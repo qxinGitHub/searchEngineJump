@@ -2,7 +2,7 @@
 // @name           searchEngineJump
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,修改自脚本4.0.5.5,版本号改为4.1.0.0
-// @version        4.1.0.0
+// @version        4.1.1.0
 // @created        2011-7-2
 // @lastUpdated    2017-02-28
 // @grant          none
@@ -1744,7 +1744,23 @@
 
 			var url = location.href;
 			var matchedRule;
-			
+
+			if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
+				document.getElementById("su").addEventListener("click",function(){
+					var fuckBD = null;
+					if (typeof iInput == 'function') {
+						fuckBD = iInput();
+					} else {
+						if (iInput.nodeName == 'INPUT') {
+							fuckBD = iInput.value;
+						} else {
+							fuckBD = iInput.textContent;
+						};
+					};
+					window.location.href="https://www.baidu.com/s?wd=" + fuckBD + "&ie=utf-8";
+				})
+			}
+
 			rules.some(function (rule) {
 				if (rule.url.test(url)) {
 					matchedRule = rule;
@@ -1759,7 +1775,7 @@
 			var iTarget = getElement(matchedRule.insertIntoDoc.target);
 			var iInput = typeof matchedRule.insertIntoDoc.keyword == 'function' ? matchedRule.insertIntoDoc.keyword : getElement(matchedRule.insertIntoDoc.keyword);
 			// console.log(iTarget, iInput);
-			
+
 			if (!iTarget || !iInput) return;
 			
 			// 添加全局样式
@@ -2038,7 +2054,6 @@
 			dropLists.forEach(function (item) {
 				container.appendChild(item[0]);
 				document.body.appendChild(item[1]);
-				
 				item[1].addEventListener('mousedown', mousedownhandler, true);
 				
 				new DropDownList(item[0], item[1]);
