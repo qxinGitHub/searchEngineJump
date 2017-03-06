@@ -2,9 +2,9 @@
 // @name           searchEngineJump
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,修改自脚本4.0.5.5,版本号改为4.1.0.0
-// @version        4.1.1.0
+// @version        4.1.1.1
 // @created        2011-7-2
-// @lastUpdated    2017-02-28
+// @lastUpdated    2017-03-06
 // @grant          none
 // @run-at         document-start
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
@@ -12,15 +12,12 @@
 // @include        *google*
 // @include        *baidu.com*
 // @include        *bing.com*
-// @include        *yandex.com*
-// @include        *searx.me*
-// @include        *so.com*
-// @include        *sogou.com*
 // @include        *youdao.com*
 // @include        *soso.com*
 // @include        *soku.com*
 // @include        *bilibili.tv*
 // @include        *acfun.tv*
+// @include        *acfun.cn*
 // @include        *youtube.com*
 // @include        *so.tv.sohu.com*
 // @include        *so.letv.com*
@@ -431,7 +428,7 @@
 					},
 				},
 				{name: "acfan",
-					url: /^https?:\/\/www\.acfun\.tv\/search/,
+					url: /^https?:\/\/www\.acfun\.cn\/search/,
 					enabled: true,
 					engineList: "video",
 					style: "\
@@ -440,8 +437,8 @@
 						margin-bottom: 5px;\
 					",
 					insertIntoDoc: {
-						keyword: 'css;#input-search-mainer',
-						target: 'css;#mainer',
+						keyword: 'css;#search-text',
+						target: 'css;.search-box-bg',
 						where: 'beforeBegin',
 					},
 				},
@@ -452,6 +449,7 @@
 					style: "\
 						border-top: 1px solid #E8E8E8;\
 						border-bottom: 1px solid #E8E8E8;\
+						margin-left: 240px; \
 					",
 					insertIntoDoc: {
 						keyword: 'css;#masthead-search-term',
@@ -1128,7 +1126,7 @@
 				favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACyElEQVQ4jXWT72tTdxTGv4yN+cY/oMFGqQpD7ZjtsAF/oPEXGFhtbUEn4mSTatSJVua0UNNSEG/01UAH0m6dN1hdW5SbrE3sgkr1hb9lRTFW3Upqcy1NzE1yc/Prfvaia7dM+7w853keznM4R4h38aHdbt8gSZJbURSv3++/Jsuyp6GhwWm1Wsvew/8XNptteTAYvMEMiKjquMvlahVCzHpHXFdXV69pWhLAHHtNSm7nbdMhYo170U61kLkZnDZSFMUrhJg9La6qqrLpum4A6FcuM+5YReRTK5HyUiLlViJLSolULiB2eA+mFgdAlmWPEOIDIYT4aHBw8DaA3tODavuESMV8orvqSZ7/Af1XD/HW71HXVKKdbsPUU9OT1NTU1Aq73b4BgPhLJrYtY2zxQuKtxzATWlH+/MvnYJpFtUAgMCDcbvcZAHOkjXSHIH50LYW3iZn2WIRoNBoTiqJ4AfIPq8n1CwrDB4pIPw5kcP6k0+hJ0+hJ8+0vaU5eNdCzk30RCAQGAPL311PwCnjVXGSw+7zOvIMa5UcTVDQl+Ox4Aoc7yfg/QwpZlj0A5pNvML2Cp/d2FhmExgrceZHn0Z952q9nqGhKsONsCiMP2Ww2J5xO534A481V3N1lLL24md/Dd96b2dWdZfF3Gi29xqR5KDQsSkpK5kaj0ZhhFtgVbKOkfTUru7+kK+RjNKkSzyR4FgvRHOzn8+YJVrakefxXHgBJkk4LIYRwuVytAOHUG7b2H8basZr5netY2/sVm737WHZpC3M6VrDk3Aku3Jq8g9HR0TGLxWKdOsaPfT7fbwBaLsWZBx1svPI1i+RNlP28jsquLWz3H8E3cg0AwzAyDofji/+/w+zOzs4LU3mTZprHE8+4q/7BcGJkeg/hcPh1dXV1zYwfWVtbW9fX1+dXVXV8SpTL5fJDQ0NPJElyWyyW0v/y/wbuo60BpWkyAAAAAABJRU5ErkJggg==',
 				// 搜索引擎编码（默认utf-8）如果跳转后乱码可以填写 'gbk'
 				encoding: 'utf-8',
-				// 是否新建网页搜索,默认当前页
+				// 是否新建网页搜索,默认当前页,如果需要在新的标签页打开 增加下面的属性
 				// blank:true,
 			};	
 			engineList.web[1] = {
@@ -1549,8 +1547,6 @@
 			
 			
 			// --------------------可设置项结束------------------------
-			// unicode转成gbk编码函数
-			// function toGBK(str) {};
 
 			//xpath 获取单个元素
 			function getElementByXPath(xPath, contextNode, doc) {
@@ -1729,11 +1725,7 @@
 				var encoding = target.getAttribute('encoding');
 				if (encoding == 'utf-8') {
 					value = encodeURIComponent(value);
-				} else if (encoding.indexOf('gb') == 0) {// 引擎接受gbk编码
-					if (pageEncoding.indexOf('gb') != 0) {// 如果当前页面也使用gbk编码的话，那么不需要再编码
-						// value = toGBK(value);
-					};
-				};
+				}
 				
 				// console.log(value);
 				target.href = target.getAttribute('url').replace('%s', value);
@@ -1745,7 +1737,9 @@
 			var url = location.href;
 			var matchedRule;
 
+			 console.log(url);
 			if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
+				console.log("fuckBD");
 				document.getElementById("su").addEventListener("click",function(){
 					var fuckBD = null;
 					if (typeof iInput == 'function') {
@@ -1758,6 +1752,17 @@
 						};
 					};
 					window.location.href="https://www.baidu.com/s?wd=" + fuckBD + "&ie=utf-8";
+				});
+				document.getElementById("page").addEventListener("click",function(e){
+					var target = e.target,
+						targetName = target.nodeName.toLowerCase();
+					if(targetName == "span"){
+						window.location.href = target.parentNode.href;
+					}else if(targetName == "a"){
+						window.location.href = target.href;
+					}else if(targetName == "i"){
+						window.location.href = target.parentNode.parentNode.href;
+					}
 				})
 			}
 
@@ -1774,7 +1779,7 @@
 			
 			var iTarget = getElement(matchedRule.insertIntoDoc.target);
 			var iInput = typeof matchedRule.insertIntoDoc.keyword == 'function' ? matchedRule.insertIntoDoc.keyword : getElement(matchedRule.insertIntoDoc.keyword);
-			// console.log(iTarget, iInput);
+			console.log(iTarget, iInput);
 
 			if (!iTarget || !iInput) return;
 			
