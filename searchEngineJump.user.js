@@ -4,7 +4,7 @@
 // @description    方便的在各个搜索引擎之间跳转,修改自脚本4.0.5.5,版本号改为4.1.0.0
 // @version        4.1.1.2
 // @created        2011-7-2
-// @lastUpdated    2017-03-06
+// @lastUpdated    2017-03-10
 // @grant          none
 // @run-at         document-start
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
