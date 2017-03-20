@@ -3,10 +3,10 @@
 
 在线安装 [Greasy Fork](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump)
 
-> 2017-2-28:update
-
-![例图](http://odp4cbmbx.bkt.clouddn.com/searchEngineJump.png)
-
+>2017-03-20 version:4.1.1.4
+- 修复个别网页搜索关键字编码问题
+- 修复百度搜索, 样式盖过搜索框的问题
+- 修复音悦tai搜索连接
 
 > 2017-03-10 version:4.1.1.2
 - 修复百度 "相关搜索" 样式丢失的问题
@@ -26,3 +26,8 @@
 > 2017-03-05: version:4.1.1.0
 - 修复使用百度搜索后,页面丢失样式的问题,方法较粗暴
 ![问题图片](http://odp4cbmbx.bkt.clouddn.com/%E9%97%AE%E9%A2%98.png)
+
+
+> 2017-2-28:update
+
+![例图](http://odp4cbmbx.bkt.clouddn.com/searchEngineJump.png)
