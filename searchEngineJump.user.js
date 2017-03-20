@@ -1618,7 +1618,7 @@
 			engineList.details[8] = ['社交', 'sociality'];
 			engineList.details[10] = ['购物', 'shopping'];
 			engineList.details[11] = ['html', 'htmls'];
-			// engineList.details[20] = ['mine', 'mine']; 	// 自用,默认隐藏
+			// engineList.details[20] = ['mine', 'mine']; 	// 隐藏
 			
 			
 			///test -------------- 测试 start
