@@ -2,9 +2,9 @@
 // @name           searchEngineJump
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,修改自脚本4.0.5.5,版本号改为4.1.0.0
-// @version        4.1.1.2
+// @version        4.1.1.3
 // @created        2011-7-2
-// @lastUpdated    2017-03-06
+// @lastUpdated    2017-03-20
 // @grant          none
 // @run-at         document-start
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
@@ -548,7 +548,7 @@
 			},
 		},		
         {name: '音悦台',
-			url: /^https?:\/\/so\.yinyuetai\.com\/mv\?/,
+			url: /^https?:\/\/so\.yinyuetai\.com\/\?keyword/,
 			enabled: true,
 			engineList: 'music',
 			style:"\
@@ -558,8 +558,8 @@
 				",
 			insertIntoDoc: {
 				keyword: '//input[@name="keyword"]',
-                target: 'css;.nav',
-                where: 'beforeBegin'
+                target: 'css;.content',
+                where: 'afterEnd'
 			},
 		},		
 
@@ -1235,7 +1235,8 @@
 			};
 			engineList.music[3] = {
 				name: '音悦Tai',
-				url: 'http://so.yinyuetai.com/mv?keyword=%s',
+				// url: 'http://so.yinyuetai.com/mv?keyword=%s',
+				url: 'http://so.yinyuetai.com/?keyword=%s',
 				favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAD4UlEQVQ4jQXBC1DTBRwH8H91eYJ4FIYgmJ4alnnemSh4WoBAHXrKo20J8nJwYzy8gE0hYUxEeQ1kIOgYDggYz2DGYzKCAQLymPHfUCIqwizkzuMSubxOm//vr8+H+fhThxih4pA5KMPFHJjuwkbl72f9Je+wZ67sZXmyXWyA9D1WWODOBkg3sYJsNzYsZw/7Raq9WVh00Ox/dqeKERV7zjx41UoNllTSmBJparWBio18Mj4pp475S1QxGk2mVS2Vj0RSz+8FZHh8jYqNfDK/aKVbk2JiQrK2W7QzEspoPwZpswdUYyIk1uxFxXAs8vVfQqL1RO1UKpLrDyJXfwr5vcEQV3+IuvsSkul8iPGV2LK80vV0usQRGfXHkVbrB0GxA4IK1yOkyA4hig0IVtggsHA9UjRHUayLxTn1IQQX2RC/xI4YX4kNK9LspHuzPVh9voK+iUoUtoQirHQz+CUbIVDaI0ixDjf0yXi+9gxPV/5Ay4AcSep9JCjbSIy35A22oItPnJXDwpIZWqMUulE5vqn3Al9pB57SFqLK3Vh6uojXVg5td3NwezwDhR3BFFphT4yP9E22pDecOCuH8bluXG7zp55pOWqM8RStcqZg5VuoNKSA4zhMzhmQ1exDdyxZUOp5FK56lxi/9LdZpSGcuP84TM3fgVizC02T8eify0Za0wGE33TEzMIIOCuH6z0JSG/ej6HfclDRz6PIqk3EfJ65ji0biCTOyuHHX39AdNUWKug9hqkneaQZ+4oKvj8N6ysrHi//AnG1Gy53HaGJpRxUjfLpbI0jMQEyW7Z8MIo4K4fphX7E1rxPidrt6F9MoXvLF+nhX33gOA7t40UIVW2Aos+HzH/noNYkoJg6J2KOZ9uyN+/GEPeag2VxCPH1OxBV7YCqyVOYfSHHsrUTK2uPkNnhhXCNPUoG/TD/MhdNM6EkanAhJvCKPXvNKKC11X8wMtsBsXYbYuqdcF63B0PLSZh7mY1GSwTitK6IqXNGbt9hTK5IoZ4KIHHTVmL4+ZvZ5Ns7SN7pi/Ptn0DU6ARxkytEWmek6j6ATL8PCS0uiGvcgrhGF8Q3u0Kq241zbdsooW0rMcKyj9jqmViS9x6F3PAZVBNCZHR74PpYGPIGTuBilydU40Jk6Y+geDgEpSMCpHW6Q22KpbxBP2Iu1PnOPfhXR9/9LKPmhxfItNJKapOQhpeqqHshn741J5FppY1q2QQyPFLSwJ8VpL4vpOlnHdQyLyHm5NduqluWKLo66E1Xjd50Y+oMZRoOUNkEjxQjAXSp/zCpTBGU1edBRaMnSDkeQjKDO1WZI0hS6/XT/6yhkUqSt5KtAAAAAElFTkSuQmCC',
 			};
 			engineList.music[5] = {
