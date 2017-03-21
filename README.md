@@ -4,11 +4,13 @@
 在线安装 [Greasy Fork](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump)
 
 > 2017-03-21 version:4.1.1.5
-- 统一图标 16x16 base64编码
+- 统一图标 16x16 base64编码,为此专门写个工具 [img2base64](http://iqingxin.cn/tool/)
 
 > 2017-03-20 version:4.1.1.4
 - 修复个别网页搜索关键字编码问题
 - 修复样式盖过百度搜索框的问题
+
+> 2017-03-20 version:4.1.1.3
 - 修复音悦tai搜索连接
 
 > 2017-03-10 version:4.1.1.2
