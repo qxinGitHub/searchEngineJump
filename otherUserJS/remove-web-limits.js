@@ -61,7 +61,7 @@
       /.*\.wikipedia\.org.*/,
       /mail\.qq\.com.*/,
       /translate\.google\..*/,
-      /.*weiyun\.com.*/,
+      /.*\.weiyun\.com.*/,
       /drive\.google\.com.*/,
       /pan\.baid.com.*/,
       /.*\.live\.com.*/, // onenote onedrive等网站
