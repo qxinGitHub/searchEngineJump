@@ -1,13 +1,14 @@
 // ==UserScript==
-// @namespace         https://www.github.com/Cat7373/
+// @namespace         https://greasyfork.org/zh-CN/users/106222-qxin-i
 
 // @name              网页限制解除
 // @name:en           Remove web limits
 // @name:zh           网页限制解除
-// @name:zh-CN        网页限制解除
-// @name:zh-TW        網頁限制解除
 // @name:ja           ウェブの規制緩和
 
+// @author         Cat73&iqxin(修改)
+
+// @description  原作者https://www.github.com/Cat7373/，因为和搜索跳转脚本冲突，遂进行了改动
 // @description       通杀大部分网站，可以解除禁止复制、剪切、选择文本、右键菜单的限制。
 // @description:en    Pass to kill most of the site, you can lift the restrictions prohibited to copy, cut, select the text, right-click menu.
 // @description:zh    通杀大部分网站，可以解除禁止复制、剪切、选择文本、右键菜单的限制。
@@ -18,8 +19,8 @@
 // @homepageURL       https://cat7373.github.io/remove-web-limits/
 // @supportURL        https://github.com/Cat7373/remove-web-limits/issues/
 
-// @author            Cat73
-// @version           1.3
+
+// @version           2.0.0
 // @license           LGPLv3
 
 // @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.3 测试通过
@@ -61,7 +62,9 @@
       /mail\.qq\.com.*/,
       /translate\.google\..*/,
       /.*weiyun\.com.*/,
-      /drive\.google\.com.*/
+      /drive\.google\.com.*/,
+      /pan\.baid.com.*/,
+      /.*\.live\.com.*/, // onenote onedrive等网站
     ]
   };
 
