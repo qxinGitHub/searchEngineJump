@@ -20,7 +20,7 @@
 // @supportURL        https://greasyfork.org/zh-CN/users/106222-qxin-i
 
 
-// @version           2.0.0
+// @version           2.0.1
 // @license           LGPLv3
 
 // @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.3 测试通过
@@ -65,6 +65,11 @@
       /drive\.google\.com.*/,
       /pan\.baid.com.*/,
       /.*\.live\.com.*/, // onenote onedrive等网站
+      // 地图 map 
+      /gaode\.com\/.*/,
+      /map\.baidu\.com.*/,
+      /.*\.google\.\w{2,4}\/maps.*/,
+
     ]
   };
 
