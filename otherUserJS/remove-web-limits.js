@@ -16,7 +16,7 @@
 // @description:zh-TW 通殺大部分網站，可以解除禁止復制、剪切、選擇文本、右鍵菜單的限制。
 // @description:ja    サイトのほとんどを殺すために渡し、あなたは、コピー切り取り、テキスト、右クリックメニューを選択することは禁止の制限を解除することができます。
 
-// @homepageURL       https://github.com/qxinGitHub/searchEngineJump
+// @homepageURL       https://greasyfork.org/zh-CN/scripts/28497
 // @supportURL        https://greasyfork.org/zh-CN/users/106222-qxin-i
 
 
