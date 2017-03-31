@@ -5,6 +5,10 @@
 
 已知问题： 与脚本[网页解除限制](https://greasyfork.org/zh-CN/scripts/14146-%E7%BD%91%E9%A1%B5%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4)有[冲突](https://greasyfork.org/zh-CN/forum/discussion/21298/x)，开启后，无法进行跳转。可以暂时先用我修改后的[网页解除限制](https://greasyfork.org/zh-CN/scripts/28497-%E7%BD%91%E9%A1%B5%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4),或者自己修改下原作者的脚本(最简单的修改方式是将unhook_eventNames中的 "mousedown|mouseup" 替换成"click"即可，暂时还不知道有什么副作用)。
 
+> 2017-03-31 version:4.1.1.7
+- 可以在开启 Content Security Policy (CSP) 安全策略的网站上使用，此版本只加了知乎，github依旧不行
+- ![知乎开启成功](http://odp4cbmbx.bkt.clouddn.com/%E7%9F%A5%E4%B9%8E20170331174102.png)
+
 > 2017-03-29 version:4.1.1.6
 - 添加 Pinterest, MDN 搜索
 
@@ -38,6 +42,6 @@
 ![问题图片](http://odp4cbmbx.bkt.clouddn.com/%E9%97%AE%E9%A2%98.png)
 
 
-> 2017-2-28:update
+> 2017-2-28:upload
 
 ![例图](http://odp4cbmbx.bkt.clouddn.com/searchEngineJump.png)

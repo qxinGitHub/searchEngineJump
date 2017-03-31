@@ -2,9 +2,9 @@
 // @name           searchEngineJump
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,修改自脚本4.0.5.5,版本号改为4.1.0.0
-// @version        4.1.1.6
+// @version        4.1.1.7
 // @created        2011-7-2
-// @lastUpdated    2017-03-29
+// @lastUpdated    2017-03-31
 // @grant          none
 // @run-at         document-start
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
@@ -60,6 +60,7 @@
 // @include        *facebook.com*
 // @include        *runoob.com*
 // @include        *pinterest.com*
+// @include        *github.com*
 
 // @match          *://*/*
 // ==/UserScript==
@@ -153,15 +154,22 @@
 					enabled: true,
 					url: /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^#]*#(?:&?q=|.+?&q=).+/,
 					engineList: 'web',
-				  style: '\
-						border: 1px solid #E5E5E5;\
+					style: '\
 						position: absolute;\
 						left: 5px;\
 						top: 150px;\
 						z-index: 9999;\
-						width: 80px;\
 						margin-left: 150px;\
 					',
+				 	// 	style: '\
+					// 	border: 1px solid #E5E5E5;\
+					// 	position: absolute;\
+					// 	left: 5px;\
+					// 	top: 150px;\
+					// 	z-index: 9999;\
+					// 	width: 80px;\
+					// 	margin-left: 150px;\
+					// ',
 					insertIntoDoc: {
 						target: 'css;body',
 						keyword: function () {
@@ -323,10 +331,12 @@
 						margin-bottom: 1px;\
 					",
 					insertIntoDoc: {
+						// keyword: 'css;#q',
 						keyword: 'css;#q',
                         // target: 'css;.zu-top',
-                        target:"css;.search-tabs",
-                        where: 'afterEnd',
+                        target:"css;body",
+                        // where: 'afterEnd',
+                        where: 'afterBegin',
 					},
 				},
 				{name: "互动百科搜索页",
@@ -1133,7 +1143,7 @@
         		{
         			name: "GitHub",
         			enabled:true,
-        			url:/^https?:\/\/www\.github\.com\/search\//,
+        			url:/^https?:\/\/github\.com\/search/,
         			engineList:"htmls",
         			style:'\
 		                border-bottom:1px solid #E5E5E5;\
@@ -1144,7 +1154,8 @@
 	               insertIntoDoc: {
 	                   // keyword:'css;input#s', 
 	                   keyword:'//input[@name="s"]', 
-	                   target:'css;.codesearch-head',
+	                   // target:'css;.codesearch-head',
+	                   target:'css;.mb-4',
 	                   where:'afterEnd',
 	               }
         		},
@@ -1668,7 +1679,7 @@
 			
 			
 			///test -------------- 测试 start
-			// console.log("searchEngineJump test: ",window.location.href)
+			console.log("searchEngineJump test: ",window.location.href)
 			///test -------------- 测试 end
 
 			// --------------------可设置项结束------------------------
@@ -1911,7 +1922,7 @@
 			var iTarget = getElement(matchedRule.insertIntoDoc.target);
 			var iInput = typeof matchedRule.insertIntoDoc.keyword == 'function' ? matchedRule.insertIntoDoc.keyword : getElement(matchedRule.insertIntoDoc.keyword);
 			
-			// console.log("searchEngineJump test: ",iTarget, iInput);
+			console.log("searchEngineJump test: ",iTarget, iInput);
 
 			if (!iTarget || !iInput) return;
 			
@@ -2227,11 +2238,12 @@
 
 	};
 	
-	
-	
+
+
 	// 如果发生通信的话，需要一个独一无二的ID
 	var messageID = Math.random().toString();
 	
+	// console.log("messageID: ",messageID);
 	// 把指定函数丢到真实环境中执行，规避一切脚本管理器乱七八糟的执行环境产生的奇葩Bug，
 	// 特别是chrome上的那个坑爹tampermonkey。。。
 	function runInPageContext(fn) {
@@ -2275,5 +2287,26 @@
 		
 	};
 
+	// runInPageContext(contentScript);
+
+	// 使用了 Content Security Policy (CSP) 安全策略的网站
+	var CSPList = [
+		"www.zhihu.com",
+		"github.com",
+	]
+	var hostname = window.location.hostname;
+
+	for(let i=0;i<CSPList.length;i++){
+		if(~hostname.indexOf(CSPList[i])){
+			contentScript();
+			console.log('black list');
+			return
+		}
+	}
+
+	console.log("run");
 	runInPageContext(contentScript);
+
+
+
 })();
