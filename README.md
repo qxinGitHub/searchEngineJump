@@ -14,8 +14,8 @@
 - 图标微调：youtube 网易云音乐 维基百科
 
 > 2017-03-31 version:4.1.1.7
-- 可以部分在开启 Content Security Policy (CSP) 安全策略的网站上使用，知乎可以，github依旧不行
-- ![知乎开启成功](http://odp4cbmbx.bkt.clouddn.com/%E7%9F%A5%E4%B9%8E20170331174102.png)
+- 可以在部分开启 Content Security Policy (CSP) 安全策略的网站上使用，知乎可以，github依旧不行
+![知乎开启成功](http://odp4cbmbx.bkt.clouddn.com/%E7%9F%A5%E4%B9%8E20170331174102.png)
 
 > 2017-03-29 version:4.1.1.6
 - 添加 Pinterest, MDN 搜索
@@ -27,6 +27,7 @@
 > 2017-03-20 version:4.1.1.4
 - 修复个别网页搜索关键字编码问题
 - 修复样式盖过百度搜索框的问题
+- 字体颜色改为 #333
 
 > 2017-03-20 version:4.1.1.3
 - 修复音悦tai搜索连接
