@@ -2,9 +2,9 @@
 // @name           searchEngineJump
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        4.1.1.8
+// @version        4.1.1.9
 // @created        2011-7-2
-// @lastUpdated    2017-04-01
+// @lastUpdated    2017-04-03
 // @grant          none
 // @run-at         document-start
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
@@ -429,17 +429,19 @@
 					},
 				},
 				{name: "bilibili",
-					url: /^https?:\/\/www\.bilibili\.tv\/search\?/,
+					// http://search.bilibili.com/all?keyword=%s
+					url: /^https?:\/\/search\.bilibili\.com\/all/,
 					enabled: true,
 					engineList: "video",
 					style: "\
 						border-top: 1px solid #E7E7E7;\
 						border-bottom: 1px solid #E7E7E7;\
+						text-align:center;\
 					",
 					insertIntoDoc: {
-						keyword: 'css;#search_keyword',
-                        target: 'css;.search-main-inner',
-                        where: 'beforeBegin',
+						keyword: 'css;#search-keyword',
+                        target: 'css;.nav-sub',
+                        where: 'afterBegin',
 					},
 				},
 				{name: "acfan",
@@ -1247,7 +1249,8 @@
 			};
 			engineList.video[1] = {
 				name: 'bilibili',
-				url: 'http://www.bilibili.tv/search?keyword=%s',
+				// url: 'http://www.bilibili.tv/search?keyword=%s',
+				url: 'http://search.bilibili.com/all?keyword=%s',
 				favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACTElEQVQ4jY2QMUsbcRjGH7n73z+m4g0OblkDpkOgRT/AKeRCYvwHzxDBBOLUzU/gF+gkjlLoKlTBxQvxCqe5u4iFkw6CATfddLPSCIWnU8/E1rYP/Jbnfd/f8ALPIqUsj4+Pe1LK8lCXBeAB8AzDeP38JokQ4u309PSP2dlZmqbZByANw8iZpvm1UCgwn88znU5/+pvgzcTExGB/f5+O4xDAewC5hYUFPj4+cn5+/huA+osCADAMw8lms8zlcpycnPySTqff2bbNVqtFALWX7kpSSk8I4aVSqVDXdY6NjdE0TU5NTVHXdQJgKpWKhBCelNLTNO0DAAkAlVar9T0MQ/Z6PYZhyDAMGUURgyBgt9tNul/96ekpd3d3mclkDqDrenR+fs7t7W0qpVitVhOUUgnD/fLyMm9ubri2tkYIIT73ej0Wi0Vubm7S930GQcBOp8N2u50w3M/MzNB1XTabTUII4UVRRKUUz87OuLOzQ8dxeH19zeFsbW1xZWWFd3d3rNVqPDw8ZKPReBJUq1WGYUilFAHw+Ph4RGBZFgEwjmPW63W6rjsqUEqx0+mw3+/T930OBoMRweXlJX3f5/39Pcvl8p8F7XY7OdjY2ODc3FzCxcVFMisUCr8LlpaW6Pt+shTH8cgTHx4eklmpVHr6ga7rQRzHrFQqzOfztG2btm3TcRzW6/WExcVF2rbNYrFI0zTZ7Xa5vr5OaJr2cW9vj1dXVzw6OqLruv/k5OSEt7e3tCxrAACvMpnMwerqKhuNxn/RbDZpWdZA07TKT3uI/eaBFtmBAAAAAElFTkSuQmCC',
 			};
 			engineList.video[2] = {
@@ -1959,9 +1962,9 @@
 					.sej-engine {
 						line-height: 2;
 						display: inline-block;
-						margin: 0 8px 0 0;
+						margin: 0 0px 0 0;
 						border: none;
-						padding: 0 4px;
+						padding: 0 8px;
 						text-decoration: none;
 						font-weight:500;
 						color: #333 !important;
