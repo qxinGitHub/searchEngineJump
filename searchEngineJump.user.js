@@ -2,9 +2,9 @@
 // @name           searchEngineJump
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        4.1.1.9
+// @version        4.1.1.10
 // @created        2011-7-2
-// @lastUpdated    2017-04-03
+// @lastUpdated    2017-04-06
 // @grant          none
 // @run-at         document-start
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
@@ -1430,7 +1430,7 @@
 			
 			engineList.translate[0] = {
 				name: '谷歌翻译',
-				url: 'https://translate.google.com.hk/?q=%s',
+				url: 'https://translate.google.com/?q=%s',
 				favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAC/UlEQVQ4jYWTT0ybdRyH34MH4wVjovG2ZIl60IMXNTgoDtlG/wAy49bt4r+8XSFm2SZGox6WWNnal45SbKAbygKbShAT38yMNC9LMGyQsS5OdGtpOwqNvNkLLbwv76+KJns8lES9jG/yXJ98kidf6bGn6vY42tWEo/2SVutXtZotHEcT2o5q33vSdlfbpk68OQSH4uCNw8F+ONAPhwbhlQ9mbkuS9NADBY72S1e8cXg9ItgfEbR2bxH5k5aw+PuRJ5994YGCGr+qeePQ2i1whQRuReAMCZq6BC0992k6+nVCfuetE7J8pEOW5Q6fz/e+LMsdbW1tH7pcrgNSjV/V3uiD5rAgNr7BzB2TyzdM3u63aThVxjcgSGcKCNvCtm0sy8I0TWzbZm1tDellv6o1RSE2bpGcX+fjbzcIjG1w+AvBvqDApQhGxlMsZNOsrhgY9+6h6zq6rmNZFlL1EVVr7oXrKZOOCzbeXpvLSZPxpIl81sYR+IPPLi6RufMr0aERpm/ewiwV0fXlyoJqn6p5eiBx02RgwmJfUBBSLQr6Ov4vbeo7NzkYXiZ6foxPzvQRHvyGyPAo/SM/kM0vVQTNUfCds5lNrzM5ZzKT+lfmCpVxKwLl/E9cvXaNxORVOuNDpLM5VovFimB/DPaeFnh7BSe/2+D4sE1jsFLDrQj2hjY53jdHOP4VysAFrkxNoy//TqlUQnrRp2qtMfB0CRqDgvrPBQ2dW0lDNq5QpYbcV+IjJc6xUz2kUmmWFhcxDAOp2p+YqgjKeLrKuJXKZNcWzpCNMyioD6wTvTjFqPojp88NM/fbbVYMA+kZd6C7JQaeHvBEwNN9H/d/cHZt0qiUcXT+RXB0maVcmu/HNSanr7OyYiBJkvTwozt27a7aufvVqp21/+Pxp+uddd6xhYZ3b7Dr8BRnBn8ml02zcDdHLpdF13W2fbbnX2o/W/faBJ8GJpi79QvpdIr5+XkymQzF4ur2gqonnttzUkmSSmXJ5++Szy9SKBQwDIPZ2eTaP/p6Y/2tPjpQAAAAAElFTkSuQmCC',
 			};
 			engineList.translate[1] = {
@@ -1885,39 +1885,39 @@
 			var matchedRule;
 
 			 // console.log(url);
-			if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
-				// console.log("fuckBD");
-				document.getElementById("su").addEventListener("click",function(){
-					var fuckBD = null;
-					if (typeof iInput == 'function') {
-						fuckBD = iInput();
-					} else {
-						if (iInput.nodeName == 'INPUT') {
-							fuckBD = iInput.value;
-						} else {
-							fuckBD = iInput.textContent;
-						};
-					};
-					window.location.href="https://www.baidu.com/s?wd=" + fuckBD + "&ie=utf-8";
-				});
-				document.getElementById("page").addEventListener("click",function(e){
-					var target = e.target,
-						targetName = target.nodeName.toLowerCase();
-					if(targetName === "span"){
-						window.location.href = target.parentNode.href;
-					}else if(targetName === "a"){
-						window.location.href = target.href;
-					}else if(targetName === "i"){
-						window.location.href = target.parentNode.parentNode.href;
-					}
-				});
-				document.getElementById("rs").addEventListener("click",function(e){
-					var target = e.target;
-						if(target.nodeName.toLowerCase() == "a"){
-							window.location.href = target.href;
-						}
-				})
-			}
+			// if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
+			// 	// console.log("fuckBD");
+			// 	document.getElementById("su").addEventListener("click",function(){
+			// 		var fuckBD = null;
+			// 		if (typeof iInput == 'function') {
+			// 			fuckBD = iInput();
+			// 		} else {
+			// 			if (iInput.nodeName == 'INPUT') {
+			// 				fuckBD = iInput.value;
+			// 			} else {
+			// 				fuckBD = iInput.textContent;
+			// 			};
+			// 		};
+			// 		window.location.href="https://www.baidu.com/s?wd=" + fuckBD + "&ie=utf-8";
+			// 	});
+			// 	document.getElementById("page").addEventListener("click",function(e){
+			// 		var target = e.target,
+			// 			targetName = target.nodeName.toLowerCase();
+			// 		if(targetName === "span"){
+			// 			window.location.href = target.parentNode.href;
+			// 		}else if(targetName === "a"){
+			// 			window.location.href = target.href;
+			// 		}else if(targetName === "i"){
+			// 			window.location.href = target.parentNode.parentNode.href;
+			// 		}
+			// 	});
+			// 	document.getElementById("rs").addEventListener("click",function(e){
+			// 		var target = e.target;
+			// 			if(target.nodeName.toLowerCase() == "a"){
+			// 				window.location.href = target.href;
+			// 			}
+			// 	})
+			// }
 
 			rules.some(function (rule) {
 				if (rule.url.test(url)) {
@@ -2118,6 +2118,11 @@
 					var top = scrolled.y + aBCRect.bottom;
 					var left = scrolled.x + aBCRect.left;
 					
+					if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
+						top -= 90;
+						left -= 120;
+					}
+					
 					style.top = top + 6 + 'px';
 					style.left = left + 'px';
 					style.zIndex = DropDownList.zIndex ++;
@@ -2247,9 +2252,20 @@
 			};
 
 
+			// todo: 此处与上面重复，在百度页面会插入两次
 			if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
 				var sej = document.getElementsByTagName("sejspan")[0];
 				sej.appendChild(globalStyle);
+
+				dropLists.forEach(function (item) {
+					container.appendChild(item[0]);
+					// document.body.appendChild(item[1]);
+					var sej = document.getElementsByTagName("sejspan")[0];
+					sej.appendChild(item[1]);
+					item[1].addEventListener('mousedown', mousedownhandler, true);
+					
+					new DropDownList(item[0], item[1]);
+				});
 			}
 
 		});
