@@ -2,9 +2,9 @@
 // @name           searchEngineJump
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        4.1.1.10
+// @version        4.1.1.11
 // @created        2011-7-2
-// @lastUpdated    2017-04-06
+// @lastUpdated    2017-04-07
 // @grant          none
 // @run-at         document-start
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
@@ -2053,7 +2053,7 @@
 			DropDownList.prototype = {
 				hidden: true,
 				showDelay: 233,
-				hideDelay: 266,
+				hideDelay: 233,
 				aShownClass: 'sej-drop-list-trigger-shown',
 				
 				init: function () {
@@ -2082,7 +2082,8 @@
 						clearTimeout(self.showTimerId);
 						
 						if (!self.hidden) {
-							list.style.opacity = 0.3;
+							list.style.top = parseInt(list.style.top)+6 +"px";
+							list.style.opacity = 0.1;
 							self.hideTimerId = setTimeout(function () {
 								self.hide();
 							}, self.hideDelay);
@@ -2142,7 +2143,7 @@
 
 					var style = this.list.style;
 					style.display = 'none';
-					style.opacity = 0.3;
+					style.opacity = 0.1;
 					
 					this.a.classList.remove(this.aShownClass);
 					
