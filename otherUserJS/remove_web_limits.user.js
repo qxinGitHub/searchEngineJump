@@ -20,7 +20,7 @@
 // @supportURL        https://greasyfork.org/zh-CN/scripts/28497
 
 
-// @version           2.1.1
+// @version           2.1.2
 // @license           LGPLv3
 
 // @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.3 测试通过
@@ -242,7 +242,7 @@
     function addBtn(){
         var node = document.createElement("remove-web-limits-iqxin");
         node.id = "remove";
-        // node.innerHTML = '<label><input type="checkbox" name="" id="black_node">黑名单</label><button id="delete">delete</btton>';
+        // node.innerHTML = '<label><input type="checkbox" name="" id="black_node">黑名单</label><button id="delete">del</btton>';
         node.innerHTML = '<label>限制解除 <input type="checkbox" style="vertical-align:middle;" name="" id="black_node"></label>';
         var css = "position:fixed;\
                 top:0;\
@@ -268,7 +268,9 @@
                 box-sizing: content-box;\
                 ";
         node.style.cssText = css;
-        document.body.appendChild(node);
+        if(window.self === window.top){
+          document.body.appendChild(node);
+        }
         node.addEventListener("mouseover",function(){
             node.style.top = "10px";
             node.style.left = "0px";
