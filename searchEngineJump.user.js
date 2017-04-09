@@ -2,9 +2,9 @@
 // @name           searchEngineJump
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        4.1.1.11
+// @version        4.1.1.12
 // @created        2011-7-2
-// @lastUpdated    2017-04-07
+// @lastUpdated    2017-04-09
 // @grant          none
 // @run-at         document-start
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
@@ -2082,8 +2082,8 @@
 						clearTimeout(self.showTimerId);
 						
 						if (!self.hidden) {
-							list.style.top = parseInt(list.style.top)+6 +"px";
-							list.style.opacity = 0.1;
+							//list.style.top = parseInt(list.style.top)+6 +"px";
+							list.style.opacity = 0.04;
 							self.hideTimerId = setTimeout(function () {
 								self.hide();
 							}, self.hideDelay);
@@ -2100,7 +2100,8 @@
 					
 					mouseEventListener.add('mouseleave', list, function () {
 						
-						list.style.opacity = 0.3;
+						list.style.opacity = 0.04;
+						list.style.top = parseInt(list.style.top)+6 +"px";
 						self.hideTimerId = setTimeout(function () {
 							self.hide();
 						}, self.hideDelay);
