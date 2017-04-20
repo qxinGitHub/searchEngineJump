@@ -7,6 +7,9 @@
 
 ### 更新历史
 
+> 2017-04-20 version 4.1.1.13
+- 谷歌搜索工具被遮挡的问题 [问题连接](https://greasyfork.org/zh-CN/forum/discussion/22006/x?locale=zh-CN)
+
 > 2017-04-09 version 4.1.1.12
 - 修复上一个版本更改动画造成列表偏移的问题
 
