@@ -7,6 +7,9 @@
 
 ### 更新历史
 
+> 2017-04-21 version 4.1.1.14
+- 修复上个版本导致的搜索栏遮挡联想词的问题
+
 > 2017-04-20 version 4.1.1.13
 - 谷歌搜索工具被遮挡的问题 [问题连接](https://greasyfork.org/zh-CN/forum/discussion/22006/x?locale=zh-CN)
 

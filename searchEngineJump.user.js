@@ -2,9 +2,9 @@
 // @name           searchEngineJump
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        4.1.1.13
+// @version        4.1.1.14
 // @created        2011-7-2
-// @lastUpdated    2017-04-20
+// @lastUpdated    2017-04-21
 // @grant          none
 // @run-at         document-start
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
@@ -126,8 +126,9 @@
 					// 给引擎列表的样式
 					style: '\
 						margin-left: 138px;\
-						z-index: 999;\
-						top:78px;\
+						z-index: 100;\
+						margin-top:5px;\
+						top:70px;\
 					',
 					// padding-left: 127px;\
 
