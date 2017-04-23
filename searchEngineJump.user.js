@@ -2,9 +2,9 @@
 // @name           searchEngineJump
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        4.1.1.14
+// @version        4.1.1.15
 // @created        2011-7-2
-// @lastUpdated    2017-04-21
+// @lastUpdated    2017-04-23
 // @grant          none
 // @run-at         document-start
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
@@ -163,15 +163,6 @@
 						z-index: 9999;\
 						margin-left: 150px;\
 					',
-				 	// 	style: '\
-					// 	border: 1px solid #E5E5E5;\
-					// 	position: absolute;\
-					// 	left: 5px;\
-					// 	top: 150px;\
-					// 	z-index: 9999;\
-					// 	width: 80px;\
-					// 	margin-left: 150px;\
-					// ',
 					insertIntoDoc: {
 						target: 'css;body',
 						keyword: function () {
@@ -453,12 +444,14 @@
 					style: "\
 						border-top: 1px solid #FFFFFF;\
 						border-bottom: 1px solid #FFFFFF;\
-						margin-bottom: 5px;\
+						display:flex;\
+						justify-content:center;\
+						flex-wrap:wrap;\
 					",
 					insertIntoDoc: {
 						keyword: 'css;#search-text',
-						target: 'css;.search-box-bg',
-						where: 'beforeBegin',
+						target: 'css;.search-nav',
+						where: 'afterBegin',
 					},
 				},
 				{name: "youtube",

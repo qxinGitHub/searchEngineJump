@@ -7,6 +7,9 @@
 
 ### 更新历史
 
+> 2017-04-23 version 4.1.1.15
+- acfun 样式不居中 [问题连接](https://greasyfork.org/zh-CN/forum/discussion/22066/x)
+
 > 2017-04-21 version 4.1.1.14
 - 修复上个版本导致的搜索栏遮挡联想词的问题
 
