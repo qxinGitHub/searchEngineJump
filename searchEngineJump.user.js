@@ -2,20 +2,22 @@
 // @name           searchEngineJump
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        4.1.1.15
+// @version        4.1.1.16
 // @created        2011-7-2
 // @lastUpdated    2017-04-23
 // @grant          none
-// @run-at         document-start
+// @run-at         document-end
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
 // @include        *google*
 // @include        *baidu.com*
 // @include        *bing.com*
+// @include        *duckduckgo.com*
 // @include        *youdao.com*
 // @include        *soso.com*
 // @include        *soku.com*
 // @include        *bilibili.tv*
+// @include        *bilibili.com*
 // @include        *acfun.tv*
 // @include        *acfun.cn*
 // @include        *youtube.com*
@@ -23,9 +25,12 @@
 // @include        *so.letv.com*
 // @include        *so.1ting.com*
 // @include        *xiami.com*
+// @include        *music.163.com*
+// @include        *music.qq.com*
 // @include        *so.yinyuetai.com*
 // @include        *pixiv.net*
 // @include        *flickr.com*
+// @include        *huaban.com*
 // @include        *www.nicovideo.jp*
 // @include        *cn.picsearch.com*
 // @include        *deviantart.com*
@@ -39,9 +44,11 @@
 // @include        *simplecd.me*
 // @include        *ed2000.com*
 // @include        *taobao.com*
+// @include        *list.tmall.com*
 // @include        *search.jd.com*
 // @include        *search.suning.com*
 // @include        *search.dangdang.com*
+// @include        *search.yhd.com*
 // @include        *amazon.cn*
 // @include        *s.mall.360.cn*
 // @include        *iciba.com*
@@ -157,19 +164,20 @@
 					url: /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^#]*#(?:&?q=|.+?&q=).+/,
 					engineList: 'web',
 					style: '\
-						position: absolute;\
-						left: 5px;\
-						top: 150px;\
-						z-index: 9999;\
-						margin-left: 150px;\
+						margin-left: 138px;\
+						z-index: 100;\
+						margin-top:5px;\
+						top:70px;\
 					',
 					insertIntoDoc: {
-						target: 'css;body',
+						// target: 'css;body',
+						target: 'css;#searchform',
 						keyword: function () {
 							var input = document.getElementById('lst-ib');
 							if (input) return input.value;
 				  	    },
-						where: 'afterBegin',
+						// where: 'afterBegin',
+						where: 'afterEnd',
 					},
 				},
 				{name: "百度网页搜索",
@@ -2339,5 +2347,50 @@
 	runInPageContext(contentScript);
 
 
+	// hash-query  不刷新页面的搜索
+		// hashchange 和 popstate 都无法检测到谷歌和百度搜索时网址的变化，不理解
+	if (window.self != window.top) return;
+	// 下面这种方法百度一直报错无法使用，遂用定时器
+	// if (true) {
+	//     console.log('iqxin添加标题节点监视器: title');
+
+	//     var watch = document.querySelector('title');
+	//     console.log("titile: ",watch);
+ 	//     console.log("titile: ",document.title);
+	//     new (window.MutationObserver || window.WebKitMutationObserver)(function(mutations){
+	//         console.log('iqxin标题发生了变化', document.title);
+	//         if(!document.querySelector('sejspan')){
+	//         	runInPageContext(contentScript);
+	//         }
+	//     }).observe(watch, {childList: true, subtree: true, characterData: true});
+	// }
+
+// 给谷歌和百度搜索的主页单独加个列表
+    var url = window.location.href;
+
+	var hashList = [
+		/^https?:\/\/www\.baidu\.com\/$/i,
+		/^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/$/i,
+	];
+	var hashtag = hashList.some(function hashUrl(element, index, array){
+			return ~url.search(element);
+		});
+	if (hashtag){
+		var oldTitle = document.title;
+		var newTitle = "";
+		var timer = setInterval(function(){
+			 //console.log("循环中");
+	        if(document.querySelector("sejspan")){
+	            //console.log("已存在");
+	            clearInterval(timer);
+	        }else{
+			    newTitle = document.title;
+			    if(oldTitle!=newTitle){
+		            //console.log("不存在开始插入");
+		            runInPageContext(contentScript);
+			    }
+	        }
+		},1000)
+	}
 
 })();

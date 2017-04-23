@@ -7,6 +7,9 @@
 
 ### 更新历史
 
+> 2017-04-23 version 4.1.1.16
+- 修复从百度，谷歌主页搜索时没样式的问题
+
 > 2017-04-23 version 4.1.1.15
 - acfun 样式不居中 [问题连接](https://greasyfork.org/zh-CN/forum/discussion/22066/x), 还有两个问题没解决，下个版本搞
 
