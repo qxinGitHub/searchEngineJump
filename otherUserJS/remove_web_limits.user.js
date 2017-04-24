@@ -20,7 +20,7 @@
 // @supportURL        https://greasyfork.org/zh-CN/scripts/28497
 
 
-// @version           2.1.3
+// @version           2.1.4
 // @license           LGPLv3
 
 // @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.3 测试通过
@@ -45,7 +45,7 @@
 //-------------------------------------------------------------------添加 start
     function test(){
         var black_list_user = GM_getValue("list_user");
-        console.log(black_list_user);
+        //console.log(black_list_user);
     }
 
   // 检查
@@ -289,7 +289,7 @@
             // node.style.width = "20px";
             node.style.height = "25px";
             node.style.lineHeight = "25px";
-            console.log(black_node.checked);
+            //console.log(black_node.checked);
             black_check(black_node.checked);
         });
         // document.getElementById("delete").addEventListener("click",function(){
@@ -302,7 +302,7 @@
 
     // 初始化
     function init() {
-        console.log("使用规则-------------------------------------------------iqxin");
+        //console.log("使用规则-------------------------------------------------iqxin");
 
         var rule = rules.default_rule;
         // 设置 event 列表
@@ -365,7 +365,7 @@
 
     var list = get_black_list();
     // console.log("list: ",list);
-    console.log("black list user: ",list.black_list_user);
+    //console.log("black list user: ",list.black_list_user);
     // console.log("black list: ",list.black_list);
 
     var hostname = window.location.hostname; 
@@ -374,11 +374,11 @@
         if(black_node){
             black_node.checked = true;
         }
-        console.log("位于黑名单中----------------revove_web_limits------iqxin");
+        //console.log("位于黑名单中----------------revove_web_limits------iqxin");
         init();
     }else{
-        console.log(hostname);
-        console.log("跳出规则-------------------revove_web_limits------iqxin");
+        //console.log(hostname);
+        //console.log("跳出规则-------------------revove_web_limits------iqxin");
     }
     //init();
 })();
