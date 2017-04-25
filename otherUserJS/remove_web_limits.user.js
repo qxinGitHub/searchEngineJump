@@ -20,7 +20,7 @@
 // @supportURL        https://greasyfork.org/zh-CN/scripts/28497
 
 
-// @version           2.1.4
+// @version           2.1.5
 // @license           LGPLv3
 
 // @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.3 测试通过
@@ -29,8 +29,6 @@
 // @compatible        safari 未测试
 
 // @match             *://*/*
-// @exclude        *localhost*
-// @exclude        *127.0.0.1*
 // @grant       GM_getValue
 // @grant       GM_setValue
 // @grant       GM_addStyle
@@ -295,9 +293,17 @@
         // document.getElementById("delete").addEventListener("click",function(){
         //  GM_deleteValue ("list_user");
         //  test();
-        // });
-      
-   }
+        // }); 
+   	};
+
+   	// 部分网站采用了其他的防复制手段，比如上面覆盖一层透明的div
+   	// www.z3z4.com 再三再四
+   	function clearz3z4(){
+   		var oDiv = document.querySelector(".moviedownaddiv");
+   		if (oDiv) {
+   			oDiv.parentNode.removeChild(oDiv);
+   		}
+   	}
 
 
     // 初始化
@@ -349,6 +355,9 @@
         if(rule.add_css) {
             addStyle('html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}');
         }
+
+    // 个别网站的善后工作
+    	clearz3z4();
     }
 
 //--开始执行---------------------------------------------------------------iqxin
