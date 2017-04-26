@@ -19,8 +19,9 @@
 // @homepageURL       https://cat7373.github.io/remove-web-limits/
 // @supportURL        https://greasyfork.org/zh-CN/scripts/28497
 
+// @icon               data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB70lEQVR4nO3XPWsUURTG8d9kE/wEiopYGCy0iaCiFkpAsPENX0AbSaX4DSxiIYiFgi8ICoIisRUsRdbCXiuRqISsQTEipFAiZjfJ7ozF7MbJujvOaiZa7AOXgTl37v3fc+85c09wbmQzrMND7JRdX3AH1zAFl4ded/B5rN76cwMGWtgreIWZFrYe7MABPECt49kTAEEb+1WiK+MTb8qfp+jrW2zs66VQENy4cL/2fnLM3tKRRfZ9/ZcyA7TSdzwuV2amz546vzsSbRWvOmru+OHTeBAEPTCLpxiDYmn4tzBpALVaWJs/vv/0+sps+R42pq9lQS9wEh/Rj7eIiqXhlhA9aSNFYRhVa9VVWJ1xctiOQRRwEScahqRHMgEkWToAgBXiQ7kGN7FwOJohsgJ0qqjeqliJWzjcCiIvgCQEsSdu41AzRF4AjZxQSLxbi7s4KhH2aVHwN6rWIR5hFGECaBOeiTNpbgC9YvdfT+tULA3nBnAGW/yaYQN8w4jYM7kBbKu3dtqDY5jMMwrSNCDOkrmGYZoi9e35VwAL6gJ0AboAXYD/CqBdbbAsAF8x3caWqxq/41EMiUu0xj1urjJXngjDWv9yAFTxpNk4uOugMAyzFiR/BpBW0RbjWm/ezzvdUioi2z6/w/MlnvxlfVw/AMjNh2b0bHjzAAAAAElFTkSuQmCC
 
-// @version           2.1.5
+// @version           2.1.6
 // @license           LGPLv3
 
 // @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.3 测试通过
@@ -253,7 +254,7 @@
                 font-family:Verdana, Arial, '宋体';\
                 color:#fff;\
                 background:#333;\
-                z-index:99999;\
+                z-index:2147483647;\
                 opacity:0.05;\
                 transition:0.3s;\
                 overflow:hidden;\
@@ -269,7 +270,11 @@
                 ";
         node.style.cssText = css;
         if(window.self === window.top){
-          document.body.appendChild(node);
+            if (document.querySelector("body")){
+                document.body.appendChild(node);
+            } else {
+                document.documentElement.appendChild(node);
+            }
         }
         node.addEventListener("mouseover",function(){
             node.style.top = "10px";
@@ -294,16 +299,16 @@
         //  GM_deleteValue ("list_user");
         //  test();
         // }); 
-   	};
+    };
 
-   	// 部分网站采用了其他的防复制手段，比如上面覆盖一层透明的div
-   	// www.z3z4.com 再三再四
-   	function clearz3z4(){
-   		var oDiv = document.querySelector(".moviedownaddiv");
-   		if (oDiv) {
-   			oDiv.parentNode.removeChild(oDiv);
-   		}
-   	}
+    // 部分网站采用了其他的防复制手段，比如上面覆盖一层透明的div
+    // www.z3z4.com 再三再四
+    function clearz3z4(){
+        var oDiv = document.querySelector(".moviedownaddiv");
+        if (oDiv) {
+            oDiv.parentNode.removeChild(oDiv);
+        }
+    }
 
 
     // 初始化
@@ -357,7 +362,7 @@
         }
 
     // 个别网站的善后工作
-    	clearz3z4();
+        clearz3z4();
     }
 
 //--开始执行---------------------------------------------------------------iqxin
