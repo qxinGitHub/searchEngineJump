@@ -7,6 +7,11 @@
 
 ### 更新历史
 
+> 2017-05-1 version 4.1.1.17
+- 添加脚本图标
+- 百度音乐样式不居中 [问题连接](https://greasyfork.org/zh-CN/forum/discussion/22341/x)
+- 名称从 “searchEngineJump” 改为 “searchEngineJump 搜索引擎快捷跳转”
+
 > 2017-04-23 version 4.1.1.16
 - 修复从百度，谷歌主页搜索时没样式的问题
 
