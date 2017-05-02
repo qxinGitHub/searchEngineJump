@@ -1,7 +1,7 @@
 // ==UserScript==
 // @namespace         https://greasyfork.org/zh-CN/users/106222-qxin-i
 
-// @name              网页限制解除
+// @name              网页限制解除(改)
 // @name:en           Remove web limits
 // @name:zh           网页限制解除
 // @name:ja           ウェブの規制緩和
@@ -19,9 +19,9 @@
 // @homepageURL       https://cat7373.github.io/remove-web-limits/
 // @supportURL        https://greasyfork.org/zh-CN/scripts/28497
 
-// @icon              data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAABpElEQVR4nO3Vv2uUQRDG8c/ebSMWqay0trATAxrUSi1S2AiWFoJYpNCgoBjURsHWJKeNRfAvsDgFixQqKdPZ2ViEiCJYBOQu8f1hEXO59713j7MUfLZ6d2a/O8vMO0OzDnin9Ku2Mjvuaw07xgSAYEVXe2indMhj92zpKJLnBhF8MDeye9hn6zbN70eRiqCw02Bra3up8BBLu1FEBxsBucXqW4csz0ULe4jorSCMuPU89boRELDMHiI6Y8V65bbCUTccc70RkaOwKLOg0IkyXa9qTjOu2LAs6NZuD86hrdTyxRNTkUqqdhXlHrngGRVEZsMpJwex9DxIZSHYclesIb65LCoHgIs66UJq6btDBZHZrPh8V6YBOX66LbOkTGckBYimBW2FVTNeuOZNyrFJ236Yl4NSy5SbVm1PDvhodqgyMledTdRlAtDzqfL9tfkwUtyaRkv9LwFj9B/w7wPycXOhqlJ0yZHKPChMi5MCiM47XhsopbVJAUHfrYbmN/EToN+02eLPfz9OYyZhFJzW1Jn3lTsxaKQjCkp52jy45r1ZvSbTb9M0d4PBozGZAAAAAElFTkSuQmCC
+// @icon               data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAABpElEQVR4nO3Vv2uUQRDG8c/ebSMWqay0trATAxrUSi1S2AiWFoJYpNCgoBjURsHWJKeNRfAvsDgFixQqKdPZ2ViEiCJYBOQu8f1hEXO59713j7MUfLZ6d2a/O8vMO0OzDnin9Ku2Mjvuaw07xgSAYEVXe2indMhj92zpKJLnBhF8MDeye9hn6zbN70eRiqCw02Bra3up8BBLu1FEBxsBucXqW4csz0ULe4jorSCMuPU89boRELDMHiI6Y8V65bbCUTccc70RkaOwKLOg0IkyXa9qTjOu2LAs6NZuD86hrdTyxRNTkUqqdhXlHrngGRVEZsMpJwex9DxIZSHYclesIb65LCoHgIs66UJq6btDBZHZrPh8V6YBOX66LbOkTGckBYimBW2FVTNeuOZNyrFJ236Yl4NSy5SbVm1PDvhodqgyMledTdRlAtDzqfL9tfkwUtyaRkv9LwFj9B/w7wPycXOhqlJ0yZHKPChMi5MCiM47XhsopbVJAUHfrYbmN/EToN+02eLPfz9OYyZhFJzW1Jn3lTsxaKQjCkp52jy45r1ZvSbTb9M0d4PBozGZAAAAAElFTkSuQmCC
 
-// @version           2.2.0
+// @version           2.2.1
 // @license           LGPLv3
 
 // @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.3 测试通过
@@ -261,7 +261,6 @@
                 "background:#333;" +
                 "z-index:2147483647;" +
                 "margin: 0;" +
-                "padding: 0;" +
                 "opacity:0.05;" +
                 "transition:0.3s;" +
                 "overflow:hidden;" +
@@ -288,6 +287,10 @@
                 "opacity: 0.9;" +
                 "height: 32px;" +
                 "line-height: 32px" +
+            "}" +
+            "#rwl-iqxin label{" +
+                "margin:0;" +
+                "padding:0;" +
             "}"
         );
     };
@@ -298,6 +301,7 @@
         // console.log(hostname);
         switch (hostname){
             case "www.z3z4.com": clear_z3z4(); break;
+            case "news.ifeng.com":
             case "www.15yan.com": rule = clear_15yan();break;
         }
         return rule?rule:rules.default_rule;
