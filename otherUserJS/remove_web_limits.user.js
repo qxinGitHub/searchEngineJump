@@ -21,7 +21,7 @@
 
 // @icon               data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAABpElEQVR4nO3Vv2uUQRDG8c/ebSMWqay0trATAxrUSi1S2AiWFoJYpNCgoBjURsHWJKeNRfAvsDgFixQqKdPZ2ViEiCJYBOQu8f1hEXO59713j7MUfLZ6d2a/O8vMO0OzDnin9Ku2Mjvuaw07xgSAYEVXe2indMhj92zpKJLnBhF8MDeye9hn6zbN70eRiqCw02Bra3up8BBLu1FEBxsBucXqW4csz0ULe4jorSCMuPU89boRELDMHiI6Y8V65bbCUTccc70RkaOwKLOg0IkyXa9qTjOu2LAs6NZuD86hrdTyxRNTkUqqdhXlHrngGRVEZsMpJwex9DxIZSHYclesIb65LCoHgIs66UJq6btDBZHZrPh8V6YBOX66LbOkTGckBYimBW2FVTNeuOZNyrFJ236Yl4NSy5SbVm1PDvhodqgyMledTdRlAtDzqfL9tfkwUtyaRkv9LwFj9B/w7wPycXOhqlJ0yZHKPChMi5MCiM47XhsopbVJAUHfrYbmN/EToN+02eLPfz9OYyZhFJzW1Jn3lTsxaKQjCkp52jy45r1ZvSbTb9M0d4PBozGZAAAAAElFTkSuQmCC
 
-// @version           2.2.1
+// @version           2.2.2
 // @license           LGPLv3
 
 // @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.3 测试通过
@@ -116,8 +116,8 @@
         },
         rule_plus: {
             name: "default",
-            hook_eventNames: "contextmenu|select|selectstart|copy|cut|dragstart|mousedown",
-            unhook_eventNames: "keydown|keyup|mouseup",
+            hook_eventNames: "contextmenu|select|selectstart|copy|cut|dragstart|mousedown|mouseup",
+            unhook_eventNames: "keydown|keyup",
             dom0: true,
             hook_addEventListener: true,
             hook_preventDefault: true,
@@ -297,14 +297,13 @@
 
     // 部分网站采用了其他的防复制手段
     function clear(){
-        var rule;
         // console.log(hostname);
         switch (hostname){
             case "www.z3z4.com": clear_z3z4(); break;
-            case "news.ifeng.com":
-            case "www.15yan.com": rule = clear_15yan();break;
+            // case "news.ifeng.com":
+            // case "www.15yan.com": rule = clear_15yan();break;
         }
-        return rule?rule:rules.default_rule;
+        return rules.rule_plus;
     }
     // www.z3z4.com 再三再四, 文字上面覆盖一层透明的div
     function clear_z3z4(){
