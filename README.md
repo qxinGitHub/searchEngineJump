@@ -3,9 +3,22 @@
 
 在线安装 [Greasy Fork](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump)
 
+__说明__
+> 5.0.0.0
+> 增加设置，可以自行打开关闭搜索列表，两个搜索之间拖动进行排序.随之而来的问题:  在百度页面中的设置样式有问题，最好在谷歌搜索页面(或必应)进行相关设置; 拖动排序和有些拖拽手势插件冲突(原因未知), 拖拽手势插件一般按ctrl忽视手势; 排序实质上是交换，两个搜索进行交换。
+![例图](http://odp4cbmbx.bkt.clouddn.com/setting.png)
+
+
 已知问题： 与脚本[网页解除限制](https://greasyfork.org/zh-CN/scripts/14146-%E7%BD%91%E9%A1%B5%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4)有[冲突](https://greasyfork.org/zh-CN/forum/discussion/21298/x)，开启后，无法进行跳转。可以暂时先用我修改后的[网页解除限制](https://greasyfork.org/zh-CN/scripts/28497-%E7%BD%91%E9%A1%B5%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4),大刀阔斧的修改，与原脚本使用上有较大的变化。或者自己修改下原作者的脚本(最简单的修改方式是将unhook_eventNames中的 "mousedown|mouseup" 替换成"click"即可，~~暂时还不知道有什么副作用~~在知乎打开评论列表会跳转到顶部)。
 
+
 ### 更新历史
+
+> 2017-05-08 version 5.0.0.0
+- __添加设置菜单(测试)__ 自定义开关搜索列表，排序，无法自己添加。测试版本
+- 添加果壳搜索
+- 修复 duckduckgo 样式
+
 
 > 2017-05-1 version 4.1.1.17
 - 添加脚本图标
@@ -16,7 +29,7 @@
 - 修复从百度，谷歌主页搜索时没样式的问题
 
 > 2017-04-23 version 4.1.1.15
-- acfun 样式不居中 [问题连接](https://greasyfork.org/zh-CN/forum/discussion/22066/x), 还有两个问题没解决，下个版本搞
+- acfun 样式不居中 [问题连接](https://greasyfork.org/zh-CN/forum/discussion/22066/x)
 
 > 2017-04-21 version 4.1.1.14
 - 修复上个版本导致的搜索栏遮挡联想词的问题
