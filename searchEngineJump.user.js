@@ -2,7 +2,7 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        5.0.0.0
+// @version        5.0.0.1
 // @created        2011-7-2
 // @lastUpdated    2017-05-08
 
@@ -1712,7 +1712,7 @@
             // GM_deleteValue("searchEngineJumpData");
             var getSettingData = GM_getValue("searchEngineJumpData");
             if(getSettingData){
-                console.log(getSettingData);
+                // console.log(getSettingData);
                 var engineDetails = [['网页', 'web'],['翻译', 'translate'],['知识', 'knowledge'],['图片', 'image'],['视频', 'video'],['音乐', 'music'],['学术', 'scholar'],  ['社交', 'sociality'],['购物', 'shopping'],['html', 'htmls'],['mine', 'mine']];
                 var getDetails = getSettingData.details;
                 var getDetailsL = getDetails.length;
@@ -1730,7 +1730,7 @@
             ///test -------------- 测试 end
 
             // --------------------可设置项结束------------------------
-            console.log("engineList: ",engineList);
+            // console.log("engineList: ",engineList);
             //xpath 获取单个元素
             function getElementByXPath(xPath, contextNode, doc) {
                 doc = doc || document;
@@ -2272,7 +2272,7 @@
                     new DropDownList(item[0], item[1]);
                 });
             };
-            console.log(engineList);
+            // console.log(engineList);
 
 
 
@@ -2305,7 +2305,7 @@
                 // dragData : null,
 
                 init: function () {
-                    console.log("init...");
+                    // console.log("init...");
                     var that = this;
 
                     this.ele.id = "settingLayer";
@@ -2458,8 +2458,8 @@
                     // console.log(this.dataset.iqxindisabled);
                     // this.dataset.iqxindisabled = this.dataset.iqxindisabled?"":"true";
                     // console.log(this.dataset.iqxindisabled);
-                    console.log(e);
-                    console.log(e.target);
+                    // console.log(e);
+                    // console.log(e.target);
                     if(e.target.className==="sej-engine"){
                          e.target.dataset.iqxindisabled = e.target.dataset.iqxindisabled?"":"true";
                     }
@@ -2469,13 +2469,13 @@
                 },
                 domdragstart:function (e) {
                     // e.target.style.opacity = '0.5';
-                    console.log(this,e);
+                    // console.log(this,e);
                     dragEl = this;
                     dragData = this.dataset.xin;
                     
                     e.dataTransfer.effectAllowed = "move";
                     e.dataTransfer.setData("text/html",this.innerHTML);
-                    console.log(dragEl,this);
+                    // console.log(dragEl,this);
                 },
                 domdragenter:function (e) {
                     e.target.classList.add('rwl-over');
@@ -2494,9 +2494,9 @@
                     if (e.stopPropagation) {
                         e.stopPropagation();
                     }
-                    console.log("dragEl-----------------",dragEl,this);
+                    // console.log("dragEl-----------------",dragEl,this);
                     if (dragEl != this) {
-                        console.log("(((((((((((((((((((((((((((((");
+                        // console.log("(((((((((((((((((((((((((((((");
                         // console.log(this.dragEl,this);
                         dragEl.innerHTML = this.innerHTML;
                         this.innerHTML = e.dataTransfer.getData('text/html');
@@ -2512,12 +2512,12 @@
                 saveData: function(){
                     var obj = {};
                     var parentdiv = document.querySelectorAll("#settingLayer .iqxin-items");
-                    console.log("保存数据-------", parentdiv);
+                    // console.log("保存数据-------", parentdiv);
                     for (let i=0;i<parentdiv.length;i++){
                         var data = parentdiv[i].querySelectorAll(".sej-engine");
                         var id = parentdiv[i].id;
                         obj[id]=[];
-                        console.log("保存obj id");
+                        // console.log("保存obj id");
                         for(let ii=0;ii<data.length;ii++){
                             if (data[ii].dataset.xin<0){
                                 var ij = -ii;
@@ -2547,9 +2547,9 @@
                         details[i] = odetails[i].dataset.xin;
                     }
 
-                    console.log("details: ",details);
+                    // console.log("details: ",details);
                     // obj.details = details;
-                    console.log(obj);
+                    // console.log(obj);
                     // obj = JSON.stringify(obj);
                     // GM_setValue("searchEngineJumpData",obj);
                     // var testD = GM_getValue("searchEngineJumpData");
@@ -2557,7 +2557,7 @@
                     // console.log(JSON.parse(testD));
                     settingData.details = details;
                     settingData.engineList = obj;
-                    console.log(settingData);
+                    // console.log(settingData);
                     GM_setValue("searchEngineJumpData",settingData);
                 },
                 addGlobalStyle: function(){
@@ -2748,7 +2748,7 @@
     // 获取存储的数据信息
     function get_data(){
         setData = GM_getValue("searchEngineJumpData");
-        console.log("settingData: ",setData);
+        // console.log("settingData: ",setData);
     }
 
 
@@ -2756,7 +2756,7 @@
     // console.log(this);
 
     var setData = null;
-    get_data();
+    // get_data();
 
     // 使用了 Content Security Policy (CSP) 安全策略的网站
     var CSPList = [
