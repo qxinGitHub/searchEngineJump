@@ -14,6 +14,13 @@ __说明__
 
 ### 更新历史
 
+> 2017-05-09 version 5.0.0.2
+- 更改字体设置后会造成错位 [问题连接](https://greasyfork.org/zh-CN/forum/discussion/23109/x)
+- 与Google Variety样式不兼容 
+
+> 2017-05-08 version 5.0.0.1
+- 注释掉 console.log
+
 > 2017-05-08 version 5.0.0.0
 - __添加设置菜单(测试)__ 自定义开关搜索列表，排序，无法自己添加。测试版本
 - 添加果壳搜索

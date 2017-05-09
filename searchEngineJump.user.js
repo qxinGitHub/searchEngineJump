@@ -2,7 +2,7 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        5.0.0.1
+// @version        5.0.0.2
 // @created        2011-7-2
 // @lastUpdated    2017-05-08
 
@@ -141,7 +141,7 @@
                     // 给引擎列表的样式
                     style: '\
                         margin-left: 138px;\
-                        z-index: 100;\
+                        z-index: 103;\
                         margin-top:5px;\
                         top:70px;\
                     ',
@@ -2570,7 +2570,7 @@
                             "background-color: rgba(0,0,0,.5);" +
                             "z-index: 200000000;" +
                             "overflow: auto;" +
-                            "font-size: small;" +
+                            "font-size: 14px;" +
                             "font-family: arial,sans-serif;" +
                         "}" +
                         "#settingLayer{" +
