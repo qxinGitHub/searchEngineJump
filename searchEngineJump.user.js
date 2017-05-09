@@ -2,9 +2,9 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        5.0.0.2
+// @version        5.0.3
 // @created        2011-7-2
-// @lastUpdated    2017-05-08
+// @lastUpdated    2017-05-09
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -83,7 +83,7 @@
 (function () {
     'use strict';
     
-    
+    function iqxinstart(){
     // function contentScript(messageID) {
         // 'use strict';
         
@@ -2158,6 +2158,7 @@
                 // 'encoding="$encoding$" url="$url$"><img src="$favicon$" class="sej-engine-icon" />$name$</a>';           
             var container = document.createElement('sejspan');
             container.id = 'sej-container';
+            container.className = "rwl-exempt";
             
             container.addEventListener('mousedown', mousedownhandler, true);
             
@@ -2206,7 +2207,7 @@
                 } else {
                     // console.log("droplist: ",engines);
                     var dropList = document.createElement('sejspan');
-                    dropList.className = 'sej-drop-list';
+                    dropList.className = 'sej-drop-list rwl-exempt';
                     dropList.innerHTML = engines;
                     
                     // 非空列表
@@ -2529,7 +2530,8 @@
                             obj[id][ij].name=data[ii].dataset.iqxintitle;
                             obj[id][ij].url=data[ii].dataset.iqxinlink;
                             if(data[ii].dataset.iqxintarget){
-                                obj[id][ij].target=data[ii].dataset.iqxintarget;
+                                //         data-iqxintarget
+                                obj[id][ij].blank=data[ii].dataset.iqxintarget;
                             };
                             if(data[ii].dataset.iqxindisabled){
                                 obj[id][ij].disable=data[ii].dataset.iqxindisabled;
@@ -2759,20 +2761,21 @@
     // get_data();
 
     // 使用了 Content Security Policy (CSP) 安全策略的网站
-    var CSPList = [
-        "www.zhihu.com",
-        "github.com",
-    ]
-    var hostname = window.location.hostname;
+    // var CSPList = [
+    //     "www.zhihu.com",
+    //     "github.com",
+    // ]
+    // var hostname = window.location.hostname;
 
-    for(let i=0;i<CSPList.length;i++){
-        if(~hostname.indexOf(CSPList[i])){
+    // for(let i=0;i<CSPList.length;i++){
+    //     if(~hostname.indexOf(CSPList[i])){
             // contentScript();
             // console.log('SEJ: black list');
-            return
-        }
-    }
+            // return
+        // }
+    // }
 
+        }
     // console.log("run");
     // runInPageContext(contentScript);
     // contentScript();
@@ -2795,7 +2798,6 @@
     //         }
     //     }).observe(watch, {childList: true, subtree: true, characterData: true});
     // }
-
     // 给谷歌和百度搜索的主页单独加个列表
     var url = window.location.href;
 
@@ -2818,10 +2820,12 @@
                 newTitle = document.title;
                 if(oldTitle!=newTitle){
                     //console.log("不存在开始插入");
-                    runInPageContext(contentScript);
+                    iqxinstart();
                 }
             }
         },1000)
+    } else {
+        iqxinstart();
     }
 
 })();
