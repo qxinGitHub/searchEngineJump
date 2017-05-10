@@ -19,7 +19,7 @@ __说明__
 - 与Google Variety样式不兼容的问题
 
 > 2017-05-10 version 5.0.5
-- 添加搜索知乎搜索[建议连接](https://greasyfork.org/zh-CN/forum/discussion/23140/x)
+- 添加搜索搜狗知乎搜索 [建议连接](https://greasyfork.org/zh-CN/forum/discussion/23140/x)
 - 添加搜狗微信搜索 (在分类 mine 中)
 
 > 2017-05-9 version 5.0.4
