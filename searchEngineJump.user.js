@@ -2,7 +2,7 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        5.1.0
+// @version        5.1.1
 // @created        2011-7-2
 // @lastUpdated    2017-05-10
 
@@ -1999,6 +1999,8 @@
                         line-height: 1.5;
                         font-size: 13px;
                         font-family: arial,sans-serif;
+                        transform-origin: top center;
+                        animation: sejopen 0.3s !important;
                     }
                     
                     
@@ -2083,6 +2085,16 @@
                         background-color: white;
                         transition: opacity 0.2s ease-in-out,
                             top 0.2s ease-in-out;
+                    }
+                    @keyframes sejopen {
+                        0% {
+                            transform: scale(1, 0.1);
+                            opacity: 0;
+                        }
+                        100% {
+                            transform: scale(1, 1);
+                            opacity: 1;
+                        }
                     }
                 */     
             }).cssText;
@@ -2375,6 +2387,13 @@
                         e.stopPropagation();
                     });
 
+                    that.domresize();
+                    // this.ele.addEventListener("resize",function(){
+                    //     console.log("0000000000000000");
+                    //     console.log(window.getComputedStyle(that.ele).height);
+                    //     that.mask.style.minHeight = window.getComputedStyle(that.ele).height;
+                    // });
+
                     this.mask.appendChild(this.ele);
                     document.body.appendChild(this.mask);
 
@@ -2497,10 +2516,18 @@
                     this.ele.appendChild(btnEle);
                 },
                 show: function(){
-                    this.mask.style.display = "block";
+                    this.mask.style.display = "flex";
+                    document.body.style.overflow = "hidden";
                 },
                 hide: function(){
                     this.mask.style.display = "none";
+                    document.body.style.overflow = "auto";
+                },
+                domresize: function(){
+                    // getComputedStyle
+                    // window.getComputedStyle(dom , ":after")
+                    console.log(window.getComputedStyle(this.ele).height);
+                    this.mask.style.minHeight = window.getComputedStyle(this.ele).height;
                 },
                 reset: function(){
                      GM_deleteValue("searchEngineJumpData");
@@ -2619,26 +2646,28 @@
                     var css = 
                         "#settingLayerMask{" +
                             "display: none;" +
+                            "justify-content: center;" +
+                            "align-items: center;" +
                             "position: fixed;" +
                             "top:0; right:0; bottom:0; left:0;" +
                             "background-color: rgba(0,0,0,.5);" +
                             "z-index: 200000000;" +
                             "overflow: auto;" +
-                            "font-size: 14px;" +
+                            // "font-size: 14px;" +
                             "font-family: arial,sans-serif;" +
+                            "min-height: 100%;" +
                         "}" +
                         "#settingLayer{" +
                             "display: flex;" +
-                            "justify-content: space-around;" +
-                            "padding: 20px 0;" +
+                            "flex-wrap: wrap;" +
+                            "padding: 20px;" +
                             "background-color: #fff;" +
-                            "width: 1080px;" +
-                            "height: 500px;" +
                             "border-radius: 4px;" +
                             "position: absolute;" +
-                            "top: 50%;" +
-                            "left: 50%;" +
-                            "transform: translate(-50%,-50%);" +
+                        "}" +
+                        ".iqxin-items{" +
+                            "margin: 0 5px 10px;" +
+                            "border-bottom: 1px solid #ccc;" +
                         "}" +
                         "#settingLayer .drag{" +
                             "display: block;" +
@@ -2650,8 +2679,7 @@
                         "}" +
                         ".sejtitle{" +
                             "text-align: center;" +
-                            "padding: 5px 0;" +
-                            "border-bottom: 1px solid #eee;" +
+                            "padding: 2px 0;" +
                             "cursor: pointer;" +
                         "}" +
                         "[data-xin]{" +
@@ -2674,7 +2702,10 @@
                         "}" +
                         "#btnEle{" +
                             "position:absolute;" +
-                            "bottom:10px;" +
+                            "bottom: -44px;" +
+                            "right: 0;" +
+                            "background: #fff;" +
+                            "border-radius: 4px;" +
                         "}" +
                         "#btnEle span{" +
                             "display: inline-block;" +
@@ -2706,12 +2737,6 @@
                             "border: 1px dashed #ccc;" +
                             "box-sizing: border-box;" +
                         "}" +
-                        "@media all and (max-width:1080px){" +
-                            "#settingLayer{" +
-                                "left: 0px;" +
-                                "transform:translate(0,-50%);" +
-                            "}" +
-                        "}" +
                         "";
                     head = document.getElementsByTagName('head')[0];
                     // if (!head) { return; }
@@ -2729,18 +2754,33 @@
                 setBtn.innerHTML = "set";
                 setBtn.innerHTML = "<img style='margin:0 0 -3px 6px;width:16px;' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSklEQVR4nGNkIAPYy8tzhLS2f0cWy42JYiTHLLI0TV6y7D82cXIcwUSqhr658/bhkaaeAyYvWfZ/0qLFW9HVs7JzOOLR8w+bObhCjIEBh4vxaaAEYIsijBCgleW4zGYipIDawEpYVgqnA8jNSqSAY28fP8PpgIEALORoUlWQwyp++8Ejks0iKQQYGRlxWs7AgNth+ABKCLRPmhqHT7GKvCwDAwMDQ11gxMRTr58UIMtNmzbjuZKejoSqghyhkGBkYGD4j8xhYGAgnANgvmvyj5RGT0gwYC4mU9y4bkUPAwPh6IAleEZisx7MAR42Nnhzyo4jR/4T4wAYICoNIFlOUH1dULglAwMDg7S4GPUcgAQIhtapV09PMDAwMHBxchBlIMvHj++JUEZ86tbnlxdgYGBg+PL1KwMxZhMVAmcuXmRgYEDELz7QuXXpewYGBoYbd+4QYzQDU012NuOmxvZJRKkmDIguyjc2dfrWZGczomhomToVrw9N9PUZGBiw54T1O3emc3Jzz2BgQIQYLlCTnQ3Xj2EQPkcYaGszsLDgL71JsZyBgcRccOHqVbwWELIcGyCrMiLHIlxgwKtjFAeYSkkJD6gD/Kur39DaQjNxmWScDkBPodQGWxrbU0+9fDIXpwNwOWJTQ8eSzY3tC4m1aHNje8mmhvY+FLGG9qQTr57MQVeL08cW4jJmJ14+OYUuTqiwwuYBczFpvZOvnl7Cpp7kIPdQUWG3KSz8QazlhADJ2XDHnTs/SdVDVQcwMDAwLJs6lR1djNwEDAB1JMSK2b7KxQAAAABJRU5ErkJggg=='>"
                 document.querySelector("#sej-container").appendChild(setBtn);
-                var sejSet = new SEJsetting();
+                // var sejSet = new SEJsetting();
+                var sejSet = null;
                 
-                setBtn.addEventListener("click",function(){sejSet.show();});
+                setBtn.addEventListener("click",function(){
+                    if(!sejSet){
+                        sejSet = new SEJsetting();
+
+                        var sej_save = document.querySelector("#xin-save");
+                        var sej_close = document.querySelector("#xin-close");
+                        var sej_reset = document.querySelector("#xin-reset");
+
+                        sej_save.addEventListener("click",function(){sejSet.saveData();sejSet.hide();window.location.reload();});
+                        sej_close.addEventListener("click",function(){sejSet.hide();});
+                        sej_reset.addEventListener("click",function(){sejSet.reset();sejSet.hide();window.location.reload();});
+
+                        window.addEventListener("resize",function(){
+                            // document.querySelector("#settingLayerMask").style.minHeight = document.querySelector("#settingLayer").style.offsetHeight;
+                            // console.log(window.getComputedStyle(document.querySelector("#settingLayer")).height);
+                            document.querySelector("#settingLayerMask").style.minHeight = window.getComputedStyle(document.querySelector("#settingLayer")).height;
+                        })
+                    }
+                    sejSet.show();
+
+                    
+                });
                 // setBtn.addEventListener("click",function(){sejSet.show();});
 
-                var sej_save = document.querySelector("#xin-save");
-                var sej_close = document.querySelector("#xin-close");
-                var sej_reset = document.querySelector("#xin-reset");
-
-                sej_save.addEventListener("click",function(){sejSet.saveData();sejSet.hide();window.location.reload();});
-                sej_close.addEventListener("click",function(){sejSet.hide();});
-                sej_reset.addEventListener("click",function(){sejSet.reset();sejSet.hide();window.location.reload();});
             };
 
         // });
@@ -2879,5 +2919,6 @@
     } else {
         iqxinstart();
     }
+    
 
 })();

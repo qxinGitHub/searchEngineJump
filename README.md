@@ -14,6 +14,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.1.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-10 
+- 添加动画效果
+- 将设置改为弹性布局(测试)
+
+
 > version 5.1.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-10 
 - 开始修改源网页的样式以兼容脚本
 - 与Google Variety样式不兼容的问题
@@ -86,7 +91,7 @@ __说明__
 
 > version:4.1.1.7  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-03-31 
 - 可以在部分开启 Content Security Policy (CSP) 安全策略的网站上使用，知乎可以，github依旧不行
-![知乎开启成功](http://odp4cbmbx.bkt.clouddn.com/%E7%9F%A5%E4%B9%8&E20170331174102.png)
+![知乎开启成功](http://odp4cbmbx.bkt.clouddn.com/%E7%9F%A5%E4%B9%8E20170331174102.png)
 
 > version:4.1.1.6  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-03-29 
 - 添加 Pinterest, MDN 搜索
