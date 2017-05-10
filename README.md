@@ -17,6 +17,7 @@ __说明__
 > 2017-05-10 version 5.1.0
 - 开始修改源网页的样式以兼容脚本
 - 与Google Variety样式不兼容的问题
+- google搜索页面中样式微调
 
 > 2017-05-10 version 5.0.5
 - 添加搜索搜狗知乎搜索 [建议连接](https://greasyfork.org/zh-CN/forum/discussion/23140/x)
