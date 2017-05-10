@@ -14,7 +14,11 @@ __说明__
 
 ### 更新历史
 
-> 2017-05-09 version 5.0.4
+> 2017-05-10 version 5.0.5
+- 添加搜索知乎搜索[建议连接](https://greasyfork.org/zh-CN/forum/discussion/23140/x)
+- 添加搜狗微信搜索 (在分类 mine 中)
+
+> 2017-05-9 version 5.0.4
 - 5.0.0.2中与样式“Google Variety”不兼容问题修改后弊大于利，暂时改回去
 
 > 2017-05-09 version 5.0.3
