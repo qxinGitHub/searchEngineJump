@@ -14,6 +14,10 @@ __说明__
 
 ### 更新历史
 
+> 2017-05-10 version 5.1.0
+- 开始修改源网页的样式以兼容脚本
+- 与Google Variety样式不兼容的问题
+
 > 2017-05-10 version 5.0.5
 - 添加搜索知乎搜索[建议连接](https://greasyfork.org/zh-CN/forum/discussion/23140/x)
 - 添加搜狗微信搜索 (在分类 mine 中)

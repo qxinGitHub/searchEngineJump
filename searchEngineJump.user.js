@@ -2,7 +2,7 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        5.0.5
+// @version        5.1.0
 // @created        2011-7-2
 // @lastUpdated    2017-05-10
 
@@ -143,7 +143,6 @@
                         margin-left: 138px;\
                         z-index: 100;\
                         margin-top:5px;\
-                        top:70px;\
                     ',
                     // padding-left: 127px;\
 
@@ -157,15 +156,17 @@
                         // 'beforeEnd' (作为给定元素的最后一个子元素) ; 
                         // 'afterEnd'(插入到给定元素的后面);.
                     insertIntoDoc: {
-                        // target: 'css;#appbar',
-                        target: 'css;#searchform',
+                        target: 'css;#appbar',
+                        // target: 'css;#searchform',
                         // keyword: function () {
                             // var input = document.getElementById('lst-ib');
                             // if (input) return input.value;
                         // },
                         keyword: '//input[@name="q"]',
-                        where: 'afterEnd',
+                        where: 'beforeBegin',
+                        // where: 'afterEnd',
                     },
+                    stylish: 'body.vasq #hdtbMenus.hdtb-td-o{top:100px !important}'
                 },
                 {name: "google-hash-query",// 不刷新页面显示搜索结果的google
                     enabled: true,
@@ -175,17 +176,15 @@
                         margin-left: 138px;\
                         z-index: 100;\
                         margin-top:5px;\
-                        top:70px;\
                     ',
                     insertIntoDoc: {
-                        // target: 'css;body',
-                        target: 'css;#searchform',
+                        target: 'css;#appbar',
                         keyword: function () {
                             var input = document.getElementById('lst-ib');
                             if (input) return input.value;
                         },
-                        // where: 'afterBegin',
-                        where: 'afterEnd',
+                        where: 'afterBegin',
+                    stylish: 'body.vasq #hdtbMenus.hdtb-td-o{top:100px !important}'
                     },
                 },
                 {name: "百度网页搜索",
@@ -1754,6 +1753,7 @@
                     // 只能对上一版本增量更新
                 if(parseFloat(getSettingData.version) < 1.1){
                     console.log("目前版本过低");
+                    console.log(getSettingData.version);
                     engineList.knowledge.push({
                         name: '知乎(搜狗)',
                         url: 'http://zhihu.sogou.com/zhihu?ie=utf8&query=%s',
@@ -1765,8 +1765,11 @@
                         favicon: 'data:image/png;base64,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',
                         blank:true,
                     });
+                    // 更新本地版本
+                    getSettingData.version = 1.1;
+                    GM_setValue("searchEngineJumpData",getSettingData);
                 }
-                console.log(engineList);
+                // console.log(engineList);
             }
             
             ///test -------------- 测试 start
@@ -2318,6 +2321,11 @@
                 });
             };
             // console.log(engineList);
+
+            // 由于冲突，更改源网页的样式
+            // console.log("-----------------------------")
+            // console.log(matchedRule.stylish);
+            if(matchedRule.stylish){GM_addStyle(matchedRule.stylish);};
 
 
 
