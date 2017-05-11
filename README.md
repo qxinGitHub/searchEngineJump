@@ -14,6 +14,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.1.3  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-11 
+- 由于上个版本的修改导致，从百度主页搜索无跳转栏的问题
+
 > version 5.1.2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-11 
 - 从谷歌主页搜索后刷新页面，跳转栏丢失的问题 [感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/23230/x)
 - 网速不好的情况下，从谷歌主页搜索无样式的问题

@@ -2913,13 +2913,12 @@
             } else if (document.querySelector("sejspan")){
                 // console.log("已存在");
                 clearInterval(timer);
-            }
-            // else if (oldTitle!=newTitle){
+            }else if (oldTitle!=newTitle){
                 // if(){
                     // console.log("不存在开始插入");
-                    // iqxinstart();
+                    iqxinstart();
                 // }
-            // }
+            }
         },1000)
     } else {
         // console.log("普通插入");
