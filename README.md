@@ -15,6 +15,9 @@ __说明__
 ### 更新历史
 
 > version 5.1.3  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-11 
+- 上一个版本忘改版本号就发布出去
+
+> version 5.1.2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-11 
 - 由于上个版本的修改导致，从百度主页搜索无跳转栏的问题
 
 > version 5.1.2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-11 
