@@ -2,9 +2,9 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        5.1.1
+// @version        5.1.2
 // @created        2011-7-2
-// @lastUpdated    2017-05-10
+// @lastUpdated    2017-05-11
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -183,9 +183,9 @@
                             var input = document.getElementById('lst-ib');
                             if (input) return input.value;
                         },
-                        where: 'afterBegin',
-                    stylish: 'body.vasq #hdtbMenus.hdtb-td-o{top:100px !important}'
+                        where: 'beforeBegin',
                     },
+                    stylish: 'body.vasq #hdtbMenus.hdtb-td-o{top:100px !important}'
                 },
                 {name: "百度网页搜索",
                     url: /^https?:\/\/www\.baidu\.com\/(?:s|baidu)/,
@@ -2896,6 +2896,7 @@
     var hashList = [
         /^https?:\/\/www\.baidu\.com\/$/i,
         /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/$/i,
+        /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^#]*#(?:&?q=|.+?&q=).+/,
     ];
     var hashtag = hashList.some(function hashUrl(element, index, array){
             return ~url.search(element);
@@ -2904,19 +2905,24 @@
         var oldTitle = document.title;
         var newTitle = "";
         var timer = setInterval(function(){
-             //console.log("循环中");
-            if(document.querySelector("sejspan")){
-                //console.log("已存在");
+             // console.log("循环中");
+            newTitle = document.title;
+            if (document.querySelector("#appbar") && !document.querySelector("sejspan")){
+                // console.log("new");
+                iqxinstart();
+            } else if (document.querySelector("sejspan")){
+                // console.log("已存在");
                 clearInterval(timer);
-            }else{
-                newTitle = document.title;
-                if(oldTitle!=newTitle){
-                    //console.log("不存在开始插入");
-                    iqxinstart();
-                }
             }
+            // else if (oldTitle!=newTitle){
+                // if(){
+                    // console.log("不存在开始插入");
+                    // iqxinstart();
+                // }
+            // }
         },1000)
     } else {
+        // console.log("普通插入");
         iqxinstart();
     }
     
