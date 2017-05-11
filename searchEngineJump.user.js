@@ -784,10 +784,7 @@
                     engineList: "translate",
                     style: '\
                         padding-left:1px;\
-                        border-top:1px solid #D9E1F7;\
-                        border-bottom:1px solid #D9E1F7;\
-                        margin-top:-1px;\
-                        text-align:center;\
+                        margin:-1px 0 0 20px;\
                     ',
                     insertIntoDoc: {
                         keyword: 'css;#source',
@@ -801,12 +798,14 @@
                     engineList: "translate",
                     style: '\
                         padding-left:1px;\
-                        border-top:1px solid #D9E1F7;\
-                        border-bottom:1px solid #D9E1F7;\
-                        margin-top:-1px;\
+                        margin:0px auto;\
+                        width:1220px;\
                     ',
                     insertIntoDoc: {
-                        keyword: 'css;#baidu_translate_input',
+                        // keyword: 'css;#baidu_translate_input',
+                        keyword: function(){
+                        	return document.querySelector("#baidu_translate_input").value;
+                        },
                         target: 'css;.header',
                         where: 'afterEnd',
                     },
@@ -816,10 +815,8 @@
                     enabled: true,
                     engineList: "translate",
                     style: '\
-                        padding-left:1px;\
-                        border-top:1px solid #D9E1F7;\
-                        border-bottom:1px solid #D9E1F7;\
-                        margin-top:-1px;\
+                        padding-left:110px;\
+                        margin-top:-4px;\
                     ',
                     insertIntoDoc: {
                         keyword: 'css;#sb_form_q',
@@ -833,15 +830,13 @@
                     engineList: "translate",
                     style: '\
                         padding-left:0px;\
-                        border-top:1px solid #D9E1F7;\
-                        border-bottom:1px solid #D9E1F7;\
-                        margin-top:0px;\
+                        margin-top:2px;\
                         text-align:center;\
                     ',
                     insertIntoDoc: {
                         keyword: 'css;#query',
-                        target: 'css;#scontainer',
-                        where: 'beforeBegin',
+                        target: 'css;.c-topbar-wrapper',
+                        where: 'beforeEnd',
                     },
                 },  
                 {name: "有道翻译",
@@ -1470,6 +1465,7 @@
                 name: '有道词典',
                 url: 'http://dict.youdao.com/search?q=%s',
                 favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA2ElEQVQ4jWNgGFQggps34Y2i2v83imr/78gpvZdgYFBgYGBg8OXkCUMWx2sITOEbRbX/MAMYGBgEkMVxahZiYJCBKTonLX+fkDgG0GNlNYIpnCQsOh8mbsjCYgkTXy8uvR+nAcgK0/gECmDifpw8oTDxMgGhBpwGOLKzu8MU7peSOW/BweFgyMJimc4rUAQT9+TiCiDKC7gwUsBiBezIzoUFGrKr8GnGBgSQDYjg5k3Aq7pFSKTfgoPDwYKDwyGNT6CAZNtx+RuqWYCgAXfklN6jayTo7AEHAIjTnaHLaQtfAAAAAElFTkSuQmCC',
+                blank:true,
             };
             engineList.translate[3] = {
                 name: '必应翻译',
@@ -1981,7 +1977,7 @@
             var iTarget = getElement(matchedRule.insertIntoDoc.target);
             var iInput = typeof matchedRule.insertIntoDoc.keyword == 'function' ? matchedRule.insertIntoDoc.keyword : getElement(matchedRule.insertIntoDoc.keyword);
             
-            // console.log("searchEngineJump test: ",iTarget, iInput);
+            console.log("searchEngineJump test: ",iTarget, iInput);
 
             if (!iTarget || !iInput) return;
             
