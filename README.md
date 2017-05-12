@@ -14,6 +14,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.1.4  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-12
+- qq音樂網址變更 [感謝反饋](https://greasyfork.org/zh-CN/forum/discussion/23366/x)
+
 > version 5.1.3  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-11 
 - 上一个版本忘改版本号就发布出去(改版本後，greasyfork無視僅有版本號的更新)
 - 翻譯(百度，谷歌，必應，有道都有所調整)小調樣式 [感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/23297/x)
