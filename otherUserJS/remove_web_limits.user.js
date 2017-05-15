@@ -21,7 +21,7 @@
 
 // @icon               data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAABpElEQVR4nO3Vv2uUQRDG8c/ebSMWqay0trATAxrUSi1S2AiWFoJYpNCgoBjURsHWJKeNRfAvsDgFixQqKdPZ2ViEiCJYBOQu8f1hEXO59713j7MUfLZ6d2a/O8vMO0OzDnin9Ku2Mjvuaw07xgSAYEVXe2indMhj92zpKJLnBhF8MDeye9hn6zbN70eRiqCw02Bra3up8BBLu1FEBxsBucXqW4csz0ULe4jorSCMuPU89boRELDMHiI6Y8V65bbCUTccc70RkaOwKLOg0IkyXa9qTjOu2LAs6NZuD86hrdTyxRNTkUqqdhXlHrngGRVEZsMpJwex9DxIZSHYclesIb65LCoHgIs66UJq6btDBZHZrPh8V6YBOX66LbOkTGckBYimBW2FVTNeuOZNyrFJ236Yl4NSy5SbVm1PDvhodqgyMledTdRlAtDzqfL9tfkwUtyaRkv9LwFj9B/w7wPycXOhqlJ0yZHKPChMi5MCiM47XhsopbVJAUHfrYbmN/EToN+02eLPfz9OYyZhFJzW1Jn3lTsxaKQjCkp52jy45r1ZvSbTb9M0d4PBozGZAAAAAElFTkSuQmCC
 
-// @version           2.2.2
+// @version           2.2.4
 // @license           LGPLv3
 
 // @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.3 测试通过
@@ -215,7 +215,20 @@
   // 获取所有元素 包括document
     function getElements() {
         var elements = Array.prototype.slice.call(document.getElementsByTagName('*'));
+
+        // 添加子元素
+        // var oparent = document.querySelectorAll("[class*='rwl-exempt']");
+        // [].forEach.call(oparent,function(odiv){
+        //     var ochildren = odiv.querySelectorAll("*");
+        //     [].forEach.call(ochildren,function(ochild){
+        //         ochild.setAttribute("rwl-exempt","true");
+        //     });
+        // });
+
+        // var elements = Array.prototype.slice.call(document.querySelectorAll("*:not([rwl-exempt='true'])"));
+        // console.log(elements);
         elements.push(document);
+        // console.log(elements);
 
         return elements;
     }
@@ -225,6 +238,7 @@
     function addBtn(){
         var node = document.createElement("remove-web-limits-iqxin");
         node.id = "rwl-iqxin";
+        node.className = "rwl-exempt";
         // node.innerHTML = '<label><input type="checkbox" name="" id="black_node">黑名单</label><button id="delete">delete</btton>';
         node.innerHTML = '<label>限制解除 <input type="checkbox" name="" id="black_node"></label>';
         if(window.self === window.top){
@@ -280,6 +294,9 @@
                 "vertical-align:middle;" +
                 "-webkit-appearance:checkbox;" +
                 "-moz-appearance:checkbox;" +
+                "position: static;" +
+                "clip: auto;" +
+                "opacity: 1;" +
             "}" +
             "#rwl-iqxin.rwl-active-iqxin{" +
                 "top: 10px;" +
@@ -291,6 +308,7 @@
             "#rwl-iqxin label{" +
                 "margin:0;" +
                 "padding:0;" +
+                "font-weight:500;" +
             "}"
         );
     };
@@ -300,6 +318,7 @@
         // console.log(hostname);
         switch (hostname){
             case "www.z3z4.com": clear_z3z4(); break;
+            case "huayu.baidu.com": clear_huayu(); break;
             // case "news.ifeng.com":
             // case "www.15yan.com": rule = clear_15yan();break;
         }
@@ -312,6 +331,12 @@
             oDiv.parentNode.removeChild(oDiv);
         }
     }
+    function clear_huayu(){
+        var oDiv = document.querySelector("#jqContextMenu");
+        if (oDiv) {
+            oDiv.parentNode.removeChild(oDiv);
+        }
+    }
     // www.15yan.com 15言， 监控 mousedown
     function clear_15yan(){
         return rules.rule_plus;
@@ -320,7 +345,7 @@
 
     // 初始化
     function init() {
-        //console.log("使用规则-------------------------------------------------iqxin");
+        // console.log("使用规则-------------------------------------------------iqxin");
         // 针对个别网站采取不同的策略
         var rule = clear();
         // 设置 event 列表
