@@ -21,7 +21,7 @@
 
 // @icon               data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAABpElEQVR4nO3Vv2uUQRDG8c/ebSMWqay0trATAxrUSi1S2AiWFoJYpNCgoBjURsHWJKeNRfAvsDgFixQqKdPZ2ViEiCJYBOQu8f1hEXO59713j7MUfLZ6d2a/O8vMO0OzDnin9Ku2Mjvuaw07xgSAYEVXe2indMhj92zpKJLnBhF8MDeye9hn6zbN70eRiqCw02Bra3up8BBLu1FEBxsBucXqW4csz0ULe4jorSCMuPU89boRELDMHiI6Y8V65bbCUTccc70RkaOwKLOg0IkyXa9qTjOu2LAs6NZuD86hrdTyxRNTkUqqdhXlHrngGRVEZsMpJwex9DxIZSHYclesIb65LCoHgIs66UJq6btDBZHZrPh8V6YBOX66LbOkTGckBYimBW2FVTNeuOZNyrFJ236Yl4NSy5SbVm1PDvhodqgyMledTdRlAtDzqfL9tfkwUtyaRkv9LwFj9B/w7wPycXOhqlJ0yZHKPChMi5MCiM47XhsopbVJAUHfrYbmN/EToN+02eLPfz9OYyZhFJzW1Jn3lTsxaKQjCkp52jy45r1ZvSbTb9M0d4PBozGZAAAAAElFTkSuQmCC
 
-// @version           2.3.0
+// @version           2.4.0
 // @license           LGPLv3
 
 // @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.3 测试通过
@@ -51,6 +51,10 @@
     function black_check(bool){
         var hostname = window.location.hostname;
         var check = check_black_list(list,hostname);
+
+        // console.log("check: ",check);
+        // console.log(list);
+
         if (bool && !check) {
             list = list.concat(hostname);
             // console.log("选中 不在黑名单, 增加",hostname,list);
@@ -67,19 +71,25 @@
         saveData(list);
         // test();
         // 刷新页面
-        window.location.reload(true);
+        // window.location.reload(true);
+        setTimeout(function(){
+            window.location.reload(true);
+            console.log("loading");
+        },400);
     }
 
-    function saveData(list){
+    function saveData(list,version){
         // console.log(list);
         var userData = {
             "status":1,
-            "version":0.1,
+            "version":black_list_version,
             "message":"0.1測試版，2017-05-16發佈",
-            "data":list
+            "data":list.sort()
         };
         GM_setValue("black_list",userData);
-        // console.log(GM_getValue("black_list"));
+        // console.log(userData);
+        console.log(GM_getValue("black_list"));
+        return userData;
     }
 
     // 數據庫版本升級，鑒於之前2.1.x版本只是隨手寫的，有太多的問題，保存數據未考慮周全，遂再次改動
@@ -103,16 +113,25 @@
         // black_list.concat
 
         // 保存數據
-        saveData(black_list);
+        return saveData(black_list);
     }
 
     // 获取黑名单
     function get_black_list(){
 
         var black_list = GM_getValue("black_list");
+
         if(!black_list){
-            versionUp();
-            black_list = GM_getValue("black_list");
+            black_list = versionUp();
+            // black_list = GM_getValue("black_list");
+        }
+
+        // 黑名單數據更新
+        // console.log("本地黑名單版本： ",black_list.version, black_list_version)
+        if(black_list.version < black_list_version){
+            console.log("低版本，更新數據");
+            var new_list = Array.from( new Set(black_list_default.concat(black_list.data)));
+            black_list = saveData(new_list);
         }
 
         // console.log(black_list);
@@ -121,8 +140,9 @@
    // 检查是否存在于黑名单中
     function check_black_list(list,host){
         for(let i=0;i<list.length;i++){
-            if(hostname===list[i]){
-            return i+1;  //万一匹配到第一个，返回0
+            // if(hostname===list[i]){
+            if(~hostname.indexOf(list[i])){
+                return i+1;  //万一匹配到第一个，返回0
             }
         }
         return false;
@@ -187,23 +207,23 @@
     }
 
   // 清理循环
-  function clearLoop() {
-    var elements = getElements();
+    function clearLoop() {
+        var elements = getElements();
 
-    for(var i in elements) {
-      for(var j in eventNames) {
-        var name = 'on' + eventNames[j];
-        if(elements[i][name] !== null && elements[i][name] !== onxxx) {
-            if(unhook_eventNames.indexOf(eventNames[j]) >= 0) {
-                elements[i][storageName + name] = elements[i][name];
-                elements[i][name] = onxxx;
-          } else {
-                elements[i][name] = null;
+        for(var i in elements) {
+          for(var j in eventNames) {
+            var name = 'on' + eventNames[j];
+            if(elements[i][name] !== null && elements[i][name] !== onxxx) {
+                if(unhook_eventNames.indexOf(eventNames[j]) >= 0) {
+                    elements[i][storageName + name] = elements[i][name];
+                    elements[i][name] = onxxx;
+              } else {
+                    elements[i][name] = null;
+              }
+            }
           }
         }
-      }
     }
-  }
 
   // 返回true的函数
     function returnTrue(e) {
@@ -437,22 +457,33 @@
 
 //--开始执行---------------------------------------------------------------iqxin
     
+    var black_list_version = 1.0;
     var black_list_default = [
-        "www.360doc.com",
-        "www.zhihu.com",
-        "huayu.baidu.com",
-        "read.qidian.com",
-        "www.xxsy.net",
+        "b.faloo.com",
+        "book.zhulang.com",
         "book.zongheng.com",
-        "www.readnovel.com",
-        "www.z3z4.com",
-        "cutelisa55.pixnet.net",
-        "www.eyu.com",
-        "www.18183.com",
-        "yuedu.163.com",
-        "news.missevan.com",
         "chokstick.com",
-        "imac.hk"
+        "cutelisa55.pixnet.net",
+        "huayu.baidu.com",
+        "imac.hk",
+        "life.tw",
+        "news.missevan.com",
+        "read.qidian.com",
+        "www.15yan.com",
+        "www.17k.com",
+        "www.18183.com",
+        "www.360doc.com",
+        "www.coco01.net",
+        "www.eyu.com",
+        "www.hongshu.com",
+        "www.hongxiu.com",
+        "www.jjwxc.net",
+        "www.readnovel.com",
+        "www.tadu.com",
+        "www.xxsy.net",
+        "www.z3z4.com",
+        "www.zhihu.com",
+        "yuedu.163.com"
     ];
 
     addBtn();   //页面左上角按钮，不想要按钮可以把这行注释掉
