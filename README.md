@@ -14,6 +14,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.2.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-20
+- 可以添加删除搜索：无容错能力，不会判断你的输入是否正确，搜索连接中的搜索网址需用 %s 替代
+
 > version 5.1.5  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-14
 - 必應錯位 [感謝反饋](https://greasyfork.org/zh-CN/forum/discussion/23528/x)
 
@@ -34,7 +37,6 @@ __说明__
 > version 5.1.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-10 
 - 添加动画效果
 - 将设置改为弹性布局(测试)
-
 
 > version 5.1.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-10 
 - 开始修改源网页的样式以兼容脚本

@@ -803,7 +803,7 @@
                     insertIntoDoc: {
                         // keyword: 'css;#baidu_translate_input',
                         keyword: function(){
-                        	return document.querySelector("#baidu_translate_input").value;
+                            return document.querySelector("#baidu_translate_input").value;
                         },
                         target: 'css;.header',
                         where: 'afterEnd',
@@ -1772,6 +1772,64 @@
             // console.log("searchEngineJump test: ",window.location.href)
             ///test -------------- 测试 end
 
+            // parseUri 1.2.2
+            // (c) Steven Levithan <stevenlevithan.com>
+            // MIT License
+            var parseUri = function(str) {
+                var o = parseUri.options,
+                    m = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
+                    uri = {},
+                    i = 14;
+
+                while (i--) uri[o.key[i]] = m[i] || "";
+
+                uri[o.ds.name] = {};
+                uri[o.ds.name][0] = {};
+                uri[o.ds.name][0]["key"] = (uri.protocol ? uri.protocol : "http") + "://" + uri.host + (uri.port ? ":" + uri.port : "") + "/";
+                uri[o.ds.name][0]["val"] = "/";
+                i = 0;
+                var tempsub = "/",
+                    subs = uri[o.key[10]].substr(1).split("/");
+                for (var j = 1; j < (subs.length + 1); j++, i++) {
+                    tempsub += tempsub === "/" ? subs[i] : "/" + subs[i];
+                    if (subs[i]) {
+                        uri[o.ds.name][j] = {};
+                        uri[o.ds.name][j]["key"] = subs[i];
+                        uri[o.ds.name][j]["val"] = tempsub;
+                    }
+                }
+
+                uri[o.q.name] = {};
+                uri[o.key[12]].replace(o.q.parser, function($0, $1, $2) {
+                    if ($1) uri[o.q.name][$1] = $2;
+                });
+                uri[o.aq.name] = {};
+                uri[o.key[13]].replace(o.aq.parser, function($0, $1, $2) {
+                    if ($1) uri[o.aq.name][$1] = $2;
+                });
+
+                return uri;
+            };
+            parseUri.options = {
+                strictMode: false,
+                key: ["source", "protocol", "authority", "userInfo", "user", "password", "host", "port", "relative", "path", "directory", "file", "query", "anchor"],
+                q: {
+                    name: "queryKey",
+                    parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+                },
+                aq: {
+                    name: "anchorqueryKey",
+                    parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+                },
+                ds: {
+                    name: "directorySub"
+                },
+                parser: {
+                    strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+                    loose: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+                }
+            };
+
             // --------------------可设置项结束------------------------
             // console.log("engineList: ",engineList);
             //xpath 获取单个元素
@@ -1977,7 +2035,7 @@
             var iTarget = getElement(matchedRule.insertIntoDoc.target);
             var iInput = typeof matchedRule.insertIntoDoc.keyword == 'function' ? matchedRule.insertIntoDoc.keyword : getElement(matchedRule.insertIntoDoc.keyword);
             
-            console.log("searchEngineJump test: ",iTarget, iInput);
+            // console.log("searchEngineJump test: ",iTarget, iInput);
 
             if (!iTarget || !iInput) return;
             
@@ -2353,6 +2411,8 @@
             function SEJsetting(){
                 this.ele = document.createElement("div");
                 this.mask = document.createElement("div");
+
+                this.parentTemp = null;
                 // this.dragEl = null;
                 // this.dragDate = null;
                 this.init();
@@ -2367,6 +2427,7 @@
 
                 init: function () {
                     // console.log("init...");
+                    // console.log("init",this);
                     var that = this;
 
                     this.ele.id = "settingLayer";
@@ -2384,29 +2445,12 @@
                     });
 
                     that.domresize();
-                    // this.ele.addEventListener("resize",function(){
-                    //     console.log("0000000000000000");
-                    //     console.log(window.getComputedStyle(that.ele).height);
-                    //     that.mask.style.minHeight = window.getComputedStyle(that.ele).height;
-                    // });
 
                     this.mask.appendChild(this.ele);
                     document.body.appendChild(this.mask);
 
                     // 绑定事件
-                    // var odivs = document.querySelectorAll("[data-xin]:not(.sejtitle)");
-                    // console.log("-------------------",odivs);
-                    // [].forEach.call(odivs,function(odiv){
-                    //     odiv.addEventListener("click",that.domClick,false);
-                        // odiv.addEventListener("dragstart",that.domdragstart,false);
-                        // odiv.addEventListener('dragover', that.domdragover, false);
-                        // odiv.addEventListener('drop', that.domdrop, false);
-
-                        // odiv.addEventListener('dragenter', domdragenter, false);
-                        // odiv.addEventListener('dragleave', domdragleave, false);
-                        // odiv.addEventListener('dragend', domdropend, false);
-                    // });
-                    this.ele.addEventListener("click",that.domClick,false);
+                    this.ele.addEventListener("click",that.domClick.bind(this),false);
                     // 拖拽
                     var odivsdrag = document.querySelectorAll(".drag");
                     [].forEach.call(odivsdrag,function(odiv){
@@ -2433,6 +2477,7 @@
                                     ' data-iqxintarget="$blank$" ' +
                                     ' data-iqxindisabled="$disabled$" ' +
                                     '><img src="$favicon$" class="sej-engine-icon" />$name$</span>' +
+                                    ' <span class="iqxin-set-del" styles="position:absolute;">DEL</span>' +
                                     '</span>';
                     // var aPat = 
                     var details = engineList.details;
@@ -2492,8 +2537,17 @@
 
                             oDivConStr += a;
                         };
+
+
+                        oDivConStr += "<span class='iqxin-additem'>+</span>";
+
                         oDivCon.innerHTML = oDivConStr;
                         odiv.appendChild(oDivCon);
+
+                        // var oadditem = document.createElement("div");
+                        // oadditem.className = "additem";
+                        // oadditem.innerHTML = "+";
+                        // odiv.appendChild(oadditem);
 
                         this.ele.appendChild(odiv);
                     };
@@ -2504,7 +2558,12 @@
                     var btnStr = "<div>" +
                                 "<span class='feedback'><a target='_blank' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>反馈 greasyfork</a></span>" +
                                 "<span class='feedback'><a target='_blank' href='https://github.com/qxinGitHub/searchEngineJump'>反馈 GitHub</a></span>" +
-                                "<span id='xin-reset'>复原</span>" +
+                                
+                                "<span id='xin-reset' title='恢复到最开始的状态'>复原</span>" +
+                                "<span title='待添加' style='text-decoration: line-through;text-decoration-color:red;'>打开方式：新标签页打开</span> " +
+                                "<span title='待添加' style='text-decoration: line-through;text-decoration-color:red;'>修改</span> " +
+                                "<span id='xin-addDel' title='增加新的或者删除现有的'>增加 / 删除</span> " +
+
                                 "<span id='xin-close'>关闭</span>" +
                                 "<span id='xin-save'>保存并关闭</span>" +
                                 "</div>";
@@ -2516,32 +2575,193 @@
                     document.body.style.overflow = "hidden";
                 },
                 hide: function(){
+                    this.addItemBoxHide();
                     this.mask.style.display = "none";
                     document.body.style.overflow = "auto";
                 },
                 domresize: function(){
                     // getComputedStyle
                     // window.getComputedStyle(dom , ":after")
-                    console.log(window.getComputedStyle(this.ele).height);
+                    // console.log(window.getComputedStyle(this.ele).height);
                     this.mask.style.minHeight = window.getComputedStyle(this.ele).height;
                 },
                 reset: function(){
                      GM_deleteValue("searchEngineJumpData");
                 },
-                domClick: function(e){
+                // 增加 “添加删除框”
+                addDel: function(){
+                    // console.log("addDel",this);
+
+                    var oactive = document.querySelector(".iqxin-btn-active");
                     // console.log(this);
-                    // this.dataset.xin = -parseInt(this.dataset.xin);
-                    // console.log(this.dataset.iqxindisabled);
-                    // this.dataset.iqxindisabled = this.dataset.iqxindisabled?"":"true";
-                    // console.log(this.dataset.iqxindisabled);
-                    // console.log(e);
-                    // console.log(e.target);
-                    if(e.target.className==="sej-engine"){
-                         e.target.dataset.iqxindisabled = e.target.dataset.iqxindisabled?"":"true";
+                    if (oactive){
+                        // console.log("存在，删除"); 
+                        this.addDelremove();
+                    } else {
+                        // console.log("不存在，增加增加");
+                        var obtn = document.querySelector("#xin-addDel");
+                        obtn.classList.add("iqxin-btn-active");
+
+                        var odom = document.querySelectorAll(".iqxin-set-del");
+                        [].forEach.call(odom,function(div){
+                            // console.log(div);
+                            div.classList.add("iqxin-set-active");
+                        }); 
+
+                        var oitemAdd = document.querySelectorAll(".iqxin-additem");
+                        [].forEach.call(oitemAdd,function(div){
+                            // console.log(div);
+                            div.classList.add("iqxin-set-active");
+                        });
                     }
                 },
+                // 关闭 “添加删除框”
+                addDelremove: function(bool){
+                    var obtn = document.querySelector(".iqxin-btn-active");
+                    if(obtn){
+                        obtn.classList.remove("iqxin-btn-active");
+
+                        var odom = document.querySelectorAll(".iqxin-set-active");
+                        [].forEach.call(odom,function(div){
+                            div.classList.remove("iqxin-set-active");
+                        }); 
+
+                        var oitemAdd = document.querySelectorAll(".iqxin-additem");
+                        [].forEach.call(oitemAdd,function(div){
+                            div.classList.remove("iqxin-set-active");
+                        });  
+                    }
+                    this.addItemBoxHide();
+                },
+                // 标题点击 （可以并入到下面的点击事件）
                 titleClick: function(){
                     this.dataset.xin = -parseInt(this.dataset.xin);
+                },
+                // 点击事件
+                domClick: function(e){
+                    var targetClass = e.target.className;
+                    // console.log(targetClass)
+
+                    if(~e.target.className.indexOf("iqxin-set-del")){
+                        // console.log(e.target);
+                        e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+                    };
+                    if(~e.target.className.indexOf("iqxin-additem")){
+                        // console.log("此处会有个弹框添加新搜索");
+                        // console.log(e);
+                        // console.log("父元素： ");
+                        // console.log(e.target.parentNode);
+                        this.parentNode = e.target.parentNode;
+                        this.addItemBox();
+                        // console.log(this);
+                    };
+                    if(e.target.className==="sej-engine"){
+                        // console.log("sej-engine 被点击");
+                        e.target.dataset.iqxindisabled = e.target.dataset.iqxindisabled?"":"true";
+                    };
+                    if(~targetClass.indexOf("addItemBoxCancel")){
+                        this.addItemBoxHide();
+                    };
+                    if(~targetClass.indexOf("addItemBoxEnter")){
+                        // console.log(e);
+                        this.addItemEnger();
+                    }
+                    // 获取焦点
+                    if(e.target.nodeName.toLowerCase() === "input"){
+                        // console.log("全部选中");
+                        e.target.select();
+                    }
+                },
+                // 界面，框：添加新的搜索
+                addItemBox: function(bool){
+                    // var backDiv = document.createElement("div");
+                    var newDiv = document.createElement("div");
+                    newDiv.id= "newSearchBox";
+                    newDiv.innerHTML=""+
+                        "<span>标&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp题 : </span><input id='iqxin-newTitle' placeholder='必填' /> <br/><br/>" +
+                        "<span>链&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp接 : </span><input id='iqxin-newLink' placeholder='必填' /> <br/><br/>" +
+                        "<span>图&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp标 : </span><input id='iqxin-newIcon' placeholder='选填，留空则自动获取' /> <br/><br/>" +
+                        // "<span>新标签页 : </span><input id='iqxin-newTarget' placeholder='选填，留空新标签页打开' />" +
+                        "<span>打开方式 : " +
+                            '<select id="iqxin-newTarget" style="border-radius: 4px;border: none;padding: 2px 0 2px 5px"> ' +
+                            '<option value="default">新标签页打开</option> ' +
+                            '<option value="newtab">当前页打开</option> ' +
+                            '<select> ' +
+                        "</span>" +
+                        "<br/><br/>" +
+                        "<span style=''><a target='_blank' style='color:#999;' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>相关使用说明</a></span>" +
+                        "&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp" +
+                        "<button id='addItemBoxEnter' class='addItemBoxEnter addItemBoxBtn'>确定</button>&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp" +
+                        "<button id='addItemBoxCancel' class='addItemBoxCancel addItemBoxBtn'>取消</button>" +
+                        "";
+                    // newDiv.style.cssText=""+
+                    //     "position:fixed;" +
+                    //     "z-index:200000100;" +
+                    //     "top:50%;" +
+                    //     "left:50%;" +
+                    //     "transform:translate(-50%,-50%);" +
+                    //     "padding:22px;" +
+                    //     "background:rgb(228, 228, 228);" +
+                    //     "border-radius:4px;" +
+                    //     "color: #041f5f;" +
+                    // "";
+                    this.ele.appendChild(newDiv);
+                    document.querySelector("#iqxin-newTitle").focus();
+                },
+                // 内部逻辑，：添加新的搜索
+                addItemEnger: function(){
+                    var otitle,olink,oimg,oblank;
+                    otitle = document.querySelector("#iqxin-newTitle").value;
+                    olink = document.querySelector("#iqxin-newLink").value;
+                    oimg = document.querySelector("#iqxin-newIcon").value;
+                    oblank = document.querySelector("#iqxin-newTarget").selectedIndex;
+                    // console.log(oblank);
+
+                    if(!oimg){
+                        var uri = parseUri(olink);
+                        // console.log(uri);
+                        var ohttp = uri.protocol?uri.protocol:"http";
+                        oimg =  ohttp + "://" + uri.host + "/favicon.ico";
+                        // console.log(oimg);
+                    }
+
+                    // 
+                    var a = '<span class="sej-engine"' +
+                                ' data-iqxinimg="$img$" ' + 
+                                ' data-iqxintitle="$title$" ' + 
+                                ' data-iqxinlink="$link$" ' +
+                                ' data-iqxintarget="$blank$" ' +
+                                '><img src="$favicon$" class="sej-engine-icon" />$name$</span>' +
+                                ' <span class="iqxin-set-del" styles="position:absolute;"> DEL </span>';
+
+
+                    a = a.replace("$img$", oimg)
+                        .replace("$title$", otitle)
+                        .replace("$link$", olink);
+
+                    if (oblank){
+                        a = a.replace('data-iqxintarget="$blank$"', '');
+                    } else {
+                        a = a.replace('$blank$', "_blank");
+                    };
+
+                    a = a.replace('$name$', otitle)
+                        .replace('$favicon$', oimg);
+
+                    var ospan = document.createElement("span"); 
+
+                    ospan.innerHTML = a;
+
+                    this.parentNode.insertBefore(ospan,this.parentNode.lastChild);
+
+                    // 添加完成，移除添加框
+                    this.addItemBoxHide();
+                },
+                addItemBoxHide: function(){
+                    var newBox = document.querySelector("#newSearchBox");
+                    if(newBox){
+                        newBox.parentNode.removeChild(newBox);
+                    }
                 },
                 domdragstart:function (e) {
                     // e.target.style.opacity = '0.5';
@@ -2667,6 +2887,7 @@
                         "}" +
                         "#settingLayer .drag{" +
                             "display: block;" +
+                            "position: relative;" +
                         "}" +
                         "#settingLayer .sej-engine{" +
                             "display: inline-block;" +
@@ -2698,7 +2919,8 @@
                         "}" +
                         "#btnEle{" +
                             "position:absolute;" +
-                            "bottom: -44px;" +
+                            "width:100%;" +
+                            "bottom: -0px;" +
                             "right: 0;" +
                             "background: #fff;" +
                             "border-radius: 4px;" +
@@ -2729,9 +2951,82 @@
                         "#btnEle .feedback{" +
                             "border-color: #aaa;" +
                         "}" +
+                        "#btnEle>div{" +
+                            "width: 100%;" +
+                            "margin-bottom:-100%;" +
+                            "display:flex;" +
+                            "justify-content: space-around;" +
+                            "background: #fff;" +
+                            "border-radius: 4px;" +
+                        "}" +
                         ".rwl-over{" +
                             "border: 1px dashed #ccc;" +
                             "box-sizing: border-box;" +
+                        "}" +
+                        ".iqxin-set-del {" +
+                            "display: none;" +
+                            "position: absolute;" +
+                            "background: #ccc;" +
+                            "color: red;" +
+                            "top: 50%;" +
+                            "transform: translate(0,-50%);" +
+                            "right: 0;" +
+                            "padding: 5px;" +
+                            "border-radius: 2px;" +
+                            "cursor: pointer;" +
+                        "}" +
+                        "span.iqxin-additem {" +
+                            "display:none;" +
+                        "}" +
+                        "span.iqxin-additem.iqxin-set-active {" +
+                            "display: inline-block;" +
+                            "text-align: center;" +
+                            "width: 100%;" +
+                            "margin: 10px 0;" +
+                            "border: 1px dotted red;" +
+                            "color: red;" +
+                        "}" +
+                        ".iqxin-set-del.iqxin-set-active {" +
+                            "display:block;" +
+                        "}" +
+                        "#btnEle span.iqxin-btn-active{" +
+                            "color:red;" +
+                            "border-color:red;" +
+                        "}" +
+                        "#newSearchBox{" +
+                            "position:fixed;" +
+                            "z-index:200000100;" +
+                            "top:50%;" +
+                            "left:50%;" +
+                            "transform:translate(-50%,-50%);" +
+                            "padding:22px;" +
+                            "background:rgb(29, 29, 29);" +
+                            "border-radius:4px;" +
+                            "color: #e8e8e8;" +
+                            //"box-shadow: 2px 2px 4px #333;" +
+                        "}" +
+                        "#newSearchBox input{" +
+                            "border: none;" +
+                            "padding: 4px 0 4px 5px;" +
+                            "border-radius: 4px;" +
+                            "outline: none;" +
+                        "}" +
+                        "#newSearchBox input:focus {" +
+                            "background: #f1d2d2;" +
+                            "transition: 0.5s;" +
+                        "}" +
+                        ".addItemBoxBtn{" +
+                            "cursor: pointer;" +
+                            "background: #fff;" +
+                            "border: none;" +
+                            "border-radius: 4px;" +
+                            "padding: 4px 10px;" +
+                            "color: #333;" +
+                        "}" +
+                        ".addItemBoxBtn:hover," +
+                        ".addItemBoxBtn:focus{" +
+                            "color:red;" +
+                            "text-decoration:underline;" +
                         "}" +
                         "";
                     head = document.getElementsByTagName('head')[0];
@@ -2760,10 +3055,12 @@
                         var sej_save = document.querySelector("#xin-save");
                         var sej_close = document.querySelector("#xin-close");
                         var sej_reset = document.querySelector("#xin-reset");
+                        var sej_addDel = document.querySelector("#xin-addDel");
 
                         sej_save.addEventListener("click",function(){sejSet.saveData();sejSet.hide();window.location.reload();});
                         sej_close.addEventListener("click",function(){sejSet.hide();});
                         sej_reset.addEventListener("click",function(){sejSet.reset();sejSet.hide();window.location.reload();});
+                        sej_addDel.addEventListener("click",function(){sejSet.addDel();});
 
                         window.addEventListener("resize",function(){
                             // document.querySelector("#settingLayerMask").style.minHeight = document.querySelector("#settingLayer").style.offsetHeight;
@@ -2921,5 +3218,4 @@
         iqxinstart();
     }
     
-
 })();
