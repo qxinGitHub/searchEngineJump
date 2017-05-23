@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
-// @description    方便的在各个搜索引擎之间跳转,增删部分搜索网站，修复百度搜索样式丢失的问题
-// @version        5.1.5
+// @description    方便的在各个搜索引擎之间跳转,增加设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
+// @version        5.2.0
 // @created        2011-7-2
-// @lastUpdated    2017-05-14
+// @lastUpdated    2017-05-21
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
