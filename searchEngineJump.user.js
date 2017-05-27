@@ -2,9 +2,9 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增加设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.2.0
+// @version        5.2.1
 // @created        2011-7-2
-// @lastUpdated    2017-05-21
+// @lastUpdated    2017-05-27
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -1210,6 +1210,21 @@
                        where:'afterEnd',
                    }
                 },
+
+                // 回家没网，用8090端口离线测试使用。
+                {
+                    name:"test",
+                    enabled:true,
+                    url:/^https?:\/\/127\.0\.0\.1:8090\/./,
+                    style:"\
+                        margin:150px;\
+                    ",
+                    insertIntoDoc: {
+                        keyword:function(){return false}, 
+                        target:'css;body',
+                        where:'beforeEnd',
+                    }
+                }
             ];
             
             
@@ -2483,7 +2498,7 @@
                     var details = engineList.details;
                     // 若根据数组长度获取，负数引导的为属性，不再length长度之内，所以来个大体的数字，当都为空时，结束循环
                     var detailsLength = details.length;
-                    var detailsLength = 11;
+                    // var detailsLength = 11;
                     for (let i=0;i<detailsLength;i++){
                         var j = i;
                         j = details[j] ? j : -j;
@@ -2508,8 +2523,8 @@
                         oDivCon.classList.add("sejcon");
                         var oDivConStr = "";
                         var engineListItme = engineList[details[j][1]];
-                        // var itemLength = engineListItme.length;
-                        var itemLength = 9;
+                        var itemLength = engineListItme.length;
+                        // var itemLength = 9;
                         // console.log(details[j][1],itemLength,engineListItme);
                         for(let ii=0;ii<itemLength;ii++){
                             // console.log(ii);
@@ -2872,6 +2887,7 @@
                             // "font-size: 14px;" +
                             "font-family: arial,sans-serif;" +
                             "min-height: 100%;" +
+                            "user-select: none;" +
                         "}" +
                         "#settingLayer{" +
                             "display: flex;" +
