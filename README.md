@@ -14,6 +14,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.2.2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-28
+- 分类中的mine分类(或多个)无法显示的问题
+
 > version 5.2.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-27
 - 最多只能添加9个搜索，继续增加无法显示的问题 [感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/24342/x)
 - 更改用户体验：文字不能被选中
