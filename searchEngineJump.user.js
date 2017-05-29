@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
-// @description    方便的在各个搜索引擎之间跳转,增加设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.2.2
+// @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
+// @version        5.3.0
 // @created        2011-7-2
-// @lastUpdated    2017-05-28
+// @lastUpdated    2017-05-29
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -1746,6 +1746,14 @@
             engineList.details[-10] = ['mine', 'mine'];   // 隐藏
             
             // GM_deleteValue("searchEngineJumpData");
+            var settingData = {
+                "status":1,
+                "message":"version 1.0, 2017-05-08发布, 1.1追加搜索， 1.2增加新标签页打开选项",
+                "version":1.2,
+                "details":[],
+                "newtab":0,
+                "engineList":{}
+            }
             var getSettingData = GM_getValue("searchEngineJumpData");
             if(getSettingData){
                 // console.log(getSettingData);
@@ -1756,28 +1764,22 @@
                 for(let i=0;i<getDetailsL;i++){
                     details[getDetails[i]] =  engineDetails[i];
                 };
-
+                                    
                 engineList = getSettingData.engineList;
                 engineList.details = details;
+                engineList.newtab = getSettingData.newtab;
 
                 // 获取版本，用于搜索列表更新
                     // 只能对上一版本增量更新
-                if(parseFloat(getSettingData.version) < 1.1){
-                    console.log("目前版本过低");
-                    console.log(getSettingData.version);
-                    engineList.knowledge.push({
-                        name: '知乎(搜狗)',
-                        url: 'http://zhihu.sogou.com/zhihu?ie=utf8&query=%s',
-                        favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACk0lEQVQ4jY2SS0hUcRTGzyLcRI9Nm8BlbaqFm9xFi+hhm9EgrVZBUETOI3VsUGeiN/RGAqFyGmcRFCFUFJRFWCs1k3LunZnGbOb+73W0ssfo3HEG+7W4E4iBtPjg4xz48Z2PI7J+Z4Psj/ZJ/Z0+qQ//v/ZH+2TX+YjIvmi/nJtBQhNIu4UETMcHraUVyiKnvyPSEHkhQQtpjlN5JkXrw0mkSUcaNcSjI81xxKc7fqFaEkjQRKQ+3CdBC3FrnHv2hUS2wPauDDXditqoSeXZMTZeGWd3WOHqMXH1mGy7abD6ZAppM8qADotlLXGG0nmGzQL54jyTv0oMpPPsDRv0j82ifpR4a9iMKBuAmrCJNKfLgFbFnogipmwqWuI8iuXwPMgiR2KIT2fEtKmNmMjRGOLVGVY2e6LWAkC7SfW1cdaeSiGHPvAiOcPBuxZyaBRx67xTNq4e0+nleJy3yqZuMWBV6CM7bitc3QptskDn62lqbxlUXR5nIJOnLmoibg1pijP8D+CEwhU2GMjYDBo2dvE3+tQcA2mbM8+/8ObTLLU9SwGCFuJPIG6NFW1JdNNmw6Vx5PAo4nVOWDpB0EJaE4hHZ8uNDKXiPPeGfrI8kETcGu+UTU1YOSUe1RjM5BeV+Bfg1rg//JMnsRxPYzl63/+iwqujT87R9HiKNYEErrBiKldyEjQtBDRq7L5lAFDdmWZlIMn7TJ7N1z9z8eU3coV5UtkCI2aBV6lZqq6nEX+mDAiYbOlM8yNXorN/2nldn866C2NUnk0hxzQuvvyKpzfr7LzlV+5QiByI9kvHBJuufmZrl+Es/AnkRBJpXuD9CcQXR/xJpLWsUBaRXecjcnoaCRhOpHbDIS/W4nkoi7TEi38AwHibcZoJerYAAAAASUVORK5CYII=',
-                    });
-                    engineList.mine.push({
-                        name: '微信(搜狗)',
-                        url: 'http://weixin.sogou.com/weixin?ie=utf8&type=2&query=%s',
-                        favicon: 'data:image/png;base64,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',
-                        blank:true,
-                    });
+                console.log(getSettingData.version,settingData.version);
+                if(parseFloat(getSettingData.version) < settingData.version){
+                    
                     // 更新本地版本
-                    getSettingData.version = 1.1;
+                    // settingData.details = details;
+                    // settingData.engineList= engineList;
+                    getSettingData.version = settingData.version;
+                    getSettingData.message = settingData.message;
+                    getSettingData.newtab = settingData.newtab; //此版本新添加的，日后版本不需要
                     GM_setValue("searchEngineJumpData",getSettingData);
                 }
                 // console.log(engineList);
@@ -2315,7 +2317,7 @@
                     } else {
                         a = a.replace('src="$favicon$"', '');
                     };
-                    if (engine.blank) {
+                    if (engineList.newtab || engine.blank) {
                         a = a.replace('$blank$', "_blank");
                     } else {
                         a = a.replace('target="$blank$"', '');
@@ -2416,13 +2418,7 @@
             // 设置按钮相关
             var dragEl = null;
             var dragData = null;
-            var settingData = {
-                "status":1,
-                "message":"version 1.0, 2017-05-08发布，测试版",
-                "version":1.1,
-                "details":[],
-                "engineList":{}
-            }
+            
             function SEJsetting(){
                 this.ele = document.createElement("div");
                 this.mask = document.createElement("div");
@@ -2574,20 +2570,29 @@
                                 "<span class='feedback'><a target='_blank' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>反馈 greasyfork</a></span>" +
                                 "<span class='feedback'><a target='_blank' href='https://github.com/qxinGitHub/searchEngineJump'>反馈 GitHub</a></span>" +
                                 
-                                "<span id='xin-reset' title='恢复到最开始的状态'>复原</span>" +
-                                "<span title='待添加' style='text-decoration: line-through;text-decoration-color:red;'>打开方式：新标签页打开</span> " +
+                                "<span id='xin-reset' title='恢复到最初状态，一切改变将不复存在，慎点'>复原</span>" +
+                                // "<span title='待添加' style='text-decoration: line-through;text-decoration-color:red;'>打开方式：新标签页打开</span> " +
+                                "<span id='xin-newtab' title='是否采用新标签页打开的方式'>打开方式：" +
+                                    "<select id='iqxin-globalNewtab'>" +
+                                        "<option value='globalDef'>默认页面 ▽</option>" +
+                                        "<option value='globalNewtab'>新标签页 ▽</option>" +
+                                    "</select>" +
+                                "</span> " +
                                 "<span title='待添加' style='text-decoration: line-through;text-decoration-color:red;'>修改</span> " +
-                                "<span id='xin-addDel' title='增加新的或者删除现有的'>增加 / 删除</span> " +
+                                "<span id='xin-addDel' title='增加新的或者删除现有的搜索'>增加 / 删除</span> " +
 
                                 "<span id='xin-close'>关闭</span>" +
                                 "<span id='xin-save'>保存并关闭</span>" +
                                 "</div>";
                     btnEle.innerHTML = btnStr;
                     this.ele.appendChild(btnEle);
+
                 },
                 show: function(){
                     this.mask.style.display = "flex";
                     document.body.style.overflow = "hidden";
+
+                    document.querySelector("#xin-newtab").querySelectorAll("option")[engineList.newtab].setAttribute("selected","selected");
                 },
                 hide: function(){
                     this.addItemBoxHide();
@@ -2705,8 +2710,8 @@
                         "</span>" +
                         "<br/><br/>" +
                         "<span style=''><a target='_blank' style='color:#999;' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>相关使用说明</a></span>" +
-                        "&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp" +
-                        "<button id='addItemBoxEnter' class='addItemBoxEnter addItemBoxBtn'>确定</button>&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp" +
+                        "&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp;" +
+                        "<button id='addItemBoxEnter' class='addItemBoxEnter addItemBoxBtn'>确定</button>&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp" +
                         "<button id='addItemBoxCancel' class='addItemBoxCancel addItemBoxBtn'>取消</button>" +
                         "";
                     // newDiv.style.cssText=""+
@@ -2859,16 +2864,13 @@
                         details[i] = odetails[i].dataset.xin;
                     }
 
-                    // console.log("details: ",details);
-                    // obj.details = details;
-                    // console.log(obj);
-                    // obj = JSON.stringify(obj);
-                    // GM_setValue("searchEngineJumpData",obj);
-                    // var testD = GM_getValue("searchEngineJumpData");
-                    // console.log(testD);
-                    // console.log(JSON.parse(testD));
+                    // 新标签页全局设置
+                    var onewtab = document.querySelector("#iqxin-globalNewtab").selectedIndex;
+
                     settingData.details = details;
                     settingData.engineList = obj;
+                    settingData.newtab = onewtab;
+                    console.log(settingData.newtab);
                     // console.log(settingData);
                     GM_setValue("searchEngineJumpData",settingData);
                 },
@@ -2936,7 +2938,7 @@
                         "#btnEle{" +
                             "position:absolute;" +
                             "width:100%;" +
-                            "bottom: -0px;" +
+                            "bottom: 4px;" +
                             "right: 0;" +
                             "background: #fff;" +
                             "border-radius: 4px;" +
@@ -3043,6 +3045,19 @@
                         ".addItemBoxBtn:focus{" +
                             "color:red;" +
                             "text-decoration:underline;" +
+                        "}" +
+                        "#xin-newtab select{" +
+                            "border: none;" +
+                            "outline: none;" +
+                            "color: #3ABDC1;" +
+                            "font-size: 1em;" +
+                            "font-family: arial,sans-serif;" +
+                            "appearance: none;" +
+                            "-moz-appearance: none;" +
+                            "-webkit-appearance: none;" +
+                            "padding: 0px 5px;" +
+                            "cursor: pointer;" +
+                            "text-decoration: underline;" +
                         "}" +
                         "";
                     head = document.getElementsByTagName('head')[0];

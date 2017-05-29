@@ -14,6 +14,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.3.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-29
+- 增加全局 “新标签页打开” 选项, 本地数据存储版本改为 1.2
+
 > version 5.2.2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-28
 - 分类中的mine分类(或多个)无法显示的问题
 
