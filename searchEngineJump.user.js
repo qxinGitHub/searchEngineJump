@@ -2565,7 +2565,7 @@
                     var btnEle = document.createElement("div");
                     btnEle.id = "btnEle"
                     var btnStr = "<div>" +
-                                "<span class='feedback' title='下版本会增加修改顶部分类标题的功能 2017-06-01'><a target='_blank' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>反馈 greasyfork</a></span>" +
+                                "<span class='feedback' title='下版本暂时不会加功能，会小修小改,代码里用不到的注释都上百行了，该清理下了 --2017-06-04'><a target='_blank' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>反馈 greasyfork</a></span>" +
                                 "<span class='feedback'><a target='_blank' href='https://github.com/qxinGitHub/searchEngineJump'>反馈 GitHub</a></span>" +
                                 
                                 "<span id='xin-reset' title='慎点，恢复到最初状态，一切改变将不复存在'>复原</span>" +
