@@ -2,9 +2,9 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.4.0
+// @version        5.5.0
 // @created        2011-7-2
-// @lastUpdated    2017-06-01
+// @lastUpdated    2017-06-04
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -1558,7 +1558,7 @@
                 url: 'http://www.guokr.com/search/all/?wd=%s',
                 favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAAAIAA8AQAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAQNJREFUeJxjFGk1/89ABHCTZmYwUGdlYGBgYDg+7w5cnIkYzQwMDHDNX9/+RBFnElRbRpTtuAATAwMDAyuPCV4DVEX+wdmfXn7HNIBHqgiv7dzC7HD+86sf4Wx2IU1EGBDjFXSgwyKGGojYvAILPBj4+fk3nC3ILopqAI9UEYoh+AKPXUiTgYEBSzQihwdy4DEwoEahDosYdgMYGCBeQQ88BgbUGBBkF8VtAI9UEYOirBhu5/MiwgVnSkw0nowhBotCHU4r/AZEKfMyKPPLMARpLsFqOMz5OA2IVYIEljK/DIo4chTiNABmOwyUWhxgYGBAxAAs+nAaALMdGSB7BRZ9MAAAP2Q1NvsvI2QAAAAASUVORK5CYII=',
             };
-            engineList.knowledge[7] = {
+            engineList.knowledge[8] = {
                 name: '知乎(搜狗)',
                 url: 'http://zhihu.sogou.com/zhihu?ie=utf8&query=%s',
                 favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACk0lEQVQ4jY2SS0hUcRTGzyLcRI9Nm8BlbaqFm9xFi+hhm9EgrVZBUETOI3VsUGeiN/RGAqFyGmcRFCFUFJRFWCs1k3LunZnGbOb+73W0ssfo3HEG+7W4E4iBtPjg4xz48Z2PI7J+Z4Psj/ZJ/Z0+qQ//v/ZH+2TX+YjIvmi/nJtBQhNIu4UETMcHraUVyiKnvyPSEHkhQQtpjlN5JkXrw0mkSUcaNcSjI81xxKc7fqFaEkjQRKQ+3CdBC3FrnHv2hUS2wPauDDXditqoSeXZMTZeGWd3WOHqMXH1mGy7abD6ZAppM8qADotlLXGG0nmGzQL54jyTv0oMpPPsDRv0j82ifpR4a9iMKBuAmrCJNKfLgFbFnogipmwqWuI8iuXwPMgiR2KIT2fEtKmNmMjRGOLVGVY2e6LWAkC7SfW1cdaeSiGHPvAiOcPBuxZyaBRx67xTNq4e0+nleJy3yqZuMWBV6CM7bitc3QptskDn62lqbxlUXR5nIJOnLmoibg1pijP8D+CEwhU2GMjYDBo2dvE3+tQcA2mbM8+/8ObTLLU9SwGCFuJPIG6NFW1JdNNmw6Vx5PAo4nVOWDpB0EJaE4hHZ8uNDKXiPPeGfrI8kETcGu+UTU1YOSUe1RjM5BeV+Bfg1rg//JMnsRxPYzl63/+iwqujT87R9HiKNYEErrBiKldyEjQtBDRq7L5lAFDdmWZlIMn7TJ7N1z9z8eU3coV5UtkCI2aBV6lZqq6nEX+mDAiYbOlM8yNXorN/2nldn866C2NUnk0hxzQuvvyKpzfr7LzlV+5QiByI9kvHBJuufmZrl+Es/AnkRBJpXuD9CcQXR/xJpLWsUBaRXecjcnoaCRhOpHbDIS/W4nkoi7TEi38AwHibcZoJerYAAAAASUVORK5CYII=',
@@ -1719,7 +1719,7 @@
                 favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABSklEQVR4nJWRQUrDQBSGv5m2mWhasCKVotQ0iCh002rqFQRBTyPoLdx4C3eudCF4Aim4EV2IrgpFFNSa1DYuQicdk0Kd1cyb/315+Ub0Ts4jspYQlI/2iMIhb6dXmREAOe3C2lhGLsyTq5QouEv/Byi/nuzb9WmxbIAs2Vib1WSaxipizpodoLZdkEKfRV6iWrUZAUJg+y4AX5d3umz73myAwnoFWXYA6N/ca8g0mSmA7ZvCJiFZMg2ALCqsrWoqFH0PgGyZBkC11iBnDmXvejgHTSBbZpIWoNpedrOYqP2RqQEFr0Ju0TEunUOzGdIy83r8HVcXh6+fRMGP+SU7r19HtesMnnoJQDgK1ViJk6OI97Nron5oAoqK8vE+SBHLvOgQ9cP4F+xmTcsLH7qpZoDRR8DgsQuYMmU8UiIm7LykmscruH3W+7HMX4w3TDVyAQKXAAAAAElFTkSuQmCC',
                 blank:true,
             };
-            engineList.mine[5] = {
+            engineList.mine[6] = {
                 name: '微信(搜狗)',
                 url: 'http://weixin.sogou.com/weixin?ie=utf8&type=2&query=%s',
                 favicon: 'data:image/png;base64,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',
@@ -1739,7 +1739,6 @@
             engineList.details[4] = ['视频', 'video'];
             engineList.details[5] = ['音乐', 'music'];
             engineList.details[6] = ['学术', 'scholar'];
-            // engineList.details[-7] = ['下载', 'download'];
             engineList.details[7] = ['社交', 'sociality'];
             engineList.details[8] = ['购物', 'shopping'];
             engineList.details[9] = ['html', 'htmls'];
@@ -1748,16 +1747,18 @@
             // GM_deleteValue("searchEngineJumpData");
             var settingData = {
                 "status":1,
-                "message":"version 1.0, 2017-05-08发布, 1.1追加搜索， 1.2增加新标签页打开选项",
-                "version":1.2,
+                "message":"version 1.0, 2017-05-08发布, 1.1追加搜索， 1.2增加新标签页打开选项,1.3增加分类改名",
+                "version":1.3,
                 "details":[],
                 "newtab":0,
-                "engineList":{}
+                "engineList":{},
+                "engineDetails":[]
             }
             var getSettingData = GM_getValue("searchEngineJumpData");
             if(getSettingData){
                 // console.log(getSettingData);
-                var engineDetails = [['网页', 'web'],['翻译', 'translate'],['知识', 'knowledge'],['图片', 'image'],['视频', 'video'],['音乐', 'music'],['学术', 'scholar'],  ['社交', 'sociality'],['购物', 'shopping'],['html', 'htmls'],['mine', 'mine']];
+                // var engineDetails = [['网页', 'web'],['翻译', 'translate'],['知识', 'knowledge'],['图片', 'image'],['视频', 'video'],['音乐', 'music'],['学术', 'scholar'],  ['社交', 'sociality'],['购物', 'shopping'],['html', 'htmls'],['mine', 'mine']];
+                var engineDetails = getSettingData.engineDetails?getSettingData.engineDetails: [['网页', 'web'],['翻译', 'translate'],['知识', 'knowledge'],['图片', 'image'],['视频', 'video'],['音乐', 'music'],['学术', 'scholar'],  ['社交', 'sociality'],['购物', 'shopping'],['html', 'htmls'],['mine', 'mine']];
                 var getDetails = getSettingData.details;
                 var getDetailsL = getDetails.length;
                 var details = [];
@@ -1779,7 +1780,8 @@
                     // settingData.engineList= engineList;
                     getSettingData.version = settingData.version;
                     getSettingData.message = settingData.message;
-                    getSettingData.newtab = settingData.newtab; //此版本新添加的，日后版本不需要
+                    getSettingData.engineDetails = engineDetails;
+                    // getSettingData.newtab = settingData.newtab; //此版本新添加的，日后版本不需要
                     GM_setValue("searchEngineJumpData",getSettingData);
                 }
                 // console.log(engineList);
@@ -2474,10 +2476,10 @@
                         // odiv.addEventListener('dragend', domdropend, false);
                     });
                     // 标题
-                    var odivstitle = document.querySelectorAll(".sejtitle");
-                    [].forEach.call(odivstitle,function(odiv){
-                        odiv.addEventListener("click",that.titleClick,false);
-                    });
+                    // var odivstitle = document.querySelectorAll(".sejtitle");
+                    // [].forEach.call(odivstitle,function(odiv){
+                    //     odiv.addEventListener("click",that.titleClick,false);
+                    // });
                 },
                 addContent: function(){
                     var aPattern = '<span draggable="true" class="drag">' +
@@ -2489,8 +2491,8 @@
                                     ' data-iqxintarget="$blank$" ' +
                                     ' data-iqxindisabled="$disabled$" ' +
                                     '><img src="$favicon$" class="sej-engine-icon" /><span>$name$</span></span>' +
-                                    ' <span class="iqxin-set-edit"><img class="sej-engine-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAACDklEQVR4nJXVzUtUURjH8Y/mSNKkki2iwiApxHQ1q/6C+gusoCB6oxbRRqFNL4sWtRKqhVSLIDe1CqpNiwjKIilKLKKFEr2Z2qI0xxHN0+LOm+PMOPOc1T2H7/f5ncO991BdNer30zmxKrl0xV2zKJjRoy6aqkkvbbdVLPuUq+8+5uGXnVILki7qsxgtNDtrTNLcijHvrdYsft0/wQ8DZgSzeqMUDW4IJceYHcvwCd1ies0KZvWI1TnhIH6574Olgg0E74zmhZ902j304by4Cxp5LPjtQNmjy3XPVK2rgmCBCcGgdVXhdBgUBCMEwVMNVeIvBMFLifKC8vgrndFBlRJUhJcWFMd3ZfGuzFRxwWrdu3KTxQQVhi8lqApfKVhf0d4bc2/OckG9Pkur7r3TEw+1FRO0GxdM2Vc2/HHBgr1If935UTfigbt5+C27MeSo9+m5GJYitlCwWR2G8oQZ/FgWX1aFgnZMG852v5nFR4rhMn+2dDVJYFpKqy0SDksUhF9FsE0bWgyIa9bIanihoEUcDTrSz4ueOVMOLxQkzVkrZcaoNz755rmpcnihYNghm3w26Ys/5cGcIKgRBJDyqCIquj8C1PqKZvHK+qVrJ5bMRwmGterU64pkkZupWO3RjXkzUZj9+jVZMGK6IsEaHTbgjpOSUYZL/pa5m4qPIbtyznpHvJaqGB53O33h4T/3VzLuzDhE6AAAAABJRU5ErkJggg=="/></span>' +
-                                    ' <span class="iqxin-set-del"><img class="sej-engine-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAADAFBMVEUAAADsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVH///9VVVVWVlZXV1dYWFhZWVlaWlpbW1tcXFxdXV1eXl5fX19gYGBhYWFiYmJjY2NkZGRlZWVmZmZnZ2doaGhpaWlqampra2tsbGxtbW1ubm5vb29wcHBxcXFycnJzc3N0dHR1dXV2dnZ3d3d4eHh5eXl6enp7e3t8fHx9fX1+fn5/f3+AgICBgYGCgoKDg4OEhISFhYWGhoaHh4eIiIiJiYmKioqLi4uMjIyNjY2Ojo6Pj4+QkJCRkZGSkpKTk5OUlJSVlZWWlpaXl5eYmJiZmZmampqbm5ucnJydnZ2enp6fn5+goKChoaGioqKjo6OkpKSlpaWmpqanp6eoqKipqamqqqqrq6usrKytra2urq6vr6+wsLCxsbGysrKzs7O0tLS1tbW2tra3t7e4uLi5ubm6urq7u7u8vLy9vb2+vr6/v7/AwMDBwcHCwsLDw8PExMTFxcXGxsbHx8fIyMjJycnKysrLy8vMzMzNzc3Ozs7Pz8/Q0NDR0dHS0tLT09PU1NTV1dXW1tbX19fY2NjZ2dna2trb29vc3Nzd3d3e3t7f39/g4ODh4eHi4uLj4+Pk5OTl5eXm5ubn5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7///8dej9TAAAAU3RSTlMAAABm7P/sZgAAABPO////zhQAAB/i/////////+IfAAAe4fvk4AAAAAAd/+Q3GxwAFR85FQBjz+LPY+v////r6//////rZM/h4c9jABUdHRUAAP0EcPoAAAEuSURBVHic7ZRnc8IwDIbdEUZHGB0kDsMOMcOMttBBB93Qvcj//y9VjB0Czh13/dz3ixT5OVmSYyMktLK6tm74oYxEMpVGUW1sbm2bM8DMZHP5OWBnd2+/YNnYAWHbKhRL5cocQKjrWFWPuSDmVS3HpUQu1eoNQkiTM9xqd7oHoG6n3cKMNyHcqNfQ4VGPUsr7nh0FbK/PIdw7PkGnZwOZNrqF9AfnF+jyaigLixYp/eH1Dbq9u4eAHyOAHh5HaPz0DCnjANjm5fUNvX98QoGCxyo5Fjmh0K/vH2hzAi0KnqnymMgJrU6gzemQBM+DZpX1/XBYUyAYTTAuZTUg+Aw8Zf+BvwJLR730sPTjXgD0H2YB0BUClXKpGAeE1y+fy2ZMfX12gdOpZMLQAfkE/AL7e5vGZF+dOQAAAABJRU5ErkJggg=="></span>' +
+                                    ' <span class="iqxin-set-edit" title="编辑 Edit"><img class="sej-engine-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAACDklEQVR4nJXVzUtUURjH8Y/mSNKkki2iwiApxHQ1q/6C+gusoCB6oxbRRqFNL4sWtRKqhVSLIDe1CqpNiwjKIilKLKKFEr2Z2qI0xxHN0+LOm+PMOPOc1T2H7/f5ncO991BdNer30zmxKrl0xV2zKJjRoy6aqkkvbbdVLPuUq+8+5uGXnVILki7qsxgtNDtrTNLcijHvrdYsft0/wQ8DZgSzeqMUDW4IJceYHcvwCd1ies0KZvWI1TnhIH6574Olgg0E74zmhZ902j304by4Cxp5LPjtQNmjy3XPVK2rgmCBCcGgdVXhdBgUBCMEwVMNVeIvBMFLifKC8vgrndFBlRJUhJcWFMd3ZfGuzFRxwWrdu3KTxQQVhi8lqApfKVhf0d4bc2/OckG9Pkur7r3TEw+1FRO0GxdM2Vc2/HHBgr1If935UTfigbt5+C27MeSo9+m5GJYitlCwWR2G8oQZ/FgWX1aFgnZMG852v5nFR4rhMn+2dDVJYFpKqy0SDksUhF9FsE0bWgyIa9bIanihoEUcDTrSz4ueOVMOLxQkzVkrZcaoNz755rmpcnihYNghm3w26Ys/5cGcIKgRBJDyqCIquj8C1PqKZvHK+qVrJ5bMRwmGterU64pkkZupWO3RjXkzUZj9+jVZMGK6IsEaHTbgjpOSUYZL/pa5m4qPIbtyznpHvJaqGB53O33h4T/3VzLuzDhE6AAAAABJRU5ErkJggg=="/></span>' +
+                                    ' <span class="iqxin-set-del" title="删除 Delete"><img class="sej-engine-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAADAFBMVEUAAADsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVH///9VVVVWVlZXV1dYWFhZWVlaWlpbW1tcXFxdXV1eXl5fX19gYGBhYWFiYmJjY2NkZGRlZWVmZmZnZ2doaGhpaWlqampra2tsbGxtbW1ubm5vb29wcHBxcXFycnJzc3N0dHR1dXV2dnZ3d3d4eHh5eXl6enp7e3t8fHx9fX1+fn5/f3+AgICBgYGCgoKDg4OEhISFhYWGhoaHh4eIiIiJiYmKioqLi4uMjIyNjY2Ojo6Pj4+QkJCRkZGSkpKTk5OUlJSVlZWWlpaXl5eYmJiZmZmampqbm5ucnJydnZ2enp6fn5+goKChoaGioqKjo6OkpKSlpaWmpqanp6eoqKipqamqqqqrq6usrKytra2urq6vr6+wsLCxsbGysrKzs7O0tLS1tbW2tra3t7e4uLi5ubm6urq7u7u8vLy9vb2+vr6/v7/AwMDBwcHCwsLDw8PExMTFxcXGxsbHx8fIyMjJycnKysrLy8vMzMzNzc3Ozs7Pz8/Q0NDR0dHS0tLT09PU1NTV1dXW1tbX19fY2NjZ2dna2trb29vc3Nzd3d3e3t7f39/g4ODh4eHi4uLj4+Pk5OTl5eXm5ubn5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7///8dej9TAAAAU3RSTlMAAABm7P/sZgAAABPO////zhQAAB/i/////////+IfAAAe4fvk4AAAAAAd/+Q3GxwAFR85FQBjz+LPY+v////r6//////rZM/h4c9jABUdHRUAAP0EcPoAAAEuSURBVHic7ZRnc8IwDIbdEUZHGB0kDsMOMcOMttBBB93Qvcj//y9VjB0Czh13/dz3ixT5OVmSYyMktLK6tm74oYxEMpVGUW1sbm2bM8DMZHP5OWBnd2+/YNnYAWHbKhRL5cocQKjrWFWPuSDmVS3HpUQu1eoNQkiTM9xqd7oHoG6n3cKMNyHcqNfQ4VGPUsr7nh0FbK/PIdw7PkGnZwOZNrqF9AfnF+jyaigLixYp/eH1Dbq9u4eAHyOAHh5HaPz0DCnjANjm5fUNvX98QoGCxyo5Fjmh0K/vH2hzAi0KnqnymMgJrU6gzemQBM+DZpX1/XBYUyAYTTAuZTUg+Aw8Zf+BvwJLR730sPTjXgD0H2YB0BUClXKpGAeE1y+fy2ZMfX12gdOpZMLQAfkE/AL7e5vGZF+dOQAAAABJRU5ErkJggg=="></span>' +
                                     '</span>';
                     // var aPat = 
                     var details = engineList.details;
@@ -2514,7 +2516,7 @@
                         oDivTitle.classList.add("sejtitle");
                         oDivTitle.dataset.iqxintitle = details[j][1];
                         oDivTitle.dataset.xin = j;
-                        oDivTitle.innerHTML = details[j][0];
+                        oDivTitle.innerHTML ='<span class="iqxin-pointer-events">' + details[j][0] + '</span>' + '<span class="iqxin-title-edit" title="编辑 Edit"><img class="sej-engine-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAACDklEQVR4nJXVzUtUURjH8Y/mSNKkki2iwiApxHQ1q/6C+gusoCB6oxbRRqFNL4sWtRKqhVSLIDe1CqpNiwjKIilKLKKFEr2Z2qI0xxHN0+LOm+PMOPOc1T2H7/f5ncO991BdNer30zmxKrl0xV2zKJjRoy6aqkkvbbdVLPuUq+8+5uGXnVILki7qsxgtNDtrTNLcijHvrdYsft0/wQ8DZgSzeqMUDW4IJceYHcvwCd1ies0KZvWI1TnhIH6574Olgg0E74zmhZ902j304by4Cxp5LPjtQNmjy3XPVK2rgmCBCcGgdVXhdBgUBCMEwVMNVeIvBMFLifKC8vgrndFBlRJUhJcWFMd3ZfGuzFRxwWrdu3KTxQQVhi8lqApfKVhf0d4bc2/OckG9Pkur7r3TEw+1FRO0GxdM2Vc2/HHBgr1If935UTfigbt5+C27MeSo9+m5GJYitlCwWR2G8oQZ/FgWX1aFgnZMG852v5nFR4rhMn+2dDVJYFpKqy0SDksUhF9FsE0bWgyIa9bIanihoEUcDTrSz4ueOVMOLxQkzVkrZcaoNz755rmpcnihYNghm3w26Ys/5cGcIKgRBJDyqCIquj8C1PqKZvHK+qVrJ5bMRwmGterU64pkkZupWO3RjXkzUZj9+jVZMGK6IsEaHTbgjpOSUYZL/pa5m4qPIbtyznpHvJaqGB53O33h4T/3VzLuzDhE6AAAAABJRU5ErkJggg=="/></span>';
                         odiv.appendChild(oDivTitle);
 
                         var oDivCon = document.createElement("div");
@@ -2682,8 +2684,9 @@
                     this.addItemBoxRemove();
                 },
                 // 标题点击 （可以并入到下面的点击事件）
-                titleClick: function(){
-                    this.dataset.xin = -parseInt(this.dataset.xin);
+                titleClick: function(e){
+                    var target = e.target;
+                    target.dataset.xin = -parseInt(target.dataset.xin);
                 },
                 // 点击事件   此处的 if 需要根据实际情况替换成 elseif
                 domClick: function(e){
@@ -2726,6 +2729,15 @@
                     if(~e.target.className.indexOf("iqxin-set-edit")){
                         // console.log("点击编辑框");
                         this.addEditBox(e);
+                    }
+                    // 标题编辑框
+                    if(~targetClass.indexOf("iqxin-title-edit")){
+                        e.stopPropagation();
+                        console.log("点击编辑框");
+                        this.addTitleEditBox(e);
+                    }
+                    if(~targetClass.indexOf("sejtitle")){
+                        this.titleClick(e);
                     }
                 },
                 // 界面，框：添加新的搜索
@@ -2902,6 +2914,42 @@
                     // 修改完成，移除添加框
                     this.addItemBoxRemove();
                 },
+                addTitleEditBox: function(e){
+                    this.addItemBoxRemove();
+
+                    var element = e.target.parentNode.firstChild;
+                    // console.log(element);
+                    element.classList.remove("iqxin-pointer-events");
+
+                    var flag = document.querySelector("#titleEdit");
+                    if(flag){
+                            element.innerHTML = element.firstChild.value?element.firstChild.value:"空";
+                        element.classList.add("iqxin-pointer-events");
+                        // element.blur();
+                        // console.log("关闭");
+                    }else{                       
+                        var oldhtml = element.innerHTML;
+                        var newobj = document.createElement("input");
+                        newobj.id = "titleEdit";
+                        newobj.type = "text";
+                        newobj.value = oldhtml;
+                        // newobj.onblur = function(){
+                        //     element.innerHTML = this.value?this.value:oldhtml;
+                        // }
+                        newobj.onkeydown = function(e){
+                            if((e.keyCode || e.which) == 13){
+                                element.innerHTML = this.value?this.value:oldhtml;
+                            }
+                            element.classList.add("iqxin-pointer-events");
+                        }
+                        element.innerHTML = "";
+                        element.appendChild(newobj);
+                        // newobj.focus();
+                        newobj.select();
+                        // console.log("增加");
+                    }
+
+                },
                 domdragstart:function (e) {
                     // e.target.style.opacity = '0.5';
                     // console.log(this,e);
@@ -2973,13 +3021,16 @@
                         }
                     }
 
+                    // 分类名称
+                    var engineDetails = [['网页', 'web'],['翻译', 'translate'],['知识', 'knowledge'],['图片', 'image'],['视频', 'video'],['音乐', 'music'],['学术', 'scholar'],  ['社交', 'sociality'],['购物', 'shopping'],['html', 'htmls'],['mine', 'mine']];
+                    
                     // 分类排序
                     var details = [];
                     var odetails = document.querySelectorAll(".sejtitle");
                     var odetailsLength = odetails.length;
                     for(let i=0;i<odetailsLength;i++){
-                        // i = i>8?-i:i;
-                        // details[i] = [odetails[i].innerHTML,odetails[i].dataset.iqxintitle];
+                        engineDetails[i][0] = odetails[i].firstChild.innerHTML;
+
                         details[i] = odetails[i].dataset.xin;
                     }
 
@@ -2988,6 +3039,7 @@
 
                     settingData.details = details;
                     settingData.engineList = obj;
+                    settingData.engineDetails = engineDetails;
                     settingData.newtab = onewtab;
                     console.log(settingData.newtab);
                     // console.log(settingData);
@@ -3031,6 +3083,7 @@
                             "width: 100%;" +
                             "box-sizing: border-box;" +
                         "}" +
+                        ".iqxin-pointer-events," +
                         ".sej-engine-icon," +
                         "#settingLayer .sej-engine *{" +
                             "pointer-events:none;" +
@@ -3039,6 +3092,7 @@
                             "text-align: center;" +
                             "padding: 2px 0;" +
                             "cursor: pointer;" +
+                            "position: relative;" +
                         "}" +
                         "[data-xin]{" +
                             "margin:5px 0;" +
@@ -3109,9 +3163,9 @@
                             "border: 1px dashed #ccc;" +
                             "box-sizing: border-box;" +
                         "}" +
+                        ".iqxin-title-edit," +
                         ".iqxin-set-edit," +
                         ".iqxin-set-del {" +
-                            // "display: none;" +
                             "visibility: hidden;" +
                             "opacity:0;" +
                             "position: absolute;" +
@@ -3125,8 +3179,8 @@
                             "cursor: pointer;" +
                             "transition: .3s;" +
                         "}" +
-                        ".iqxin-set-edit{" +
-                            // "transition:none;" +
+                        ".iqxin-title-edit{" +
+                            "padding: 2px 3px 2px 6px;" +
                         "}" +
                         "span.iqxin-additem {" +
                             "display:none;" +
@@ -3140,9 +3194,10 @@
                             "color: red;" +
                             "cursor: pointer;" +
                         "}" +
+                        "#settingLayer .sejtitle:hover .iqxin-title-edit," +
                         "#settingLayer .sejcon>span:hover .iqxin-set-edit{" +
                             "visibility:visible;" +
-                            "opacity:1;" +
+                            "opacity:0.8;" +
                             // "transition:none;" +
                         "}" +
                         ".iqxin-set-edit.iqxin-set-active," +
@@ -3202,6 +3257,9 @@
                             "padding: 0px 5px;" +
                             "cursor: pointer;" +
                             "text-decoration: underline;" +
+                        "}" +
+                        "#titleEdit{" +
+                            "width:6em;" +
                         "}" +
                         "";
                     head = document.getElementsByTagName('head')[0];
