@@ -21,7 +21,7 @@
 
 // @icon               data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAABpElEQVR4nO3Vv2uUQRDG8c/ebSMWqay0trATAxrUSi1S2AiWFoJYpNCgoBjURsHWJKeNRfAvsDgFixQqKdPZ2ViEiCJYBOQu8f1hEXO59713j7MUfLZ6d2a/O8vMO0OzDnin9Ku2Mjvuaw07xgSAYEVXe2indMhj92zpKJLnBhF8MDeye9hn6zbN70eRiqCw02Bra3up8BBLu1FEBxsBucXqW4csz0ULe4jorSCMuPU89boRELDMHiI6Y8V65bbCUTccc70RkaOwKLOg0IkyXa9qTjOu2LAs6NZuD86hrdTyxRNTkUqqdhXlHrngGRVEZsMpJwex9DxIZSHYclesIb65LCoHgIs66UJq6btDBZHZrPh8V6YBOX66LbOkTGckBYimBW2FVTNeuOZNyrFJ236Yl4NSy5SbVm1PDvhodqgyMledTdRlAtDzqfL9tfkwUtyaRkv9LwFj9B/w7wPycXOhqlJ0yZHKPChMi5MCiM47XhsopbVJAUHfrYbmN/EToN+02eLPfz9OYyZhFJzW1Jn3lTsxaKQjCkp52jy45r1ZvSbTb9M0d4PBozGZAAAAAElFTkSuQmCC
 
-// @version           2.4.1
+// @version           2.4.2
 // @license           LGPLv3
 
 // @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.3 测试通过
@@ -265,30 +265,22 @@
 
   // 获取所有元素 包括document
     function getElements() {
-        // var elements = Array.prototype.slice.call(document.getElementsByTagName('*'));
-        // console.log(elements);
+        var elements = Array.prototype.slice.call(document.getElementsByTagName('*'));
+        // var elementsArr = Array.from(elements);
+        var elementsSet = new Set(elements);
 
-        // 添加子元素
-        // console.log("添加子元");
-        var oparent = document.querySelectorAll("[class*='rwl-exempt']");
-        // console.log(oparent[0].getAttribute("rwl-exempt"));
-        for(let i=0;i<oparent.length;i++){
-            if (!oparent[i].getAttribute("rwl-exempt")) {
-                // console.log("添加子元素，裏面");
-                oparent[i].setAttribute("rwl-exempt","true");
-                // [].forEach.call(oparent,function(odiv){
-                    var ochildren = oparent[i].querySelectorAll("*");
-                    [].forEach.call(ochildren,function(ochild){
-                        ochild.setAttribute("rwl-exempt","true");
-                    });
-                // });
-            }
-        }
+        // console.log("所有元素：",elements);
+        var exempt = Array.prototype.slice.call(document.querySelectorAll("[class*='rwl-exempt'],[class*='rwl-exempt'] *"));
+        // console.log("排除1：",exempt);
 
-        var elements = Array.prototype.slice.call(document.querySelectorAll("*:not([rwl-exempt='true'])"));
-        // console.log(elements);
+        // var exemptArr = Array.from(exempt);
+        var exemptSet = new Set(exempt);
+
+        // console.log("排除元素；",exempt);
+
+        elements = Array.from(new Set(elements.concat(exempt).filter(v => !elementsSet.has(v) || !exemptSet.has(v))))
         elements.push(document);
-        // console.log(elements);
+        // console.log("最后结果：",elements);
 
         return elements;
     }
@@ -450,7 +442,7 @@
 
     // 添加CSS
         if(rule.add_css) {
-            GM_addStyle('html, :not([rwl-exempt="true"]) {-webkit-user-select:text!important; -moz-user-select:text!important;}');
+            GM_addStyle('html, :not([class*="rwl-exempt"]) {-webkit-user-select:text!important; -moz-user-select:text!important;}');
         }
 
     }
