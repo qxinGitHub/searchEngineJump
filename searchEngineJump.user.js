@@ -2640,7 +2640,7 @@
                     var ohttp = uri.protocol?uri.protocol:"http";
                     console.log(this.online);
                     if (this.online){
-                        oimg = 'http://www.google.com/s2/favicons?domain=' + uri.host;
+                        oimg = 'https://www.google.com/s2/favicons?domain=' + uri.host;
                     } else {
                         oimg =  ohttp + "://" + uri.host + "/favicon.ico";
                     }
@@ -2880,7 +2880,7 @@
 
                 var that = this;
                 var myImage = new Image;
-                myImage.src = 'http://www.google.com/s2/favicons?domain=www.baidu.com&' + Math.random() ;
+                myImage.src = 'https://www.google.com/s2/favicons?domain=www.baidu.com&' + Math.random() ;
                 setTimeout(function(){
                     // console.log("取消加载");
                     console.log(myImage.width);
