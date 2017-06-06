@@ -14,8 +14,8 @@ __说明__
 
 ### 更新历史
 
-> version 5.5.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-06-04
-- 添加新的搜索时，图标会优先从google的API获取，网络不通的情况下使用域名加favicon.ico的方式获取
+> version 5.5.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-06-07
+- 添加新的搜索时，图标会优先从google的API获取，网络不通的情况下使用域名加favicon.ico的方式获取 [感谢建议](https://greasyfork.org/zh-CN/forum/discussion/24961/x)
 - 细节优化，重置设置时增加询问窗口
 
 > version 5.5.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-06-04
