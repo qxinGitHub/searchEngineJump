@@ -16,10 +16,16 @@ __说明__
 
 ### 更新历史
 
+> version 5.6.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-07-20
+- 默认添加360搜索,爱奇艺视频及网页顶部搜索栏 [感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/27278/x)
+- 视频分类默认添加QQ视频搜索，未能实现顶部搜索栏，原因查找中
+- 修复网易云音乐跳转默认添加"&type=1" 的问题 [感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/27196/x)
+
 > version 5.6.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-07-16
 - 增加折叠当前搜索分类选项
 - 增加设置数据直接修改代码的选项
 - 设置界面按钮调整
+- 默认隐藏学术搜索列表
 
 > version 5.5.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-06-07
 - 添加新的搜索时，图标会优先从google的API获取，网络不通的情况下使用域名加favicon.ico的方式获取 [感谢建议](https://greasyfork.org/zh-CN/forum/discussion/24961/x)
