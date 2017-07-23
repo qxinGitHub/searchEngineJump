@@ -2,9 +2,9 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.6.1
+// @version        5.6.2
 // @created        2011-7-2
-// @lastUpdated    2017-07-20
+// @lastUpdated    2017-07-23
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -487,17 +487,17 @@
                  },
             },
             {name: "腾讯视频",
-                    url: /^https?:\/\/v\.qq\.com\/x\/search/,
+                    url: /^https?:\/\/v\.qq\.com\/x\/search/i,
                     engineList: "video",
                     enabled: true,
-                    style: "",
+                    style: "width:1140px;margin:0 auto;",
                     insertIntoDoc: {
-                       keyword: 'css;#iWordMid',
+                       keyword: 'css;#keywords',
                        target: 'css;.site_head_simple',
-                       where: 'afterEnd'
-                    }
+                       where: 'afterEnd',
+                    },
             },
-        
+
         
             // 音乐
             {name: "百度音乐",
@@ -1301,13 +1301,11 @@
             name: '爱奇艺',
             url: 'http://so.iqiyi.com/so/q_%s',
             favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAAAIABLAQAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAARJJREFUeJylk71KxFAQhb8bw7IKgbW0sxUuiPgA2ttsodhaLOwDiBDyALKNnYWBFJYiKttspUhaQRAh4GMoBDSkuRZOdHTDkrgHBs6dnzNT3ANzwkSJXQUOgPVuJ+gDFGVe29ztBEh9DDwD5z7wBPT+Nr5/5BOdW1oMdtSzL7Hly/Db8SBbbnN6lNhXYLvNTC1MGFsHHAJrwEDVJsA9cCKbUrWx4qmnBlYARsPMzFh4JPENX5Q2G1x7BewKv6uSnpzTBBeKn2mBX3DO1V4zGmbXdXxKoC2mBE5v9h/nUnx4udwLY+vC2N426TdRYh3//4k9UxH4MQsw0wvKbKkPbCBu5MsgFGWOt4A2D0WZ6wVjxI2fleZQvCOg+1AAAAAASUVORK5CYII=',
-            // blank:true,
         };
         engineList.video[9] = {
             name: '腾讯视频',
             url: 'https://v.qq.com/x/search/?q=%s',
             favicon: 'data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACNUlEQVR4nK2SS0iUYRSGn/P/42UcLCXDIoykaKhlSVCbGlu1MkgSJKE20saoyG2Q7QNpF0RIi6goXKQkLoIQhjBCNBAddFLGWw0q3ua/nxa/82eF0KID3+K7vC/Peb8DO+pKWi80p9W5mtbH/GPJzs3loUAFkOKp6GylbSR7UmLtZmDoAI06gE4P78+2nj7FvorPuB64HnieHF41tdD00c/sSqDvREHpPXF2zj24eAgRBBida2d4phORkCiEMu73peTh7wZvRQGeNJzbiu/JVYSC0EQERnIdfJm9HRmpqDN40SxHQp2BDTjgyHLcsn2aEkNcivfjOAa2E3Cytpu2M/WUmrPYruI6lKbe+0GqX4+GBM8MRaA7VYsI3Kqbj/BWvEle5htDIoGJpTbS2a5tOiHmm/UGFmBBwfax7AAliAyqY8e5eSBHmVeHZfkcqerBdn0sByxH2fDd0Rh2mJBl+wjClreKIWa4MBlf72Vxc4piNpZtIGj41aJPY1gCohTsAAE2/B+YlLDsZHk+3RKFZ3s1vB4ZRUTDFmAqc6PsTgw7jHtzrdqPlefNnonrLBbGoz5F4EPmBQtrKRDdNtQ3ufZ4M0AMJ+x374qxtVITVH5b/RoJx+Y7GVsozsI2NpLMd8QniznFsJnAkGTD0rLftzdARPg084ip/DUoCgFBX63fS7T8NYkAerdkMBuv+p5MZFqVkl8X4W3WtRLHeCDBn+LoSVRdGx4iZjggOqR+4vxuwv9WPwHg2/J5NFR2OgAAAABJRU5ErkJggg==',
-            blank:true,
         };
         
         // 音乐搜索列表
@@ -1757,13 +1755,13 @@
                                 
             engineList = getSettingData.engineList;
             engineList.details = details;
-            engineList.newtab = getSettingData.newtab;
+            // engineList.newtab = getSettingData.newtab;
 
             // 获取版本，用于搜索列表更新
                 // 只能对上一版本增量更新
             // console.log(getSettingData.version,settingData.version);
             if(parseFloat(getSettingData.version) < settingData.version){
-                
+                console.log("版本过低，开始更新")
                 // 1.4更新
                 getSettingData.foldlist = settingData.foldlist;
                 // 更新本地版本
@@ -1773,6 +1771,7 @@
                 GM_setValue("searchEngineJumpData",getSettingData);
             }
         } else {
+            console.log("未发现本地列表");
             // "details":[],
             // "engineDetails":[],
             // "engineList":{}
@@ -1782,6 +1781,8 @@
 
             GM_setValue("searchEngineJumpData",settingData);
             getSettingData = GM_getValue("searchEngineJumpData");
+
+            console.log(getSettingData);
 
             // getSettingData.foldlist = false;
         }
@@ -2303,6 +2304,7 @@
                 if(engine.disable) return;
                 var a = aPattern.replace('$encoding$', (engine.encoding || 'utf-8').toLowerCase())
                     .replace('$url$', engine.url)
+                    // .replace("$href$", engine.url)
                     .replace('$name$', engine.name);
                 
                 if (engine.favicon) {
@@ -2659,6 +2661,7 @@
             // code编辑界面
             editCodeBox: function(){
                 console.log("原始数据： ",getSettingData);
+                var userSetting = GM_getValue("searchEngineJumpData")
                 var editbox = document.createElement("div");
                 // var sData = 
                 editbox.id = "iqxin-editCodeBox"; 
@@ -2676,7 +2679,7 @@
                     // "</br>version:若有新功能加入，靠这个版本号识别"+
                     // "</br>newtab:0为默认设置，1为新标签页打开</span>" +
                     "</p>" +
-                    "<textarea wrap='off' cols='45' rows='20' style='overflow:auto;border-radius:4px;'>" + JSON.stringify(getSettingData,false,4) + "</textarea>" + 
+                    "<textarea wrap='off' cols='45' rows='20' style='overflow:auto;border-radius:4px;'>" + JSON.stringify(userSetting,false,4) + "</textarea>" + 
                     "<br>" +
                     "<button id='xin-reset'>清空设置</button> &nbsp;&nbsp;&nbsp;" +
                     "<button id='codeboxclose'>关闭</button> &nbsp;&nbsp;&nbsp;" +
@@ -3085,9 +3088,8 @@
                 settingData.details = details;
                 settingData.engineDetails = engineDetails;
                 settingData.engineList = obj;
-                // console.log(settingData.newtab);
-                console.log("保存数据");
-                console.log(settingData);
+                // console.log("保存数据");
+                // console.log(settingData);
                 GM_setValue("searchEngineJumpData",settingData);
             },
             isOnline: function(){
@@ -3157,7 +3159,7 @@
                         "cursor: pointer;" +
                         "position: relative;" +
                     "}" +
-                    "[data-xin]{" +
+                    "#settingLayerMask [data-xin]{" +
                         "margin:4px 0;" +
                         "line-height:1.7;" +
                         "border-radius:4px;" +
@@ -3340,7 +3342,7 @@
             var setBtn = document.createElement("span");
             setBtn.id = "setBtn";
             setBtn.innerHTML = "set";
-            setBtn.innerHTML = "<img style='margin:0 0 -3px 6px;width:16px;' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSklEQVR4nGNkIAPYy8tzhLS2f0cWy42JYiTHLLI0TV6y7D82cXIcwUSqhr658/bhkaaeAyYvWfZ/0qLFW9HVs7JzOOLR8w+bObhCjIEBh4vxaaAEYIsijBCgleW4zGYipIDawEpYVgqnA8jNSqSAY28fP8PpgIEALORoUlWQwyp++8Ejks0iKQQYGRlxWs7AgNth+ABKCLRPmhqHT7GKvCwDAwMDQ11gxMRTr58UIMtNmzbjuZKejoSqghyhkGBkYGD4j8xhYGAgnANgvmvyj5RGT0gwYC4mU9y4bkUPAwPh6IAleEZisx7MAR42Nnhzyo4jR/4T4wAYICoNIFlOUH1dULglAwMDg7S4GPUcgAQIhtapV09PMDAwMHBxchBlIMvHj++JUEZ86tbnlxdgYGBg+PL1KwMxZhMVAmcuXmRgYEDELz7QuXXpewYGBoYbd+4QYzQDU012NuOmxvZJRKkmDIguyjc2dfrWZGczomhomToVrw9N9PUZGBiw54T1O3emc3Jzz2BgQIQYLlCTnQ3Xj2EQPkcYaGszsLDgL71JsZyBgcRccOHqVbwWELIcGyCrMiLHIlxgwKtjFAeYSkkJD6gD/Kur39DaQjNxmWScDkBPodQGWxrbU0+9fDIXpwNwOWJTQ8eSzY3tC4m1aHNje8mmhvY+FLGG9qQTr57MQVeL08cW4jJmJ14+OYUuTqiwwuYBczFpvZOvnl7Cpp7kIPdQUWG3KSz8QazlhADJ2XDHnTs/SdVDVQcwMDAwLJs6lR1djNwEDAB1JMSK2b7KxQAAAABJRU5ErkJggg=='>"
+            setBtn.innerHTML = "<img style='margin:0 0 -3px 6px;width:16px;vertical-align: baseline;' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSklEQVR4nGNkIAPYy8tzhLS2f0cWy42JYiTHLLI0TV6y7D82cXIcwUSqhr658/bhkaaeAyYvWfZ/0qLFW9HVs7JzOOLR8w+bObhCjIEBh4vxaaAEYIsijBCgleW4zGYipIDawEpYVgqnA8jNSqSAY28fP8PpgIEALORoUlWQwyp++8Ejks0iKQQYGRlxWs7AgNth+ABKCLRPmhqHT7GKvCwDAwMDQ11gxMRTr58UIMtNmzbjuZKejoSqghyhkGBkYGD4j8xhYGAgnANgvmvyj5RGT0gwYC4mU9y4bkUPAwPh6IAleEZisx7MAR42Nnhzyo4jR/4T4wAYICoNIFlOUH1dULglAwMDg7S4GPUcgAQIhtapV09PMDAwMHBxchBlIMvHj++JUEZ86tbnlxdgYGBg+PL1KwMxZhMVAmcuXmRgYEDELz7QuXXpewYGBoYbd+4QYzQDU012NuOmxvZJRKkmDIguyjc2dfrWZGczomhomToVrw9N9PUZGBiw54T1O3emc3Jzz2BgQIQYLlCTnQ3Xj2EQPkcYaGszsLDgL71JsZyBgcRccOHqVbwWELIcGyCrMiLHIlxgwKtjFAeYSkkJD6gD/Kur39DaQjNxmWScDkBPodQGWxrbU0+9fDIXpwNwOWJTQ8eSzY3tC4m1aHNje8mmhvY+FLGG9qQTr57MQVeL08cW4jJmJ14+OYUuTqiwwuYBczFpvZOvnl7Cpp7kIPdQUWG3KSz8QazlhADJ2XDHnTs/SdVDVQcwMDAwLJs6lR1djNwEDAB1JMSK2b7KxQAAAABJRU5ErkJggg=='>"
             document.querySelector("#sej-container").appendChild(setBtn);
             var sejSet = null;
             
