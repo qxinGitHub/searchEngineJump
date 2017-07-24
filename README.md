@@ -16,6 +16,10 @@ __说明__
 
 ### 更新历史
 
+> version 5.6.3  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-07-24
+- 修复打开方式无法设置为新标签页打开 [感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/27413)
+- 个别网站样式调整
+
 > version 5.6.2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-07-23
 - 剔除本地保存的设置代码中无用的信息
 - 修复在百度页面打开设置存在的样式问题

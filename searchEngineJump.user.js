@@ -2,9 +2,9 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.6.2
+// @version        5.6.3
 // @created        2011-7-2
-// @lastUpdated    2017-07-23
+// @lastUpdated    2017-07-24
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -280,18 +280,16 @@
                 engineList: "knowledge",
                 enabled: true,
                 style: "\
-                    border-top: 1px solid #e5e5e5;\
-                    text-align: center;\
-                    border-bottom: 1px solid #e5e5e5;\
-                    margin-bottom: 1px;\
+                        position: absolute;\
+    					padding-left: 14em;\
                 ",
                 insertIntoDoc: {
                     keyword: function(){
                         var url = window.location.href.substring(window.location.href.lastIndexOf("/")+1);
                         return decodeURIComponent(url);
                         }, 
-                    target: 'css;#firstHeading',
-                    where: 'beforeBegin',
+                    target: 'css;#mw-head',
+                    where: 'afterBegin',
                 },
             },
             {name: "知乎",
@@ -299,16 +297,15 @@
                 engineList: "knowledge",
                 enabled: true,
                 style: "\
-                    border-top: 1px solid #e5e5e5;\
-                    text-align: center;\
-                    border-bottom: 1px solid #e5e5e5;\
-                    margin-bottom: 1px;\
+                    margin: 5px auto 0px;\
+                    width:960px;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#q',
                     target:"css;body",
                     where: 'afterBegin',
                 },
+                stylish:".zu-main:padding-top:0px;!important",
             },
             {name: "互动百科搜索页",
                 url: /^https?:\/\/so\.baike\.com\/doc/i,
@@ -383,10 +380,8 @@
                 engineList: "video",
                 enabled: true,
                 style: "\
-                    padding-left: 10px;\
-                    border-bottom: 1px solid #EEEEEE;\
-                    border-top: 1px solid #EEEEEE;\
-                    text-align: center;\
+					width:1190px;\
+					margin:0 auto;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#headq',
@@ -415,14 +410,13 @@
                 enabled: true,
                 engineList: "video",
                 style: "\
-                    border-top: 1px solid #E7E7E7;\
-                    border-bottom: 1px solid #E7E7E7;\
-                    text-align:center;\
+                    width:980px;\
+                    margin:10px auto -5px;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#search-keyword',
-                    target: 'css;.nav-sub',
-                    where: 'afterBegin',
+                    target: 'css;.so-wrap',
+                    where: 'beforeBegin',
                 },
             },
             {name: "acfan",
@@ -600,14 +594,11 @@
                 enabled: true,
                 engineList: "image",
                 style: '\
-                    padding-left: 0px;\
-                    border-top: 1px solid #ccc;\
-                    border-bottom: 1px solid #ccc;\
-                    text-align: center;\
+                    margin-left:110px;\
                     ',
                 insertIntoDoc: {
                     keyword: 'css;input#kw',
-                    target: 'css;#search',
+                    target: 'css;.s_tab',
                     where: 'afterEnd',
                 },
             },
@@ -616,11 +607,7 @@
                 enabled: true,
                 engineList: "image",
                 style: '\
-                    border-bottom: 1px solid #E5E5E5;\
-                    border-top: 1px solid #E5E5E5;\
-                    padding-left:0px;\
-                    margin-top:-1px;\
-                    text-align: center;\
+                    margin-left:136px;\
                     ',
                 insertIntoDoc: {
                     keyword: 'css;input[name=q]',
@@ -672,7 +659,7 @@
                     },
             },
             {name: "pixiv",
-                url: /^http:\/\/www\.pixiv\.net\/search\.php/,
+                url: /^http:\/\/www\.pixiv\.net\/search\.php/i,
                 engineList: "image",
                 enabled: true,
                 style: '\
@@ -1536,6 +1523,7 @@
             name: '果壳',
             url: 'http://www.guokr.com/search/all/?wd=%s',
             favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAAAIAA8AQAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAQNJREFUeJxjFGk1/89ABHCTZmYwUGdlYGBgYDg+7w5cnIkYzQwMDHDNX9/+RBFnElRbRpTtuAATAwMDAyuPCV4DVEX+wdmfXn7HNIBHqgiv7dzC7HD+86sf4Wx2IU1EGBDjFXSgwyKGGojYvAILPBj4+fk3nC3ILopqAI9UEYoh+AKPXUiTgYEBSzQihwdy4DEwoEahDosYdgMYGCBeQQ88BgbUGBBkF8VtAI9UEYOirBhu5/MiwgVnSkw0nowhBotCHU4r/AZEKfMyKPPLMARpLsFqOMz5OA2IVYIEljK/DIo4chTiNABmOwyUWhxgYGBAxAAs+nAaALMdGSB7BRZ9MAAAP2Q1NvsvI2QAAAAASUVORK5CYII=',
+            blank:true,
         };
         engineList.knowledge[8] = {
             name: '知乎(搜狗)',
@@ -1755,7 +1743,7 @@
                                 
             engineList = getSettingData.engineList;
             engineList.details = details;
-            // engineList.newtab = getSettingData.newtab;
+            engineList.newtab = getSettingData.newtab;
 
             // 获取版本，用于搜索列表更新
                 // 只能对上一版本增量更新
@@ -3342,7 +3330,7 @@
             var setBtn = document.createElement("span");
             setBtn.id = "setBtn";
             setBtn.innerHTML = "set";
-            setBtn.innerHTML = "<img style='margin:0 0 -3px 6px;width:16px;vertical-align: baseline;' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSklEQVR4nGNkIAPYy8tzhLS2f0cWy42JYiTHLLI0TV6y7D82cXIcwUSqhr658/bhkaaeAyYvWfZ/0qLFW9HVs7JzOOLR8w+bObhCjIEBh4vxaaAEYIsijBCgleW4zGYipIDawEpYVgqnA8jNSqSAY28fP8PpgIEALORoUlWQwyp++8Ejks0iKQQYGRlxWs7AgNth+ABKCLRPmhqHT7GKvCwDAwMDQ11gxMRTr58UIMtNmzbjuZKejoSqghyhkGBkYGD4j8xhYGAgnANgvmvyj5RGT0gwYC4mU9y4bkUPAwPh6IAleEZisx7MAR42Nnhzyo4jR/4T4wAYICoNIFlOUH1dULglAwMDg7S4GPUcgAQIhtapV09PMDAwMHBxchBlIMvHj++JUEZ86tbnlxdgYGBg+PL1KwMxZhMVAmcuXmRgYEDELz7QuXXpewYGBoYbd+4QYzQDU012NuOmxvZJRKkmDIguyjc2dfrWZGczomhomToVrw9N9PUZGBiw54T1O3emc3Jzz2BgQIQYLlCTnQ3Xj2EQPkcYaGszsLDgL71JsZyBgcRccOHqVbwWELIcGyCrMiLHIlxgwKtjFAeYSkkJD6gD/Kur39DaQjNxmWScDkBPodQGWxrbU0+9fDIXpwNwOWJTQ8eSzY3tC4m1aHNje8mmhvY+FLGG9qQTr57MQVeL08cW4jJmJ14+OYUuTqiwwuYBczFpvZOvnl7Cpp7kIPdQUWG3KSz8QazlhADJ2XDHnTs/SdVDVQcwMDAwLJs6lR1djNwEDAB1JMSK2b7KxQAAAABJRU5ErkJggg=='>"
+            setBtn.innerHTML = "<img style='margin:0 0 -3px 6px;width:16px;vertical-align: baseline;display:inline-block;' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSklEQVR4nGNkIAPYy8tzhLS2f0cWy42JYiTHLLI0TV6y7D82cXIcwUSqhr658/bhkaaeAyYvWfZ/0qLFW9HVs7JzOOLR8w+bObhCjIEBh4vxaaAEYIsijBCgleW4zGYipIDawEpYVgqnA8jNSqSAY28fP8PpgIEALORoUlWQwyp++8Ejks0iKQQYGRlxWs7AgNth+ABKCLRPmhqHT7GKvCwDAwMDQ11gxMRTr58UIMtNmzbjuZKejoSqghyhkGBkYGD4j8xhYGAgnANgvmvyj5RGT0gwYC4mU9y4bkUPAwPh6IAleEZisx7MAR42Nnhzyo4jR/4T4wAYICoNIFlOUH1dULglAwMDg7S4GPUcgAQIhtapV09PMDAwMHBxchBlIMvHj++JUEZ86tbnlxdgYGBg+PL1KwMxZhMVAmcuXmRgYEDELz7QuXXpewYGBoYbd+4QYzQDU012NuOmxvZJRKkmDIguyjc2dfrWZGczomhomToVrw9N9PUZGBiw54T1O3emc3Jzz2BgQIQYLlCTnQ3Xj2EQPkcYaGszsLDgL71JsZyBgcRccOHqVbwWELIcGyCrMiLHIlxgwKtjFAeYSkkJD6gD/Kur39DaQjNxmWScDkBPodQGWxrbU0+9fDIXpwNwOWJTQ8eSzY3tC4m1aHNje8mmhvY+FLGG9qQTr57MQVeL08cW4jJmJ14+OYUuTqiwwuYBczFpvZOvnl7Cpp7kIPdQUWG3KSz8QazlhADJ2XDHnTs/SdVDVQcwMDAwLJs6lR1djNwEDAB1JMSK2b7KxQAAAABJRU5ErkJggg=='>"
             document.querySelector("#sej-container").appendChild(setBtn);
             var sejSet = null;
             
