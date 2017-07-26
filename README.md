@@ -16,6 +16,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.7.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-07-26
+- 增加修改设置按钮透明度的功能，设置-编辑-setBtnOpacity 后面的数字为透明度取值0-1
+- 删掉本地设置数据中的details信息，整合到engineDetails中
+- 个别网站样式调整
+
 > version 5.6.3  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-07-24
 - 修复打开方式无法设置为新标签页打开 [感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/27413)
 - 个别网站样式调整
@@ -83,7 +88,7 @@ __说明__
 - 将设置改为弹性布局(测试)
 
 > version 5.1.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-05-10 
-- 开始修改源网页的样式以兼容脚本
+- 增加修改源网页的能力，用以兼容脚本
 - 与Google Variety样式不兼容的问题
 - google搜索页面中样式微调
 - 本地数据存储的版本无法自动更新问题

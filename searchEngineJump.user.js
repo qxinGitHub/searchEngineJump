@@ -2,9 +2,9 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.6.3
+// @version        5.7.0
 // @created        2011-7-2
-// @lastUpdated    2017-07-24
+// @lastUpdated    2017-07-26
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -165,10 +165,9 @@
                 engineList: "web",
                 style: '\
                     padding-left:15px;\
-                    border-bottom: 1px solid #E6E6E6;\
-                    margin-top:1px;\
+                    margin-top:10px;\
                     margin-left: 100px;\
-                    margin-bottom:15px;\
+                    margin-bottom:-20px;\
                 ',
                 insertIntoDoc: {
                     keyword: 'css;#sb_form_q',
@@ -182,9 +181,7 @@
                 engineList: "web",
                 style: '\
                     padding-left:95px;\
-                    border-top: 1px solid #E6E6E6;\
-                    border-bottom: 1px solid #E6E6E6;\
-                    margin-top:0px;\
+                    margin-top:5px;\
                 ',
                 insertIntoDoc: {
                     keyword: '//input[@name="q"]',
@@ -198,7 +195,6 @@
                 engineList: "web",
                 style: '\
                     padding-left:35px;\
-                    border-bottom: 1px solid #E6E6E6;\
                     margin-top:0px;\
                 ',
                 insertIntoDoc: {
@@ -281,7 +277,7 @@
                 enabled: true,
                 style: "\
                         position: absolute;\
-    					padding-left: 14em;\
+                        padding-left: 14em;\
                 ",
                 insertIntoDoc: {
                     keyword: function(){
@@ -380,8 +376,8 @@
                 engineList: "video",
                 enabled: true,
                 style: "\
-					width:1190px;\
-					margin:0 auto;\
+                    width:1190px;\
+                    margin:0 auto;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#headq',
@@ -443,7 +439,8 @@
                 style: "\
                     border-top: 1px solid #E8E8E8;\
                     border-bottom: 1px solid #E8E8E8;\
-                    margin-left: 240px; \
+                    padding-left: 240px; \
+                    background:#fff;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#masthead-search-term',
@@ -831,8 +828,7 @@
                 enabled: true,
                 engineList: "shopping",
                 style: "\
-                    border-bottom: 1px solid #E5E5E5;\
-                    border-top: 1px solid #E5E5E5;\
+                    margin:10px 0 -10px;\
                     text-align:center;\
                 ",
                 insertIntoDoc: {
@@ -847,7 +843,7 @@
                            }
                         }
                     },
-                    target: 'css;body',
+                    target: 'css;#main',
                     where: 'beforeBegin',
                 },
             },
@@ -856,8 +852,7 @@
                 enabled: true,
                 engineList: "shopping",
                 style: "\
-                    border-bottom: 1px solid #E5E5E5;\
-                    border-top: 1px solid #E5E5E5;\
+                    margin: 10px auto -10px;\
                     text-align:center;\
                 ",
                 insertIntoDoc: {
@@ -871,8 +866,7 @@
                 enabled: true,
                 engineList: "shopping",
                 style: "\
-                    border-bottom: 1px solid #E5E5E5;\
-                    border-top: 1px solid #E5E5E5;\
+                    margin: 10px auto -10px;\
                     text-align: center;\
                 ",
                 insertIntoDoc: {
@@ -1241,7 +1235,7 @@
         
         engineList.video[0] = {
             name: 'youtube',
-            url: 'http://www.youtube.com/results?search_query=%s',
+            url: 'https://www.youtube.com/results?search_query=%s',
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAByElEQVR4nO2WTy/EQBjGf1M9ES4rQSzdlkVw2KtIcMBdfB1fQ3wWXEQiTtgI4k8k/gbBRdzYjkO33VUz7WyWuuwzeZPp9O37PH3ft52BFlr4Z4j6i7vJUZkFaf7oLOKNJjcTI5mQhxg8PheRgKvxbMlDFE7OhQ0gZTL/p9+8PtsSynXrcqwofQlJJgmsc2k5mjdqqriXY0Vp+ylvDxC6yM8PiqcXPL688DY91VAGfNQ8lpQBgakB9HZ3M3J2QcfqWkPPqsxKS39QgtqoR//8PF3rG7SvrHzzUQ1dbLMSxEpRjz7XBdflaXaO18UF8H1lDKEpgW3S31EPJDj3OA5sbALwVCrRlsvFFagF+CafmOZhpQiAchmAh0IBe8gDQKoTg61Z/84fZsBMBz2Ow/P7O22eV8uextdO+wlVJQRBDBUcekM/1uINHAkwq4CsCkh2Lrue9p42AyZfgSVEqESJgwTiEDoewwwEiMfYL6QT1wSo122TuspqF4aue94w+BVjctD3j9jNO6kSop1MCPNOjEG3owqAnf5kEbqttFkB0/fXZueBj8rfnVeiV9vuG8z0VDTzcFM7koXY6h3IRMTc423zNW2hhd/CF3jZLaCW4/+vAAAAAElFTkSuQmCC',
         };
         engineList.video[1] = {
@@ -1570,7 +1564,7 @@
             name: 'Google+',
             url: 'https://plus.google.com/s/%s',
             // favicon: 'https://plus.google.com/favicon.ico',
-            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACnUlEQVQ4jX2Sy08TURjF+z8Yd27QVI2iwAhT24pIy9CWTkVrMRgxUTQRYuJKQly4UIOJMUYlcWHCxsdGYWPSxqhRF7IxMRGDEejcmU55P20FBQpDfy4KKI+4OIubfPd3zz3ns+lBJ6sKuRFBJ0KREL5ihF9G+EoQvmLWzP0j2+pBdSEUCT3oJHnuOOapAIkTHsxaH+bpILrq+g9AdSMUiYFLdcx2feZntIP5+HeyloWVTpFuf4bwyznIOpBNV13oAQdGdSlWaopUx1P65DyS9WGWZn8z1/0ldzngyLn0y+sAoUNo5fsZuX4FgNGWqwhFQivLJ9X+BIBkfRjhK0E/eohExIsecq86sekhN5q3kKHmRgBSLx4Td9qJO+1MtrUCWRInFTTPfowaL5l+EyPiQVMkdNX1N0Thl/n9qROAsbs3MOtU5nu6mXh4B81bSKJGIXk+gjU1QfJ8BOOEF111r4ToQgQcGMfKGL/fwsz7V8tuntBbtA2z1kdmwMRK/yC7uIiVTpFJGiQi3rU1akfy6XPsYPRmMwAZQ6P/Yi2ioug/DpZbEAGZyUf3mPvWxUznO6bfRslm5ln6NcPApTrih/eQOFmxSQaqC6EcYObDaxZHBum/EEGvcqIdyWeoqQGA6TdRNE8BRnXpxhaEX8YIlwMw2dZKz96t6FW5L/Xs3kL65XN+ffqIVpafW3W/Y90eBBwYR0tZGB3GSk0xdvsa5hkVsy7I+INbLAwmGWpqQPMUrHl5FWCobvTKAwxePktG64WlJaypCazJcea/f2W4uRHhKcAIuTGCzg2yxQMHiVc56fMWEq8sRoTLETUKokahr0Kit3wfWtBFPHBwU9miJXaiJXZijl3EZDtRaTtRKY+olEdM3knMsYuVmc30B6Utqs/wm281AAAAAElFTkSuQmCC',
+            favicon: 'data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACM0lEQVR4nG2TT0iUURTFf/d93zeiFkJkFLXJkhYFbYIQIhdZ6EyG0DCWRLZLWrcvgoK2bdwFLUSKIKMCW4hkZgsRMaRFmiMVhSgurNCcee+0cPwz4uU9eFzOue/ce7jGtsjfvrVfszO/kEBCIYCEJQl1z/ttO74skc9lJAQl0kYBKOUCxbhi+diLt1XrHLf+mMmltb36ThEX/lVOX2zcwDqAmWyzkJACWtNQdtFmbZWU5bPpUYB4uuvaPubnQaKYVFDb/aTsx5+dWWIgQpv9Svi/S6cAnJubm0PCR6kN8sjNTj49uAvA7GqBZe8RYu2UFArybecf2de2JmHGnsfPABjoaIMgnBkEEeGpdsahOMIFqO3pY+ZKhiqMGBFT6hlg/P4dVPSknHG292VZKxPtrZx8+gqAw72v+dKeoQZwqGQbsLvuCGZGtMP0VxSYzKWRxGg2zbL3eAmHwvqsOXr1esl3MZJrZSibBuDzw3ugQApjMpchMVFdstCmMo0yM1aCONjTt6P3H7It1JhjlwkwTJ5E8CeERlf/5p2hQALkOy7h/61sEBcnxnl/uYUEqEA4g8REghE54/Tg6FAMsFIsLFdEcWU18O1Glu+rRQjgDFIG1QYpwAUwDEP88DoOW3ZhqvmMDAgIL1jwAScRAQkQmzAZzsRvXxxoGBxrgi27UN8/bIsFP+YkEsSByEghEtMaSGAm5nw4sU4uU7A1Pp5r6N7r6AJYCh4TLKwWmi4Mjw9sx/4HkrAQwN8GM6wAAAAASUVORK5CYII=',
         };
         
         // 学术搜索列表
@@ -1710,31 +1704,64 @@
         
         var settingData = {
             "status":1,
-            "message":"$相关说明$(status: 如果设置出错，去Tampermonkey中将该脚本的Storage,将其设置为非数字1，可清空设置)..."+
+            "message":"$相关说明$(status: 如果设置出错，去Tampermonkey中将该脚本复原出场设置或进入其Storage,将其设置为0，可清空设置)..."+
                     "(version: 若有新功能加入，靠这个版本号识别)..." +
                     "(newtab: 0为默认设置，1为新标签页打开)..." +
                     "(foldlist: 折叠当前搜索分类列表。true为折叠，false为展开。)..." +
-                    "(details: 分类列表的显示情况，正数为显示，负数为隐藏。该数字的绝对值不能重复，数字必须连续，从0开始)..." +
-                    "(engineDetails: 第一个值为分类列表标题名称，第二个值与enginelist相关联，必须匹配。可以用它将分类列表按自己喜欢排序)..." +
+                    "(settingOpacity: 设置按钮的透明度，值为0-1之间的数，0为透明，1为完全显示，中间值半透明。注：-1为直接关闭按钮，关闭之前请确定自己有能力再次打开它)..." +
+                    "(engineDetails: 第一个值为分类列表标题名称，第二个值与enginelist相关联，必须匹配,第三个值true为显示列表，false为禁用列表。可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)",
-            "version":1.4,
+            "version":1.5,
             "newtab":0,
             "foldlist":false,
-            "details":["0","1","2","3","4","5","-6","7","8","9","-10"],
-            "engineDetails":[['网页', 'web'],['翻译', 'translate'],['知识', 'knowledge'],['图片', 'image'],['视频', 'video'],['音乐', 'music'],['学术', 'scholar'],  ['社交', 'sociality'],['购物', 'shopping'],['html', 'htmls'],['mine', 'mine']],
+            "setBtnOpacity":0.8,
+            "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],['html', 'htmls',true],['mine', 'mine',false]],
             "engineList":{}
         }
         // GM_deleteValue("searchEngineJumpData");
         var getSettingData = GM_getValue("searchEngineJumpData");
         if(getSettingData){
-            console.log("存在列表：",getSettingData);
-            if(getSettingData.status!=1){
-                GM_deleteValue("searchEngineJumpData");
-                window.location.reload();
+            // console.log("存在列表：",getSettingData);
+            if(!getSettingData.status && confirm("设置发生错误，脚本将会复原出厂设置")){
+                // if(){
+                    GM_deleteValue("searchEngineJumpData");
+                    window.location.reload();
+                // }
             }
-            // var engineDetails = [['网页', 'web'],['翻译', 'translate'],['知识', 'knowledge'],['图片', 'image'],['视频', 'video'],['音乐', 'music'],['学术', 'scholar'],  ['社交', 'sociality'],['购物', 'shopping'],['html', 'htmls'],['mine', 'mine']];
-            var engineDetails = getSettingData.engineDetails?getSettingData.engineDetails: settingData.engineDetails;
-            var getDetails = getSettingData.details;
+
+            // 获取版本，用于搜索列表更新
+                // 只能对上一版本增量更新
+            // console.log(getSettingData.version,settingData.version);
+            if(parseFloat(getSettingData.version) < settingData.version){
+                console.log("版本过低，开始更新,当前版本号和目标版本号: ",getSettingData.version,settingData.version)
+                // 1.4更新
+                // getSettingData.foldlist = settingData.foldlist;
+                // 1.5更新
+                getSettingData.setBtnOpacity = settingData.setBtnOpacity;
+                // 下面这项设置与之前设置存在冲突，需要将数据转移到新版本
+                // getSettingData.engineDetails = settingData.engineDetails;
+                var tempDetails = getSettingData.details;
+                var tempDetalisL = tempDetails.length;
+                for(let i=0;i<tempDetalisL;i++){
+                    getSettingData.engineDetails[i][2] = tempDetails[i]>=0?true:false;
+                }
+                delete getSettingData.details;
+
+                // 更新本地版本
+                getSettingData.version = settingData.version;
+                getSettingData.message = settingData.message;
+                GM_setValue("searchEngineJumpData",getSettingData);
+            }
+
+            var engineDetails = getSettingData.engineDetails;
+
+            //列表分类显示情况
+            var getDetails = engineDetails.map(function(value,index){
+                // console.log(value,value[2]);
+                return value[2]?index:-index;
+            })
+
+            // 列表分类的key value
             var getDetailsL = getDetails.length;
             var details = [];
             for(let i=0;i<getDetailsL;i++){
@@ -1743,21 +1770,8 @@
                                 
             engineList = getSettingData.engineList;
             engineList.details = details;
-            engineList.newtab = getSettingData.newtab;
+            // engineList.newtab = getSettingData.newtab;
 
-            // 获取版本，用于搜索列表更新
-                // 只能对上一版本增量更新
-            // console.log(getSettingData.version,settingData.version);
-            if(parseFloat(getSettingData.version) < settingData.version){
-                console.log("版本过低，开始更新")
-                // 1.4更新
-                getSettingData.foldlist = settingData.foldlist;
-                // 更新本地版本
-                getSettingData.version = settingData.version;
-                getSettingData.message = settingData.message;
-                getSettingData.engineDetails = engineDetails;
-                GM_setValue("searchEngineJumpData",getSettingData);
-            }
         } else {
             console.log("未发现本地列表");
             // "details":[],
@@ -1772,11 +1786,10 @@
 
             console.log(getSettingData);
 
-            // getSettingData.foldlist = false;
         }
             
         ///test -------------- 测试 start
-        console.log("searchEngineJump test location.href: ",window.location.href)
+        // console.log("searchEngineJump test location.href: ",window.location.href)
         ///test -------------- 测试 end
 
         // parseUri 1.2.2
@@ -2074,7 +2087,7 @@
                     display: inline-block;
                     margin: 0 0px 0 0;
                     border: none;
-                    padding: 0 8px;
+                    padding: 0 6px;
                     text-decoration: none;
                     font-weight:500;
                     color: #333 !important;
@@ -2300,7 +2313,7 @@
                 } else {
                     a = a.replace('src="$favicon$"', '');
                 };
-                if (engineList.newtab || engine.blank) {
+                if (getSettingData.newtab || engine.blank) {
                     a = a.replace('$blank$', "_blank");
                 } else {
                     a = a.replace('target="$blank$"', '');
@@ -2380,7 +2393,7 @@
             });
         };
 
-        // 由于冲突，更改源网页的样式
+        // 由于与要插入网页的样式无法很好的兼容，更改源网页的样式
         if(matchedRule.stylish){GM_addStyle(matchedRule.stylish);};
 
         // -------------------设置开关--------------------------------
@@ -2571,7 +2584,7 @@
                 this.mask.style.display = "flex";
                 document.body.style.overflow = "hidden";
 
-                document.querySelector("#xin-newtab").querySelectorAll("option")[engineList.newtab].setAttribute("selected","selected");
+                document.querySelector("#xin-newtab").querySelectorAll("option")[getSettingData.newtab].setAttribute("selected","selected");
             },
             hide: function(){
                 this.addItemBoxRemove(); // 新的搜索添加框
@@ -3054,17 +3067,17 @@
                 }
 
                 // 分类名称
-                // var engineDetails = [['网页', 'web'],['翻译', 'translate'],['知识', 'knowledge'],['图片', 'image'],['视频', 'video'],['音乐', 'music'],['学术', 'scholar'],  ['社交', 'sociality'],['购物', 'shopping'],['html', 'htmls'],['mine', 'mine']];
-                var engineDetails = getSettingData.engineDetails?getSettingData.engineDetails:settingData.engineDetails;
+                var engineDetails = getSettingData.engineDetails;
                 
                 // 分类排序
-                var details = [];
                 var odetails = document.querySelectorAll(".sejtitle");
                 var odetailsLength = odetails.length;
                 for(let i=0;i<odetailsLength;i++){
                     engineDetails[i][0] = odetails[i].firstChild.innerHTML;
 
-                    details[i] = odetails[i].dataset.xin;
+                    engineDetails[i][2] = odetails[i].dataset.xin>=0?true:false;
+
+                    // details[i] = odetails[i].dataset.xin;
                 }
 
                 // 新标签页全局设置
@@ -3073,7 +3086,6 @@
 
                 settingData.newtab = onewtab;
                 settingData.foldlist = foldlist;
-                settingData.details = details;
                 settingData.engineDetails = engineDetails;
                 settingData.engineList = obj;
                 // console.log("保存数据");
@@ -3326,11 +3338,18 @@
         };
 
         // 增加设置按钮
-        if (true){
+        if (~getSettingData.setBtnOpacity){
             var setBtn = document.createElement("span");
             setBtn.id = "setBtn";
-            setBtn.innerHTML = "set";
-            setBtn.innerHTML = "<img style='margin:0 0 -3px 6px;width:16px;vertical-align: baseline;display:inline-block;' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSklEQVR4nGNkIAPYy8tzhLS2f0cWy42JYiTHLLI0TV6y7D82cXIcwUSqhr658/bhkaaeAyYvWfZ/0qLFW9HVs7JzOOLR8w+bObhCjIEBh4vxaaAEYIsijBCgleW4zGYipIDawEpYVgqnA8jNSqSAY28fP8PpgIEALORoUlWQwyp++8Ejks0iKQQYGRlxWs7AgNth+ABKCLRPmhqHT7GKvCwDAwMDQ11gxMRTr58UIMtNmzbjuZKejoSqghyhkGBkYGD4j8xhYGAgnANgvmvyj5RGT0gwYC4mU9y4bkUPAwPh6IAleEZisx7MAR42Nnhzyo4jR/4T4wAYICoNIFlOUH1dULglAwMDg7S4GPUcgAQIhtapV09PMDAwMHBxchBlIMvHj++JUEZ86tbnlxdgYGBg+PL1KwMxZhMVAmcuXmRgYEDELz7QuXXpewYGBoYbd+4QYzQDU012NuOmxvZJRKkmDIguyjc2dfrWZGczomhomToVrw9N9PUZGBiw54T1O3emc3Jzz2BgQIQYLlCTnQ3Xj2EQPkcYaGszsLDgL71JsZyBgcRccOHqVbwWELIcGyCrMiLHIlxgwKtjFAeYSkkJD6gD/Kur39DaQjNxmWScDkBPodQGWxrbU0+9fDIXpwNwOWJTQ8eSzY3tC4m1aHNje8mmhvY+FLGG9qQTr57MQVeL08cW4jJmJ14+OYUuTqiwwuYBczFpvZOvnl7Cpp7kIPdQUWG3KSz8QazlhADJ2XDHnTs/SdVDVQcwMDAwLJs6lR1djNwEDAB1JMSK2b7KxQAAAABJRU5ErkJggg=='>"
+            GM_addStyle("#setBtn{" +
+                            "opacity:"+getSettingData.setBtnOpacity+";"+
+                            "transition:0.5s;"+
+                        "}"+
+                        "#sej-container:hover span#setBtn{" +
+                            "opacity:1;" +
+                        "}" +
+                        "");
+            setBtn.innerHTML = "<img style='margin:0 0 -3px 6px;width:16px;vertical-align: baseline;display:inline-block;cursor:pointer;' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSklEQVR4nGNkIAPYy8tzhLS2f0cWy42JYiTHLLI0TV6y7D82cXIcwUSqhr658/bhkaaeAyYvWfZ/0qLFW9HVs7JzOOLR8w+bObhCjIEBh4vxaaAEYIsijBCgleW4zGYipIDawEpYVgqnA8jNSqSAY28fP8PpgIEALORoUlWQwyp++8Ejks0iKQQYGRlxWs7AgNth+ABKCLRPmhqHT7GKvCwDAwMDQ11gxMRTr58UIMtNmzbjuZKejoSqghyhkGBkYGD4j8xhYGAgnANgvmvyj5RGT0gwYC4mU9y4bkUPAwPh6IAleEZisx7MAR42Nnhzyo4jR/4T4wAYICoNIFlOUH1dULglAwMDg7S4GPUcgAQIhtapV09PMDAwMHBxchBlIMvHj++JUEZ86tbnlxdgYGBg+PL1KwMxZhMVAmcuXmRgYEDELz7QuXXpewYGBoYbd+4QYzQDU012NuOmxvZJRKkmDIguyjc2dfrWZGczomhomToVrw9N9PUZGBiw54T1O3emc3Jzz2BgQIQYLlCTnQ3Xj2EQPkcYaGszsLDgL71JsZyBgcRccOHqVbwWELIcGyCrMiLHIlxgwKtjFAeYSkkJD6gD/Kur39DaQjNxmWScDkBPodQGWxrbU0+9fDIXpwNwOWJTQ8eSzY3tC4m1aHNje8mmhvY+FLGG9qQTr57MQVeL08cW4jJmJ14+OYUuTqiwwuYBczFpvZOvnl7Cpp7kIPdQUWG3KSz8QazlhADJ2XDHnTs/SdVDVQcwMDAwLJs6lR1djNwEDAB1JMSK2b7KxQAAAABJRU5ErkJggg=='>"
             document.querySelector("#sej-container").appendChild(setBtn);
             var sejSet = null;
             
@@ -3351,9 +3370,7 @@
                     // sej_edit.addEventListener("click",function(e){sejSet.addEdit(e);});
                     sej_edit.addEventListener("click",function(){sejSet.editCodeBox();});
                 }
-                sejSet.show();
-
-                
+                sejSet.show(); 
             });
         };
 
@@ -3417,5 +3434,4 @@
         // console.log("普通插入");
         iqxinstart();
     }
-    
 })();
