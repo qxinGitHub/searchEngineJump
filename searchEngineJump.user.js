@@ -2,9 +2,9 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.7.0
+// @version        5.8.0
 // @created        2011-7-2
-// @lastUpdated    2017-07-26
+// @lastUpdated    2017-07-28
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -189,20 +189,6 @@
                     where: 'afterEnd',
                 },
             },
-            {name: "360",
-                url: /^https?:\/\/www\.so\.com\/s\?/,
-                enabled: true,
-                engineList: "web",
-                style: '\
-                    padding-left:35px;\
-                    margin-top:0px;\
-                ',
-                insertIntoDoc: {
-                    keyword: '//input[@name="q"]',
-                    target: 'css;#header',
-                    where: 'afterEnd',
-                },
-            },
 
             // 知识               
             {name: "百度百科词条",
@@ -261,9 +247,9 @@
                 enabled: true,
                 style: "\
                     border-top: 1px solid #e5e5e5;\
-                    text-align: center;\
                     border-bottom: 1px solid #e5e5e5;\
                     margin-bottom: 1px;\
+                    margin-left:112px;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#kw',
@@ -1501,6 +1487,7 @@
             name: '豆丁文档',
             url: 'http://www.docin.com/search.do?searchcat=2&searchType_banner=p&nkey=%s',
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACsklEQVQ4jZ3SWUgTcBwH8H+QeDCpLUXR2vKGyZzHFuq8ErMi1PBK01LSBKdplgeYCPWQZWFgGV2GQhbpQ4XNSs3l0XRTZ+pm6hRiTtnmXOKZZfv2EstSevD3/P18H778CNnmOfmYHSSE7NquJylVjq1O3pTQbWH3Y7YpZcNBhn1uFpz/5SzNdhOGOZXQTa2Ji60XJdgr3ibndBWjtXKSi7Ju33lCCHWTsnY28Uoud3tyo5Oruv/Jb/VO/4Hlsj7Pn8VSD5SM+KB83Ae3J5lIr2Z2bcLc41YZtYrAtc7FaPTqz6JPx4dkNg3CmRjUjnFRKHZFUgcb2SNchJ13ufUXZvJMj76a8YfmRwOWvg9ANlcE2VwhZPqLGNJloXM6ETWjQeB3s5Eg9Qcz1D5uozcpf+0+Il6IhELfhKn5z5BqL6BPm4ZeTSrE6kQIp6LwXBGJq4P+yO7mGWh0mrtRO3ma8xpVAeiYiYZcVwOFXoCB2TyoV5qhXHwG3eoHKBcFqFdE4NqwF3JbuF8pFIq1sSD0BDWzeS4EzcrD0K/JAAASdS4AYG19HdolFQCgS12BkgF7ZApYGkIIzVgQdoqW16jh4eUkD+plMdYNK2hTpQIAZLoGNCjifxfcQ26PHfhNbL2lJbH6M2CgRVTtBAvVI87QrkoAAIIvcQCAIV0d6sajAABC1SOc6WCAX++tIITs3Dgi7fJbx/kK+V50Td+FfFaIx6MHMarrxouJK7gpDYdcK8HDwUvg97ERUeBSuekHAk7uKbo+xkKByAH5H+koFrsgt8sBWe1uyGhlIaHRFSltbOQLgxaodub0rV53R2yp3dNSOReZIi5S33OQ9I6D2CYOYgTeSBP5oUh06Jt7kE3kVth4wcmMgrw3Icr8/iPI6Q9HVk8gzrUHGNIfhLTs97Dx/Tf/C0aUi3kge/guAAAAAElFTkSuQmCC',
+            disable:true,
         };
         engineList.knowledge[5] = {
             name: '爱问知识',
@@ -1512,6 +1499,7 @@
             name: '百度知道',
             url: 'http://zhidao.baidu.com/search?word=%s',
             favicon: icon.baidu,
+            disable:true,
         };
         engineList.knowledge[7] = {
             name: '果壳',
@@ -1523,6 +1511,7 @@
             name: '知乎(搜狗)',
             url: 'http://zhihu.sogou.com/zhihu?ie=utf8&query=%s',
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACk0lEQVQ4jY2SS0hUcRTGzyLcRI9Nm8BlbaqFm9xFi+hhm9EgrVZBUETOI3VsUGeiN/RGAqFyGmcRFCFUFJRFWCs1k3LunZnGbOb+73W0ssfo3HEG+7W4E4iBtPjg4xz48Z2PI7J+Z4Psj/ZJ/Z0+qQ//v/ZH+2TX+YjIvmi/nJtBQhNIu4UETMcHraUVyiKnvyPSEHkhQQtpjlN5JkXrw0mkSUcaNcSjI81xxKc7fqFaEkjQRKQ+3CdBC3FrnHv2hUS2wPauDDXditqoSeXZMTZeGWd3WOHqMXH1mGy7abD6ZAppM8qADotlLXGG0nmGzQL54jyTv0oMpPPsDRv0j82ifpR4a9iMKBuAmrCJNKfLgFbFnogipmwqWuI8iuXwPMgiR2KIT2fEtKmNmMjRGOLVGVY2e6LWAkC7SfW1cdaeSiGHPvAiOcPBuxZyaBRx67xTNq4e0+nleJy3yqZuMWBV6CM7bitc3QptskDn62lqbxlUXR5nIJOnLmoibg1pijP8D+CEwhU2GMjYDBo2dvE3+tQcA2mbM8+/8ObTLLU9SwGCFuJPIG6NFW1JdNNmw6Vx5PAo4nVOWDpB0EJaE4hHZ8uNDKXiPPeGfrI8kETcGu+UTU1YOSUe1RjM5BeV+Bfg1rg//JMnsRxPYzl63/+iwqujT87R9HiKNYEErrBiKldyEjQtBDRq7L5lAFDdmWZlIMn7TJ7N1z9z8eU3coV5UtkCI2aBV6lZqq6nEX+mDAiYbOlM8yNXorN/2nldn866C2NUnk0hxzQuvvyKpzfr7LzlV+5QiByI9kvHBJuufmZrl+Es/AnkRBJpXuD9CcQXR/xJpLWsUBaRXecjcnoaCRhOpHbDIS/W4nkoi7TEi38AwHibcZoJerYAAAAASUVORK5CYII=',
+            disable:true,
         };
 
         //社交列表
@@ -1688,19 +1677,19 @@
         
         //控制列表的具体细节
         //engineList.details[排序(从小到大,小于0不显示相应列表)]=['显示在网页上的名字',列表名称(别改这个)]
-        engineList.details = [];
+        // engineList.details = [];
         
-        engineList.details[0] = ['网页', 'web'];
-        engineList.details[1] = ['翻译', 'translate'];
-        engineList.details[2] = ['知识', 'knowledge'];
-        engineList.details[3] = ['图片', 'image'];
-        engineList.details[4] = ['视频', 'video'];
-        engineList.details[5] = ['音乐', 'music'];
-        engineList.details[-6] = ['学术', 'scholar'];
-        engineList.details[7] = ['社交', 'sociality'];
-        engineList.details[8] = ['购物', 'shopping'];
-        engineList.details[9] = ['html', 'htmls'];
-        engineList.details[-10] = ['mine', 'mine'];   // 隐藏
+        // engineList.details[0] = ['网页', 'web'];
+        // engineList.details[1] = ['翻译', 'translate'];
+        // engineList.details[2] = ['知识', 'knowledge'];
+        // engineList.details[3] = ['图片', 'image'];
+        // engineList.details[4] = ['视频', 'video'];
+        // engineList.details[5] = ['音乐', 'music'];
+        // engineList.details[-6] = ['学术', 'scholar'];
+        // engineList.details[7] = ['社交', 'sociality'];
+        // engineList.details[8] = ['购物', 'shopping'];
+        // engineList.details[9] = ['html', 'htmls'];
+        // engineList.details[-10] = ['mine', 'mine'];   // 隐藏
         
         var settingData = {
             "status":1,
@@ -1710,13 +1699,16 @@
                     "(foldlist: 折叠当前搜索分类列表。true为折叠，false为展开。)..." +
                     "(settingOpacity: 设置按钮的透明度，值为0-1之间的数，0为透明，1为完全显示，中间值半透明。注：-1为直接关闭按钮，关闭之前请确定自己有能力再次打开它)..." +
                     "(engineDetails: 第一个值为分类列表标题名称，第二个值与enginelist相关联，必须匹配,第三个值true为显示列表，false为禁用列表。可以用它将分类列表按自己喜欢排序)..." +
-                    "(engineList: 各个搜索的相关信息)",
-            "version":1.5,
+                    "(engineList: 各个搜索的相关信息)" +
+                    "(rules: 将搜索样式插入到目标网页，同脚本中的rules设置相同，优先级高于。自带了360搜索，可仿写)...",
+            "version":1.6,
             "newtab":0,
             "foldlist":false,
             "setBtnOpacity":0.8,
             "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],['html', 'htmls',true],['mine', 'mine',false]],
-            "engineList":{}
+            "engineList":{},
+            "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web", "style": "padding-left:35px;margin-top:0px;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#header", "where": "afterEnd"}}]
+
         }
         // GM_deleteValue("searchEngineJumpData");
         var getSettingData = GM_getValue("searchEngineJumpData");
@@ -1737,57 +1729,62 @@
                 // 1.4更新
                 // getSettingData.foldlist = settingData.foldlist;
                 // 1.5更新
-                getSettingData.setBtnOpacity = settingData.setBtnOpacity;
-                // 下面这项设置与之前设置存在冲突，需要将数据转移到新版本
-                // getSettingData.engineDetails = settingData.engineDetails;
-                var tempDetails = getSettingData.details;
-                var tempDetalisL = tempDetails.length;
-                for(let i=0;i<tempDetalisL;i++){
-                    getSettingData.engineDetails[i][2] = tempDetails[i]>=0?true:false;
-                }
-                delete getSettingData.details;
+                if(getSettingData.versiion===1.4){
+                	getSettingData.setBtnOpacity = settingData.setBtnOpacity;
 
-                // 更新本地版本
+                    var tempDetails = getSettingData.details;
+                    var tempDetalisL = tempDetails.length;
+                    for(let i=0;i<tempDetalisL;i++){
+                        getSettingData.engineDetails[i][2] = tempDetails[i]>=0?true:false;
+                    }
+                    delete getSettingData.details;
+                }
+
+                // 1.6更新
+                getSettingData.rules = settingData.rules;
+
+                // 更新本地版本 其他相关信息
                 getSettingData.version = settingData.version;
                 getSettingData.message = settingData.message;
                 GM_setValue("searchEngineJumpData",getSettingData);
             }
 
-            var engineDetails = getSettingData.engineDetails;
-
-            //列表分类显示情况
-            var getDetails = engineDetails.map(function(value,index){
-                // console.log(value,value[2]);
-                return value[2]?index:-index;
-            })
-
-            // 列表分类的key value
-            var getDetailsL = getDetails.length;
-            var details = [];
-            for(let i=0;i<getDetailsL;i++){
-                details[getDetails[i]] =  engineDetails[i];
-            };
-                                
             engineList = getSettingData.engineList;
-            engineList.details = details;
-            // engineList.newtab = getSettingData.newtab;
-
+                 
         } else {
             console.log("未发现本地列表");
             // "details":[],
             // "engineDetails":[],
             // "engineList":{}
-            console.log(engineList.details);
+            // console.log(engineList.details);
             settingData.engineList = engineList;
             console.log("初始化：",settingData);
 
             GM_setValue("searchEngineJumpData",settingData);
             getSettingData = GM_getValue("searchEngineJumpData");
 
-            console.log(getSettingData);
+            // console.log(getSettingData);
 
         }
-            
+        
+        // 处理enginlist.detail的相关信息     
+        var engineDetails = getSettingData.engineDetails;
+        //列表分类显示情况
+        var getDetails = engineDetails.map(function(value,index){
+            // console.log(value,value[2]);
+            return value[2]?index:-index;
+        })
+
+        // 列表分类的key value
+        var getDetailsL = getDetails.length;
+        var details = [];
+        for(let i=0;i<getDetailsL;i++){
+            details[getDetails[i]] =  engineDetails[i];
+        };
+        engineList.details = details;
+
+
+
         ///test -------------- 测试 start
         // console.log("searchEngineJump test location.href: ",window.location.href)
         ///test -------------- 测试 end
@@ -2038,13 +2035,30 @@
 
         var url = location.href;
         var matchedRule;
+        var marchedSign;
 
-        rules.some(function (rule) {
+        //先判断用户规则 
+        marchedSign = getSettingData.rules.some(function (rule) {
+            // console.info("rule: ",rule.url,typeof(rule.url),rule);
+            // console.log(getSettingData.rules);
+            rule.url = new RegExp(rule.url.substring(1,rule.url.length-1));
+            // console.log(getSettingData.rules);
+            // console.info(typeof(rule.url),rule.url);
             if (rule.url.test(url)) {
                 matchedRule = rule;
                 return true;
             };
         });
+
+        // console.log(marchedSign,matchedRule);
+        if(!marchedSign){
+            rules.some(function (rule) {
+                if (rule.url.test(url)) {
+                    matchedRule = rule;
+                    return true;
+                };
+            });
+        }
         
         // console.log(matchedRule);
         if (!matchedRule || !matchedRule.enabled) return;
@@ -2301,11 +2315,22 @@
             var engines = [];
             
             engineList[category].forEach(function (engine) {
-                if (matchedRule.url.test(engine.url)) return;// 去掉跳转到当前引擎的引擎
+                // 检测是否用搜索搜某一网站 site:xxx.xx
+                var engineUrl = engine.url;
+                var siteIndex = engineUrl.lastIndexOf("site:");
+                var siteMark = null;
+                // console.log("siteIndex: ",siteIndex);
+                if(~siteIndex){
+                    var siteURL = engineUrl.slice(siteIndex);
+                    siteMark = /([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}/.test(siteURL);
+                    // console.log(/([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}/.test(siteURL),siteURL);
+                }
+
+                if (!siteMark && matchedRule.url.test(engineUrl)) return;// 去掉跳转到当前引擎的引擎
                 if(engine.disable) return;
                 var a = aPattern.replace('$encoding$', (engine.encoding || 'utf-8').toLowerCase())
-                    .replace('$url$', engine.url)
-                    // .replace("$href$", engine.url)
+                    .replace('$url$', engineUrl)
+                    // .replace("$href$", engineUrl)
                     .replace('$name$', engine.name);
                 
                 if (engine.favicon) {
@@ -2540,7 +2565,7 @@
                                     foldlist_checked +
                                 " style='vertical-align:middle;'></label>" +
                             "</span>" +
-                            "<span id='xin-modification' title='edit 分享自己的设置或清空设置'>编辑</span> " +
+                            "<span id='xin-modification' title='edit 分享自己的设置或清空设置'>高级</span> " +
                             "<span id='xin-addDel' title='add & del 增加新的或者删除现有的搜索'>增加 / 删除</span> " +
                             "<span id='xin-save' title='save & close'>保存并关闭</span>" +
                             "</div>";
@@ -2674,11 +2699,8 @@
                     "padding:10px 20px;" ;
                 var innerH = " "+
                     "<p><span style='color:red;font-size:1.2em;'>! ! !</span></br>"+
-                    "此处是为了方便将自己的设置分享给他人</br>"+
-                    "设置错误会导致脚本无法运行"+
-                    // "</br><span style='font-size:0.6em;'>status:如果设置出错，去Tampermonkey中脚本的Storage,将其设置为非数字1，可清空设置"+
-                    // "</br>version:若有新功能加入，靠这个版本号识别"+
-                    // "</br>newtab:0为默认设置，1为新标签页打开</span>" +
+                    "此处修改自由性更高，</br>"+
+                    "但设置错误会导致脚本无法运行"+
                     "</p>" +
                     "<textarea wrap='off' cols='45' rows='20' style='overflow:auto;border-radius:4px;'>" + JSON.stringify(userSetting,false,4) + "</textarea>" + 
                     "<br>" +
@@ -3084,13 +3106,15 @@
                 var onewtab = document.querySelector("#iqxin-globalNewtab").selectedIndex;
                 var foldlist = document.querySelector("#iqxin-foldlist").checked;
 
-                settingData.newtab = onewtab;
-                settingData.foldlist = foldlist;
-                settingData.engineDetails = engineDetails;
-                settingData.engineList = obj;
-                // console.log("保存数据");
+                // 以防不测，重新获取本地配置文件
+                var getData = GM_getValue("searchEngineJumpData");
+                getData.newtab = onewtab;
+                getData.foldlist = foldlist;
+                getData.engineDetails = engineDetails;
+                getData.engineList = obj;
+
                 // console.log(settingData);
-                GM_setValue("searchEngineJumpData",settingData);
+                GM_setValue("searchEngineJumpData",getData);
             },
             isOnline: function(){
                 console.log("this.online",this.online);
