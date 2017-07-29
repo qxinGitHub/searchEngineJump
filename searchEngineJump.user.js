@@ -2,9 +2,9 @@
 // @name           searchEngineJump 搜索引擎快捷跳转
 // @author         NLF&锐经(修改)&iqxin(再修改)
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.8.0
+// @version        5.8.1
 // @created        2011-7-2
-// @lastUpdated    2017-07-28
+// @lastUpdated    2017-07-29
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -2317,7 +2317,7 @@
             engineList[category].forEach(function (engine) {
                 // 检测是否用搜索搜某一网站 site:xxx.xx
                 var engineUrl = engine.url;
-                var siteIndex = engineUrl.lastIndexOf("site:");
+                var siteIndex = engineUrl.lastIndexOf("site");
                 var siteMark = null;
                 // console.log("siteIndex: ",siteIndex);
                 if(~siteIndex){

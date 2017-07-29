@@ -16,6 +16,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.8.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-07-29
+- 依旧无法排除针对某一网站搜索的情况[感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/27527/x)
+
 > version 5.8.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-07-28
 - 增加配置文件中rules信息，功能同脚本中的rules一样，但优先级更高,配置文件更新至1.6
 - 之前会去掉跳转到当前搜索的搜索，现在会排除搜索引擎针对某一网站搜索的情况 site:xxx.xx [如反馈中的这种情况](https://greasyfork.org/zh-CN/forum/discussion/27527/x)
