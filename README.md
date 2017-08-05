@@ -16,6 +16,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.9.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-05
+- 添加增删搜索列表的功能
+- 增加debug 设置-高级-debug
+- 众多细节调整
+
 > version 5.8.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-07-29
 - 依旧无法排除针对某一网站搜索的情况[感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/27527/x)
 

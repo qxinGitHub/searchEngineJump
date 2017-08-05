@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name           searchEngineJump 搜索引擎快捷跳转
-// @author         NLF&锐经(修改)&iqxin(再修改)
+// @author         NLF&锐经(修改) & iqxin(再修改)
+// @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.8.1
+// @version        5.9.0
 // @created        2011-7-2
-// @lastUpdated    2017-07-29
+// @lastUpdated    2017-08-5
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -16,7 +17,7 @@
 // @include        *bing.com*
 // @include        *duckduckgo.com*
 // @include        *youdao.com*
-// @include        *soso.com*
+// @include        *so.com*
 // @include        *soku.com*
 // @include        *bilibili.tv*
 // @include        *bilibili.com*
@@ -146,12 +147,10 @@
                 enabled: true,
                 engineList: "web",
                 style: '\
-                    border-top:1px solid #e5e5e5;\
-                    margin-top:0px;\
-                    border-bottom: 1px solid #e5e5e5;\
-                    margin-bottom: 1px;\
+                    margin-top:8px;\
+                    margin-bottom: -5px;\
                     z-index: 99;\
-                    margin-left: 121px;\
+                    margin-left: 113px;\
                 ',
                 insertIntoDoc: {
                     keyword: 'css;input#kw',
@@ -1174,6 +1173,8 @@
             google:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD1klEQVR4nMWXbWhbVRjHf+cmTZq3hU67tcvmaql2L2q3FdTqkEodTESZ+GEKExX3YTrRyhCmMnDgCkP8EHwBnV+UMRyIiGLZLG7TMq22MsegOErrSmnarFub0CbN6z1+KLnNzb1JbmLF59M5T57z/H835zlvQkopqcCklBQbIoRACFFJOoQVgJyooiiWkqqqahmmJEClwtWAFAVQVbVq4UpymQIUG5CdmiR5/gfSl4bIjI+hRiMgJcoqP7aNzTjaduDs2o0tsMEyhAHALDA7HSL26Qck+89BuZIRAueDnXgOvIatYV1ZCB2AWUCir5eF4HFkYrG0cCGHy43v0Ns4O3eVhNBaZsUW//Jz5o+/U7E4gFyMkxr81eBXFEW3jO35APnVmujrJfbZR6bJ7c0tOO59AFtjAIQgG5okNfgLmdERLab2sSfxdR82h8vTEnLJdOLZqUnm9j+DTCZ0A22NAbzdh3G032eaODU0wPz7x3Du7MR78JBpTCGEkFLKwnmJBV8l/t2AbkDN5rvw9wQRPl/pxPEYwu0pGQPLtWBYBXJxjGz/FuLnGkkO1QOgrL6FuhOnUPx1ZRNXakrhNiDDp8Gm4t41iWfPNYRD4nnx4H8iLqXEXjj/cvaC1nZsjmAPeHF07V5xcQ3A4IwN6/q2O+4HuyFMs66emGXBI3ucdG7R5zLujekZXVe4WiwLlLNQxLiLrsxpY9FSGSsANfW6royPGEKqNY/TeCwbJld4tyJnw1p/OjLMGjVDjWJeBz++Zb7m/55R2X9Cv4Wv9RsBlMLLgqh7WGufSa7n6VAzvdd+MhUpZb+PZg2+Oxttei0hTADW7iWNnfcW7uHo/A4S2Pj4yiluJiKWxRcSkq9+S+t8t92q0FDwDwghlmpAVdVlp6uJTzxv8nWiSfPNJqJ0/9xDNDVfVjydhXe/STIb0xfco236KcxpKjmSfNt79wHc9lqd76+5MfadfYP+0B9FxUci47z0/WkGx1I6/2qP4PHtegDdaZgjyj+Qzoz3c2QgaCrUtCpAR8N2NngbEEJwffEml64Pc/nGVSQSW6IFd/gVRGZp+z76VC07W5fnP19LAyjckgFOXv2W4J9fFP3iUiayPlzhl3mhvY3nH3LofsvX0j5ZCKGrBYB9rU9wrON13HZXxQCKPc6zj0wZxHNXdU3XyqV0On6DDy+fpG/iIqqFh1T7mq10b3uOTXXNBvGSl9JSgQBTsRn6Ji4yGL7CaHSCuWQUKcHv9LHRt45t9ZvoWt9Ba93thrGWr+XlBlRjFT9Mcva/Ps3+DciKPU5LwZgmq+J5/g/N4OUGvdHwnQAAAABJRU5ErkJggg==",
             baidu:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABpElEQVR4nKWTvUtbURjGfzcf5prqEBFMBpWCHUIVISKRoIgQ3QQRRNBM1UHqX+AiLg4uQpeCiKigIkIkf4DgYAmVQBDEL2iHVIsfaGpi1Nxrck+HaGLMzSB5xuec9znP+5z3lYQQghJgKKW4qMDW9gPNbaf4AwkA5hbiTE1HSWuFd016AhubCZ6eBEurdzgcJr59vwXA45bp8VqLO4j+yzxhtWboKpuB8/NU9vyF13UQ3lPwjVzibpWZnLAhWySGByupqzWxG1JoaizjU4OZ4G4Sj1vOKYhnzMxGhdMVEU5XRPz6rQo9dHSfCacrIlbW41ku68lhz5iRLRLV1UYOjlT6hy4Y8F1w9jdFUhFc36QBODxSC1sYGqzEZjPwsd5MLKbxZeyKu0Qmk9HxK9YW7XjcMqGwgrcrF6T0dpCub9L4Ri75c5p6TdP0uYzl+Rpki1T8F2JxTbcYYP9AZfRrzpWugD+Q0C1+QXhPwR+4Ly5gNufb04Om5a9O3iT29X5gJ/jIj2CSuloTne3lGI3wM6RwfKLS2mJhoL8iT6AgxPei5G38Dx7mvwaRBxETAAAAAElFTkSuQmCC",
             bing:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB5ElEQVQ4jZ2Tv0sbYRyHX5Uzl8bLVNrSToUOHbr0T2gHqf1Baf8AvcUruNcpd5e75BK9H0Q9gptCogZKh6J2kWtDhkpxkmCwOIidijpYECoI5unQNo0QauwHnuUD78PL9/2+on9w0ItrWiSraiSNjER9w8NRTFUjuQvimhaJuKZ9ThaLJHyfGzMz3AxDRC6H7LooQYDi+50JApJhiJBVNVJ8nx7TZKhU4svhIYX1dW4XCsRsm4FstjOOg+K6fwXCMHiysMCfvKhUELp+OcHjcrkleL60hEil/l/wslKhxzAQuk6vaRLPZC5/g9dra5jVKvdnZ5FtG5FKIVkWSjeCB3NzvFpeBuD7yQnvd3YYW13lztQUsm1fLHhUKnE1n6e+v0973mxtIaXTJDKZLoY4Ps71yUneNhqt/uPuLrJlceUiwcP5ea5NTJCt1fh2fNzq321vI6XT/xacNZuUNzdpHBy0Dp41m1Tqde4Vi/RbVucZPG1bpPbU9vZ4triIlE7TZ5qdXyFmWdzyfYobG/w4PQXg69ERYysrKI6D0PXzu9Am+KAEAYrjELNthGEwVC5jVqvcDUOErv/6E45znlwOxfMQ8ujop2QYorguiueRcF16HQeRzSLl8wz87hXXPY/nkZye5icfi28JEi0cegAAAABJRU5ErkJggg==',
+            edit:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAACDklEQVR4nJXVzUtUURjH8Y/mSNKkki2iwiApxHQ1q/6C+gusoCB6oxbRRqFNL4sWtRKqhVSLIDe1CqpNiwjKIilKLKKFEr2Z2qI0xxHN0+LOm+PMOPOc1T2H7/f5ncO991BdNer30zmxKrl0xV2zKJjRoy6aqkkvbbdVLPuUq+8+5uGXnVILki7qsxgtNDtrTNLcijHvrdYsft0/wQ8DZgSzeqMUDW4IJceYHcvwCd1ies0KZvWI1TnhIH6574Olgg0E74zmhZ902j304by4Cxp5LPjtQNmjy3XPVK2rgmCBCcGgdVXhdBgUBCMEwVMNVeIvBMFLifKC8vgrndFBlRJUhJcWFMd3ZfGuzFRxwWrdu3KTxQQVhi8lqApfKVhf0d4bc2/OckG9Pkur7r3TEw+1FRO0GxdM2Vc2/HHBgr1If935UTfigbt5+C27MeSo9+m5GJYitlCwWR2G8oQZ/FgWX1aFgnZMG852v5nFR4rhMn+2dDVJYFpKqy0SDksUhF9FsE0bWgyIa9bIanihoEUcDTrSz4ueOVMOLxQkzVkrZcaoNz755rmpcnihYNghm3w26Ys/5cGcIKgRBJDyqCIquj8C1PqKZvHK+qVrJ5bMRwmGterU64pkkZupWO3RjXkzUZj9+jVZMGK6IsEaHTbgjpOSUYZL/pa5m4qPIbtyznpHvJaqGB53O33h4T/3VzLuzDhE6AAAAABJRU5ErkJggg==",
+            del:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAADAFBMVEUAAADsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVH///9VVVVWVlZXV1dYWFhZWVlaWlpbW1tcXFxdXV1eXl5fX19gYGBhYWFiYmJjY2NkZGRlZWVmZmZnZ2doaGhpaWlqampra2tsbGxtbW1ubm5vb29wcHBxcXFycnJzc3N0dHR1dXV2dnZ3d3d4eHh5eXl6enp7e3t8fHx9fX1+fn5/f3+AgICBgYGCgoKDg4OEhISFhYWGhoaHh4eIiIiJiYmKioqLi4uMjIyNjY2Ojo6Pj4+QkJCRkZGSkpKTk5OUlJSVlZWWlpaXl5eYmJiZmZmampqbm5ucnJydnZ2enp6fn5+goKChoaGioqKjo6OkpKSlpaWmpqanp6eoqKipqamqqqqrq6usrKytra2urq6vr6+wsLCxsbGysrKzs7O0tLS1tbW2tra3t7e4uLi5ubm6urq7u7u8vLy9vb2+vr6/v7/AwMDBwcHCwsLDw8PExMTFxcXGxsbHx8fIyMjJycnKysrLy8vMzMzNzc3Ozs7Pz8/Q0NDR0dHS0tLT09PU1NTV1dXW1tbX19fY2NjZ2dna2trb29vc3Nzd3d3e3t7f39/g4ODh4eHi4uLj4+Pk5OTl5eXm5ubn5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7///8dej9TAAAAU3RSTlMAAABm7P/sZgAAABPO////zhQAAB/i/////////+IfAAAe4fvk4AAAAAAd/+Q3GxwAFR85FQBjz+LPY+v////r6//////rZM/h4c9jABUdHRUAAP0EcPoAAAEuSURBVHic7ZRnc8IwDIbdEUZHGB0kDsMOMcOMttBBB93Qvcj//y9VjB0Czh13/dz3ixT5OVmSYyMktLK6tm74oYxEMpVGUW1sbm2bM8DMZHP5OWBnd2+/YNnYAWHbKhRL5cocQKjrWFWPuSDmVS3HpUQu1eoNQkiTM9xqd7oHoG6n3cKMNyHcqNfQ4VGPUsr7nh0FbK/PIdw7PkGnZwOZNrqF9AfnF+jyaigLixYp/eH1Dbq9u4eAHyOAHh5HaPz0DCnjANjm5fUNvX98QoGCxyo5Fjmh0K/vH2hzAi0KnqnymMgJrU6gzemQBM+DZpX1/XBYUyAYTTAuZTUg+Aw8Zf+BvwJLR730sPTjXgD0H2YB0BUClXKpGAeE1y+fy2ZMfX12gdOpZMLQAfkE/AL7e5vGZF+dOQAAAABJRU5ErkJggg==",
         };
 
         // 网页搜索列表
@@ -1606,7 +1607,7 @@
         engineList.htmls[0] = {
             name: 'MDN',
             url: 'https://developer.mozilla.org/zh-CN/search?q=%s',
-            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAADAFBMVEUAAAAEgb8AWKIAbbMHk8wAeLwBUJUAYqsAV6IBbK8DXqECWJsAi8sEZ6YAgsQAXaYDYqYAlNEAZa0AbLIIf7kGdLAFbqwBVJwAcrcAgsQHebUJhL0AVZwAeLwAktAAjcwBVJsBVJwAfcABUZYAVJsAiMgBUZYBm9YAWKMAVJsBUZUKjsUAnNgAnNgAnNgBVJsBnNgAltQJiMEAVp4KjsUKjsUAndkAWaMKjcQBTZEKjcQBUJUKjcQAmtYAmtYAmtYAntkAntoKkMcKkcgKkskLkMcAntoLkMcKi8MKjcUKi8MKjcT////x8vIJg7wKisIDWZwEX6EDW50Jhb4AktAIfbcJh8ADYaIAXKYDY6QIf7kDXZ8AldMCVpkAlNIAXqcCVZgAkc8CUZYAjMsAbrQAWqQCV5oAisoHd7MAYakAl9QGb60FZqYCU5cAm9gAY6sAX6gAh8gAmNUAjs0Aa7IKjMMAmdYAYqoKjcQAg8QIerYEZaUAhcYFaKgAj84AWaMFbKsIgbsFaqkAe74AZKwAabAAdLgAZq0AaK8KjsUGca8AgMIAZ64Gc7AAfcAAdroLkMcAb7UHebUAcrcGdbEAWKIBT5QAndkAeLwAcLbv8PEAVqEAgsP19vYATpMJgrsAgcMAVaD///oAn9vw8fL///z//Pj09PMAWaAAU5v5+PUAXqT8+vYAYab39fQAZagAV50AT5kAZqsBaa0AcbEEh8QEjcgAba4Fl9EEk84ATZ8Ag8kEisYEkMu51OPM3uhOkr8Lkciwzt8tfrXY5evE2eWnyNzg6u4+jb4AWKhspckAecOJttN5qs0AR5Kaxd6Sv9gAcbw9lcZgnsZWmcQferQxj8L7/f7l8vjo7vFwsNNWo8wAergXca6cwNcAUaLt9/vZ6/Y8hrhhqdEida4ihbwuh7sASZ30+v19tNNJm8kDgcDR5O5XtN6nz+at2e2Hvdk5p9jJ5POZ0etvveEPa6u93O5+x+YonNEjkMcVZ6V8udoYf7uPxuQXiMP////1D5bdAAAATHRSTlMABoCAJYCbgO4MmpuAm4DuGoDu7pubm0Xu7pubJ+7u7mZX7sk17uAv0ozx5WLLwHRW7puph1rrulD+kLK6jvSblPDrfkm/iLTuxsXvPlPBYgAAATdJREFUeJy90z1Lw1AYxfEMfitH13ubVGnBlvrSqvhCEyQisSqIRSUKKmiWDhZLLRRcBBdHv5MfwHPveVKTpoiTvyHcA3+yPY7zf+7z8zM/F+I48n0/nXNxHGemExnuoTGZ0WQ6LlV3SaYrE0GVllZIZlUmghL110lmSSaCPtXC8EOB7g9GZoeEoEaVlrK0gd0iBBV6V5kAe58QdKyRzga60zkhBNuG1oNcoHtfRxaCR0vrqUCp7g0guDb0azFQt4Bgz5rxB9UFBGdWb0ZwBwjOrZdicGkgOLXGb4XgwUBwTD/B2O4NQrBMwzSQfUAIylRPA9kXhKAuriRIJyFYJC8IAhOUZQeEwKOtHZLpyUTQoLVVktmQiaBt4bFpTU08ms3mfHoASZJgtjMT36fcCT1Pzd+O8Y++AcqvFc1FTPj9AAAAAElFTkSuQmCC',
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAAAAABWESUoAAAAuUlEQVR4nGNgGH5AQIcLn3TX/////38r14lwQxJkhDFYfzFgE2ZggjFQ5Bn0MYyf9R8VaKHJt/1HB/slkS37j9XRPzlgCv4xYlXAwAhzJBMjYw12JXBQjOGG////I1nMwsDA8AZD/gaKGa8x5J8wI8vrIslsYmAw2nCHHcMdd6Hyq3G4UwXTaahgHSEFDOsh8l9xKmBI+f//////d3ErYGDY9P///y34FDAw7Pk/B78CBg4LAgoGIwAA1vmlPJfmqVYAAAAASUVORK5CYII=',
             // blank:true,
         };
         engineList.htmls[1] = {
@@ -1701,10 +1702,11 @@
                     "(engineDetails: 第一个值为分类列表标题名称，第二个值与enginelist相关联，必须匹配,第三个值true为显示列表，false为禁用列表。可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页，同脚本中的rules设置相同，优先级高于。自带了360搜索，可仿写)...",
-            "version":1.6,
+            "version":1.7,
             "newtab":0,
             "foldlist":false,
             "setBtnOpacity":0.8,
+            "debug":false,
             "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],['html', 'htmls',true],['mine', 'mine',false]],
             "engineList":{},
             "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web", "style": "padding-left:35px;margin-top:0px;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#header", "where": "afterEnd"}}]
@@ -1730,7 +1732,7 @@
                 // getSettingData.foldlist = settingData.foldlist;
                 // 1.5更新
                 if(getSettingData.versiion===1.4){
-                	getSettingData.setBtnOpacity = settingData.setBtnOpacity;
+                    getSettingData.setBtnOpacity = settingData.setBtnOpacity;
 
                     var tempDetails = getSettingData.details;
                     var tempDetalisL = tempDetails.length;
@@ -1741,7 +1743,11 @@
                 }
 
                 // 1.6更新
-                getSettingData.rules = settingData.rules;
+                if(getSettingData.versiion===1.5){
+                    getSettingData.rules = settingData.rules;
+                }
+                // 1.7更新
+                getSettingData.debug = settingData.debug;
 
                 // 更新本地版本 其他相关信息
                 getSettingData.version = settingData.version;
@@ -1783,10 +1789,12 @@
         };
         engineList.details = details;
 
-
+        // debug
+        // getSettingData.debug = true;
+        reloadDebug(getSettingData.debug);
 
         ///test -------------- 测试 start
-        // console.log("searchEngineJump test location.href: ",window.location.href)
+        debug("searchEngineJump test location.href: ",window.location.href)
         ///test -------------- 测试 end
 
         // parseUri 1.2.2
@@ -2068,7 +2076,7 @@
         var iInput = typeof matchedRule.insertIntoDoc.keyword == 'function' ? matchedRule.insertIntoDoc.keyword : getElement(matchedRule.insertIntoDoc.keyword);
         
         ///test -------------- 测试 start
-        console.log("searchEngineJump test iTarget, iInput: ",iTarget, iInput);
+        debug("searchEngineJump test iTarget, iInput: ",iTarget, iInput);
         ///test -------------- 测试 end
 
 
@@ -2421,7 +2429,7 @@
         // 由于与要插入网页的样式无法很好的兼容，更改源网页的样式
         if(matchedRule.stylish){GM_addStyle(matchedRule.stylish);};
 
-        // -------------------设置开关--------------------------------
+        // -------------------设置相关--------------------------------
         // 设置按钮相关
         var dragEl = null;
         var dragData = null;
@@ -2504,7 +2512,9 @@
                     oDivTitle.classList.add("sejtitle");
                     oDivTitle.dataset.iqxintitle = details[j][1];
                     oDivTitle.dataset.xin = j;
-                    oDivTitle.innerHTML ='<span class="iqxin-pointer-events">' + details[j][0] + '</span>' + '<span class="iqxin-title-edit" title="编辑 Edit"><img class="sej-engine-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAACDklEQVR4nJXVzUtUURjH8Y/mSNKkki2iwiApxHQ1q/6C+gusoCB6oxbRRqFNL4sWtRKqhVSLIDe1CqpNiwjKIilKLKKFEr2Z2qI0xxHN0+LOm+PMOPOc1T2H7/f5ncO991BdNer30zmxKrl0xV2zKJjRoy6aqkkvbbdVLPuUq+8+5uGXnVILki7qsxgtNDtrTNLcijHvrdYsft0/wQ8DZgSzeqMUDW4IJceYHcvwCd1ies0KZvWI1TnhIH6574Olgg0E74zmhZ902j304by4Cxp5LPjtQNmjy3XPVK2rgmCBCcGgdVXhdBgUBCMEwVMNVeIvBMFLifKC8vgrndFBlRJUhJcWFMd3ZfGuzFRxwWrdu3KTxQQVhi8lqApfKVhf0d4bc2/OckG9Pkur7r3TEw+1FRO0GxdM2Vc2/HHBgr1If935UTfigbt5+C27MeSo9+m5GJYitlCwWR2G8oQZ/FgWX1aFgnZMG852v5nFR4rhMn+2dDVJYFpKqy0SDksUhF9FsE0bWgyIa9bIanihoEUcDTrSz4ueOVMOLxQkzVkrZcaoNz755rmpcnihYNghm3w26Ys/5cGcIKgRBJDyqCIquj8C1PqKZvHK+qVrJ5bMRwmGterU64pkkZupWO3RjXkzUZj9+jVZMGK6IsEaHTbgjpOSUYZL/pa5m4qPIbtyznpHvJaqGB53O33h4T/3VzLuzDhE6AAAAABJRU5ErkJggg=="/></span>';
+                    oDivTitle.innerHTML ='<span class="iqxin-pointer-events">' + details[j][0] + '</span>' + 
+                                        '<span class="iqxin-title-edit" title="编辑 Edit"><img class="sej-engine-icon" src="' + icon.edit + '"/></span>'+
+                                        ' <span class="iqxin-set-title-del" title="删除 Delete"><img class="sej-engine-icon" src="' + icon.del + '"></span>';
                     odiv.appendChild(oDivTitle);
 
                     var oDivCon = document.createElement("div");
@@ -2572,6 +2582,13 @@
                 btnEle.innerHTML = btnStr;
                 this.ele.appendChild(btnEle);
                 
+                // 增加搜索列表
+                var nSearchList = document.createElement("div");
+                nSearchList.id = "nSearchList";
+                nSearchList.style.cssText = "visibility:hidden;opacity:0;transition:0.3s;position:absolute;bottom:10%;right:5%;padding:5px 10px;border-radius:4px;border:1px solid #EC6D51;color:#ec6d51;cursor:pointer;background:#fff;";
+                nSearchList.innerHTML = "增加新的搜索列表";
+                this.ele.appendChild(nSearchList);
+
                 var closebtnELe = document.createElement("span");
                 closebtnELe.id = "xin-close";
                 closebtnELe.setAttribute("title","close 关闭");
@@ -2606,18 +2623,28 @@
                 "");
             },
             show: function(){
-                this.mask.style.display = "flex";
-                document.body.style.overflow = "hidden";
+                var style = this.mask.style;
+                style.display = "flex";
+                style.overflow = "hidden";
 
                 document.querySelector("#xin-newtab").querySelectorAll("option")[getSettingData.newtab].setAttribute("selected","selected");
+                setTimeout(function () {
+                    style.opacity = 1;
+                }, 30);
             },
             hide: function(){
                 this.addItemBoxRemove(); // 新的搜索添加框
                 this.addDelremove();  //  增加/删除界面
                 this.editCodeBoxClose(); // code编辑框
                 this.addTitleEditBoxRemove(); //标题编辑框
-                this.mask.style.display = "none";
+                this.boxClose("#newSearchListBox"); // 添加新的搜索列表
+
+                var style = this.mask.style;
+                style.opacity = 0;
                 document.body.style.overflow = "auto";
+                setTimeout(function () {
+                    style.display = "none";
+                }, 300);
             },
             reset: function(){
                 if(confirm("将会删除用户设置！")){
@@ -2631,7 +2658,7 @@
                 if (e.target.classList.contains("iqxin-btn-active")){
                     this.addDelremove();
                 } else {
-                    this.addDelremove();
+                    // this.addDelremove();
                     // console.log("不存在，增加增加");
                     var obtn = document.querySelector("#xin-addDel");
                     obtn.classList.add("iqxin-btn-active");
@@ -2642,11 +2669,24 @@
                         div.classList.add("iqxin-set-active");
                     }); 
 
+                    // 标题添加删除框
+                    var odom = document.querySelectorAll(".iqxin-set-title-del");
+                    [].forEach.call(odom,function(div){
+                        // console.log(div);
+                        div.classList.add("iqxin-set-active");
+                    });
+
+                    // 增加单个搜索
                     var oitemAdd = document.querySelectorAll(".iqxin-additem");
                     [].forEach.call(oitemAdd,function(div){
                         // console.log(div);
                         div.classList.add("iqxin-set-active");
                     });
+
+                    // 添加搜索列表
+                    var olistAdd = document.querySelector("#nSearchList");
+                    olistAdd.classList.add("iqxin-set-active");
+
                 }
             },
             // 关闭 “添加删除框”
@@ -2667,165 +2707,7 @@
                 }
                 this.addItemBoxRemove();
             },
-            // 添加编辑框 进入编辑状态  处于弃用状态
-            addEdit: function(e){
-                // 将addDelremove单独提取出来未生效 2017-05-31 21:45:56
-                if (e.target.classList.contains("iqxin-btn-active")){
-                    this.addDelremove();
-                } else {
-                    this.addDelremove();
-                    var obtn = document.querySelector("#xin-modification");
-                    obtn.classList.add("iqxin-btn-active");
 
-                    var odom = document.querySelectorAll(".iqxin-set-edit");
-                    [].forEach.call(odom,function(div){
-                        // console.log(div);
-                        div.classList.add("iqxin-set-active");
-                    }); 
-                }
-            },
-            // code编辑界面
-            editCodeBox: function(){
-                console.log("原始数据： ",getSettingData);
-                var userSetting = GM_getValue("searchEngineJumpData")
-                var editbox = document.createElement("div");
-                // var sData = 
-                editbox.id = "iqxin-editCodeBox"; 
-                editbox.style.cssText = "position:fixed;" +
-                    "top:50%;left:50%;" +
-                    "transform:translate(-50%,-50%);" +
-                    "background:#ccc;" +
-                    "border-radius:4px;" +
-                    "padding:10px 20px;" ;
-                var innerH = " "+
-                    "<p><span style='color:red;font-size:1.2em;'>! ! !</span></br>"+
-                    "此处修改自由性更高，</br>"+
-                    "但设置错误会导致脚本无法运行"+
-                    "</p>" +
-                    "<textarea wrap='off' cols='45' rows='20' style='overflow:auto;border-radius:4px;'>" + JSON.stringify(userSetting,false,4) + "</textarea>" + 
-                    "<br>" +
-                    "<button id='xin-reset'>清空设置</button> &nbsp;&nbsp;&nbsp;" +
-                    "<button id='codeboxclose'>关闭</button> &nbsp;&nbsp;&nbsp;" +
-                    "<button id='xin-codeboxsave'>保存</button>" +
-                "";
-                // console.log(JSON.stringify(getSettingData,4));
-                // console.log(JSON.stringify(getSettingData,null,4));
-                editbox.innerHTML = innerH;
-                this.ele.appendChild(editbox);
-            },
-            editCodeBoxSave: function(){
-                var codevalue = document.querySelector("#iqxin-editCodeBox textarea").value;
-                if(codevalue){
-                    // console.log(JSON.parse(codevalue));
-                    GM_setValue("searchEngineJumpData",JSON.parse(codevalue));
-                    // console.log(GM_getValue("searchEngineJumpData"));
-                    // 刷新页面
-                    setTimeout(function(){
-                        window.location.reload();
-                    },300);
-                } else {
-                    // alert("输入为空");
-                    this.reset();
-                }
-            },
-            editCodeBoxClose: function(){
-                var box = document.querySelector("#iqxin-editCodeBox");
-                if(box){
-                    box.parentNode.removeChild(box);
-                }
-            },
-            // 关闭编辑框 退出编辑状态
-            addEditremove: function(){
-                var obtn = document.querySelector(".iqxin-btn-active");
-                if(obtn){
-                    obtn.classList.remove("iqxin-btn-active");
-
-                    var odom = document.querySelectorAll(".iqxin-set-active");
-                    [].forEach.call(odom,function(div){
-                        div.classList.remove("iqxin-set-active");
-                    }); 
-
-                    var oitemAdd = document.querySelectorAll(".iqxin-additem");
-                    [].forEach.call(oitemAdd,function(div){
-                        div.classList.remove("iqxin-set-active");
-                    });  
-                }
-                this.addItemBoxRemove();
-            },
-            // 标题点击 （可以并入到下面的点击事件）
-            titleClick: function(e){
-                var target = e.target;
-                target.dataset.xin = -parseInt(target.dataset.xin);
-            },
-            // 点击事件   此处的 if 需要根据实际情况替换成 elseif
-            domClick: function(e){
-                var targetClass = e.target.className;
-                var targetid = e.target.id;
-                // console.log("点击事件 class：",e.target,targetid,e)
-
-                if(~e.target.className.indexOf("iqxin-set-del")){
-                    // console.log(e.target);
-                    e.target.parentNode.parentNode.removeChild(e.target.parentNode);
-                };
-                if(~e.target.className.indexOf("iqxin-additem")){
-                    // console.log("此处会有个弹框添加新搜索");
-                    this.parentNode = e.target.parentNode;
-                    this.addItemBox();
-                    // console.log(this);
-                };
-                if(e.target.className==="sej-engine"){
-                    console.log("sej-engine 被点击");
-                    e.target.dataset.iqxindisabled = e.target.dataset.iqxindisabled?"":"true";
-                };
-                if(~targetClass.indexOf("addItemBoxCancel")){
-                    this.addItemBoxRemove();
-                };
-                // 添加新的搜索 确定
-                if(~targetClass.indexOf("addItemBoxEnter")){
-                    // console.log(e);
-                    this.addItemEnger();
-                };
-                // 修改搜索 确定
-                if(~targetClass.indexOf("editItemBoxEnter")){
-                    // console.log(e);
-                    this.addEditBoxEnger();
-                };
-                // 获取焦点， 全选
-                if(e.target.nodeName.toLowerCase() === "input"){
-                    // console.log("全部选中");
-                    e.target.select();
-                }
-                // 编辑框
-                if(~e.target.className.indexOf("iqxin-set-edit")){
-                    // console.log("点击编辑框");
-                    this.addEditBox(e);
-                }
-                // 标题编辑框
-                if(~targetClass.indexOf("iqxin-title-edit")){
-                    e.stopPropagation();
-                    console.log("点击编辑框");
-                    this.addTitleEditBox(e);
-                }
-                if(~targetClass.indexOf("sejtitle")){
-                    this.titleClick(e);
-                }
-                // codebox  源代码编辑框
-                if(targetid ==="codeboxclose"){
-                    this.editCodeBoxClose();
-                } else if(targetid==="xin-reset"){
-                    this.reset();
-                } else if( targetid === "xin-codeboxsave"){
-                    this.editCodeBoxSave();
-                }
-                // 空白地方点击
-                if(~targetClass.indexOf("iqxin-items")){
-                    this.addItemBoxRemove(); // 新的搜索添加框
-                    this.addDelremove();  //  增加/删除界面
-                    this.editCodeBoxClose(); // code编辑框
-                    this.addTitleEditBoxRemove(); //标题编辑框
-                }
-
-            },
             // 界面，框：添加新的搜索
             addItemBox: function(bool){
                 this.isOnline();
@@ -2864,7 +2746,7 @@
                 if (!oimg){
                     var uri = parseUri(olink);
                     var ohttp = uri.protocol?uri.protocol:"http";
-                    console.log(this.online);
+                    debug("能否连接至google：",this.online);
                     if (this.online){
                         oimg = 'https://www.google.com/s2/favicons?domain=' + uri.host;
                     } else {
@@ -2878,7 +2760,12 @@
                             ' data-iqxinlink="$link$" ' +
                             ' data-iqxintarget="$blank$" ' +
                             '><img src="$favicon$" class="sej-engine-icon" />$name$</span>' +
-                            ' <span class="iqxin-set-del" styles="position:absolute;"> DEL </span>';
+                            '<span class="iqxin-set-edit" title="编辑 Edit">' +
+                                '<img class="sej-engine-icon" src="' + icon.edit + '">' +
+                            '</span> ' +
+                            '<span class="iqxin-set-del iqxin-set-active" title="删除 Delete">' +
+                                '<img class="sej-engine-icon" src="' + icon.del + '">' +
+                            '</span>' ;
 
                 a = a.replace("$img$", oimg)
                     .replace("$title$", otitle)
@@ -2894,7 +2781,7 @@
                     .replace('$favicon$', oimg);
 
                 var ospan = document.createElement("span"); 
-
+                ospan.className = "drag";
                 ospan.innerHTML = a;
 
                 this.parentNode.insertBefore(ospan,this.parentNode.lastChild);
@@ -2908,6 +2795,76 @@
                     newBox.parentNode.removeChild(newBox);
                 }
             },
+
+            // 界面， 框: 添加新的搜索列表
+            addSearchListBox: function(){
+                var odiv = document.querySelector("#newSearchListBox");
+                if (odiv){
+                    this.boxClose("#newSearchListBox");
+                    return;
+                }
+                var newDiv = document.createElement("div");
+                newDiv.id= "newSearchListBox";
+
+                var myDate = new Date();
+                var hash = "user" + myDate.getDate() + myDate.getHours() +myDate.getMinutes()+myDate.getSeconds();
+
+                newDiv.innerHTML=""+
+                    "<span>列表名称: </span><input id='iqxin-newSearchListName'>" +
+                    "<br><br>" +
+                    "<span>内部名称: </span><input id='iqxin-newSearchListInnerName' value='" + hash + "'>" +
+                    "<br><br>" +
+                    "<button id='addSearchListBoxEnter' class='addSearchListBoxEnter addItemBoxBtn'>确定</button>&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp" +
+                    "<button id='addSearchListBoxCancel' class='addSearchListBoxCancel addItemBoxBtn'>取消</button>" +
+                    "";
+                this.ele.appendChild(newDiv);
+
+                document.querySelector("#iqxin-newSearchListName").focus();
+            },
+            addSearchListEnger: function(){
+                var name = document.querySelector("#iqxin-newSearchListName").value;
+                var innerName = document.querySelector("#iqxin-newSearchListInnerName").value;
+
+                if(innerName.length===0){
+                    alert("内部名称不能为空");
+                    return;
+                }
+                if(name.length===0){
+                    name = innerName;
+                }
+
+                var odiv = document.createElement("div");
+                odiv.id = innerName;
+                odiv.className = "iqxin-items";
+                odiv.innerHTML = "" +
+                    '<div class="sejtitle" data-iqxintitle="' + innerName + '" data-xin="99">' +
+                        '<span class="iqxin-pointer-events">'+ name +'</span>' +
+                        '<span class="iqxin-title-edit" title="编辑 Edit">' +
+                            '<img class="sej-engine-icon" src="' + icon.edit + '">' +
+                        '</span> ' +
+                        '<span class="iqxin-set-title-del iqxin-set-active" title="删除 Delete">' +
+                            '<img class="sej-engine-icon" src="' + icon.del + '">' +
+                        '</span>' +
+                    '</div>' +
+                    '<div class="sejcon">' +
+                        '<span class="iqxin-additem iqxin-set-active">+</span>' +
+                    '</div>' +
+                "";
+
+                this.boxClose("#newSearchListBox");
+
+                var btnEle = document.querySelector("#btnEle");
+                btnEle.parentNode.insertBefore(odiv,btnEle);
+            },
+
+
+            boxClose: function(ele){
+                var odiv = document.querySelector(ele);
+                if(odiv){
+                    odiv.parentNode.removeChild(odiv);
+                }
+            },
+
             // 界面 框：修改框
             addEditBox: function(e){
                 this.addItemBoxRemove();
@@ -2989,6 +2946,8 @@
                 // 修改完成，移除添加框
                 this.addItemBoxRemove();
             },
+
+            // 标题编辑
             addTitleEditBox: function(e){
                 this.addItemBoxRemove();
 
@@ -3028,6 +2987,154 @@
                     odiv.parentNode.innerHTML = odiv.value?odiv.value:"空";
                 }
             },
+
+            // 高级菜单，配置文件编辑界面
+            editCodeBox: function(){
+                console.log("原始数据： ",getSettingData);
+                var userSetting = GM_getValue("searchEngineJumpData")
+                var editbox = document.createElement("div");
+                // var sData = 
+                editbox.id = "iqxin-editCodeBox"; 
+                editbox.style.cssText = "position:fixed;" +
+                    "top:50%;left:50%;" +
+                    "transform:translate(-50%,-50%);" +
+                    "background:#ccc;" +
+                    "border-radius:4px;" +
+                    "padding:10px 20px;" ;
+                var innerH = " "+
+                    "<p><span style='color:red;font-size:1.2em;'>! ! !</span></br>"+
+                    "此处修改自由性更高，</br>"+
+                    "但设置错误会导致脚本无法运行"+
+                    "</p>" +
+                    "<textarea wrap='off' cols='45' rows='20' style='overflow:auto;border-radius:4px;'>" + JSON.stringify(userSetting,false,4) + "</textarea>" + 
+                    "<br>" +
+                    "<button id='xin-reset'>清空设置</button> &nbsp;&nbsp;&nbsp;" +
+                    "<button id='codeboxclose'>关闭</button> &nbsp;&nbsp;&nbsp;" +
+                    "<button id='xin-codeboxsave'>保存</button>" +
+                "";
+                // console.log(JSON.stringify(getSettingData,4));
+                // console.log(JSON.stringify(getSettingData,null,4));
+                editbox.innerHTML = innerH;
+                this.ele.appendChild(editbox);
+            },
+            editCodeBoxSave: function(){
+                var codevalue = document.querySelector("#iqxin-editCodeBox textarea").value;
+                if(codevalue){
+                    // console.log(JSON.parse(codevalue));
+                    GM_setValue("searchEngineJumpData",JSON.parse(codevalue));
+                    // console.log(GM_getValue("searchEngineJumpData"));
+                    // 刷新页面
+                    setTimeout(function(){
+                        window.location.reload();
+                    },300);
+                } else {
+                    // alert("输入为空");
+                    this.reset();
+                }
+            },
+            editCodeBoxClose: function(){
+                var box = document.querySelector("#iqxin-editCodeBox");
+                if(box){
+                    box.parentNode.removeChild(box);
+                }
+            },
+
+            // 标题点击 （开关搜索列表）（可以并入到下面的点击事件）
+            titleClick: function(e){
+                var target = e.target;
+                target.dataset.xin = -parseInt(target.dataset.xin);
+            },
+            // 点击事件   此处的 if 需要根据实际情况替换成 elseif (switch)
+            domClick: function(e){
+                var targetClass = e.target.className;
+                var targetid = e.target.id;
+                debug("点击事件：%o, ID: %o, class: %o, e: %o",e.target,targetid,targetClass,e)
+
+                // 删除搜索
+                if(~e.target.className.indexOf("iqxin-set-del")){
+                    // console.log(e.target);
+                    e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+                };
+                // 删除搜索列表
+                if(~e.target.className.indexOf("iqxin-set-title-del")){
+                    // console.log(e.target, e.target.parentNode.parentNode);
+                    e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);
+                };
+
+                if(~e.target.className.indexOf("iqxin-additem")){
+                    // console.log("此处会有个弹框添加新搜索");
+                    this.parentNode = e.target.parentNode;
+                    this.addItemBox();
+                    // console.log(this);
+                };
+                if(e.target.className==="sej-engine"){
+                    console.log("sej-engine 被点击");
+                    e.target.dataset.iqxindisabled = e.target.dataset.iqxindisabled?"":"true";
+                };
+                if(~targetClass.indexOf("addItemBoxCancel")){
+                    this.addItemBoxRemove();
+                };
+                // 添加新的搜索 确定
+                if(~targetClass.indexOf("addItemBoxEnter")){
+                    this.addItemEnger();
+                };
+                // 添加新的搜索列表 确定
+                if(targetid === "nSearchList"){
+                    debug("添加新的搜索列表");
+                    this.addSearchListBox();
+                };
+                if(targetid === "addSearchListBoxEnter"){
+                    debug("向网页添加元素");
+                    this.addSearchListEnger();
+                };
+                if(targetid === "addSearchListBoxCancel"){
+                    debug("移除盒子");
+                    this.boxClose("#newSearchListBox");
+                };
+
+                // 修改搜索 确定
+                if(~targetClass.indexOf("editItemBoxEnter")){
+                    // console.log(e);
+                    this.addEditBoxEnger();
+                };
+                // 获取焦点， 全选
+                if(e.target.nodeName.toLowerCase() === "input"){
+                    // console.log("全部选中");
+                    e.target.select();
+                }
+                // 编辑框
+                if(~e.target.className.indexOf("iqxin-set-edit")){
+                    // console.log("点击编辑框");
+                    this.addEditBox(e);
+                }
+                // 标题编辑框
+                if(~targetClass.indexOf("iqxin-title-edit")){
+                    e.stopPropagation();
+                    console.log("点击编辑框");
+                    this.addTitleEditBox(e);
+                }
+                if(~targetClass.indexOf("sejtitle")){
+                    this.titleClick(e);
+                }
+                // codebox  源代码编辑框
+                if(targetid ==="codeboxclose"){
+                    this.editCodeBoxClose();
+                } else if(targetid==="xin-reset"){
+                    this.reset();
+                } else if( targetid === "xin-codeboxsave"){
+                    this.editCodeBoxSave();
+                }
+                // 空白地方点击
+                if(~targetClass.indexOf("iqxin-items") || targetid === "settingLayer"){
+                    this.addItemBoxRemove(); // 新的搜索添加框
+                    this.addDelremove();  //  增加/删除界面
+                    this.editCodeBoxClose(); // code编辑框
+                    this.addTitleEditBoxRemove(); //标题编辑框
+                    this.boxClose("#newSearchListBox"); // 添加新的搜索列表
+                }
+            },
+
+            // 拖动
             domdragstart:function (e) {
                 dragEl = this;
                 dragData = this.dataset.xin;
@@ -3059,6 +3166,26 @@
                 
                 return false;
             },
+
+            // 判断是否能连接至google
+            isOnline: function(){
+                console.log("this.online",this.online);
+                if(this.online)return;
+
+                var that = this;
+                var myImage = new Image;
+                myImage.src = 'https://www.google.com/s2/favicons?domain=www.baidu.com&' + Math.random() ;
+                setTimeout(function(){
+                    // console.log("取消加载");
+                    console.log(myImage.width);
+                    if(myImage.width){
+                        that.online = true;
+                    }else{
+                        myImage.src = undefined;
+                        // that.online = "哈哈";
+                    };
+                },2000);
+            },
             saveData: function(){
                 // 
                 this.addTitleEditBoxRemove(); //标题栏处于编辑状态
@@ -3089,14 +3216,16 @@
                 }
 
                 // 分类名称
-                var engineDetails = getSettingData.engineDetails;
+                var engineDetails=[]; 
                 
                 // 分类排序
                 var odetails = document.querySelectorAll(".sejtitle");
                 var odetailsLength = odetails.length;
                 for(let i=0;i<odetailsLength;i++){
+                    debug(odetails[i]);
+                    engineDetails[i] = [];
                     engineDetails[i][0] = odetails[i].firstChild.innerHTML;
-
+                    engineDetails[i][1] = odetails[i].dataset.iqxintitle;
                     engineDetails[i][2] = odetails[i].dataset.xin>=0?true:false;
 
                     // details[i] = odetails[i].dataset.xin;
@@ -3113,26 +3242,8 @@
                 getData.engineDetails = engineDetails;
                 getData.engineList = obj;
 
-                // console.log(settingData);
+                debug('将要保存的数据：',getData);
                 GM_setValue("searchEngineJumpData",getData);
-            },
-            isOnline: function(){
-                console.log("this.online",this.online);
-                if(this.online)return;
-
-                var that = this;
-                var myImage = new Image;
-                myImage.src = 'https://www.google.com/s2/favicons?domain=www.baidu.com&' + Math.random() ;
-                setTimeout(function(){
-                    // console.log("取消加载");
-                    console.log(myImage.width);
-                    if(myImage.width){
-                        that.online = true;
-                    }else{
-                        myImage.src = undefined;
-                        // that.online = "哈哈";
-                    };
-                },2000);
             },
             addGlobalStyle: function(){
                 var head, style;
@@ -3149,6 +3260,8 @@
                         "font-family: arial,sans-serif;" +
                         "min-height: 100%;" +
                         "font-size:medium;" +
+                        "transition:0.3s;" +
+                        "opacity:0;" +
                         "user-select: none;" +
                     "}" +
                     "#settingLayer{" +
@@ -3158,8 +3271,11 @@
                         "background-color: #fff;" +
                         "border-radius: 4px;" +
                         "position: absolute;" +
+                        "min-width: 880px;" +
+                        // "justify-content: space-around;" +
                     "}" +
                     ".iqxin-items{" +
+                        "min-width:5em;" +
                         "margin: 0 5px 10px;" +
                         "border-bottom: 1px solid #ccc;" +
                     "}" +
@@ -3259,6 +3375,7 @@
                     "}" +
                     ".iqxin-title-edit," +
                     ".iqxin-set-edit," +
+                    ".iqxin-set-title-del," +
                     ".iqxin-set-del {" +
                         "visibility: hidden;" +
                         "opacity:0;" +
@@ -3272,6 +3389,10 @@
                         "border-radius: 2px;" +
                         "cursor: pointer;" +
                         "transition: .3s;" +
+                    "}" +
+                    ".iqxin-set-title-del.iqxin-set-active {" +
+                        "background: #fff;" +
+                        "border-radius: 50% 0 0 50%;" +
                     "}" +
                     ".iqxin-title-edit{" +
                         "padding: 2px 3px 2px 6px;" +
@@ -3293,15 +3414,18 @@
                         "visibility:visible;" +
                         "opacity:0.8;" +
                     "}" +
+                    "#nSearchList.iqxin-set-active," +
                     ".iqxin-set-edit.iqxin-set-active," +
+                    ".iqxin-set-title-del.iqxin-set-active," +
                     ".iqxin-set-del.iqxin-set-active {" +
-                        "visibility:visible;" +
-                        "opacity:1;" +
+                        "visibility:visible !important;" +
+                        "opacity:1 !important;" +
                     "}" +
                     "#btnEle span.iqxin-btn-active{" +
                         "color:red;" +
                         "border-color:red;" +
                     "}" +
+                    "#newSearchListBox," +
                     "#newSearchBox{" +
                         "position:fixed;" +
                         "z-index:200000100;" +
@@ -3313,12 +3437,14 @@
                         "color: #e8e8e8;" +
                         "margin: -149px -117px;" +
                     "}" +
+                    "#newSearchListBox input," +
                     "#newSearchBox input{" +
                         "border: none;" +
                         "padding: 4px 0 4px 5px;" +
                         "border-radius: 4px;" +
                         "outline: none;" +
                     "}" +
+                    "#newSearchListBox input:focus," +
                     "#newSearchBox input:focus {" +
                         "background: #f1d2d2;" +
                         "transition: 0.5s;" +
@@ -3387,7 +3513,7 @@
                     var sej_addDel = document.querySelector("#xin-addDel");
                     var sej_edit = document.querySelector("#xin-modification");
 
-                    sej_save.addEventListener("click",function(){sejSet.saveData();sejSet.hide();window.location.reload();});
+                    sej_save.addEventListener("click",function(){sejSet.saveData();sejSet.hide();if(!getSettingData.debug)window.location.reload();});
                     sej_close.addEventListener("click",function(){sejSet.hide();});
                     // sej_reset.addEventListener("click",function(){sejSet.reset();sejSet.hide();window.location.reload();});
                     sej_addDel.addEventListener("click",function(e){sejSet.addDel(e);});
@@ -3408,6 +3534,18 @@
         var setData = null;
         // get_data();
     }
+
+
+
+    // 从此处开始执行
+    var debug;
+    function reloadDebug(bool) {
+        debug = bool ? console.info.bind(console) : function() {};
+    }
+    // function reloadDebug() {
+    //     debug = prefs.debug ? console.debug.bind(console) : function() {};
+    // }
+
 
     // hash-query  不刷新页面的搜索
         // hashchange 和 popstate 都无法检测到谷歌和百度搜索时网址的变化，不理解
