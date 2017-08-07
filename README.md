@@ -16,6 +16,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.9.2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-07
+- 设置菜单可视区域过低时，无法滚动到顶部的问题
+
 > version 5.9.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-06
 - 设置菜单可视区域过低时，无滚动条的问题[感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/27907/x)
 

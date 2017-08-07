@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.9.1
+// @version        5.9.2
 // @created        2011-7-2
-// @lastUpdated    2017-08-06
+// @lastUpdated    2017-08-7
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -2627,6 +2627,8 @@
                 style.display = "flex";
                 document.body.style.overflow = "hidden";
 
+                this.windowResize();
+
                 document.querySelector("#xin-newtab").querySelectorAll("option")[getSettingData.newtab].setAttribute("selected","selected");
                 setTimeout(function () {
                     style.opacity = 1;
@@ -3186,6 +3188,33 @@
                     };
                 },2000);
             },
+            windowResize: function(){
+                // var settingLayer = document.querySelector("#settingLayer");
+                // console.log(this);
+                var eleStyle = window.getComputedStyle(this.ele , null);
+                var w = parseInt(eleStyle.width) ;
+                var h = parseInt(eleStyle.height)  + 54;
+                var ww = document.documentElement.clientWidth;
+                var wh = document.documentElement.clientHeight;
+
+                var maskStyle = this.mask.style;
+
+                // 关闭按钮
+
+
+                // console.log("宽：",w,ww);
+
+                if(w>=ww){
+                    maskStyle.justifyContent = "stretch";
+                }else{
+                    maskStyle.justifyContent = "center";
+                }
+                if(h>=wh){
+                    maskStyle.alignItems = "stretch";
+                }else{
+                    maskStyle.alignItems = "center";
+                }
+            },
             saveData: function(){
                 // 
                 this.addTitleEditBoxRemove(); //标题栏处于编辑状态
@@ -3272,18 +3301,7 @@
                         "border-radius: 4px;" +
                         "position: absolute;" +
                         "min-width: 880px;" +
-                        // "justify-content: space-around;" +
-                    "}" +
-                    "@media screen and (max-width:1150px){" +
-                        "#settingLayerMask{" +
-                            "justify-content: normal;" +
-                            "}" +
-                    "}" +
-                    "@media screen and (max-height:450px){" +
-                        "#settingLayerMask{" +
-                            // "justify-content: normal;" +
-                            "align-items: normal;" + 
-                            "}" +
+                        "margin:20px 20px 70px;" +
                     "}" +
                     ".iqxin-items{" +
                         "min-width:5em;" +
@@ -3531,7 +3549,10 @@
                     // sej_edit.addEventListener("click",function(e){sejSet.addEdit(e);});
                     sej_edit.addEventListener("click",function(){sejSet.editCodeBox();});
                 }
-                sejSet.show(); 
+                sejSet.show();
+
+                window.addEventListener("resize",sejSet.windowResize.bind(sejSet));
+
             });
         };
 
