@@ -1699,6 +1699,7 @@
                     "(newtab: 0为默认设置，1为新标签页打开)..." +
                     "(foldlist: 折叠当前搜索分类列表。true为折叠，false为展开。)..." +
                     "(settingOpacity: 设置按钮的透明度，值为0-1之间的数，0为透明，1为完全显示，中间值半透明。注：-1为直接关闭按钮，关闭之前请确定自己有能力再次打开它)..." +
+                    "(debug: debug模式，开启后，控制台会输出一些信息，“关闭并保存”按钮将不会在刷新页面)..." +
                     "(engineDetails: 第一个值为分类列表标题名称，第二个值与enginelist相关联，必须匹配,第三个值true为显示列表，false为禁用列表。可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页，同脚本中的rules设置相同，优先级高于。自带了360搜索，可仿写)...",
@@ -3005,7 +3006,7 @@
                     "padding:10px 20px;" ;
                 var innerH = " "+
                     "<p><span style='color:red;font-size:1.2em;'>! ! !</span></br>"+
-                    "此处修改自由性更高，</br>"+
+                    "此处有更多的设置选项，自由度更高，</br>"+
                     "但设置错误会导致脚本无法运行"+
                     "</p>" +
                     "<textarea wrap='off' cols='45' rows='20' style='overflow:auto;border-radius:4px;'>" + JSON.stringify(userSetting,false,4) + "</textarea>" + 
