@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.9.2
+// @version        5.10.0
 // @created        2011-7-2
-// @lastUpdated    2017-08-7
+// @lastUpdated    2017-08-08
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -146,6 +146,7 @@
                 url: /^https?:\/\/www\.baidu\.com\/(?:s|baidu)/,
                 enabled: true,
                 engineList: "web",
+                fixedTop:55,
                 style: '\
                     margin-top:8px;\
                     margin-bottom: -5px;\
@@ -277,9 +278,11 @@
                 url: /^https?:\/\/www\.zhihu\.com\/search\?/i,
                 engineList: "knowledge",
                 enabled: true,
+                fixedTop:45,
                 style: "\
                     margin: 5px auto 0px;\
                     width:960px;\
+                    z-index:19;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#q',
@@ -390,6 +393,7 @@
                 url: /^https?:\/\/search\.bilibili\.com\/all/,
                 enabled: true,
                 engineList: "video",
+                fixedTop:50,
                 style: "\
                     width:980px;\
                     margin:10px auto -5px;\
@@ -421,6 +425,7 @@
                 url: /^https?:\/\/www\.youtube\.com\/results/,
                 enabled: true,
                 engineList: "video",
+                fixedTop:50,
                 style: "\
                     border-top: 1px solid #E8E8E8;\
                     border-bottom: 1px solid #E8E8E8;\
@@ -452,6 +457,7 @@
                  url: /^https?:\/\/so\.iqiyi\.com\/so\/q/,
                  enabled: true,
                  engineList: "video",
+                 fixedTop:60,
                  style: '\
                         margin:0 auto;\
                         width:1180px;\
@@ -575,6 +581,7 @@
                 url: /^https?:\/\/image\.baidu\.com\/search/i,
                 enabled: true,
                 engineList: "image",
+                fixedTop:95,
                 style: '\
                     margin-left:110px;\
                     ',
@@ -812,8 +819,9 @@
                 url: /^https?:\/\/s\.taobao\.com\/search/,
                 enabled: true,
                 engineList: "shopping",
+                fixedTop:52,
                 style: "\
-                    margin:10px 0 -10px;\
+                    margin:10px auto -10px;\
                     text-align:center;\
                 ",
                 insertIntoDoc: {
@@ -1131,8 +1139,6 @@
                 url:/^https?:\/\/developer\.mozilla\.org\/.{2,5}\/search/,
                 engineList:"htmls",
                 style:'\
-                    border-bottom:1px solid #E5E5E5;\
-                    border-top:1px solid #E5E5E5;\
                     position:relative;\
                     text-align:center;\
                    ',
@@ -1700,17 +1706,19 @@
                     "(foldlist: 折叠当前搜索分类列表。true为折叠，false为展开。)..." +
                     "(settingOpacity: 设置按钮的透明度，值为0-1之间的数，0为透明，1为完全显示，中间值半透明。注：-1为直接关闭按钮，关闭之前请确定自己有能力再次打开它)..." +
                     "(debug: debug模式，开启后，控制台会输出一些信息，“关闭并保存”按钮将不会在刷新页面)..." +
+                    "(fixedTop: 将搜索栏固定到顶端。 true开启，false关闭)..." +
                     "(engineDetails: 第一个值为分类列表标题名称，第二个值与enginelist相关联，必须匹配,第三个值true为显示列表，false为禁用列表。可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页，同脚本中的rules设置相同，优先级高于。自带了360搜索，可仿写)...",
-            "version":1.7,
+            "version":1.8,
             "newtab":0,
             "foldlist":false,
             "setBtnOpacity":0.8,
             "debug":false,
+            "fixedTop":false,
             "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],['html', 'htmls',true],['mine', 'mine',false]],
             "engineList":{},
-            "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web", "style": "padding-left:35px;margin-top:0px;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#header", "where": "afterEnd"}}]
+            "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding-left:35px;margin-top:0px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#header", "where": "afterEnd"}}]
 
         }
         // GM_deleteValue("searchEngineJumpData");
@@ -1748,7 +1756,11 @@
                     getSettingData.rules = settingData.rules;
                 }
                 // 1.7更新
-                getSettingData.debug = settingData.debug;
+                if(getSettingData.versiion===1.6){
+                    getSettingData.debug = settingData.debug;
+                }
+                // 1.8更新
+                getSettingData.fixedTop = settingData.fixedTop;
 
                 // 更新本地版本 其他相关信息
                 getSettingData.version = settingData.version;
@@ -2092,8 +2104,8 @@
                 #sej-container {
                     display: block;
                     position: relative;
-                    z-index: auto;
-                    padding: 1px 0 1px 5px;
+                    z-index: 2;
+                    padding: 1px 5px 1px 5px;
                     line-height: 1.5;
                     font-size: 13px;
                     font-family: arial,sans-serif;
@@ -2429,6 +2441,52 @@
 
         // 由于与要插入网页的样式无法很好的兼容，更改源网页的样式
         if(matchedRule.stylish){GM_addStyle(matchedRule.stylish);};
+        //固定搜索栏
+        if(getSettingData.fixedTop){
+            window.onscroll = function(){
+                fixedTopFun(matchedRule.fixedTop);
+            };
+            // 固定搜索栏
+            function fixedTopFun(height){
+                var obj = document.getElementById("sej-container");
+                var objTop = obj.offsetTop ;
+                var objLeft = obj.offsetLeft ;
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                // console.log("obj.offsetLeft",obj.offsetLeft);
+
+                if(height){
+                    objTop = height;
+                }else{
+                    height = 0;
+                }
+
+                // console.log("定位属性",obj.style.position);
+                // console.log("height参数：",height);
+
+                if(scrollTop <= objTop){
+                    obj.style.position = 'relative';
+                    obj.style.top = '0px';
+                    obj.style.left = '0px';
+                    obj.style.background = 'none';
+                    // obj.style.zIndex = 'auto';
+                }else if(obj.style.position!="fixed"){
+                    // console.log(scrollTop,objTop,scrollTop - objTop);
+                    var objstyle = window.getComputedStyle(obj , null);
+                    var marginTop = parseInt(objstyle.marginTop);
+                    var marginLeft = parseInt(objstyle.marginLeft);
+                    var marginRight = parseInt(objstyle.marginRight);
+                    // console.log(objLeft,marginLeft);
+
+                    obj.style.position = 'fixed';
+                    obj.style.top = height - marginTop + 'px';
+                    // obj.style.left = objLeft + 'px';
+                    // obj.style.left = objLeft - marginLeft + 'px';
+                    obj.style.left = marginRight - marginLeft!=0? objLeft - marginLeft+ 'px':objLeft + 'px';
+                    obj.style.background = '#fff';
+                    // obj.style.zIndex = '999';
+                }
+            };
+        };
 
         // -------------------设置相关--------------------------------
         // 设置按钮相关
@@ -3189,6 +3247,8 @@
                     };
                 },2000);
             },
+
+            // 窗口大小改变
             windowResize: function(){
                 // var settingLayer = document.querySelector("#settingLayer");
                 // console.log(this);
@@ -3199,9 +3259,6 @@
                 var wh = document.documentElement.clientHeight;
 
                 var maskStyle = this.mask.style;
-
-                // 关闭按钮
-
 
                 // console.log("宽：",w,ww);
 
