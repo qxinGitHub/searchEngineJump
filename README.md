@@ -16,6 +16,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.10.2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-09
+- 设置界面样式调整，增加多个设置按钮。更改设置界面的打开关闭动画
+
 > version 5.10.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-09
 - 去除关闭按钮的旋转动画
 - 去除莫名多的margin属性

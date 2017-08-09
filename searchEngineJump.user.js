@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.10.1
+// @version        5.10.2
 // @created        2011-7-2
 // @lastUpdated    2017-08-09
 
@@ -1613,7 +1613,7 @@
         engineList.htmls[0] = {
             name: 'MDN',
             url: 'https://developer.mozilla.org/zh-CN/search?q=%s',
-            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAAAAABWESUoAAAAuUlEQVR4nGNgGH5AQIcLn3TX/////38r14lwQxJkhDFYfzFgE2ZggjFQ5Bn0MYyf9R8VaKHJt/1HB/slkS37j9XRPzlgCv4xYlXAwAhzJBMjYw12JXBQjOGG////I1nMwsDA8AZD/gaKGa8x5J8wI8vrIslsYmAw2nCHHcMdd6Hyq3G4UwXTaahgHSEFDOsh8l9xKmBI+f//////d3ErYGDY9P///y34FDAw7Pk/B78CBg4LAgoGIwAA1vmlPJfmqVYAAAAASUVORK5CYII=',
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAABi0lEQVR4nJ2VsU4CQRRFzy66GCtLrWysjMbEyi+wNFHBmGDpH1jYWJtAq5WxpoFEorXxB6xs1CBBI4WJVhpNoPBayMAuuzOw3FcwvMe5eTOzy0OYIGCHMk3ayBJf3FMmTxCieotN6lZwMOpsRQzIUBwZNlEk0zdIjwtR7BqQGwsXIicg4HVsgxYBFGzlGS1pepjFHlSSCiUZ/ehQS9rVerJB1eOZeUKapINNXjz14jMbzdhxWImn5oi2dCa3FuObCH85HoJL0o3mIgYeMt0o3qBVbaZ659LlfpOOyCHza5/ewsPjKJXJv0L7ORjhDIwSDnGi+/kxAv6QfAsIvY+At5SxGSxbkEshtKqanpS1PwcmGgN4xfE6hZ4DowXqlitLkh9PlVJe42e8rYvIBr4dG6ANj0mF/ZBBw2Xw7HOX1NY5Hlfd9b2r/1ufmq22gcc18OYyqA39U53Smr3aIosg7zJwRt4MltJYeEn0R9tJavw0NNqEYDvVcM31uH6WgAJVmnSsYIcmVQrh8f4HufpcPqh3SFcAAAAASUVORK5CYII=',
             // blank:true,
         };
         engineList.htmls[1] = {
@@ -2540,6 +2540,9 @@
                     odiv.addEventListener('drop', that.domdrop, false);
                     // odiv.addEventListener('dragend', domdropend, false);
                 });
+                // input[range]
+                that.rangeChange(true);
+                document.querySelector("#setBtnOpacityRange").addEventListener("input",that.rangeChange);
             },
             addContent: function(){
                 var aPattern = '<span draggable="true" class="drag">' +
@@ -2614,33 +2617,68 @@
                     this.ele.appendChild(odiv);
                 };
 
+                // 更多设置 菜单
+                var btnEle2 = document.createElement("div");
+                btnEle2.id = "btnEle2"
+                var fixedTop_checked = getSettingData.fixedTop?"checked":"";
+                var debug_checked = getSettingData.debug?"checked":"";
+                var foldlist_checked = getSettingData.foldlist?"checked":"";
+
+                // var setBtnOpacity_value = getSettingData.setBtnOpacity;
+                var btnStr2 = "<div>" +
+                            // "<span class='feedback' title='已然看不懂自己写的代码'><a target='_blank' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>反馈 greasyfork</a></span>" +
+                            // "<span class='feedback'><a target='_blank' href='https://github.com/qxinGitHub/searchEngineJump'>反馈 GitHub</a></span>" +                           
+                            "<span id='xin-reset' title='慎点，恢复到最初状态，一切改变将不复存在'>清空设置</span>" +
+                            "<span id='xin-modification' title='edit 分享自己的配置或清空配置'>配置文件</span>" +
+                            "<span id='iqxin-debugS' title='debug'>" +
+                                "<label>debug模式<input id='iqxin-debug' type='checkbox' name='' " +
+                                    debug_checked +
+                                " style='vertical-align:middle;'></label>" +
+                            "</span>" +
+                            "<span id='xin-foldlists'>" +
+                                "<label>折叠当前搜索分类<input id='iqxin-foldlist' type='checkbox' name='' " +
+                                    foldlist_checked +
+                                " style='vertical-align:middle;'></label>" +
+                            "</span>" +
+                            "<span id='iqxin-fixedTopS' title='fixedTop'>" +
+                                "<label>固定到顶端<input id='iqxin-fixedTop' type='checkbox' name='' " +
+                                    fixedTop_checked +
+                                " style='vertical-align:middle;'></label>" +
+                            "</span>" +
+                            "<span id='xin-setBtnOpacity' title='设置按钮透明度'>设置按钮透明度 <input type='range' step='0.01'  min='0' max='1' value='"+ getSettingData.setBtnOpacity +"' id='setBtnOpacityRange'><i style='display:inline-block;width:3em;text-align:center;' class='iqxin-setBtnOpacityRangeValue'></i></span>" +
+                            
+                            "</div>";
+                btnEle2.innerHTML = btnStr2;
+                this.ele.appendChild(btnEle2);
+
+
                 // 添加按钮
                 var btnEle = document.createElement("div");
                 btnEle.id = "btnEle"
 
-                var foldlist_checked = getSettingData.foldlist?"checked":"";
                 var btnStr = "<div>" +
                             "<span class='feedback' title='已然看不懂自己写的代码'><a target='_blank' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>反馈 greasyfork</a></span>" +
                             "<span class='feedback'><a target='_blank' href='https://github.com/qxinGitHub/searchEngineJump'>反馈 GitHub</a></span>" +                           
                             // "<span id='xin-reset' title='慎点，恢复到最初状态，一切改变将不复存在'>复原</span>" +
+                            "<span id='moreSet' title='more set'>更多设置</span>" +
                             "<span id='xin-newtab' title='open newtab 是否采用新标签页打开的方式'>打开方式：" +
                                 "<select id='iqxin-globalNewtab'>" +
                                     "<option value='globalDef'>默认页面 ▽</option>" +
                                     "<option value='globalNewtab'>新标签页 ▽</option>" +
                                 "</select>" +
                             "</span> " +
-                            "<span id='xin-foldlist'>" +
-                                "<label>折叠当前搜索分类<input id='iqxin-foldlist' type='checkbox' name='' " +
-                                    foldlist_checked +
-                                " style='vertical-align:middle;'></label>" +
-                            "</span>" +
-                            "<span id='xin-modification' title='edit 分享自己的设置或清空设置'>高级</span> " +
+                            // "<span id='xin-foldlists'>" +
+                            //     "<label>折叠当前搜索分类<input id='iqxin-foldlist' type='checkbox' name='' " +
+                            //         foldlist_checked +
+                            //     " style='vertical-align:middle;'></label>" +
+                            // "</span>" +
+                            // "<span id='xin-modification' title='edit 分享自己的设置或清空设置'>高级</span> " +
                             "<span id='xin-addDel' title='add & del 增加新的或者删除现有的搜索'>增加 / 删除</span> " +
                             "<span id='xin-save' title='save & close'>保存并关闭</span>" +
                             "</div>";
                 btnEle.innerHTML = btnStr;
                 this.ele.appendChild(btnEle);
-                
+
                 // 增加搜索列表
                 var nSearchList = document.createElement("div");
                 nSearchList.id = "nSearchList";
@@ -2648,6 +2686,7 @@
                 nSearchList.innerHTML = "增加新的搜索列表";
                 this.ele.appendChild(nSearchList);
 
+                // 关闭按钮
                 var closebtnELe = document.createElement("span");
                 closebtnELe.id = "xin-close";
                 closebtnELe.setAttribute("title","close 关闭");
@@ -2665,7 +2704,7 @@
                         "padding:10px;" +
                         "border: 3px solid #3ABDC1;" +
                         "border-radius: 50%;" +
-                        "transition: .3s;" +
+                        "transition: .5s;" +
                         "top: -20px;" +
                         "right:-20px;" +
                         "position: absolute;" +
@@ -2677,12 +2716,40 @@
                         "background: indianred;" +
                         "border-color: indianred;" +
                         "color: #fff;" +
+                        // "transform: rotate(180deg);" +
+                    "}" +
+                    // type[range] 效果
+                    "input[type=range] {" +
+                        "outline: none;" +
+                        "-webkit-appearance: none;" +
+                        "background:-webkit-linear-gradient(left,#3ABDC1,#83e7ea) no-repeat, #fff;" +
+                        "border-radius: 10px; /*这个属性设置使填充进度条时的图形为圆角*/" +
+                    "}" +
+                    "input[type=range]::-webkit-slider-thumb {" +
+                        "-webkit-appearance: none;" +
+                    "} " +
+                    "input[type=range]::-webkit-slider-runnable-track {" +
+                        "height: 10px;" +
+                        "border-radius: 10px; /*将轨道设为圆角的*/" +
+                        "box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; /*轨道内置阴影效果*/" +
+                    "}" +
+                    "input[type=range]::-webkit-slider-thumb {" +
+                        "-webkit-appearance: none;" +
+                        "height: 18px;" +
+                        "width: 18px;" +
+                        "margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/" +
+                        "background: #fff; " +
+                        "border-radius: 50%; /*外观设置为圆形*/" +
+                        "border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/" +
+                        "box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/" +
                     "}" +
                 "");
             },
             show: function(){
                 var style = this.mask.style;
+                var eleStyle = this.ele.style;
                 style.display = "flex";
+                eleStyle.transform = "translateY(-20%)";
                 document.body.style.overflow = "hidden";
 
                 this.windowResize();
@@ -2690,6 +2757,7 @@
                 document.querySelector("#xin-newtab").querySelectorAll("option")[getSettingData.newtab].setAttribute("selected","selected");
                 setTimeout(function () {
                     style.opacity = 1;
+                    eleStyle.transform = "none";
                 }, 30);
             },
             hide: function(){
@@ -2698,13 +2766,16 @@
                 this.editCodeBoxClose(); // code编辑框
                 this.addTitleEditBoxRemove(); //标题编辑框
                 this.boxClose("#newSearchListBox"); // 添加新的搜索列表
+                document.querySelector("#btnEle2").classList.remove("btnEle2active"); // 更多设置
+
 
                 var style = this.mask.style;
+                this.ele.style.transform = "translateY(20%)";
                 style.opacity = 0;
-                document.body.style.overflow = "auto";
                 setTimeout(function () {
                     style.display = "none";
-                }, 300);
+                    document.body.style.overflow = "auto";
+                }, 500);
             },
             reset: function(){
                 if(confirm("将会删除用户设置！")){
@@ -3184,6 +3255,14 @@
                 } else if( targetid === "xin-codeboxsave"){
                     this.editCodeBoxSave();
                 }
+
+                //  点击更多菜单
+                if(targetid ==="moreSet"){
+                    document.querySelector("#btnEle2").classList.toggle("btnEle2active");
+                    // iqxin-btn-active
+                    e.target.classList.toggle("iqxin-btn-active");
+                }
+
                 // 空白地方点击
                 if(~targetClass.indexOf("iqxin-items") || targetid === "settingLayer"){
                     this.addItemBoxRemove(); // 新的搜索添加框
@@ -3191,6 +3270,7 @@
                     this.editCodeBoxClose(); // code编辑框
                     this.addTitleEditBoxRemove(); //标题编辑框
                     this.boxClose("#newSearchListBox"); // 添加新的搜索列表
+                    document.querySelector("#btnEle2").classList.remove("btnEle2active"); // 更多设置
                 }
             },
 
@@ -3247,6 +3327,19 @@
                 },2000);
             },
 
+            // 设置按钮透明度设置
+            rangeChange: function(bool){
+                // console.log(this);
+                if(bool){
+                    var odom = document.querySelector("#setBtnOpacityRange");
+                    odom.style.backgroundSize = odom.value*100 +"% 100%";
+                    document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = odom.value;
+                }else{
+                    console.log(this.style,this.value);
+                    this.style.backgroundSize = this.value*100 +"% 100%";
+                    document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = this.value;
+                }
+            },
             // 窗口大小改变
             windowResize: function(){
                 // var settingLayer = document.querySelector("#settingLayer");
@@ -3325,6 +3418,9 @@
                 var getData = GM_getValue("searchEngineJumpData");
                 getData.newtab = onewtab;
                 getData.foldlist = foldlist;
+                getData.setBtnOpacity = document.querySelector("#setBtnOpacityRange").value;
+                getData.debug = document.querySelector("#iqxin-debug").checked;;
+                getData.fixedTop = document.querySelector("#iqxin-fixedTop").checked;;
                 getData.engineDetails = engineDetails;
                 getData.engineList = obj;
 
@@ -3346,7 +3442,7 @@
                         "font-family: arial,sans-serif;" +
                         "min-height: 100%;" +
                         "font-size:medium;" +
-                        "transition:0.3s;" +
+                        "transition:0.5s;" +
                         "opacity:0;" +
                         "user-select: none;" +
                     "}" +
@@ -3358,6 +3454,7 @@
                         "border-radius: 4px;" +
                         "position: absolute;" +
                         "min-width: 880px;" +
+                        "transition:0.5s;" +
                     "}" +
                     ".iqxin-items{" +
                         "min-width:5em;" +
@@ -3407,6 +3504,7 @@
                     "[data-xin^='-']:hover{" +
                         "background-color: coral;" +
                     "}" +
+                    "#btnEle2," +
                     "#btnEle{" +
                         "position:absolute;" +
                         "width:100%;" +
@@ -3415,6 +3513,7 @@
                         "background: #fff;" +
                         "border-radius: 4px;" +
                     "}" +
+                    "#btnEle2 span," +
                     "#btnEle span{" +
                         "display: inline-block;" +
                         "background: #fff;" +
@@ -3435,9 +3534,11 @@
                         "text-decoration: underline;" +
                         "color: #ef8957;" +
                     "}" +
+                    "#btnEle2 span.feedback:hover," +
                     "#btnEle span.feedback:hover{" +
                         "border-color:#ef8957;" +
                     "}" +
+                    "#btnEle2 span:not(.feedback):hover," +
                     "#btnEle span:not(.feedback):hover{" +
                         "background:#3ACBDD;" +
                         "color:#fff;" +
@@ -3446,6 +3547,7 @@
                     "#btnEle .feedback{" +
                         "border-color: #aaa;" +
                     "}" +
+                    "#btnEle2>div," +
                     "#btnEle>div{" +
                         "width: 100%;" +
                         "margin-bottom:-100%;" +
@@ -3453,6 +3555,15 @@
                         "justify-content: space-around;" +
                         "background: #fff;" +
                         "border-radius: 4px;" +
+                    "}" +
+                    "#btnEle2{" +
+                        "opacity:0;" +
+                        "transform:translate(0,0px);" +
+                        "transition : 0.3s;" +
+                    "}" +
+                    "#btnEle2.btnEle2active{" +
+                        "opacity:1;" +
+                        "transform:translate(0,53px);" +
                     "}" +
                     ".rwl-over{" +
                         "border: 1px dashed #ccc;" +
@@ -3604,10 +3715,12 @@
                     sej_addDel.addEventListener("click",function(e){sejSet.addDel(e);});
                     // sej_edit.addEventListener("click",function(e){sejSet.addEdit(e);});
                     sej_edit.addEventListener("click",function(){sejSet.editCodeBox();});
+
+                    //
+                    window.addEventListener("resize",sejSet.windowResize.bind(sejSet));
                 }
                 sejSet.show();
 
-                window.addEventListener("resize",sejSet.windowResize.bind(sejSet));
 
             });
         };
