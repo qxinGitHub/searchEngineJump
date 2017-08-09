@@ -16,7 +16,11 @@ __说明__
 
 ### 更新历史
 
-> version 5.10.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-07
+> version 5.10.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-09
+- 去除关闭按钮的旋转动画
+- 去除莫名多的margin属性
+
+> version 5.10.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-08
 - 增加固定到顶端选项,页面向下滚动后工具条能保持在页面顶部。“设置 - 高级 - fixedTop” 改为true, 某些页面兼容的并不好很好 [感谢建议](https://greasyfork.org/zh-CN/forum/discussion/27478/x)
 
 > version 5.9.2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-07
