@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.10.2
+// @version        5.10.3
 // @created        2011-7-2
-// @lastUpdated    2017-08-09
+// @lastUpdated    2017-08-10
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -2847,9 +2847,9 @@
                 var newDiv = document.createElement("div");
                 newDiv.id= "newSearchBox";
                 newDiv.innerHTML=""+
-                    "<span>标&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp题 : </span><input id='iqxin-newTitle' placeholder='必填' /> <br/><br/>" +
-                    "<span>链&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp接 : </span><input id='iqxin-newLink' placeholder='必填' /> <br/><br/>" +
-                    "<span>图&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp标 : </span><input id='iqxin-newIcon' placeholder='选填，留空则自动获取' /> <br/><br/>" +
+                    "<span>标&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp题 : </span><input id='iqxin-newTitle' placeholder='必填' onfocus='this.select()' /> <br/><br/>" +
+                    "<span>链&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp接 : </span><input id='iqxin-newLink' placeholder='必填' onfocus='this.select()' /> <br/><br/>" +
+                    "<span>图&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp标 : </span><input id='iqxin-newIcon' placeholder='选填，留空则自动获取' onfocus='this.select()' /> <br/><br/>" +
                     "<span>打开方式 : " +
                         '<select id="iqxin-newTarget" style="border-radius: 4px;border: none;padding: 2px 0 2px 2px"> ' +
                         '<option value="default">新标签页打开</option> ' +
@@ -2941,9 +2941,9 @@
                 var hash = "user" + myDate.getDate() + myDate.getHours() +myDate.getMinutes()+myDate.getSeconds();
 
                 newDiv.innerHTML=""+
-                    "<span>列表名称: </span><input id='iqxin-newSearchListName'>" +
+                    "<span>列表名称: </span><input id='iqxin-newSearchListName' onfocus='this.select()'>" +
                     "<br><br>" +
-                    "<span>内部名称: </span><input id='iqxin-newSearchListInnerName' value='" + hash + "'>" +
+                    "<span>内部名称: </span><input id='iqxin-newSearchListInnerName' onfocus='this.select()' value='" + hash + "'>" +
                     "<br><br>" +
                     "<button id='addSearchListBoxEnter' class='addSearchListBoxEnter addItemBoxBtn'>确定</button>&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp" +
                     "<button id='addSearchListBoxCancel' class='addSearchListBoxCancel addItemBoxBtn'>取消</button>" +
@@ -3025,9 +3025,9 @@
                 var newDiv = document.createElement("div");
                 newDiv.id= "newSearchBox";
                 var innerHTML=""+
-                    "<span>标&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp题 : </span><input id='iqxin-newTitle' placeholder='必填' value='"+ otitle +"' /> <br/><br/>" +
-                    "<span>链&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp接 : </span><input id='iqxin-newLink' placeholder='必填' value='"+ olink +"' /> <br/><br/>" +
-                    "<span>图&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp标 : </span><input id='iqxin-newIcon' placeholder='选填，留空则自动获取' value='"+ oicon +"' /> <br/><br/>" +
+                    "<span>标&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp题 : </span><input id='iqxin-newTitle' placeholder='必填' onfocus='this.select()' value='"+ otitle +"' /> <br/><br/>" +
+                    "<span>链&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp接 : </span><input id='iqxin-newLink' placeholder='必填' onfocus='this.select()' value='"+ olink +"' /> <br/><br/>" +
+                    "<span>图&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp标 : </span><input id='iqxin-newIcon' placeholder='选填，留空则自动获取' onfocus='this.select()' value='"+ oicon +"' /> <br/><br/>" +
                     "<span>打开方式 : " +
                         '<select id="iqxin-newTarget" style="border-radius: 4px;border: none;padding: 2px 0 2px 2px"> ' +
                             '$strblank$' +
@@ -3229,10 +3229,10 @@
                     this.addEditBoxEnger();
                 };
                 // 获取焦点， 全选
-                if(e.target.nodeName.toLowerCase() === "input"){
-                    // console.log("全部选中");
-                    e.target.select();
-                }
+                // if(e.target.nodeName.toLowerCase() === "input"){
+                //     // console.log("全部选中");
+                //     e.target.select();
+                // }
                 // 编辑框
                 if(~e.target.className.indexOf("iqxin-set-edit")){
                     // console.log("点击编辑框");
@@ -3445,6 +3445,7 @@
                         "transition:0.5s;" +
                         "opacity:0;" +
                         "user-select: none;" +
+                        "-moz-user-select: none;" +
                     "}" +
                     "#settingLayer{" +
                         "display: flex;" +
@@ -3659,6 +3660,7 @@
                         "text-decoration:underline;" +
                     "}" +
                     "#xin-newtab select{" +
+                        "height:auto;" +
                         "border: none;" +
                         "outline: none;" +
                         "color: #3ABDC1;" +
