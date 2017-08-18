@@ -16,6 +16,12 @@ __说明__
 
 ### 更新历史
 
+> version 5.11.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-18
+- 增加列表排序的功能：设置-更多设置-列表排序
+- 修复在 奔跑的奶酪定制版火狐v8 设置菜单错位的问题
+- 默认隐藏html搜索列表; javlibrary搜索连接修复; 删除百度知道; 增加萌娘百科
+- 设置界面样式微调
+
 > version 5.10.3  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-10
 - 输入框改为获取焦点后自动选中文本，之前是鼠标点击输入框自动选中文本
 - 火狐浏览器设置界面全选的问题
@@ -29,7 +35,7 @@ __说明__
 - 去除莫名多的margin属性
 
 > version 5.10.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-08
-- 增加固定到顶端选项,页面向下滚动后工具条能保持在页面顶部。“设置 - 高级 - fixedTop” 改为true, 某些页面兼容的并不好很好 [感谢建议](https://greasyfork.org/zh-CN/forum/discussion/27478/x)
+- 增加固定到顶端选项,页面向下滚动后工具条能保持在页面顶部。“设置 - 高级 - fixedTop” 改为true, 某些页面兼容的并不是很好 [感谢建议](https://greasyfork.org/zh-CN/forum/discussion/27478/x)
 
 > version 5.9.2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-07
 - 设置菜单可视区域过低时，无法滚动到顶部的问题

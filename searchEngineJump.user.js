@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.10.3
+// @version        5.11.0
 // @created        2011-7-2
-// @lastUpdated    2017-08-10
+// @lastUpdated    2017-08-18
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -146,7 +146,7 @@
                 url: /^https?:\/\/www\.baidu\.com\/(?:s|baidu)/,
                 enabled: true,
                 engineList: "web",
-                fixedTop:55,
+                fixedTop:56,
                 style: '\
                     margin-top:8px;\
                     margin-bottom: -5px;\
@@ -363,9 +363,11 @@
                 url: /^https?:\/\/www\.soku\.com\/v\?/,
                 engineList: "video",
                 enabled: true,
+                fixedTop:54,
                 style: "\
                     width:1190px;\
                     margin:0 auto;\
+                    z-index:99999;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#headq',
@@ -408,6 +410,7 @@
                 url: /^https?:\/\/www\.acfun\.cn\/search/,
                 enabled: true,
                 engineList: "video",
+                fixedTop:46,
                 style: "\
                     border-top: 1px solid #FFFFFF;\
                     border-bottom: 1px solid #FFFFFF;\
@@ -472,6 +475,7 @@
                     url: /^https?:\/\/v\.qq\.com\/x\/search/i,
                     engineList: "video",
                     enabled: true,
+                    fixedTop:60,
                     style: "width:1140px;margin:0 auto;",
                     insertIntoDoc: {
                        keyword: 'css;#keywords',
@@ -819,7 +823,7 @@
                 url: /^https?:\/\/s\.taobao\.com\/search/,
                 enabled: true,
                 engineList: "shopping",
-                fixedTop:52,
+                fixedTop:51,
                 style: "\
                     margin:10px auto -10px;\
                     text-align:center;\
@@ -1479,12 +1483,6 @@
             url: 'http://baike.baidu.com/search/word?pic=1&sug=1&word=%s',
             favicon: icon.baidu,
         };
-        engineList.knowledge[7] = {
-            name: '互动百科',
-            url: 'http://so.hudong.com/s/doc/%s',
-            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABVUlEQVQ4jaWSwSvDYRjHn79AkmhFW1vT0Gb90k5ujv4BVwcn5Q+QRn5tbUVZP6GtlJbk4ECRi5tcXLg5yg5yQw7Y+Dg87+ttlGne+vQ+z/d9P8/h7RUAdjvaAxB2OvkPQrWLP1F/BoCPuu4mF7a7+ZWzGRUaLy6Dr1rY6kHp/cmFr5cvfJfZZTyhEoJKCMrf2BvTi/vj2h9POrlsnEoIYbMPNvtgo78ZgJtTVwOcTLtz4wlrYVgLQxBxvJuHCiJQO4ePd3i8hZcHuL/S3HhCKQqlKKzGlGBI5Q3PZZbHmp6txrCesBKHlTgsDyh22d7ydKf54az2xhOKCSgmoDCoAARjrr+/dkNtVhjEekJ+GPLDkEvCq/ksuaSjOgXrE81ZLon1BD8FfgqWRlS+PNC6FcYTFtOwmIajgg5Y8P6G8YSsB1kPGm86YH60NdkM1hMA5jLtAXwCyK3ufWEwzWsAAAAASUVORK5CYII=',
-            disable:true,
-        };
         engineList.knowledge[3] = {
             name: '百度文库',
             url: 'http://wenku.baidu.com/search?word=%s&ie=utf-8',
@@ -1503,10 +1501,11 @@
             // encoding: 'gbk',
         };
         engineList.knowledge[6] = {
-            name: '百度知道',
-            url: 'http://zhidao.baidu.com/search?word=%s',
-            favicon: icon.baidu,
-            disable:true,
+            name: '萌娘百科',
+            url: 'https://zh.moegirl.org/%s',
+            favicon: "data:image/x-icon;base64,AAABAAEAEBAAAAAAIABPAgAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAhZJREFUeJyN011ozXEcx/HXOc7mnON4mM0Wo7V5ahJtaTIkuSFFQnGjFrmRxIVy48KN5E7K0412Qx7WmodyQexCuSCxhRUlDzPLtrOj7cw5/n8XkzO2C5+736fv99Pv/ft9v/yr96bJSo7zIZQUioy1ouOKHjrpjjNCVX/57Za4oA9Txtqjabdt9kmdOrPVapKS8EOvK54KTDGEwByBapN1KJKS0m6XphjIalSsQajYiIRhxJWq1eexNnERk5yU1CLpnk++KvVtIsZlQve1uSV0aIwf0eyzZ3boVDIeYbQoqsU6GbMt0q7RR6026LdZaL6MTfKKRFHqgfW2mWdw9BGfWOiSTl+0yTvsuddarTRsqX4HRQ2qttERszSql7HMA9sKv9BlldB0m9TYq0G5i3qcFsgoMijmvrQZ7qrS4LmELgMmQ+w3QKWoPl1KVEuLa5HVpNiAwEzDDhuSMCjw3UZDipQJCwF94kK1XnmjV6cae+SFKuSkZe1TJyIAB3BepYieAkKAEjftNNVua/SbKSnvqx6BuHNuOOeqy84aUCanXEJ3ISAuLy9lru9iBqStENNhuVCIGV6a6q2cXt0q5MTU+lJAWOqRF4676pScb9KOqbTfW91CzHfdSh2g1WrF8hb7XLjBWu0qbJWxwIj1KhyyxTXbf6/OuzHLlTVH1AcRP8dP4kRqdtQT5X/Od9S77sT/Nf+HfgGu7K8KC1PzBgAAAABJRU5ErkJggg==",
+            // disable:true,
+            blank:true,
         };
         engineList.knowledge[7] = {
             name: '果壳',
@@ -1539,6 +1538,7 @@
             name: '百度贴吧',
             url: 'http://tieba.baidu.com/f?kw=%s&ie=utf-8',
             favicon: icon.baidu,
+            blank:true,
         };
         engineList.sociality[3] = {
             name: '腾讯微博',
@@ -1665,7 +1665,7 @@
         };
         engineList.mine[4] = {
             name: 'av-javlibrary',
-            url: 'http://www.jav11b.com/cn/vl_searchbyid.php?keyword=%s',
+            url: 'http://www.ja14b.com/cn/vl_searchbyid.php?keyword=%s',
             favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAAAIAA3AQAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAP5JREFUeJylkzFKBDEUhr+3SQZdF8vFxmobwT2AtXgHCzsbQbyANuJVbLyAnR7BTlFBrGwUsRBcGdckz2JFd5zMzA7+Vf6Q9+XPSyIfc2fKP9RJznYNZncZpBkgpQQC2fvGjx3Pn7dLIP2seds6gD6N0YccgHj63AiwpQSrPbCC374injy2BHQN7mJtMnbp/v5VYZXZXPo1ruIKsg6yspAGYKeKTBpgj4fo7WgGQEUAffksllQC+g73uk7YukRHAfGKRiXs3dQApurtwYBwdI8Me4gAi5a4f1c+UjroROZwUPAhASj2II/w5iEP4PXbB/zOdeWTLv+FlprttdToC7F9R7urpLwHAAAAAElFTkSuQmCC',
             blank:true,
         };
@@ -1698,13 +1698,14 @@
         // engineList.details[9] = ['html', 'htmls'];
         // engineList.details[-10] = ['mine', 'mine'];   // 隐藏
         
+        // 面试一轮就被刷，写会儿代码缓解下心情，更新至5.11.0
         var settingData = {
             "status":1,
             "message":"$相关说明$(status: 如果设置出错，去Tampermonkey中将该脚本复原出场设置或进入其Storage,将其设置为0，可清空设置)..."+
                     "(version: 若有新功能加入，靠这个版本号识别)..." +
                     "(newtab: 0为默认设置，1为新标签页打开)..." +
                     "(foldlist: 折叠当前搜索分类列表。true为折叠，false为展开。)..." +
-                    "(settingOpacity: 设置按钮的透明度，值为0-1之间的数，0为透明，1为完全显示，中间值半透明。注：-1为直接关闭按钮，关闭之前请确定自己有能力再次打开它)..." +
+                    "(settingOpacity: 设置按钮的透明度，值为0-1之间的数，0为透明，1为完全显示，中间值半透明。注：-1为直接关闭按钮，关闭之前请确定自己知道如何再次打开它)..." +
                     "(debug: debug模式，开启后，控制台会输出一些信息，“关闭并保存”按钮将不会在刷新页面)..." +
                     "(fixedTop: 将搜索栏固定到顶端。 true开启，false关闭)..." +
                     "(engineDetails: 第一个值为分类列表标题名称，第二个值与enginelist相关联，必须匹配,第三个值true为显示列表，false为禁用列表。可以用它将分类列表按自己喜欢排序)..." +
@@ -1715,11 +1716,10 @@
             "foldlist":false,
             "setBtnOpacity":0.8,
             "debug":false,
-            "fixedTop":false,
-            "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],['html', 'htmls',true],['mine', 'mine',false]],
+            "fixedTop":true,
+            "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],['html', 'htmls',false],['mine', 'mine',false]],
             "engineList":{},
             "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding-left:35px;margin-top:0px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#header", "where": "afterEnd"}}]
-
         }
         // GM_deleteValue("searchEngineJumpData");
         var getSettingData = GM_getValue("searchEngineJumpData");
@@ -2560,7 +2560,7 @@
                 var details = engineList.details;
                 // 若根据数组长度获取，负数引导的为属性，不再length长度之内，所以来个大体的数字，当都为空时，结束循环
                 // var detailsLength = details.length;
-                var detailsLength = 15;
+                var detailsLength = 99;
                 for (let i=0;i<detailsLength;i++){
                     var j = i;
                     j = details[j] ? j : -j;
@@ -2571,7 +2571,8 @@
                     odiv.classList.add("iqxin-items");
 
                     var oDivTitle = document.createElement("div");
-                    oDivTitle.classList.add("sejtitle");
+                    oDivTitle.classList.add("sejtitle","drag");
+                    oDivTitle.setAttribute("draggable","true");
                     oDivTitle.dataset.iqxintitle = details[j][1];
                     oDivTitle.dataset.xin = j;
                     oDivTitle.innerHTML ='<span class="iqxin-pointer-events">' + details[j][0] + '</span>' + 
@@ -2628,13 +2629,14 @@
                 var btnStr2 = "<div>" +
                             // "<span class='feedback' title='已然看不懂自己写的代码'><a target='_blank' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>反馈 greasyfork</a></span>" +
                             // "<span class='feedback'><a target='_blank' href='https://github.com/qxinGitHub/searchEngineJump'>反馈 GitHub</a></span>" +                           
-                            "<span id='xin-reset' title='慎点，恢复到最初状态，一切改变将不复存在'>清空设置</span>" +
+                            "<span id='xin-reset' title='慎点，出厂重置'>清空设置</span>" +
                             "<span id='xin-modification' title='edit 分享自己的配置或清空配置'>配置文件</span>" +
-                            "<span id='iqxin-debugS' title='debug'>" +
-                                "<label>debug模式<input id='iqxin-debug' type='checkbox' name='' " +
+                            "<span id='iqxin-debugS' title='对设置菜单有一定的影响'>" +
+                                "<label>debug<input id='iqxin-debug' type='checkbox' name='' " +
                                     debug_checked +
                                 " style='vertical-align:middle;'></label>" +
                             "</span>" +
+                            "<span id='xin-listSort'>列表排序</span>" +
                             "<span id='xin-foldlists'>" +
                                 "<label>折叠当前搜索分类<input id='iqxin-foldlist' type='checkbox' name='' " +
                                     foldlist_checked +
@@ -2656,7 +2658,7 @@
                 var btnEle = document.createElement("div");
                 btnEle.id = "btnEle"
 
-                var btnStr = "<div>" +
+                var btnStr = "<div class='btnEleLayer'>" +
                             "<span class='feedback' title='已然看不懂自己写的代码'><a target='_blank' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>反馈 greasyfork</a></span>" +
                             "<span class='feedback'><a target='_blank' href='https://github.com/qxinGitHub/searchEngineJump'>反馈 GitHub</a></span>" +                           
                             // "<span id='xin-reset' title='慎点，恢复到最初状态，一切改变将不复存在'>复原</span>" +
@@ -2691,59 +2693,6 @@
                 closebtnELe.id = "xin-close";
                 closebtnELe.setAttribute("title","close 关闭");
                 this.ele.appendChild(closebtnELe);
-                GM_addStyle(""+
-                    "#xin-close{" +
-                        "background:white;" +
-                        "color:#3ABDC1;" +
-                        "line-height:20px;" +
-                        "text-align:center;" +
-                        "height:20px;" +
-                        "width:20px;" +
-                        "text-align:center;" +
-                        "font-size:20px;" +
-                        "padding:10px;" +
-                        "border: 3px solid #3ABDC1;" +
-                        "border-radius: 50%;" +
-                        "transition: .5s;" +
-                        "top: -20px;" +
-                        "right:-20px;" +
-                        "position: absolute;" +
-                    "}" +
-                    "#xin-close::before{" +
-                        "content:'\\2716';" +
-                    "}" +
-                    "#xin-close:hover{" +
-                        "background: indianred;" +
-                        "border-color: indianred;" +
-                        "color: #fff;" +
-                        // "transform: rotate(180deg);" +
-                    "}" +
-                    // type[range] 效果
-                    "input[type=range] {" +
-                        "outline: none;" +
-                        "-webkit-appearance: none;" +
-                        "background:-webkit-linear-gradient(left,#3ABDC1,#83e7ea) no-repeat, #fff;" +
-                        "border-radius: 10px; /*这个属性设置使填充进度条时的图形为圆角*/" +
-                    "}" +
-                    "input[type=range]::-webkit-slider-thumb {" +
-                        "-webkit-appearance: none;" +
-                    "} " +
-                    "input[type=range]::-webkit-slider-runnable-track {" +
-                        "height: 10px;" +
-                        "border-radius: 10px; /*将轨道设为圆角的*/" +
-                        "box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; /*轨道内置阴影效果*/" +
-                    "}" +
-                    "input[type=range]::-webkit-slider-thumb {" +
-                        "-webkit-appearance: none;" +
-                        "height: 18px;" +
-                        "width: 18px;" +
-                        "margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/" +
-                        "background: #fff; " +
-                        "border-radius: 50%; /*外观设置为圆形*/" +
-                        "border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/" +
-                        "box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/" +
-                    "}" +
-                "");
             },
             show: function(){
                 var style = this.mask.style;
@@ -2761,13 +2710,7 @@
                 }, 30);
             },
             hide: function(){
-                this.addItemBoxRemove(); // 新的搜索添加框
-                this.addDelremove();  //  增加/删除界面
-                this.editCodeBoxClose(); // code编辑框
-                this.addTitleEditBoxRemove(); //标题编辑框
-                this.boxClose("#newSearchListBox"); // 添加新的搜索列表
-                document.querySelector("#btnEle2").classList.remove("btnEle2active"); // 更多设置
-
+                this.allBoxClose(); // 关闭所有次级窗口、菜单
 
                 var style = this.mask.style;
                 this.ele.style.transform = "translateY(20%)";
@@ -3170,6 +3113,92 @@
                 }
             },
 
+            // 搜索列表排序
+            searchListSortBox:function(){
+
+            	GM_addStyle('' +
+            		'.iqxin-listDrag{' +
+            			'cursor:move;' +
+            		    'text-align: center;' +
+    					'padding: 4px 0;' +
+            		'}' +
+            		'.iqxin-listDrag:hover{' +
+            			'background:#666;' +
+                        "border-radius:4px;" +
+            		'}' +
+            		'');
+
+            	var sortBox = document.createElement("div");
+                // var sData = 
+                sortBox.id = "iqxin-sortBox"; 
+                sortBox.style.cssText = "position:fixed;" +
+                    "top:50%;left:50%;" +
+                    "transform:translate(-50%,-50%);" +
+                    "background:#333;" +
+                    "color: #fff;" +
+                    "border-radius:4px;" +
+                    "padding:10px 20px;" ;
+
+                var innerH = " ";
+               
+                // 获取当前分类情况
+                var odetails = document.querySelectorAll(".sejtitle");
+                var odetailsLength = odetails.length;
+                for(let i=0;i<odetailsLength;i++){
+                    // debug(odetails[i]);
+                    // console.log(odetails[i]);
+                    var iqxinDisabledList = odetails[i].dataset.xin>=0?true:false;
+                    innerH += "<p draggable='true' class='iqxin-listDrag'><span style='pointer-events:none;' data-iqxintitle='"+  odetails[i].dataset.iqxintitle +"' data-iqxindisabledlist='"+ iqxinDisabledList  +"'>"+ odetails[i].firstChild.innerHTML + "</span></p>";
+                }
+
+                // 添加保存关闭按钮
+                innerH += "<br><p><button class='iqxin-listDragClose'>关闭</button> <button class='iqxin-listDragSave'>保存</button></p>"
+                sortBox.innerHTML = innerH;
+                this.ele.appendChild(sortBox);
+
+                var odivsdrag = document.querySelectorAll(".iqxin-listDrag");
+                var that = this;
+                [].forEach.call(odivsdrag,function(odiv){
+                    odiv.addEventListener("dragstart",that.domdragstart,false);
+                    // odiv.addEventListener('dragenter', that.domdragenter, false);
+                    odiv.addEventListener('dragover', that.domdragover, false);
+                    // odiv.addEventListener('dragleave', that.domdragleave, false);
+                    odiv.addEventListener('drop', that.domdrop, false);
+                    // odiv.addEventListener('dragend', domdropend, false);
+                });
+            },
+            searchListSortEnger:function(){
+            	// 分类名称
+                var engineDetails=[]; 
+                
+                // 分类排序
+                var odetails = document.querySelectorAll(".iqxin-listDrag");
+                var odetailsLength = odetails.length;
+                for(let i=0;i<odetailsLength;i++){
+                    engineDetails[i] = [];
+                    var odetailsChild = odetails[i].firstChild;
+                    engineDetails[i][0] = odetailsChild.innerHTML;
+                    engineDetails[i][1] = odetailsChild.dataset.iqxintitle;
+                    engineDetails[i][2] = odetailsChild.dataset.iqxindisabledlist === 'true'?true:false;
+                };
+
+                //保存数据
+                var getData = GM_getValue("searchEngineJumpData");
+    			
+    			// console.info('before: ');
+                // console.log(getData.engineDetails);
+
+                getData.engineDetails = engineDetails;
+
+    			// console.info('after: ');
+                // console.log(getData.engineDetails);
+                GM_setValue("searchEngineJumpData",getData);
+
+                if(!getData.debug){
+                	window.location.reload();
+                }
+            },
+
             // 标题点击 （开关搜索列表）（可以并入到下面的点击事件）
             titleClick: function(e){
                 var target = e.target;
@@ -3228,20 +3257,14 @@
                     // console.log(e);
                     this.addEditBoxEnger();
                 };
-                // 获取焦点， 全选
-                // if(e.target.nodeName.toLowerCase() === "input"){
-                //     // console.log("全部选中");
-                //     e.target.select();
-                // }
+
                 // 编辑框
                 if(~e.target.className.indexOf("iqxin-set-edit")){
-                    // console.log("点击编辑框");
                     this.addEditBox(e);
                 }
                 // 标题编辑框
                 if(~targetClass.indexOf("iqxin-title-edit")){
                     e.stopPropagation();
-                    console.log("点击编辑框");
                     this.addTitleEditBox(e);
                 }
                 if(~targetClass.indexOf("sejtitle")){
@@ -3263,27 +3286,65 @@
                     e.target.classList.toggle("iqxin-btn-active");
                 }
 
-                // 空白地方点击
-                if(~targetClass.indexOf("iqxin-items") || targetid === "settingLayer"){
-                    this.addItemBoxRemove(); // 新的搜索添加框
-                    this.addDelremove();  //  增加/删除界面
-                    this.editCodeBoxClose(); // code编辑框
-                    this.addTitleEditBoxRemove(); //标题编辑框
-                    this.boxClose("#newSearchListBox"); // 添加新的搜索列表
-                    document.querySelector("#btnEle2").classList.remove("btnEle2active"); // 更多设置
+                //  列表排序
+                if(targetid ==="xin-listSort"){
+                    this.searchListSortBox();
                 }
+                // iqxin-listDragSave
+                if(e.target.className==="iqxin-listDragSave"){
+                    this.searchListSortEnger();
+                } else if(e.target.className==="iqxin-listDragClose"){
+                    this.boxClose("#iqxin-sortBox"); 
+                };
+
+                // 空白地方点击
+                if(~targetClass.indexOf("iqxin-items") || targetid === "settingLayer" || targetClass==="btnEleLayer"){
+                    // this.addItemBoxRemove(); // 新的搜索添加框
+                    // this.addDelremove();  //  增加/删除界面
+                    // this.editCodeBoxClose(); // code编辑框
+                    // this.addTitleEditBoxRemove(); //标题编辑框
+                    // this.boxClose("#newSearchListBox"); // 添加新的搜索列表
+                    // document.querySelector("#btnEle2").classList.remove("btnEle2active"); // 更多设置
+                    this.allBoxClose();
+                }
+            },
+
+            // 关闭所有次级窗口、菜单
+            allBoxClose: function(){
+            	this.addItemBoxRemove(); // 新的搜索添加框
+                this.addDelremove();  //  增加/删除界面
+                this.editCodeBoxClose(); // code编辑框
+                this.addTitleEditBoxRemove(); //标题编辑框
+                this.boxClose("#newSearchListBox"); // 添加新的搜索列表
+                this.boxClose("#iqxin-sortBox"); // 搜索列表排序
+                document.querySelector("#btnEle2").classList.remove("btnEle2active"); // 更多设置
             },
 
             // 拖动
             domdragstart:function (e) {
-                dragEl = this;
-                dragData = this.dataset.xin;
-                
-                e.dataTransfer.effectAllowed = "move";
-                e.dataTransfer.setData("text/html",this.innerHTML);
+                if(~this.className.indexOf("sejtitle")){
+                    dragEl = this.parentNode;
+                } else{
+                    dragEl = this;
+
+                }
+                dragData = dragEl.innerHTML;
+                    console.info("start");
+                    // console.info(this);
+                    console.info(e.target);
+                    // console.info(e.target===this);
+                    // console.info(this.classList);
+                    // console.info(e.target.classList);
+                    
+                    e.dataTransfer.effectAllowed = "move";
+                    e.dataTransfer.setData("text/html",dragEl.innerHTML);
             },
             domdragenter:function (e) {
                 e.target.classList.add('rwl-over');
+
+                console.info('enter');
+                console.log(e);
+                console.log(e.target);
             },
             domdragover:function (e) {
                 if (e.preventDefault) {
@@ -3296,14 +3357,41 @@
                 e.target.classList.remove('rwl-over'); 
             },
             domdrop:function (e) {
+            	// e.target === this
+                var _this = e.target;
+                if(~_this.className.indexOf("sejtitle")){
+                    var that = _this.parentNode;
+                    // console.log("存在titile",that);
+
+                    var temp = dragEl.id;
+                    dragEl.id = that.id;
+                    that.id = temp;
+                } else if(~_this.className.indexOf("iqxin-listDrag")){
+                    var that = _this;
+                    // console.log("puts");
+                }else{
+                    var that = _this.parentNode;
+                }
+                // console.info("drop");
+                // console.info(_this);
+                // console.info(_this.classList);
+
+                // console.log(dragEl);
+                // console.log(that);
+                // console.log(that.innerHTML);
+
+
                 if (e.stopPropagation) {
                     e.stopPropagation();
                 }
-                if (dragEl != this) {
-                    dragEl.innerHTML = this.innerHTML;
-                    this.innerHTML = e.dataTransfer.getData('text/html');
-                }    
                 
+                if (dragEl != that) {
+                    dragEl.innerHTML = that.innerHTML;
+                    that.innerHTML = e.dataTransfer.getData('text/html');
+                    // console.log(dragData);
+                    // that.innerHTML = dragData;
+                }    
+
                 return false;
             },
 
@@ -3453,14 +3541,14 @@
                         "padding: 20px;" +
                         "background-color: #fff;" +
                         "border-radius: 4px;" +
-                        "position: absolute;" +
+                        "position: relative;" +
                         "min-width: 880px;" +
                         "transition:0.5s;" +
                     "}" +
                     ".iqxin-items{" +
                         "min-width:5em;" +
                         "margin: 0 5px 10px;" +
-                        "border-bottom: 1px solid #ccc;" +
+                        // "border-bottom: 1px solid #ccc;" +
                     "}" +
                     "#settingLayer .drag{" +
                         "display: block;" +
@@ -3505,6 +3593,9 @@
                     "[data-xin^='-']:hover{" +
                         "background-color: coral;" +
                     "}" +
+                    "#settingLayerMask label{" +
+                    	"cursor:pointer;" +
+                    "}" +
                     "#btnEle2," +
                     "#btnEle{" +
                         "position:absolute;" +
@@ -3517,9 +3608,9 @@
                     "#btnEle2 span," +
                     "#btnEle span{" +
                         "display: inline-block;" +
-                        "background: #fff;" +
+                        "background: #EFF4F8;" +
                         "border: 1px solid #3abdc1;" +
-                        "margin: 10px auto;" +
+                        "margin: 12px auto 10px;" +
                         "color: #3abdc1;" +
                         "padding: 5px 10px;" +
                         "border-radius: 4px;" +
@@ -3554,7 +3645,7 @@
                         "margin-bottom:-100%;" +
                         "display:flex;" +
                         "justify-content: space-around;" +
-                        "background: #fff;" +
+                        "background: #EFF4F8;" +
                         "border-radius: 4px;" +
                     "}" +
                     "#btnEle2{" +
@@ -3672,9 +3763,62 @@
                         "padding: 0px 5px;" +
                         "cursor: pointer;" +
                         "text-decoration: underline;" +
+                        "background: #EFF4F8;" +
                     "}" +
                     "#titleEdit{" +
                         "width:6em;" +
+                    "}" +
+                    // 关闭按钮
+                    "#xin-close{" +
+                        "background:white;" +
+                        "color:#3ABDC1;" +
+                        "line-height:20px;" +
+                        "text-align:center;" +
+                        "height:20px;" +
+                        "width:20px;" +
+                        "text-align:center;" +
+                        "font-size:20px;" +
+                        "padding:10px;" +
+                        "border: 3px solid #3ABDC1;" +
+                        "border-radius: 50%;" +
+                        "transition: .5s;" +
+                        "top: -20px;" +
+                        "right:-20px;" +
+                        "position: absolute;" +
+                    "}" +
+                    "#xin-close::before{" +
+                        "content:'\\2716';" +
+                    "}" +
+                    "#xin-close:hover{" +
+                        "background: indianred;" +
+                        "border-color: indianred;" +
+                        "color: #fff;" +
+                        // "transform: rotate(180deg);" +
+                    "}" +
+                    // type[range] 效果
+                    "input[type=range] {" +
+                        "outline: none;" +
+                        "-webkit-appearance: none;" +
+                        "background:-webkit-linear-gradient(left,#3ABDC1,#83e7ea) no-repeat, #fff;" +
+                        "border-radius: 10px; /*这个属性设置使填充进度条时的图形为圆角*/" +
+                    "}" +
+                    "input[type=range]::-webkit-slider-thumb {" +
+                        "-webkit-appearance: none;" +
+                    "} " +
+                    "input[type=range]::-webkit-slider-runnable-track {" +
+                        "height: 10px;" +
+                        "border-radius: 10px; /*将轨道设为圆角的*/" +
+                        "box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; /*轨道内置阴影效果*/" +
+                    "}" +
+                    "input[type=range]::-webkit-slider-thumb {" +
+                        "-webkit-appearance: none;" +
+                        "height: 18px;" +
+                        "width: 18px;" +
+                        "margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/" +
+                        "background: #fff; " +
+                        "border-radius: 50%; /*外观设置为圆形*/" +
+                        "border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/" +
+                        "box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/" +
                     "}" +
                     "";
                 head = document.getElementsByTagName('head')[0];
