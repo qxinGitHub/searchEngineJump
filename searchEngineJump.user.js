@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.11.0
+// @version        5.11.1
 // @created        2011-7-2
 // @lastUpdated    2017-08-18
 
@@ -2866,7 +2866,11 @@
             addItemBoxRemove: function(){
                 var newBox = document.querySelector("#newSearchBox");
                 if(newBox){
-                    newBox.parentNode.removeChild(newBox);
+                	newBox.style.transform = "scale(1, 0.1)";
+                	newBox.style.opacity = "0";
+                	setTimeout(function(){
+                    	newBox.parentNode.removeChild(newBox);
+                	},350);
                 }
             },
 
@@ -3121,6 +3125,7 @@
             			'cursor:move;' +
             		    'text-align: center;' +
     					'padding: 4px 0;' +
+    					'margin: 2px 0;' +
             		'}' +
             		'.iqxin-listDrag:hover{' +
             			'background:#666;' +
@@ -3686,9 +3691,6 @@
                         "padding: 2px 3px 2px 6px;" +
                     "}" +
                     "span.iqxin-additem {" +
-                        "display:none;" +
-                    "}" +
-                    "span.iqxin-additem.iqxin-set-active {" +
                         "display: inline-block;" +
                         "text-align: center;" +
                         "width: 100%;" +
@@ -3696,6 +3698,16 @@
                         "border: 1px dotted red;" +
                         "color: red;" +
                         "cursor: pointer;" +
+                        "visibility:hidden;" +
+                        "opacity:0;" +
+                        "transition:0.3s;" +
+                        "transform:scale(0);" +
+                    "}" +
+                    "span.iqxin-additem.iqxin-set-active {" +
+                    	"visibility:visible;" +
+                        "opacity:1;" +
+                        "margin:10px 0;" +
+                        "transform:scale(1);" +
                     "}" +
                     "#settingLayer .sejtitle:hover .iqxin-title-edit," +
                     "#settingLayer .sejcon>span:hover .iqxin-set-edit{" +
@@ -3715,6 +3727,9 @@
                     "}" +
                     "#newSearchListBox," +
                     "#newSearchBox{" +
+                    	"transition:0.3s;" +
+                    	"transform-origin: top center;" +
+                    	"animation: sejopen 0.3s;" +
                         "position:fixed;" +
                         "z-index:200000100;" +
                         "top:50%;" +
