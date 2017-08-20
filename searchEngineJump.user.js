@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.11.1
+// @version        5.11.2
 // @created        2011-7-2
-// @lastUpdated    2017-08-18
+// @lastUpdated    2017-08-19
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -189,6 +189,38 @@
                     where: 'afterEnd',
                 },
             },
+            {name:"雅虎网页搜索",
+                url:/^https?:\/\/search\.yahoo\.com\/search/i,
+                engineList:"web",
+                enabled:true,
+                fixedTop:72,
+                style:"\
+                    margin-left:122px;\
+                    margin-bottom:-4px;\
+                    padding-top:6px;\
+                ",
+                insertIntoDoc:{
+                    keyword:'css;#yschsp',
+                    target:'css;#horizontal-bar',
+                    where:'afterBegin',
+                },
+            },
+            {name:"台湾雅虎网页搜索",
+                url:/^https?:\/\/tw\.search\.yahoo\.com\/search/i,
+                engineList:"web",
+                enabled:true,
+                fixedTop:52,
+                style:"\
+                    margin-left:-10px;\
+                    margin-bottom:10px;\
+                ",
+                insertIntoDoc:{
+                    keyword:'css;#yschsp',
+                    target:'css;#results',
+                    where:'afterBegin',
+                },
+            },
+
 
             // 知识               
             {name: "百度百科词条",
@@ -1226,6 +1258,13 @@
             favicon: 'data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB60lEQVR4nIWTvWtTURTAf+e+GpPWRFptmigIDhWELo5+DKLCMxZEJfVjEhTqok4O/geik2MdOuhUm4ogpTS6iNQoRV3sIOqQgpiX2NKEprH58B2HvMQEUnO3ezi/3/m4XKHD2fvywrCr1oirbvWPuh9XYs8znfIApPUSmR97KHAbaY8rVIBxx0487iz4ML4tsrrmCAxsVckTpRw7cbQ1ZgCiq2vLDViVSatAb8ZOSMZOiEttCFj0qh2Jzo8l2jqIJOM3BJmowxJ3Tk8/61Q9koxPCnINwHXN/mzsaRrACDzwcl5vBQM49sx1VDcARNxHLSNIqG51b/5vfgAVuV/vm+NtOwAI6sb3rgKVhTqP75+gpvTlK2SswM5ughoa9a9XQdGmYKK0pF9CKZYqi7e6CT5XF+5+63vLlcKP5UZMirODUz1GLgFsL2pQLv4qdoLLc7sPKeYTQEnN1YFR5wmA6DS+8o5wuT6jbmLMwUAsm26Ff8+GT4nhFYBCPnAm19/sAKD0InzY9JBqEspPRd8g+FE5IULIg93NcnmXz+c7aYnMqOqUAeg9m3unRofVe2eEPSJyWZBzDRjVtN+SUP/5Qt4S2efVP9D2aQBKc4PHBO6IyohCVeA9uPf8oytfW/PWk0PhoJ3NdVt81/MXwby4bACYqGIAAAAASUVORK5CYII=',
             // disable:true,
         };
+        engineList.web[5] = {
+            name: 'yahoo',
+            // https://tw.search.yahoo.com/search?&p=%s  // 台湾
+            url: 'https://search.yahoo.com/search;?p=%s',
+            favicon: 'data:image/x-icon;base64,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',
+            disable:true,
+        };
 
         // 视频搜索列表
         engineList.video = [];
@@ -2112,6 +2151,7 @@
                     font-family: arial,sans-serif;
                     transform-origin: top center;
                     animation: sejopen 0.3s !important;
+                    //transition:0.3s;
                 }
                 
                 #sej-expanded-category {
@@ -2452,6 +2492,13 @@
                 var obj = document.getElementById("sej-container");
                 var objTop = obj.offsetTop ;
                 var objLeft = obj.offsetLeft ;
+
+                var current = obj.offsetParent;
+        　　　　while (current !== null){
+                    objLeft += current.offsetLeft;
+        　　　　　　current = current.offsetParent;
+        　　　　}
+
                 var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
                 // console.log("obj.offsetLeft",obj.offsetLeft);
 
@@ -2476,7 +2523,7 @@
                     var marginTop = parseInt(objstyle.marginTop);
                     var marginLeft = parseInt(objstyle.marginLeft);
                     var marginRight = parseInt(objstyle.marginRight);
-                    // console.log(objLeft,marginLeft);
+                    console.log(objLeft,marginLeft);
 
                     obj.style.position = 'fixed';
                     obj.style.top = height - marginTop + 'px';
@@ -2867,11 +2914,13 @@
             addItemBoxRemove: function(){
                 var newBox = document.querySelector("#newSearchBox");
                 if(newBox){
-                	newBox.style.transform = "scale(1, 0.1)";
-                	newBox.style.opacity = "0";
-                	setTimeout(function(){
-                    	newBox.parentNode.removeChild(newBox);
-                	},350);
+                    // newBox.style.transformOrigin = "bottom center";
+                    newBox.style.transform = "scale(1, 0.1)";
+                    newBox.style.opacity = "0";
+                    setTimeout(function(){
+                    	// newBox.style.transformOrigin = "top center";
+                        newBox.parentNode.removeChild(newBox);
+                    },350);
                 }
             },
 
@@ -3121,20 +3170,20 @@
             // 搜索列表排序
             searchListSortBox:function(){
 
-            	GM_addStyle('' +
-            		'.iqxin-listDrag{' +
-            			'cursor:move;' +
-            		    'text-align: center;' +
-    					'padding: 4px 0;' +
-    					'margin: 2px 0;' +
-            		'}' +
-            		'.iqxin-listDrag:hover{' +
-            			'background:#666;' +
+                GM_addStyle('' +
+                    '.iqxin-listDrag{' +
+                        'cursor:move;' +
+                        'text-align: center;' +
+                        'padding: 4px 0;' +
+                        'margin: 2px 0;' +
+                    '}' +
+                    '.iqxin-listDrag:hover{' +
+                        'background:#666;' +
                         "border-radius:4px;" +
-            		'}' +
-            		'');
+                    '}' +
+                    '');
 
-            	var sortBox = document.createElement("div");
+                var sortBox = document.createElement("div");
                 // var sData = 
                 sortBox.id = "iqxin-sortBox"; 
                 sortBox.style.cssText = "position:fixed;" +
@@ -3174,7 +3223,7 @@
                 });
             },
             searchListSortEnger:function(){
-            	// 分类名称
+                // 分类名称
                 var engineDetails=[]; 
                 
                 // 分类排序
@@ -3190,18 +3239,18 @@
 
                 //保存数据
                 var getData = GM_getValue("searchEngineJumpData");
-    			
-    			// console.info('before: ');
+                
+                // console.info('before: ');
                 // console.log(getData.engineDetails);
 
                 getData.engineDetails = engineDetails;
 
-    			// console.info('after: ');
+                // console.info('after: ');
                 // console.log(getData.engineDetails);
                 GM_setValue("searchEngineJumpData",getData);
 
                 if(!getData.debug){
-                	window.location.reload();
+                    window.location.reload();
                 }
             },
 
@@ -3317,7 +3366,7 @@
 
             // 关闭所有次级窗口、菜单
             allBoxClose: function(){
-            	this.addItemBoxRemove(); // 新的搜索添加框
+                this.addItemBoxRemove(); // 新的搜索添加框
                 this.addDelremove();  //  增加/删除界面
                 this.editCodeBoxClose(); // code编辑框
                 this.addTitleEditBoxRemove(); //标题编辑框
@@ -3363,7 +3412,7 @@
                 e.target.classList.remove('rwl-over'); 
             },
             domdrop:function (e) {
-            	// e.target === this
+                // e.target === this
                 var _this = e.target;
                 if(~_this.className.indexOf("sejtitle")){
                     var that = _this.parentNode;
@@ -3547,7 +3596,7 @@
                         "padding: 20px;" +
                         "background-color: #fff;" +
                         "border-radius: 4px;" +
-                        "position: relative;" +
+                        "position: absolute;" +
                         "min-width: 880px;" +
                         "transition:0.5s;" +
                     "}" +
@@ -3600,7 +3649,7 @@
                         "background-color: coral;" +
                     "}" +
                     "#settingLayerMask label{" +
-                    	"cursor:pointer;" +
+                        "cursor:pointer;" +
                     "}" +
                     "#btnEle2," +
                     "#btnEle{" +
@@ -3655,11 +3704,13 @@
                         "border-radius: 4px;" +
                     "}" +
                     "#btnEle2{" +
+                        "visibility:hidden;" +
                         "opacity:0;" +
                         "transform:translate(0,0px);" +
                         "transition : 0.3s;" +
                     "}" +
                     "#btnEle2.btnEle2active{" +
+                        "visibility:visible;" +
                         "opacity:1;" +
                         "transform:translate(0,53px);" +
                     "}" +
@@ -3705,7 +3756,7 @@
                         "transform:scale(0);" +
                     "}" +
                     "span.iqxin-additem.iqxin-set-active {" +
-                    	"visibility:visible;" +
+                        "visibility:visible;" +
                         "opacity:1;" +
                         "margin:10px 0;" +
                         "transform:scale(1);" +
@@ -3728,9 +3779,9 @@
                     "}" +
                     "#newSearchListBox," +
                     "#newSearchBox{" +
-                    	"transition:0.3s;" +
-                    	"transform-origin: top center;" +
-                    	"animation: sejopen 0.3s;" +
+                        "transition:0.3s;" +
+                        "transform-origin: top center;" +
+                        "animation: sejopen 0.3s;" +
                         "position:fixed;" +
                         "z-index:200000100;" +
                         "top:50%;" +
