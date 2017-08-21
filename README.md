@@ -16,6 +16,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.12.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-21
+- 增加post提交方方式 搜索连接后跟‘$post$xx’ 其中的 xx 是指post提交的名称 [相关反馈](https://greasyfork.org/zh-CN/forum/discussion/28440/x)
+- 修复“搜索项目”可以与“分类名称”拖拽的问题 [感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/27907/x)
+- 在 searx、搜狗 页面添加样式
+
 > version 5.11.2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-20
 - 设置菜单可视区域过低时，设置按钮 无法自动置底的问题  [感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/27907/x)
 - 添加雅虎搜索 
