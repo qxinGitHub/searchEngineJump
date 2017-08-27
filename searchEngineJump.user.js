@@ -98,7 +98,7 @@
                 engineList: 'web',
                 // 给引擎列表的样式
                 style: '\
-                    margin-left: 138px;\
+                    margin-left: 142px;\
                     z-index: 100;\
                     margin-top:5px;\
                 ',
@@ -2402,7 +2402,8 @@
                 var left = scrolled.x + aBCRect.left;
                 
                 if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
-                    top -= 90;
+                    // top -= 90;
+                    top = 26;
                     left -= 120;
                 }
                 
@@ -3684,7 +3685,7 @@
                     "}" +
                     ".iqxin-items{" +
                         "min-width:5em;" +
-                        "margin: 0 5px 10px;" +
+                        "margin: 0 5px 0px;" +
                         // "border-bottom: 1px solid #ccc;" +
                     "}" +
                     "#settingLayer .drag{" +
@@ -4067,6 +4068,7 @@
         /^https?:\/\/www\.baidu\.com\/$/i,
         /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/$/i,
         /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^#]*#(?:&?q=|.+?&q=).+/,
+        // /^https?:\/\/searx\.me\//i,
     ];
     var hashtag = hashList.some(function hashUrl(element, index, array){
             return ~url.search(element);
@@ -4075,10 +4077,10 @@
         var oldTitle = document.title;
         var newTitle = "";
         var timer = setInterval(function(){
-             // console.log("循环中");
+             // console.log("循环中",newTitle,oldTitle);
             newTitle = document.title;
             if (document.querySelector("#appbar") && !document.querySelector("sejspan")){
-                // console.log("new");
+                console.log("new");
                 iqxinstart();
             } else if (document.querySelector("sejspan")){
                 // console.log("已存在");
