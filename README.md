@@ -16,8 +16,15 @@ __说明__
 
 ### 更新历史
 
+> version 5.12.2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-09-01
+- 设置菜单中，被禁用的搜索缺失删除线的问题
+- youtube 改版
+- 从百度文库跳转时乱码的问题[感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/28783)
+- 调整了最低宽度，在一般屏上有更好的表现 [感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/28783)
+
 > version 5.12.1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-27
 - 固定搜索栏的情况下，在百度页面二级搜索菜单错位的问题
+- 谷歌页面样式微调
 
 > version 5.12.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-21
 - 增加post提交方方式 搜索连接后跟‘$post$xx’ 其中的 xx 是指post提交的名称 [相关反馈](https://greasyfork.org/zh-CN/forum/discussion/28440/x)

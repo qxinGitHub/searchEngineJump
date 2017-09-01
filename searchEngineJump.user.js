@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.12.1
+// @version        5.12.2
 // @created        2011-7-2
-// @lastUpdated    2017-08-27
+// @lastUpdated    2017-09-01
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -235,16 +235,16 @@
                 },
             },
             {name: "搜狗",
-	            url: /^https?:\/\/www\.sogou\.com\/sogou\?/,
-	            enabled: true,
-	            engineList: "web",
+                url: /^https?:\/\/www\.sogou\.com\/sogou\?/,
+                enabled: true,
+                engineList: "web",
                 fixedTop:60,
-	            style: "top:100px;padding-left:114px;z-index:99;",
-	            insertIntoDoc: {
-		            keyword: "css;#upquery",
-		            target: "css;.header",
-		            where: "afterEnd",
-	            },
+                style: "top:100px;padding-left:114px;z-index:99;",
+                insertIntoDoc: {
+                    keyword: "css;#upquery",
+                    target: "css;.header",
+                    where: "afterEnd",
+                },
             },
 
 
@@ -290,12 +290,18 @@
                 enabled: true,
                 style: "\
                     border-top: 1px solid #e5e5e5;\
-                    text-align: center;\
+                    padding-left:121px;\
                     border-bottom: 1px solid #e5e5e5;\
                     margin-bottom: 1px;\
                 ",
                 insertIntoDoc: {
-                    keyword: 'css;#kw',
+                    // keyword: 'css;#kw',
+                    keyword: function(){
+                        var str = document.querySelector("#kw").value;
+                        // alert(str);
+                        // return decodeURIComponent(str);
+                        return str;
+                        }, 
                     target: 'css;#hd',
                     where: 'afterEnd',
                 },
@@ -417,16 +423,16 @@
                    stylish: '.header{ margin-bottom: 5px; }'
             },
             {name: "微信搜狗",
-	            url: /^https?:\/\/weixin\.sogou\.com\/weixin\?/,
-	            enabled: true,
-	            engineList: "web",
+                url: /^https?:\/\/weixin\.sogou\.com\/weixin\?/,
+                enabled: true,
+                engineList: "web",
                 fixedTop:55,
-	            style: "width: 1000px;margin: 8px auto -5px;z-index:99;",
-	            insertIntoDoc: {
-	            	keyword: "//input[@name='query']",
-	            	target: "css;.header-box",
-	            	where: "afterEnd",
-            	},
+                style: "width: 1000px;margin: 8px auto -5px;z-index:99;",
+                insertIntoDoc: {
+                    keyword: "//input[@name='query']",
+                    target: "css;.header-box",
+                    where: "afterEnd",
+                },
             },
             
             
@@ -501,16 +507,17 @@
                 url: /^https?:\/\/www\.youtube\.com\/results/,
                 enabled: true,
                 engineList: "video",
-                fixedTop:50,
+                fixedTop:56,
                 style: "\
-                    border-top: 1px solid #E8E8E8;\
-                    border-bottom: 1px solid #E8E8E8;\
                     padding-left: 240px; \
-                    background:#fff;\
+                    margin-top: 62px;\
+                    margin-bottom: -80px;\
                 ",
                 insertIntoDoc: {
-                    keyword: 'css;#masthead-search-term',
-                    target: 'css;#page-container',
+                    // keyword: 'css;#masthead-search-term',
+                    keyword: 'css;input#search',
+                    // target: 'css;#page-container',
+                    target: 'css;#page-manager',
                     where: 'beforeBegin',
                 },
             },
@@ -2128,9 +2135,13 @@
             //     value = encodeURIComponent(value);
             // }
             
-            // console.log(value)
+            //console.log(value)
             // console.log(decodeURI(value));
-            value = decodeURI(value);
+            // value = decodeURIComponent(value);
+
+            // // @name     searchEngineJump-NextStage
+            if (document.characterSet != "UTF-8") value = encodeURIComponent(value);
+            
             var targetURL = target.getAttribute('url');
             // console.log(targetURL);
             // 如果有post请求
@@ -2145,6 +2156,7 @@
                 target.setAttribute("onclick","this.getElementsByTagName('form')[0].submit();return false;");
                 // alert(f);
             } else{
+                console.log(value);
                 target.href = target.getAttribute('url').replace('%s', value);
             }
         };
@@ -3677,10 +3689,11 @@
                         "display: flex;" +
                         "flex-wrap: wrap;" +
                         "padding: 20px;" +
+                        "margin: 25px;" +
                         "background-color: #fff;" +
                         "border-radius: 4px;" +
                         "position: absolute;" +
-                        "min-width: 880px;" +
+                        "min-width: 700px;" +
                         "transition:0.5s;" +
                     "}" +
                     ".iqxin-items{" +
@@ -3719,7 +3732,7 @@
                     ".sejcon [data-xin]{"+
                         "cursor: pointer;" +
                     "}" +
-                    "[data-iqxindisabled='true']," +
+                    "#settingLayerMask [data-iqxindisabled='true']," +
                     "[data-xin^='-']{" +
                         "background-color: darkkhaki;" +
                         "text-decoration: line-through;" +
