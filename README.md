@@ -16,6 +16,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.12.3   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-09-10
+- 设置菜单集成到 Tampermonkey 菜单中
+- 点击"设置按钮透明度"后的数字可隐藏设置菜单，重新打开需从Tampermonkey菜单中打开，火狐用户请无视此项更新
+- 林花谢了春红，太匆匆 --李煜 相见欢 
+
 > version 5.12.2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-09-01
 - 设置菜单中，被禁用的搜索缺失删除线的问题
 - youtube 改版
