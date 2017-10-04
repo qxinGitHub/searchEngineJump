@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.12.4
+// @version        5.12.5
 // @created        2011-7-2
-// @lastUpdated    2017-09-23
+// @lastUpdated    2017-10-04
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -77,6 +77,7 @@
 // @grant       GM_setValue
 // @grant       GM_addStyle
 // @grant       GM_deleteValue
+// @grant       GM_setClipboard
 // @grant       GM_registerMenuCommand
 // @run-at      document-end
 
@@ -1800,7 +1801,7 @@
         // engineList.details[9] = ['html', 'htmls'];
         // engineList.details[-10] = ['mine', 'mine'];   // 隐藏
         
-        // 面试一轮就被刷，写会儿代码缓解下心情，更新至5.11.0
+
         var settingData = {
             "status":1,
             "message":"$相关说明$(status: 如果设置出错，去Tampermonkey中将该脚本复原出场设置或进入其Storage,将其设置为0，可清空设置)..."+
@@ -2235,7 +2236,10 @@
         ///test -------------- 测试 end
 
 
-        if (!iTarget || !iInput) return;
+        if (!iTarget || !iInput) {
+            oconsole.log("目标有误： itarget：" + iTarget + "iInput: " + iInput);
+            return;
+        }
             
         // 添加全局样式
         var globalStyle = document.createElement('style');
@@ -2253,6 +2257,7 @@
                     font-family: arial,sans-serif;
                     transform-origin: top center;
                     animation: sejopen 0.3s !important;
+                    border-bottom-right-radius: 4px;
                     //transition:0.3s;
                 }
                 
@@ -2315,7 +2320,7 @@
                     border: none;
                     padding: 0;
                     margin: 0 3px 0 0;
-                    vertical-align: text-bottom;
+                    vertical-align: middle;
                 }
                 
                 .sej-drop-list {
@@ -2626,7 +2631,7 @@
                     var marginTop = parseInt(objstyle.marginTop);
                     var marginLeft = parseInt(objstyle.marginLeft);
                     var marginRight = parseInt(objstyle.marginRight);
-                    console.log(objLeft,marginLeft);
+                    //console.log(objLeft,marginLeft);
 
                     obj.style.position = 'fixed';
                     obj.style.top = height - marginTop + 'px';
@@ -2959,8 +2964,8 @@
                     "<br/><br/>" +
                     "<span style=''><a target='_blank' style='color:#999;' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>相关使用说明</a></span>" +
                     "&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp;" +
-                    "<button id='addItemBoxEnter' class='addItemBoxEnter addItemBoxBtn'>确定</button>&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp" +
-                    "<button id='addItemBoxCancel' class='addItemBoxCancel addItemBoxBtn'>取消</button>" +
+                    "<button id='addItemBoxEnter' class='addItemBoxEnter addItemBoxBtn iqxin-enterBtn'>确定</button>&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp" +
+                    "<button id='addItemBoxCancel' class='addItemBoxCancel addItemBoxBtn iqxin-closeBtn'>取消</button>" +
                     "";
 
                 this.ele.appendChild(newDiv);
@@ -3142,8 +3147,8 @@
                     "<br/><br/>" +
                     "<span style=''><label>禁用：<input type='checkbox' name='' id='iqxin-newDisabled' $checked$ style='vertical-align:middle;'></label></span>" +
                     "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-                    "<button id='editItemBoxEnter' class='editItemBoxEnter addItemBoxBtn'>确定</button>&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp" +
-                    "<button id='addItemBoxCancel' class='addItemBoxCancel addItemBoxBtn'>取消</button>" +
+                    "<button id='editItemBoxEnter' class='editItemBoxEnter addItemBoxBtn iqxin-enterBtn'>确定</button>&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp" +
+                    "<button id='addItemBoxCancel' class='addItemBoxCancel addItemBoxBtn iqxin-closeBtn'>取消</button>" +
                     "";
 
                 newDiv.innerHTML = innerHTML.replace("$strblank$", strblank)
@@ -3246,8 +3251,9 @@
                     "<textarea wrap='off' cols='45' rows='20' style='overflow:auto;border-radius:4px;'>" + JSON.stringify(userSetting,false,4) + "</textarea>" + 
                     "<br>" +
                     "<button id='xin-reset'>清空设置</button> &nbsp;&nbsp;&nbsp;" +
-                    "<button id='codeboxclose'>关闭</button> &nbsp;&nbsp;&nbsp;" +
-                    "<button id='xin-codeboxsave'>保存</button>" +
+                    "<button id='xin-copyCode'>复制</button> &nbsp;&nbsp;&nbsp;" +
+                    "<button id='codeboxclose' class='iqxin-closeBtn'>关闭</button> &nbsp;&nbsp;&nbsp;" +
+                    "<button id='xin-codeboxsave' class='iqxin-enterBtn'>保存</button>" +
                 "";
                 // console.log(JSON.stringify(getSettingData,4));
                 // console.log(JSON.stringify(getSettingData,null,4));
@@ -3441,6 +3447,10 @@
                     this.reset();
                 } else if( targetid === "xin-codeboxsave"){
                     this.editCodeBoxSave();
+                } else if( targetid === "xin-copyCode"){
+                    // this.copyCode();
+                    GM_setClipboard(JSON.stringify(getSettingData,false,4));
+                    iqxinShowTip("复制成功");
                 }
 
                 //  点击更多菜单
@@ -3606,6 +3616,20 @@
                 },2000);
             },
 
+            // 重新加本工具
+            reloadSet: function(){
+                var elems = document.querySelectorAll('#sej-container, #settingLayerMask, sejspan.sej-drop-list');
+                if (!elems) return;
+                console.log("elems: " + elems);
+                // return;
+
+                [].forEach.call(elems, function(elem) {
+                    elem.parentNode.removeChild(elem);
+                });
+
+                iqxinstart();
+            },
+
             // 设置按钮透明度设置
             rangeChange: function(bool){
                 // console.log(this);
@@ -3727,17 +3751,19 @@
                         "overflow: auto;" +
                         "font-family: arial,sans-serif;" +
                         "min-height: 100%;" +
-                        "font-size:medium;" +
+                        "font-size:16px;" +
                         "transition:0.5s;" +
                         "opacity:0;" +
                         "user-select: none;" +
                         "-moz-user-select: none;" +
+                        "padding-bottom: 80px;" +
+                        "box-sizing: border-box;" +
                     "}" +
                     "#settingLayer{" +
                         "display: flex;" +
                         "flex-wrap: wrap;" +
                         "padding: 20px;" +
-                        "margin: 25px;" +
+                        "margin: 25px 25px 100px 0px;" +
                         "background-color: #fff;" +
                         "border-radius: 4px;" +
                         "position: absolute;" +
@@ -3775,22 +3801,27 @@
                         "border-radius:4px;" +
                     "}" +
                     ".sejtitle:not([data-xin^='-']):hover{" +
-                    "background:#EAEAEA;" +
+                    "background:#cff9ff;" +
                     "}" +
                     ".sejcon [data-xin]{"+
                         "cursor: pointer;" +
                     "}" +
+                    "#settingLayerMask .sej-engine:hover{" +
+                        "background-color:#cff9ff" +
+                    "}" +
                     "#settingLayerMask [data-iqxindisabled='true']," +
                     "[data-xin^='-']{" +
-                        "background-color: darkkhaki;" +
+                        // "background-color: darkkhaki;" +
+                        "background-color: #ccc;" +
                         "text-decoration: line-through;" +
                         "text-decoration-color:red;" +
                         "border-radius:2px;" +
                         "transition:.3s;" +
                     "}" +
-                    "[data-iqxindisabled='true']:hover," +
+                    "#settingLayerMask [data-iqxindisabled='true']:hover," +
                     "[data-xin^='-']:hover{" +
-                        "background-color: coral;" +
+                        // "background-color: coral;" +
+                        "background-color: #ffa2a2;" +
                     "}" +
                     "#settingLayerMask label{" +
                         "cursor:pointer;" +
@@ -3869,12 +3900,13 @@
                         "visibility: hidden;" +
                         "opacity:0;" +
                         "position: absolute;" +
-                        "background: #ccc;" +
+                        // "background: #ccc;" +
+                        "background: rgba(207, 249, 255, 0.86);" +
                         "color: red;" +
                         "top: 50%;" +
                         "transform: translate(0,-50%);" +
                         "right: 0;" +
-                        "padding: 4px 3px 5px 6px;" +
+                        "padding: 3px 3px 6px 6px;" +
                         "border-radius: 2px;" +
                         "cursor: pointer;" +
                         "transition: .3s;" +
@@ -3884,7 +3916,7 @@
                         "border-radius: 50% 0 0 50%;" +
                     "}" +
                     ".iqxin-title-edit{" +
-                        "padding: 2px 3px 2px 6px;" +
+                        "padding: 0px 3px 6px 6px;" +
                     "}" +
                     "span.iqxin-additem {" +
                         "display: inline-block;" +
@@ -3955,12 +3987,13 @@
                         "border-radius: 4px;" +
                         "padding: 4px 10px;" +
                         "color: #333;" +
+                        "transition:0.3s;" +
                     "}" +
-                    ".addItemBoxBtn:hover," +
-                    ".addItemBoxBtn:focus{" +
-                        "color:red;" +
-                        "text-decoration:underline;" +
-                    "}" +
+                    // ".addItemBoxBtn:hover," +
+                    // ".addItemBoxBtn:focus{" +
+                    //     "color:red;" +
+                    //     "text-decoration:underline;" +
+                    // "}" +
                     "#xin-newtab select{" +
                         "height:auto;" +
                         "border: none;" +
@@ -3979,6 +4012,29 @@
                     "#titleEdit{" +
                         "width:6em;" +
                     "}" +
+                    // 按钮效果 ： 确定 取消按钮
+                    ".iqxin-enterBtn{" +
+                        "background: #84bb84;" +
+                         "border: none;" +
+                         "color: #fff;" +
+                    "}" +
+                    ".iqxin-closeBtn{" +
+                         "background: #ff6565;" +
+                         "border: none;" +
+                         "color: #fff;" +
+                    "}" +
+                    ".iqxin-closeBtn:hover{" +
+                        "background:#fff;" +
+                        "color: #ff6565;" +
+                    "}" +
+                    ".iqxin-enterBtn:hover{" +
+                        "background:#fff;" +
+                        "color: #84bb84;" +
+                    "}" +
+                    // ".iqxin-enterBtn:hover," +
+                    // ".iqxin-closeBtn:hover{" +
+                    //     "background:#fff;" +
+                    // "}" +
                     // 关闭按钮
                     "#xin-close{" +
                         "background:white;" +
@@ -4059,6 +4115,7 @@
             setBtn.addEventListener("click",setBtnStart);
         };
 
+        // 注册菜单
         GM_registerMenuCommand("search jump 搜索跳转设置",setBtnStart);
 
         function setBtnStart(){
@@ -4071,7 +4128,8 @@
                 var sej_addDel = document.querySelector("#xin-addDel");
                 var sej_edit = document.querySelector("#xin-modification");
 
-                sej_save.addEventListener("click",function(){sejSet.saveData();sejSet.hide();if(!getSettingData.debug)window.location.reload();});
+                // sej_save.addEventListener("click",function(){sejSet.saveData();sejSet.hide();if(!getSettingData.debug)window.location.reload();});
+                sej_save.addEventListener("click",function(){sejSet.saveData();sejSet.hide();sejSet.reloadSet();});
                 sej_close.addEventListener("click",function(){sejSet.hide();});
                 // sej_reset.addEventListener("click",function(){sejSet.reset();sejSet.hide();window.location.reload();});
                 sej_addDel.addEventListener("click",function(e){sejSet.addDel(e);});
@@ -4102,10 +4160,45 @@
     function reloadDebug(bool) {
         debug = bool ? console.info.bind(console) : function() {};
     }
-    // function reloadDebug() {
-    //     debug = prefs.debug ? console.debug.bind(console) : function() {};
-    // }
 
+    // 消息提示框
+    var iqxinTimerGlobalTip = null
+    function iqxinShowTip(text,duration){
+        var odom = document.querySelector("#iqixn-global-tip");
+        if(!odom){  
+            odom = document.createElement("div");
+            odom.id = "iqixn-global-tip";
+            odom.style.cssText = "" +
+                "opacity: 0;" +
+                "height: 25px;" +
+                "line-height: 25px;" +
+                "letter-spacing: 1px;" +
+                "font-size: 1em;" +
+                "color: #fff;" +
+                "padding: 5px 20px;" +
+                "border-radius: 5px;" +
+                "background-color: #666;" +
+                "position: absolute;" +
+                "z-index: 200000001;" +
+                "left: 50%;" +
+                "bottom: 5%;" +
+                "transform: translate(-50%);" +
+                "transition: .4s;" ;
+            document.body.appendChild(odom);
+        }
+
+        odom.innerHTML=text;
+        odom.style.opacity=1;
+
+        duration = duration?duration:1500;
+        //防止持续时间内多次触发提示
+        if(!iqxinTimerGlobalTip){
+            iqxinTimerGlobalTip = setTimeout(function(){
+                odom.style.opacity=0;
+                iqxinTimerGlobalTip = null;
+            },duration);
+        }
+    }
 
     // hash-query  不刷新页面的搜索
         // hashchange 和 popstate 都无法检测到谷歌和百度搜索时网址的变化，不理解
@@ -4157,4 +4250,5 @@
         // console.log("普通插入");
         iqxinstart();
     }
+
 })();
