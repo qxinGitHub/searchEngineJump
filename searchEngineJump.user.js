@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.12.5
+// @version        5.12.6
 // @created        2011-7-2
-// @lastUpdated    2017-10-04
+// @lastUpdated    2017-10-10
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -2320,7 +2320,7 @@
                     border: none;
                     padding: 0;
                     margin: 0 3px 0 0;
-                    vertical-align: middle;
+                    vertical-align: text-bottom;
                 }
                 
                 .sej-drop-list {
@@ -3825,6 +3825,9 @@
                     "}" +
                     "#settingLayerMask label{" +
                         "cursor:pointer;" +
+                    "}" +
+                    "#settingLayerMask .sej-engine-icon{" +
+                        "vertical-align:middle;" +
                     "}" +
                     "#btnEle2," +
                     "#btnEle{" +

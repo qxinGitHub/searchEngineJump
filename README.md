@@ -17,7 +17,10 @@ __说明__
 
 ### 更新历史
 
-> version 5.12.5   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-09-23
+> version 5.12.6   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-10-10
+- 修复图标偏移
+
+> version 5.12.5   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-10-04
 - 更改设置后无需重新加载页面
 - 设置界面调整： 配色 位置偏下 字体偏小
 
