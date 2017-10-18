@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.12.6
+// @version        5.12.7
 // @created        2011-7-2
-// @lastUpdated    2017-10-10
+// @lastUpdated    2017-10-18
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -2351,6 +2351,16 @@
                         opacity: 1;
                     }
                 }
+                @keyframes iqxinsejopen {
+                    0% {
+                        transform: scale(0.01, 0.01);
+                        opacity: 0;
+                    }
+                    100% {
+                        transform: scale(1, 1);
+                        opacity: 1;
+                    }
+                }
             */     
         }).cssText;
         document.head.appendChild(globalStyle);
@@ -2602,10 +2612,10 @@
                 var objLeft = obj.offsetLeft ;
 
                 var current = obj.offsetParent;
-        　　　　while (current !== null){
+                while (current !== null){
                     objLeft += current.offsetLeft;
-        　　　　　　current = current.offsetParent;
-        　　　　}
+                    current = current.offsetParent;
+                }
 
                 var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
                 // console.log("obj.offsetLeft",obj.offsetLeft);
@@ -2641,6 +2651,10 @@
                     obj.style.background = '#fff';
                     // obj.style.zIndex = '999';
                 }
+            };
+        } else {
+            window.onscroll = function(){
+                return true;
             };
         };
 
@@ -2686,16 +2700,6 @@
 
                 // 绑定事件
                 this.ele.addEventListener("click",that.domClick.bind(this),false);
-                // 拖拽
-                // var odivsdrag = document.querySelectorAll(".drag");
-                // [].forEach.call(odivsdrag,function(odiv){
-                //     odiv.addEventListener("dragstart",that.domdragstart,false);
-                //     // odiv.addEventListener('dragenter', that.domdragenter, false);
-                //     odiv.addEventListener('dragover', that.domdragover, false);
-                //     // odiv.addEventListener('dragleave', that.domdragleave, false);
-                //     odiv.addEventListener('drop', that.domdrop, false);
-                //     // odiv.addEventListener('dragend', domdropend, false);
-                // });
                 this.dragEvent();
                 // input[range]
                 that.rangeChange(true);
@@ -3029,12 +3033,12 @@
                 var newBox = document.querySelector("#newSearchBox");
                 if(newBox){
                     // newBox.style.transformOrigin = "bottom center";
-                    newBox.style.transform = "scale(1, 0.1)";
+                    newBox.style.transform = "scale(0.01, 0.01)";
                     newBox.style.opacity = "0";
                     setTimeout(function(){
                         // newBox.style.transformOrigin = "top center";
                         newBox.parentNode.removeChild(newBox);
-                    },350);
+                    },550);
                 }
             },
 
@@ -3109,6 +3113,7 @@
 
             // 界面 框：修改框
             addEditBox: function(e){
+                console.log(e);
                 this.addItemBoxRemove();
 
                 var target = e.target.parentNode.firstChild;
@@ -3135,6 +3140,7 @@
 
                 var newDiv = document.createElement("div");
                 newDiv.id= "newSearchBox";
+                newDiv.style.cssText = "top:"+(e.screenY-120) +"px;left:"+(e.screenX-140) +"px;";
                 var innerHTML=""+
                     "<span>标&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp题 : </span><input id='iqxin-newTitle' placeholder='必填' onfocus='this.select()' value='"+ otitle +"' /> <br/><br/>" +
                     "<span>链&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp接 : </span><input id='iqxin-newLink' placeholder='必填' onfocus='this.select()' value='"+ olink +"' /> <br/><br/>" +
@@ -3155,6 +3161,7 @@
                                     .replace("$checked$",strdisable);
 
                 this.ele.appendChild(newDiv);
+                setTimeout(function(){newDiv.style.cssText="";},10);
                 document.querySelector("#iqxin-newTitle").select();
             },
             addEditBoxEnger: function(){
@@ -3628,6 +3635,7 @@
                 });
 
                 iqxinstart();
+                iqxinShowTip("保存成功");
             },
 
             // 设置按钮透明度设置
@@ -3958,9 +3966,11 @@
                     "}" +
                     "#newSearchListBox," +
                     "#newSearchBox{" +
-                        "transition:0.3s;" +
-                        "transform-origin: top center;" +
-                        "animation: sejopen 0.3s;" +
+                        "transition:0.6s;" +
+                        // "transform-origin: top center;" +
+                        "transform-origin: center center;" +
+                        "animation-timing-function: ease-in;" +
+                        "animation: iqxinsejopen 0.8s;" +
                         "position:fixed;" +
                         "z-index:200000100;" +
                         "top:50%;" +
@@ -4016,28 +4026,21 @@
                         "width:6em;" +
                     "}" +
                     // 按钮效果 ： 确定 取消按钮
+                    ".iqxin-closeBtn," +
                     ".iqxin-enterBtn{" +
-                        "background: #84bb84;" +
-                         "border: none;" +
-                         "color: #fff;" +
-                    "}" +
-                    ".iqxin-closeBtn{" +
-                         "background: #ff6565;" +
-                         "border: none;" +
-                         "color: #fff;" +
+                        "box-sizing: border-box;" +
                     "}" +
                     ".iqxin-closeBtn:hover{" +
-                        "background:#fff;" +
-                        "color: #ff6565;" +
+                        "background: #ff6565;" +
+                    	"border-color: #ff6565;" +
+                        "color: #fff;" +
                     "}" +
                     ".iqxin-enterBtn:hover{" +
-                        "background:#fff;" +
-                        "color: #84bb84;" +
+                        "background: #84bb84;" +
+                    	"border-color: #84bb84;" +
+                        "color: #fff;" +
                     "}" +
-                    // ".iqxin-enterBtn:hover," +
-                    // ".iqxin-closeBtn:hover{" +
-                    //     "background:#fff;" +
-                    // "}" +
+
                     // 关闭按钮
                     "#xin-close{" +
                         "background:white;" +
@@ -4164,12 +4167,14 @@
         debug = bool ? console.info.bind(console) : function() {};
     }
 
-    // 消息提示框
+    // 消息提示框  
+        // 目前只是为了给用户一个反馈。 - 成功了么 - 嗯，成功了
     var iqxinTimerGlobalTip = null
     function iqxinShowTip(text,duration){
+        console.log("iqxin -- 消息提示框: ", text);
         var odom = document.querySelector("#iqixn-global-tip");
         if(!odom){  
-            odom = document.createElement("div");
+            odom = document.createElement("iqxinDiv");
             odom.id = "iqixn-global-tip";
             odom.style.cssText = "" +
                 "opacity: 0;" +
@@ -4181,7 +4186,7 @@
                 "padding: 5px 20px;" +
                 "border-radius: 5px;" +
                 "background-color: #666;" +
-                "position: absolute;" +
+                "position: fixed;" +
                 "z-index: 200000001;" +
                 "left: 50%;" +
                 "bottom: 5%;" +
