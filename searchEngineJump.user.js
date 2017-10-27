@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.12.7
+// @version        5.12.8
 // @created        2011-7-2
-// @lastUpdated    2017-10-18
+// @lastUpdated    2017-10-27
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -160,6 +160,7 @@
                     target: 'css;#s_tab',
                     where: 'afterEnd',
                 },
+                stylish:".headBlock,.se_common_hint{display:none !important}"
             },
             {name: "必应网页搜索",
                 url: /^https?:\/\/[^.]*\.bing\.com\/search/,
@@ -908,7 +909,7 @@
                 fixedTop:51,
                 style: "\
                     margin:10px auto -10px;\
-                    text-align:center;\
+                    text-align: center;\
                 ",
                 insertIntoDoc: {
                     keyword: function() {
@@ -923,7 +924,9 @@
                         }
                     },
                     target: 'css;#main',
+                    // target: 'css;#mainsrp-header',
                     where: 'beforeBegin',
+                    // where: 'afterEnd',
                 },
             },
             {name: "天猫搜索",
@@ -2237,7 +2240,7 @@
 
 
         if (!iTarget || !iInput) {
-            oconsole.log("目标有误： itarget：" + iTarget + "iInput: " + iInput);
+            console.log("目标有误： iTarget：" + iTarget + "\niInput: " + iInput);
             return;
         }
             
@@ -2643,15 +2646,30 @@
                     var marginRight = parseInt(objstyle.marginRight);
                     //console.log(objLeft,marginLeft);
 
-                    obj.style.position = 'fixed';
                     obj.style.top = height - marginTop + 'px';
                     // obj.style.left = objLeft + 'px';
                     // obj.style.left = objLeft - marginLeft + 'px';
-                    obj.style.left = marginRight - marginLeft!=0? objLeft - marginLeft+ 'px':objLeft + 'px';
                     obj.style.background = '#fff';
                     // obj.style.zIndex = '999';
+
+                    obj.style.left = getElementLeft(obj) - marginLeft + "px";
+                    if(obj.style.textAlign === "center"){
+                        obj.style.width = objstyle.width;
+                    }
+
+                    obj.style.position = 'fixed';
                 }
             };
+            function getElementLeft(element){
+            　　　　var actualLeft = element.offsetLeft;
+            　　　　var current = element.offsetParent;
+            　　　　while (current !== null){
+            　　　　　　actualLeft += current.offsetLeft;
+            　　　　　　current = current.offsetParent;
+            　　　　}
+                console.log(actualLeft);
+            　　　　return actualLeft;
+            }
         } else {
             window.onscroll = function(){
                 return true;
@@ -3480,20 +3498,25 @@
 
                 // 关闭设置菜单按钮
                 if(targetClass === "iqxin-setBtnOpacityRangeValue"){
-                    var odom = document.querySelector("#setBtnOpacityRange");
-                    var odomV = odom.value;
-                    // odom.style.backgroundSize = odom.value*100 +"% 100%";
-                    console.log(odomV,getSettingData.setBtnOpacity);
-                    if(getSettingData.setBtnOpacity<0){
-                        document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = odomV;
-                        odom.style.background = "-webkit-linear-gradient(left,#3ABDC1,#83e7ea) no-repeat, #fff";
-                    }else{   
-                        document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = "禁用";
-                        odom.style.background = "-webkit-linear-gradient(left,#bdbdbd,#c6c7c7) no-repeat, #fff";
-                    }
-                    odom.style.backgroundSize = odom.value*100 +"% 100%";
+                    if(~window.navigator.userAgent.indexOf("Chrome")){
+                        var odom = document.querySelector("#setBtnOpacityRange");
+                        var odomV = odom.value;
+                        // odom.style.backgroundSize = odom.value*100 +"% 100%";
+                        console.log(odomV,getSettingData.setBtnOpacity);
+                        if(getSettingData.setBtnOpacity<0){
+                            document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = odomV;
+                            odom.style.background = "-webkit-linear-gradient(left,#3ABDC1,#83e7ea) no-repeat, #fff";
+                        }else{   
+                            document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = "禁用";
+                            odom.style.background = "-webkit-linear-gradient(left,#bdbdbd,#c6c7c7) no-repeat, #fff";
+                        }
+                        odom.style.backgroundSize = odom.value*100 +"% 100%";
 
-                    getSettingData.setBtnOpacity = -getSettingData.setBtnOpacity;
+                        getSettingData.setBtnOpacity = -getSettingData.setBtnOpacity;
+                    } else {
+                        console.log("非chrome");
+                        iqxinShowTip("抱歉，目前只支持chrome类浏览器",2500);
+                    }
                 }
 
                 // 空白地方点击
@@ -4032,13 +4055,13 @@
                     "}" +
                     ".iqxin-closeBtn:hover{" +
                         "background: #ff6565;" +
-                    	"border-color: #ff6565;" +
+                        "border-color: #ff6565;" +
                         "color: #fff;" +
                     "}" +
                     ".iqxin-enterBtn:hover{" +
                         "background: #84bb84;" +
-                    	"border-color: #84bb84;" +
-                        "color: #fff;" +
+                         "border-color: #84bb84;" +
+                         "color: #fff;" +
                     "}" +
 
                     // 关闭按钮
