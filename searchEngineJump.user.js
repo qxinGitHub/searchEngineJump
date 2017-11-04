@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.12.8
+// @version        5.12.9
 // @created        2011-7-2
-// @lastUpdated    2017-10-27
+// @lastUpdated    2017-11-04
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -929,10 +929,30 @@
                     // where: 'afterEnd',
                 },
             },
+            {name: "天猫超市搜索",
+                url: /^https?:\/\/list\.tmall\.com\/search_product\.htm.*from=chaoshi/i,
+                enabled: true,
+                engineList: "shopping",
+                fixedTop:37,
+                style: "\
+                    z-index:9999;\
+                    margin: 2px auto -10px;\
+                    left:0;\
+                    right:0;\
+                    text-align:center;\
+                    position:absolute;\
+                ",
+                insertIntoDoc: {
+                    keyword: 'css;#mq',
+                    target: 'css;.headerCon',
+                    where: 'beforeBegin',
+                },
+            },
             {name: "天猫搜索",
                 url: /^https?:\/\/list\.tmall\.com\/search_product\.htm/i,
                 enabled: true,
                 engineList: "shopping",
+                fixedTop:34,
                 style: "\
                     margin: 10px auto -10px;\
                     text-align:center;\
@@ -2633,11 +2653,12 @@
                 // console.log("height参数：",height);
 
                 if(scrollTop <= objTop){
-                    obj.style.position = 'relative';
-                    obj.style.top = '0px';
-                    obj.style.left = '0px';
-                    obj.style.background = 'none';
+                    // obj.style.position = 'relative';
+                    // obj.style.top = '0px';
+                    // obj.style.left = '0px';
+                    // obj.style.background = 'none';
                     // obj.style.zIndex = 'auto';
+                    obj.style.cssText = matchedRule.style;
                 }else if(obj.style.position!="fixed"){
                     // console.log(scrollTop,objTop,scrollTop - objTop);
                     var objstyle = window.getComputedStyle(obj , null);
@@ -2653,6 +2674,13 @@
                     // obj.style.zIndex = '999';
 
                     obj.style.left = getElementLeft(obj) - marginLeft + "px";
+                    // obj.style.left = getElementLeft(obj) + "px";
+                    console.log("objLeft: ",objLeft,"marginLeft: ",marginLeft,getElementLeft(obj));
+                    // 知乎等网站的情况 利用 margin 居中
+                    if(marginRight === marginLeft){
+                        obj.style.left = marginLeft + "px";
+                    }
+                    // 淘宝等网站的情况 利用 text-align 居中
                     if(obj.style.textAlign === "center"){
                         obj.style.width = objstyle.width;
                     }
