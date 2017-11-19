@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.12.9
+// @version        5.12.10
 // @created        2011-7-2
-// @lastUpdated    2017-11-04
+// @lastUpdated    2017-11-19
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -779,6 +779,46 @@
             },
 
             // 资源下载
+            {
+                name: '海盗湾thepiratebay',
+                url: /^https?:\/\/thepiratebay\.org\/search/i,
+                engineList: 'bittorrent',
+                enabled: true,
+                style: '\
+                    text-align: center;\
+                    z-index: 9999;\
+                    ',
+                insertIntoDoc: {
+                    keyword: 'css;.inputbox',
+                    target: 'css;#SearchResults',
+                    where: 'beforeBegin',
+                },
+            },
+            {
+                name: '动漫花园',
+                url: /^https?:\/\/share\.dmhy\.org\/topics\/list\?keyword\=/i,
+                engineList: 'download',
+                enabled: true,
+                style: '\
+                    text-align: center;\
+                    ',
+                insertIntoDoc: {
+                    keyword: 'css;#keyword',
+                    target: 'css;.table.clear',
+                    where: 'beforeBegin',
+                },
+            },
+            {
+                name: 'ED2K',
+                url: /^https?:\/\/www\.ed2000\.com\/filelist\.asp/i,
+                engineList: 'download',
+                enabled: true,
+                insertIntoDoc: {
+                    keyword: 'css;.searchtxt',
+                    target: 'css;.topsearch',
+                    where: 'afterEnd',
+                },
+            }, 
             {name: "人人影视",
                 url: /^https?:\/\/www\.zimuzu\.tv\/search\//,
                 engineList: "download",
@@ -793,7 +833,7 @@
                     where: 'afterEnd',
                 },
             },
-            {name: '百度网盘',
+            {name: '酷搜-百度网盘',
                 url: /^https?:\/\/so\.cqp\.cc\/search/i,
                 engineList: 'download',
                 enabled: true,
@@ -1488,15 +1528,54 @@
         engineList.download = [];
         
         engineList.download[0] = {
-            name: '射手字幕',
-            url: 'http://sub.makedie.me/sub/?searchword=%s',
-            //favicon: 'http://sub.makedie.me/favicon.ico',
-            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAADeklEQVQ4jW2TfUjUdxzH35xZlpJHNczZtRNhrdQSC64Nw9Ya9EdjS5K2gcGkNEZImUNDc8mYpTnLh3l6nmg171LcMsGWcUete8CH65azrOYoyWVat9Dp7uH3+36+n/2xLWj0/v/1/uv1Al6x2KiotYlRUe8mLVr0fhZgfBNIAxAGAK8BKa9iXuyT1NRD5Rs3Xq1OS7t2HPAYgblSwNuYnW23trfbuk+e7P88MtLyBvD2S2CyVpv+MVDfFB8/Oe1285TTyW3h4dwGcDPAnqNHmZl5yuHg76KjuQbwfajRFAMAEhYseMdrNv9xv7mZz61cGRzv61MURVGHSkqECaBGQB0oLlaCwaB6LTtbrQFCLYDsNRgYAJABVA2Xl7Pf7w94T5wQfZmZ4tmtW3R52zY2A2QG2FNaKolIOnJzpWXVKtkSHq78sGGDAADkATbb7t0UDASU52NjNGG302hDAxkBaQKkEZC/VFSwEIL+fPiQA7Oz5K2oUDvWrVMAADlA1+WtW2UwGFT6CwrEUFmZGK6slGcjI/l6VpZ80NHB80+fSlUISUTy+d278uquXaJ382YGAO0+4EKvwcBzPp9yz2ym4epqMX3zppx2uVgIQczMwZkZFkLI0YYGPrtsGTUD0rJ+vQ+vA28dAC5d3LRJnX38WB2urKQJu52eOByyx2Dgni1bZGdCAt8+fZqJSNr37JF1gGpdsYJy09K+gh5I/3Lx4qF7VmvoL59PjHd3S6Eo7Dl2TF5MSWFnTg5bdToeqapiIpKO/fulEZDnY2PnAUQgFfisbefO0fEbN+av791Lv9tsNDc5KX0jI9I/NcVEJEdra3nk1CkmIunOzycTwC1a7QyAMMQA7xUuXdpXm5Q08sTlkmNWKw0cOSKnBwbkYFGR7E1PZ0tMDN85c4aFEOTKzycjIJsSEh79pzf2AZaf6+v9E06n0rJkifQUFfH9tjbqP3iQf9y+nesAvv3PgXQXFqqNgCxZs+bSC41TgMzzq1f7mzSagBEITbrd4reuLtGu09HElSvy19ZWfubxsBCCBsvKgiaAv0lO/umlFg7rdO3f6/XcGhHBnsJCvlNTwyaAL8TF8YPOThaqyiIU4sGCAjYtXBhau3z5R/8PMfpwRsbXB+Ljv/0UMB8KC+s5DnjrtNpHHXFxPJCXxw07dri+SEy0fKDX5/7LaP4Gg4AFwSni4+YAAAAASUVORK5CYII=',
+            name: 'BTSOW',
+            blank:true,
+            url: 'https://btso.pw/search/%s',
+            favicon: 'https://btso.pw/app/bts/View/img/favicon.ico'
         };
         engineList.download[1] = {
-            name: '人人影视',
+            name: '谷歌搜索',
+            blank:true,
+            url: 'https://www.google.com/cse?q=%s&newwindow=1&cx=006100883259189159113%3Atwgohm0sz8q',
+            favicon: icon.google,
+        };
+        engineList.download[2] = {
+            name: '动漫花园',
+            url: 'https://share.dmhy.org/topics/list?keyword=%s',
+            favicon: 'https://share.dmhy.org/favicon.ico'
+        };
+        engineList.download[3] = {
+            name: '海盗湾',
+            url: 'https://thepiratebay.org/search/%s',
+            favicon: 'https://thepiratebay.org/favicon.ico'
+        };
+        engineList.download[4] = {
+            name: 'veryCD',
+            blank:true,
+            url: 'http://www.verycd.com/search/folders/%s',
+            favicon: 'http://www.verycd.com/favicon.ico?v=2'
+        };
+        engineList.download[5] = {
+            name: 'ED2000',
+            url: 'http://www.ed2000.com/FileList.asp?PageIndex=1&SearchWord=%s&searchMethod=ED2000',
+            favicon: 'https://share.dmhy.org/favicon.ico'
+        };
+        engineList.download[6] = {
+            name: '人人影视字幕',
             url: 'http://www.zimuzu.tv/search/index?keyword=%s',
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAADQUlEQVQ4jS2SS2hcdRTGDwW789FUNFCRihtB3YoLNy6mKGJFbBeCgtqdKKh1J4SK0NZFFxEVgiSahy1im2Zim0wSG/ImadBkknY6mZjHzGSm87xz79z3vf87PxeTxbf8ft855zsiZ893HR0u+C9Oabw3bzBfDii7EVVXkch7XNmwuZy0+G3boWAr8nbEbDXg5FjRl7Pnu0T+PPCfSWi8NaczV/apuBF1T5GsBQxkHAYzDomcR9VVVN2IDS3kgyWDFyY1jtw48OXorTqvTDe4U/IpO21zw4vQvYjlUsByKUD3I3Q/YrcZcilp8dGSwWvTDR4fqyNPJTRGiz5FJ6LiKhZLPgVLYQYtnLAtK2hRtBW/b7t8n7T4bKXJGzM6JxIaMpj32Lciio7ids6jL+0wlvVoeBFRq0XUaqH7EZN5j6GMw5VNm69WTU7P6Tw3oSFbpmLfUgzsuFxct+hNOyw+9LGCCBW1UK0WdtBeZ/AQ8OVdk7dndU5OaMgDM+RiyubjJYML/1qMHqabQYuaG1FzI6ygPcV4zuNS0uLTlSanZnQ6ExryyZrJS1MaZ+YNerYcKm77iAVLMZb1GM96FCyF7rer7cs4fLho8OqdBo/eriMyUqNzvM7X6xZ5S1E+TN03Q65uu/yadujfcvjPCKm4EQe24psNi+cnNY6M1hC5XuXNZYN0U5G1IzYbIQVbUXEjto2Q7ns2361ZfLtusa6F5OyIjKk4vdJEhmtIbEYnqYc8MBV/VwLemde5sGmRsxRFp/04X6yavL9gcGbBYLoSkDYVSSMkNqsjSS0gZYTEiz5PT2h0JjRentL4fM1kx1RkrYjFasDrszrPTmicmNQYKfqkjJBkI0BSDZ943qVjuIZcryIjNR75q85jY3XevdvkfjMkbSpulXyeHK8jw1U6btYYybukGgES32tyfHAf6c8jV0vIH5U2aLiK3KwRWzBI6iEpQxEv+HTcqCIDBTqGsozsmcix7lVffryH9GSQvj2k/wAZetiGXSsj18qcmtZINgJSekA853B8YBf5OcUTP/zji8TOdcnlJV+615Gf7iM9W8gvO0jvHtK331bvHrHxIsm6R0rziO8aHOte9SV2rut/2AZGwaMpOBUAAAAASUVORK5CYII=',
+        };
+        engineList.download[7] = {
+            name: 'sub HD 字幕',
+            blank:true,
+            url: 'http://subhd.com/search0/%s',
+            favicon:"http://subhd.com/images/apple-touch-icon-57x57.png"
+        };
+        engineList.download[8] = {
+            name: '酷搜-百度盘',
+            blank:true,
+            url: 'https://so.cqp.cc/search?w=%s',
+            favicon:"https://cqp.cc/favicon.ico"
         };
 
         // 购物列表
@@ -1829,6 +1908,9 @@
             "status":1,
             "message":"$相关说明$(status: 如果设置出错，去Tampermonkey中将该脚本复原出场设置或进入其Storage,将其设置为0，可清空设置)..."+
                     "(version: 若有新功能加入，靠这个版本号识别)..." +
+                    "(addSearchItems: 允许更新时，添加新的搜索到你的搜索列表，将来更新使用)..." +
+                    "(modifySearchItems: 允许更新时，修改你的搜索列表中的项目,将来更新使用)..." +
+                    "(connectToTheServer: 允许连接到我的服务器(更新列表，将图标转换为base64),将来更新使用或永不使用)..." +
                     "(newtab: 0为默认设置，1为新标签页打开)..." +
                     "(foldlist: 折叠当前搜索分类列表。true为折叠，false为展开。)..." +
                     "(settingOpacity: 设置按钮的透明度，值为0-1之间的数，0为透明，1为完全显示，中间值半透明。注：-1为直接关闭按钮，关闭之前请确定自己知道如何再次打开它)..." +
@@ -1837,13 +1919,16 @@
                     "(engineDetails: 第一个值为分类列表标题名称，第二个值与enginelist相关联，必须匹配,第三个值true为显示列表，false为禁用列表。可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页，同脚本中的rules设置相同，优先级高于。自带了360搜索，可仿写)...",
-            "version":1.8,
+            "version":1.9,
+            "addSearchItems":true,
+            "modifySearchItems":true,
+            "connectToTheServer":true,
             "newtab":0,
             "foldlist":false,
             "setBtnOpacity":0.8,
             "debug":false,
             "fixedTop":true,
-            "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],['html', 'htmls',false],['mine', 'mine',false]],
+            "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],['html', 'htmls',false],['mine', 'mine',false],["下载","download",false]],
             "engineList":{},
             "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding-left:35px;margin-top:0px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#header", "where": "afterEnd"}}]
         }
@@ -1866,29 +1951,35 @@
                 // 1.4更新
                 // getSettingData.foldlist = settingData.foldlist;
                 // 1.5更新
-                if(getSettingData.versiion===1.4){
-                    getSettingData.setBtnOpacity = settingData.setBtnOpacity;
+                // if(getSettingData.versiion===1.4){
+                //     getSettingData.setBtnOpacity = settingData.setBtnOpacity;
 
-                    var tempDetails = getSettingData.details;
-                    var tempDetalisL = tempDetails.length;
-                    for(let i=0;i<tempDetalisL;i++){
-                        getSettingData.engineDetails[i][2] = tempDetails[i]>=0?true:false;
-                    }
-                    delete getSettingData.details;
-                }
+                //     var tempDetails = getSettingData.details;
+                //     var tempDetalisL = tempDetails.length;
+                //     for(let i=0;i<tempDetalisL;i++){
+                //         getSettingData.engineDetails[i][2] = tempDetails[i]>=0?true:false;
+                //     }
+                //     delete getSettingData.details;
+                // }
 
-                // 1.6更新
-                if(getSettingData.versiion===1.5){
-                    getSettingData.rules = settingData.rules;
-                }
-                // 1.7更新
-                if(getSettingData.versiion===1.6){
-                    getSettingData.debug = settingData.debug;
-                }
+                // // 1.6更新
+                // if(getSettingData.versiion===1.5){
+                //     getSettingData.rules = settingData.rules;
+                // }
+                // // 1.7更新
+                // if(getSettingData.versiion===1.6){
+                //     getSettingData.debug = settingData.debug;
+                // }
                 // 1.8更新
-                getSettingData.fixedTop = settingData.fixedTop;
+                // getSettingData.fixedTop = settingData.fixedTop;
+                // 1.9 更新
+                getSettingData.engineDetails = getSettingData.engineDetails.concat([["下载","download",false]]);
+                getSettingData.engineList.download = engineList.download;
 
                 // 更新本地版本 其他相关信息
+                getSettingData.addSearchItems = settingData.addSearchItems;
+                getSettingData.modifySearchItems = settingData.modifySearchItems;
+                getSettingData.connectToTheServer = settingData.connectToTheServer;
                 getSettingData.version = settingData.version;
                 getSettingData.message = settingData.message;
                 GM_setValue("searchEngineJumpData",getSettingData);
@@ -2675,7 +2766,7 @@
 
                     obj.style.left = getElementLeft(obj) - marginLeft + "px";
                     // obj.style.left = getElementLeft(obj) + "px";
-                    console.log("objLeft: ",objLeft,"marginLeft: ",marginLeft,getElementLeft(obj));
+                    // console.log("objLeft: ",objLeft,"marginLeft: ",marginLeft,getElementLeft(obj));
                     // 知乎等网站的情况 利用 margin 居中
                     if(marginRight === marginLeft){
                         obj.style.left = marginLeft + "px";

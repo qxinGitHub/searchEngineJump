@@ -17,6 +17,10 @@ __说明__
 
 ### 更新历史
 
+> version 5.12.10   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-11-19
+- 增加了下载搜索列表, 默认隐藏 [感谢建议](https://greasyfork.org/zh-CN/forum/discussion/31317/x)
+- 增加了几个或许将来要用到的设置选项
+
 > version 5.12.9   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-11-04
 - 天猫超市导致源网页侧边栏错位的问题 [感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/30899/)
 - 修复上个版本导致知乎固定到顶栏错位的问题
