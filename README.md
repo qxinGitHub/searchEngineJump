@@ -17,6 +17,10 @@ __说明__
 
 ### 更新历史
 
+> version 5.12.11   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-11-27
+- 翻译列表增加海词搜索[感谢建议](https://greasyfork.org/zh-CN/forum/discussion/31670/x)，老用户默认禁用
+- 淘宝页面鼠标划过商品后，会遮挡工具栏的问题
+
 > version 5.12.10   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-11-19
 - 增加了下载搜索列表, 默认隐藏 [感谢建议](https://greasyfork.org/zh-CN/forum/discussion/31317/x)
 - 增加了几个或许将来要用到的设置选项
