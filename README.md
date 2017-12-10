@@ -17,6 +17,10 @@ __说明__
 
 ### 更新历史
 
+> version 5.12.12   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-10
+- 知乎搜索界面改动
+- 搜索列表变动：html搜索列表合并至mine中
+
 > version 5.12.11   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-11-27
 - 翻译列表增加海词搜索[感谢建议](https://greasyfork.org/zh-CN/forum/discussion/31670/x)，老用户默认禁用
 - 淘宝页面鼠标划过商品后，会遮挡工具栏的问题
