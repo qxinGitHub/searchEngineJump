@@ -17,11 +17,14 @@ __说明__
 
 ### 更新历史
 
+> version 5.13.1   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-11
+- 优酷搜索连接变动[感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/31999/x)
+
 > version 5.13.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-11
 - 更改排序方式，使其更直观易用
 
 > version 5.12.12   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-10
-- 知乎搜索界面改动
+- 知乎界面改动
 - 搜索列表变动：html搜索列表合并至mine中
 
 > version 5.12.11   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-11-27

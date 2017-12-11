@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.13.0
+// @version        5.13.1
 // @created        2011-7-2
 // @lastUpdated    2017-12-11
 
@@ -448,7 +448,8 @@
             
             // 视频网站
             {name: "优酷",
-                url: /^https?:\/\/www\.soku\.com\/v\?/,
+                // url: /^https?:\/\/www\.soku\.com\/v\?/,
+                url: /^https?:\/\/www\.soku\.com\/search_video\//,
                 engineList: "video",
                 enabled: true,
                 fixedTop:54,
@@ -1421,7 +1422,8 @@
         };
         engineList.video[2] = {
             name: '优酷',
-            url: 'http://www.soku.com/v?keyword=%s',
+            // url: 'http://www.soku.com/v?keyword=%s',
+            url: "http://www.soku.com/search_video/q_%s",
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABnElEQVQ4jZ2Sv2vCUBDHv4OFYEAeRrFihjeYLl3eILRDhkcXKQg6tWAHs4W6WBAq2CWCFLe4CS7ZOhWyuHTK4uDmpKtD/4As3dOhOYk/SrGBg3fc+37u7vsCAOztPud/DXhEseoUN7cX6Qbi7/Yi3Vh1ihuqT+pZDwADAIyqzE2KKWatfEDiY/W5XVgCAGatfEBdm0K1mkK1+pI5NAF1jgWsKVSLIE2hWr92GFWZCwCUJ1ea24Xl14BHfckcAIDJFTmpZz0qUJhckX8CyINRlbnnDDw5kckVmVzB5Ip8vMo87ayw/wIUnz093AceMxkAWF8yh8z87Onh233Ov8yfCbpgckVSo7ldWMa7s1h+zjV77Gfunl0SKNcNS+t6AUqGUG8enuhMdc0e+5o99gEAqXJF6tN1pE/XEYkpz9Tajtb1AjoTgOqpckXuAJLiorsIUTLESYB9MQD8C5B/eV+SSScBNHvs70MIwFpD78CzkiEOTGStoZcEZmptZ5t3vaDoLkJ9uo4Krx+bn3lKhtjuTT9GDImfliWhW3Hs0Tdk6pGCP1WKswAAAABJRU5ErkJggg==',
         };
         engineList.video[3] = {
@@ -1953,10 +1955,11 @@
                     "(engineDetails: 第一个值为分类列表标题名称，第二个值与enginelist相关联，必须匹配,第三个值true为显示列表，false为禁用列表。可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页，同脚本中的rules设置相同，优先级高于。自带了360搜索，可仿写)...",
-            "version":1.91,
+            "version":1.92,
             "addSearchItems":true,
             "modifySearchItems":true,
             "connectToTheServer":true,
+            "closeBtn":true,
             "newtab":0,
             "foldlist":false,
             "setBtnOpacity":0.8,
@@ -1985,7 +1988,7 @@
                 // 1.4更新
                 // getSettingData.foldlist = settingData.foldlist;
                 // 1.5更新
-                // if(getSettingData.versiion===1.4){
+                // if(getSettingData.version===1.4){
                 //     getSettingData.setBtnOpacity = settingData.setBtnOpacity;
 
                 //     var tempDetails = getSettingData.details;
@@ -1997,30 +2000,38 @@
                 // }
 
                 // // 1.6更新
-                // if(getSettingData.versiion===1.5){
+                // if(getSettingData.version===1.5){
                 //     getSettingData.rules = settingData.rules;
                 // }
                 // // 1.7更新
-                // if(getSettingData.versiion===1.6){
+                // if(getSettingData.version===1.6){
                 //     getSettingData.debug = settingData.debug;
                 // }
                 // 1.8更新
                 // getSettingData.fixedTop = settingData.fixedTop;
                 // 1.9 更新
-                if(getSettingData.versiion===1.8){
-                    getSettingData.engineDetails = getSettingData.engineDetails.concat([["下载","download",false]]);
-                    getSettingData.engineList.download = engineList.download;
+                // if(getSettingData.version===1.8){
+                //     getSettingData.engineDetails = getSettingData.engineDetails.concat([["下载","download",false]]);
+                //     getSettingData.engineList.download = engineList.download;
 
-                    getSettingData.addSearchItems = settingData.addSearchItems;
-                    getSettingData.modifySearchItems = settingData.modifySearchItems;
-                    getSettingData.connectToTheServer = settingData.connectToTheServer;
-                }
+                //     getSettingData.addSearchItems = settingData.addSearchItems;
+                //     getSettingData.modifySearchItems = settingData.modifySearchItems;
+                //     getSettingData.connectToTheServer = settingData.connectToTheServer;
+                // }
 
-                // 1.91 更新 添加海词； 版本号已蹦，应该从1.01而不是1.1开始计算。
-                if(getSettingData.addSearchItems && getSettingData.engineList.hasOwnProperty("translate")){
-                    engineList.translate[7].disable = true; // 对于老用户，默认禁用的状态添加
-                    getSettingData.engineList["translate"].push(engineList.translate[7])
+                // 1.91更新 添加海词； 版本号已蹦，应该从1.01而不是1.1开始计算。
+                // if(getSettingData.addSearchItems && getSettingData.engineList.hasOwnProperty("translate")){
+                //     engineList.translate[7].disable = true; // 对于老用户，默认禁用的状态添加
+                //     getSettingData.engineList["translate"].push(engineList.translate[7])
+                // }
+
+                // 1.92更新 优酷搜索变动
+                if(getSettingData.modifySearchItems){
+                    getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"http://www.soku.com/v?keyword=%s","http://www.soku.com/search_video/q_%s")
+                    //  5.11.0(2017.8.18) 的变动，但从未主动去修复它
+                    getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"http://www.jav11b.com/cn/vl_searchbyid.php?keyword=%s","http://www.ja14b.com/cn/vl_searchbyid.php?keyword=%s")
                 }
+                getSettingData.closeBtn = settingData.closeBtn;
 
                 // 更新本地版本 其他相关信息
                 getSettingData.version = settingData.version;
@@ -2032,10 +2043,6 @@
                  
         } else {
             console.log("未发现本地列表");
-            // "details":[],
-            // "engineDetails":[],
-            // "engineList":{}
-            // console.log(engineList.details);
             settingData.engineList = engineList;
             console.log("初始化：",settingData);
 
@@ -2069,6 +2076,20 @@
         ///test -------------- 测试 start
         debug("searchEngineJump test location.href: ",window.location.href)
         ///test -------------- 测试 end
+
+        // 更新已过期的搜索链接
+        function modifySearchItemsFun(engineList,oldURL,newURL){
+            for(let value in engineList){
+                var item = engineList[value]
+                for(let i=0;i<item.length;i++){
+                    if(item[i].url === oldURL){
+                        item[i].url = newURL;
+                        return engineList;
+                    }
+                }
+            }
+            return engineList;
+        }
 
         // parseUri 1.2.2
         // (c) Steven Levithan <stevenlevithan.com>
