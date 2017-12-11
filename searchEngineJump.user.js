@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.12.12
+// @version        5.13.0
 // @created        2011-7-2
-// @lastUpdated    2017-12-10
+// @lastUpdated    2017-12-11
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -1557,7 +1557,7 @@
             name: 'BTSOW',
             blank:true,
             url: 'https://btso.pw/search/%s',
-            favicon: 'https://btso.pw/app/bts/View/img/favicon.ico'
+            favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAAAIACJAQAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAVBJREFUeJzVkk0rhGEUhq/neT9mGGYwZSXlIz9gsiJWo1gQxaT8BUuUnSws/ARbyyklCzXKwsJCERurIWtlZmpoGu/rHAtiGDSxctdZPJ3T/dzn6sC/UHqd9PQm6a96thGDeBPXiQgHI6ukfmWws8x1oqWF7iSnw0us1PZM7SOzTX6gLd4XiqChIaiCBoIIqBjCRyiU7ymUyOY2yNQnEDoAjLzGM2AsGPv+T3usmZ7O2NzsGlqXYOaQfJeb6JOqoAEEgUEDgRCeAqAC9klxQwirUCw9NELgZ5ndcTTe6RBFiKsSVYhZiPrQ7ILnAP5recAtV2aL/g8Q9yfR1qQl6guOtURc8BzBcwy+A54LvgXfU/wris72C6s3iBN7mPsbyVbu3mAiNfVJhW/3yQ2ycjKPXi5a/TWUoyFSFwvo+RS9jczXXeLoMWdaZkzKjRn8Wc/HVG5h5+kwfgAAAABJRU5ErkJggg=='
         };
         engineList.download[1] = {
             name: '谷歌搜索',
@@ -1568,23 +1568,23 @@
         engineList.download[2] = {
             name: '动漫花园',
             url: 'https://share.dmhy.org/topics/list?keyword=%s',
-            favicon: 'https://share.dmhy.org/favicon.ico'
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAC1ElEQVR4nCXTyY7cRACA4b9c5a3tdi8z6e4JsygzTKJIcwJxyTPwfDwJnDjNBQgicCFESiRamSW9jt2r7barXBz43uETP02srSws04JD7tBUPv0RtHwAGC8tgxC+fyV4mMPNAMZryy9Lwd2TRu01VAeYTva8+e6YsoDbv1LiqMdun+HJkJeXHlHT8CJy+JxazjoOL2rBeC5QsxWkU8siaxjfafqx4OV1F7B0vA6ykdS1ZaYl/ZZhGCkeU83bj5pdblGzZcFwFHJ+McBRmnRnCbFIqSiNBXPAOIJ3D4ZAKk5VzqxUBL2Q/SJHbfca12wJByEEClNpssaQaUGaHohcwdmRywKXNKv48aHg8qsu89UWmgbneNgmLeHnX6fcTyzSkRS1x+0fcz5/qdkeJFFXIQr4+EmzLRLefdiQO22c0wRV19AKY6Ijh0KDdOH+3wkXF22+vW7DwfL7+wWLDBrj8eabFunGMF8tifMYB8ANBYd8QSM0xhquzk+oVw1uU+DFFiE6CNenn0ieJZrLkU9CyJFyUSjLdLzm9NmAr08UERWTnWCyXbOpz+j4lkHHkEQtzp9LTA1uy2KDkNqxqDKzXA18Li5CdjuN9jzu7kp6SUIImHXDsB3QTqB0DOVBMh8f2G+h7AWoOBBcn4ek2YFKeJCDFgIAzwKOZK/hyyMsVxnrrOLm9Qjh7OiXCnW/2PG87YGS1AZkY0iOFPapAqD2NL/9uSQXCa7oEokNw5Fks4tQyqB6wza3759wNLy+iYmkR7XLKfGQLpjG5eqqy9Oqpt2SXJ/3iY3huC/5NN6jAgkngx7T6YIo8FGqIokUs6xmU0CrbXl1EsDAASnAVJSVQgNRO8DphJZ+1wFASuh0PPbZmtNRl7d/PzDNGkoLbvh/z9z4PK5hNsnoJBLxwz/Wrraa+RPYpiA2UFiN348BeBznWEcTBz6HqqRxXOLQ5fTYJ+pI/gNDt17HeSMTvQAAAABJRU5ErkJggg=='
         };
         engineList.download[3] = {
             name: '海盗湾',
             url: 'https://thepiratebay.org/search/%s',
-            favicon: 'https://thepiratebay.org/favicon.ico'
+            favicon: 'data:image/jpeg;base64,AAABAAEAEBAAAAAAIAA2AgAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgCAAAAkJFoNgAAAf1JREFUeJx9kj9r8nAQxy8xLQatGmPtIoiigoKCoAZHyeQutEtBHHRpl7yELq6+AP+8AIcWOxURQRzMIDhEyeLilIKDQYUg+eWeIT48VujzWe4Ovtzd9zgKEeEvl/kVFEXZCWMHVVUlSTIMg6bpK6ndpV6vPz4+nmtE7Pf7v/W2qVQqtvI8gWHOyc3NDSGE4zhCyH6/BwDLshDx9vbWFvxYIJ1Oz+fz5+fnXq8ny3KtVnt/f282m5f2mMtFWZblef50Or2+vjqdTtM0X15eFEWx5/zzhIjtdtsuvV7v5cy7uzuHwwEAhULhdDoh4vVNdF0Ph8MulwsAEomEYRiEEAA4Ho9nD8vlUpIk0zTtToIg5PN5n88HAMViURAEjuMAIBgMMgxDCKHG43GpVHp7e3O73Q8PDxzHHQ4H0zTtVVmWpWmapulcLjcYDKbTKTMcDgFgPB5blhWJRDKZjCiKqVTKPvRut1utVqqqdrvdVquVTqepr6+vz89PRVEajcZiseh0OtvtNhAIxONxTdMMw4jFYqFQ6Pv7W9M0QgiFiJqmJZNJn88XjUbv7+89Hk8ikbAsS5ZlVVV5ns9msx8fH6IoVqtVQMT9fu/3+yVJ0nUdf6Lr+mQyeXp6AoDZbIaIgIimaY5Go+12i7+w2WzK5fJ6vUZE6j8vfQki2h/+B8UpLqpv9VygAAAAAElFTkSuQmCC'
         };
         engineList.download[4] = {
             name: 'veryCD',
             blank:true,
             url: 'http://www.verycd.com/search/folders/%s',
-            favicon: 'http://www.verycd.com/favicon.ico?v=2'
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACbklEQVR4nK2RPWhTYRSGn+/+5LdJk2pDa6soVkEH8R8Vi9VJXAQHcbQ46mBVFBe1gzjVRVFcXBy0VITSQeiirT+gWAfFtpZq06ZN0jbeNJrcJPfe3M+hWIhdFH3hwFne53DeF/5RInFzo/Ti3RE79/H93xhTt3fO6FpgUOTuH9n3Y2H8FUKhaWFUFZ24AMbljisY2b3lvDllKvL6+gc9UwDJW1vOVexSly50Gjo+CQFg3G21nZKhlaVNtP78nG9Pa8yZiOOm0pRTKYpTE+TeviZ60vvctgptITWIDK9ZF23vjSsA0bTi99ZohII+svNdMSc+icxkqMxncOZnsYxviCaJY5lttbEAhINOtL03DqAAiM4BR0Q2m2qdwO/3YIx04GYNKrksTjaDlfhCzSGHyAYfwiupXav6f2Wh/FrkylMBNIm/ReAJeyjVdWPNJLAys9SeLhPZFED4XEzW0HPBWVUFkFcPaD4JpfIBUCG42UWps9FaU4TPzBFobkGNVECFJxdHcG2zswqQHm1ottNJFt55lmryN5fxbJ1Fb9yPvmISgOTXFrAtXMfeWAVo7O6Ol6anCdhFRntWI20BlovulejqIFgSaQue3RgGwOP1Di/LwOh7TCExhf1mAmmpuEUFNy8Wp6gw9KieSrmIrmvU1K+4tAyQQ9yZ+/yB76bJ0/MlZIElgCzAcN/iGyFNcw739xvLALteDJ1Omko+WZRkv5nY+QZkAWQBeq9JcCyiAR+xVY1LFVYBAI5PxEMef+ilJlUenR3HzSu4hTDWbImVQZ91YmxMHBwYcPgTPdyy7Vj63tFE3+7tZ6/+dui/6ifLWRWj5AzXVgAAAABJRU5ErkJggg=='
         };
         engineList.download[5] = {
             name: 'ED2000',
             url: 'http://www.ed2000.com/FileList.asp?PageIndex=1&SearchWord=%s&searchMethod=ED2000',
-            favicon: 'https://share.dmhy.org/favicon.ico'
+            favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAAAIAAwAgAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAfdJREFUeJylkUtoE0Ech79dJWYjSau2qcW0jZDSLoZYRfFRsLYHEcWD9OCh14AgiIg30YOCJzGHetNcLZ681GcPFgMaPTT1AaZK0NAmbvPYWBOy26YJ66EkkF2bi38YGGbm++Y/vwFTBWXJMK+1KvF/YICtZrjHLUFcbykLx3XBIgCYOOUj8jFNUJaM0PQUupJEU37ye+EzyaTC8+hiE9wQBGXJ6HFLLBd0lrI6oekp1NgsWuYX2cQ3Hs0kLDdbOnButzPQ7+HouTOkZx7z+tU75r/nNwUtgmP+LtScykLiJUmlzI9UoSXYENTDKmo1RAFezC9z6+YVvn76gudt1Ehlii1FQj2Di+NDlEpl9o5cwHv+OoIgcP/SaTq0Re7GOxpA7EOkSSbWO9jm2sGefQEq+Tiqmmf05Cj7nX/oP+Dj6cMbzL1/w+S92xw8cqLpe8V6e06vj+6xcWztO1GfXOXaYI4aa5TXJe48eMburk6Gh0f+nYHDvoXKSgE1NgvA2koBgIxSoluWmTg+xuFDQ+TzWaugPpmLRPEHBgAoqwr6amXjwK4+ens3RrVatYYYlCXD43aQymqWTdfZywT8gzgcdirrVUKTYUuIQlCWDNnbTp/Hha5VSCwVSec0wnFdMAdmhhtPEEWBzjYbtNnQV2ukc9qmgLn+AvHN01EAtz5WAAAAAElFTkSuQmCC'
         };
         engineList.download[6] = {
             name: '人人影视',
@@ -1595,7 +1595,7 @@
             name: 'subHD字幕',
             blank:true,
             url: 'http://subhd.com/search0/%s',
-            favicon:"http://subhd.com/images/apple-touch-icon-57x57.png"
+            favicon:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFn0lEQVR4nM1Xa2xURRT+zu3SFtKXZZeHYqFQwGxVEhQLhFQRjPERwdpdCGWDGCRYa/ylRkNYN/pLNARsiWB8pAuN3ZboH5GXGEFbaqIGlFViMXERIdtS6VI3bLt7jz/mzr1z7+5WSfzhSe7O7J1vzvnmzJkz5xKkBIMaQiE9q6+OA1ganbJOBwdAVAWgxhjtB3NMA4V7vPGOrLlOUfTTuEAAXl+ksAyDjQTeD7CYQkYLFiB2qmEwtKYE3N3RLv/oePrHJbDE13oURCv/ieS4wnyst6vlgRsi4PVFCssRT4FyDMvFZxsCg6whB2aYPUW5vEFyb6UsPuv+gojqWdHDxu+cqkpsbV6B+dUeMUYEZoauM/pjV/Dym5/h8sA1qBuktjrzib7aweWqPZtxb7TWBaJ6NukTZH9+tQfh7WtN42LRgqamEebNciOyaz0qKyYp8+wtkVbvjda67B5QZImvje28xSpffPpePLbCC8q1JQYRdez1ts9x8Mtzpg6n9Ha1ZO+UGXAOvx1v34ziIov0wNAItu08ivOxKxhJjqKitBgvbKpH/aLZKCiwHLpyw7tIXh9zEIUIKyUwCTCCjgZSBsxkQET4+qNmU8Hezj58eOBb5RhKvFC1/621qJ5RCQAYuprE6uZ2pDMZB1b0h9lTFPWeTWsAUIbBRmbBkJnM9pap5bYVtH/yHRgqBgCT+X/bziMmtrJiEhZ6b7Zh1X4ZBhsRCuma4M77FUeZveoZN4GZzSeT0bMw6i73/zZkw294/C7kF2FTE8eQDbdKdaL/++VhEJEZYBNcBVkYa554hq4mcT01huupMfTHrljjDhzAQDCo0VJf23omhPMELHoiVgwwM+qb3kEmnQd8g0JAQNPBARGeMOJDYUiM7kNnrAlEONnxDNq3+7HmkTuNOapHlFa+lxip20ox0KEHNBBVqSmXQWCyEsjb+3rxffSijXnNTDee37AMu19djWnuUjDJeQDIaOV/qRMAG3YEHgBpVVTnax3TiFxsHVJBz/wvZLN/ETY+sSivO5kZOz44ia7DP9idbHpFuT2N9wykqc7XOkYEl8AohuW2KNsts+KqFd68RABg647DON533nFxqYtigzTSVOdv/UkDbhNYAueMRid7gb7njhl4ZctyTJlcYhKU90PnwdPY1d4zrj4GftaIOSbYwcgWyHHCWHnHxnvGN2cuoKEljI+P/Ihrf6VM40SENQ8vwIPL5madQlL0EXOM6nxt6zVC+L84WJXlE/Hp3o22d0vW7M6xdiHMCGh93ngHwGJlMPMriBlfdWxBb2czejubse7RBVByKmRsk3QNM/4cTqLh2fYsg+Y5YHsi6vPGOzQJk+qs/7DdbvfVzYZMFuS4643zB2bCpYERG4GykiIFaxQ3bDyhkK4hFNKZqckYhRkPIFy8PGzm9dvnTjOdZwYWZ4dYUWGB7T5IjKSsRdt90wQYFVEC7m6ZCNXnaM8vAmrkg+meUocPyExy8rl/8Ry7Hce4xCfg7hYEgkEt2uUf1cHHJEJ4iLGns8+m60BrAFM9JQIDibUsTPOUYFuLVUSnM7qCYblT0MHHot6zaQSDmq3GWuxvtTmKAFRNr8Ce1xpQXjrRUpzOINofx6nTMUwsnoD6u6tx6/QKaIq6P+IJPPlSBNeSKVOXzEu9kRwlGSA/QgZSNrQh4Tf8qJnpxr+RS/EEGp7bl13CM5CAvTzPW5ZLejIjFxa6cOi9p1BcNGFc45mMjoc2vY+RZCqLAOt84pSjLLeXuQYZb7TWVQ5RIzqvj4ICDYFVC1EzazLmzXJjdCyDc78O4PyFIUQOnkE6rdvrWqMzDFEDOgn/Dz7NHFvgFG+01lWGwUYitW502nBcegDAJD5Oc6zaTiCX5PtUDwY18XmuB0BaFYAaBgNM/QSOMSgsUjsw7ie6ovNvYr7e8pZ+VIUAAAAASUVORK5CYII="
         };
         // engineList.download[8] = {
         //     name: '酷搜-百度盘',
@@ -2890,11 +2890,11 @@
                 var odivsdrag = document.querySelectorAll(".drag");
                 [].forEach.call(odivsdrag,function(odiv){
                     odiv.addEventListener("dragstart",that.domdragstart,false);
-                    // odiv.addEventListener('dragenter', that.domdragenter, false);
+                    odiv.addEventListener('dragenter', that.domdragenter, false);
                     odiv.addEventListener('dragover', that.domdragover, false);
-                    // odiv.addEventListener('dragleave', that.domdragleave, false);
+                    odiv.addEventListener('dragleave', that.domdragleave, false);
                     odiv.addEventListener('drop', that.domdrop, false);
-                    // odiv.addEventListener('dragend', domdropend, false);
+                    odiv.addEventListener('dragend',that.domdropend, false);
                 });
             },
             addContent: function(){
@@ -3718,11 +3718,12 @@
                     e.dataTransfer.setData("text/html",dragEl.innerHTML);
             },
             domdragenter:function (e) {
-                e.target.classList.add('rwl-over');
-
-                console.info('enter');
-                console.log(e);
-                console.log(e.target);
+                var target = e.target;
+                var targetClass = target.className;
+                if(~targetClass.indexOf("sejtitle")){
+                    target = target.parentNode;
+                }
+                target.classList.add('drop-over');
             },
             domdragover:function (e) {
                 if (e.preventDefault) {
@@ -3732,54 +3733,74 @@
                 return false;
             },
             domdragleave:function (e) {
-                e.target.classList.remove('rwl-over'); 
+                var target = e.target;
+                var targetClass = target.className;
+                if(~targetClass.indexOf("sejtitle")){
+                    target = target.parentNode;
+                }
+                target.classList.remove('drop-over'); 
             },
             domdrop:function (e) {
-
+                debug("拖拽结束")
                 // e.target === this
                 var _this = e.target;
-                if(~_this.className.indexOf("sejtitle")){
-                    var that = _this.parentNode;
-                } else if(~_this.className.indexOf("iqxin-listDrag")){
-                    var that = _this;
-                }else{
-                    var that = _this.parentNode;
-                }
-
+                var that = _this.parentNode;
+                var pparentNode = that.parentNode;
+                
                 // 防止跨区域移动
+                SEJsetting.prototype.domdropend();
                 if(dragEl.className != that.className){
+                    console.log("移动对象 之前，现在: ", dragEl.className);
+                    console.log(that.className);
                     return;
                 }
-                // 如果移动标题，需要顺带交换id /单独拿出来是为了上面的防止跨区域移动的问题
+
+                // Sortable.js https://github.com/RubaXa/Sortable
+                var targetRect = _this.getBoundingClientRect(); // 
+                var width = targetRect.right - targetRect.left; //目标节点的宽
+                var height = targetRect.bottom - targetRect.top; //目标节点的高 
+                var domPosition = null;
                 if(~_this.className.indexOf("sejtitle")){
-                    var temp = dragEl.id;
-                    dragEl.id = that.id;
-                    that.id = temp;
+                    debug(e.clientX,targetRect.left,height,e.clientX - targetRect.left,(e.clientX - targetRect.left) / height)
+                    if((e.clientX - targetRect.left) / width > 0.5){
+                        debug("右");
+                        domPosition = true;
+                    }else{
+                        debug("左");
+                        domPosition = false;
+                    }
+                } else {
+                    if((e.clientY - targetRect.top) / height > 0.5){
+                        debug("下");
+                        domPosition = true;
+                    }else{
+                        debug("上");
+                        domPosition = false;
+                    }
                 }
-                // console.info("drop");
-                // console.info(_this);
-                // console.info(_this.classList);
 
-                // console.log(dragEl);
-                // console.log(that);
-                // console.log(that.innerHTML);
+                dragEl.style.transformOrigin = "top center";
+                dragEl.style.animation = "sejopen 0.3s";
 
-
-                if (e.stopPropagation) {
-                    e.stopPropagation();
+                if(domPosition){
+                    if(pparentNode.lastChild == that){
+                        pparentNode.insertBefore(dragEl,that);
+                    }else{
+                        pparentNode.insertBefore(dragEl,that.nextElementSibling)
+                    }
+                }else{
+                    that.parentNode.insertBefore(dragEl,that);
                 }
-                
-                if (dragEl != that) {
-                    dragEl.innerHTML = that.innerHTML;
-                    that.innerHTML = e.dataTransfer.getData('text/html');
-                    // console.log(dragData);
-                    // that.innerHTML = dragData;
-                }    
-                    
-                // 重新注册拖动事件
+
+                // 重新绑定拖拽事件
                 SEJsetting.prototype.dragEvent();
-
                 return false;
+            },
+            domdropend:function(){
+                var dom = document.querySelector(".drop-over");
+                if(dom){
+                    dom.classList.remove("drop-over")
+                }
             },
 
             // 判断是否能连接至google
@@ -4079,9 +4100,8 @@
                         "opacity:1;" +
                         "transform:translate(0,53px);" +
                     "}" +
-                    ".rwl-over{" +
-                        "border: 1px dashed #ccc;" +
-                        "box-sizing: border-box;" +
+                    ".drop-over{" +
+                        "opacity: 0.6;" +
                     "}" +
                     ".iqxin-title-edit," +
                     ".iqxin-set-edit," +

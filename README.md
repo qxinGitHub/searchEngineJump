@@ -4,18 +4,21 @@
 
 __说明__
 > 5.0.0.0
-> 增加设置，可以自行打开关闭搜索列表，两个搜索之间拖动进行排序.
-> 拖动排序和有些拖拽手势插件冲突(原因未知), 拖拽手势插件一般按ctrl忽视手势; 排序实质上是交换，两个搜索进行交换。
+> 增加设置，可以自行打开关闭搜索列表，搜索项目(列表)可拖拽排序
+> 拖动排序和有些拖拽手势插件冲突(原因未知), 拖拽手势插件一般按ctrl忽视手势; 
 ![例图](http://odp4cbmbx.bkt.clouddn.com/setting20170806230906.png)
 
 
-已知问题： 与脚本[网页解除限制](https://greasyfork.org/zh-CN/scripts/14146-%E7%BD%91%E9%A1%B5%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4)有[冲突](https://greasyfork.org/zh-CN/forum/discussion/21298/x)，开启后，无法进行跳转。可以暂时先用我修改后的[网页解除限制](https://greasyfork.org/zh-CN/scripts/28497-%E7%BD%91%E9%A1%B5%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4),大刀阔斧的修改，与原脚本使用上有较大的变化。或者自己修改下原作者的脚本(最简单的修改方式是将unhook_eventNames中的 "mousedown|mouseup" 替换成"click"即可，~~暂时还不知道有什么副作用~~在知乎打开评论列表会跳转到顶部)。
+已知问题： 与脚本[网页解除限制](https://greasyfork.org/zh-CN/scripts/14146-%E7%BD%91%E9%A1%B5%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4)有[冲突](https://greasyfork.org/zh-CN/forum/discussion/21298/x)，开启后，无法进行跳转。可以暂时先用我修改后的[网页解除限制](https://greasyfork.org/zh-CN/scripts/28497-%E7%BD%91%E9%A1%B5%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4),大刀阔斧的修改，与原脚本使用上有较大的变化。或者自己修改下原作者的脚本, 使用 exclude 排除相关网页。
 
 
 本脚本修改自[searchEngineJump modified version from NLF 4.0.5.3](https://greasyfork.org/zh-CN/scripts/18315-searchenginejump-modified-version-from-nlf)
 此类脚本的鼻祖为 NLF 写的 [搜索引擎跳转（searchEngineJump）](http://userscripts.org/scripts/show/84970) , 不过目前该网站已经无法打开， [相关网页快照](http://web.archive.org/web/*/http://userscripts.org/scripts/show/84970)
 
 ### 更新历史
+
+> version 5.13.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-11
+- 更改排序方式，使其更直观易用
 
 > version 5.12.12   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-10
 - 知乎搜索界面改动
