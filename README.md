@@ -17,11 +17,16 @@ __说明__
 
 ### 更新历史
 
-> version 5.13.1   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-11
+> version 5.14.0    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-12
+- 可以隐藏设置界面右上角的关闭按钮 配置文件 closeBtn
+- 隐藏设置按钮后需要刷新页面才能再次打开的问题
+- 其他小细节的统一
+
+> version 5.13.1    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-11
 - 优酷搜索连接变动[感谢反馈](https://greasyfork.org/zh-CN/forum/discussion/31999/x)
 
 > version 5.13.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-11
-- 更改排序方式，使其更直观易用
+- 更改拖拽排序的实现方法，使其更直观易用
 
 > version 5.12.12   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-10
 - 知乎界面改动
