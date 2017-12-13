@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.15.0    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-13
+- 设置界面可以拖动
+
 > version 5.14.0    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-12
 - 可以隐藏设置界面右上角的关闭按钮 配置文件 closeBtn
 - 隐藏设置按钮后需要刷新页面才能再次打开的问题

@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.14.0
+// @version        5.15.0
 // @created        2011-7-2
-// @lastUpdated    2017-12-12
+// @lastUpdated    2017-12-13
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -2856,6 +2856,7 @@
                 // 绑定事件
                 this.ele.addEventListener("click",that.domClick.bind(this),false);
                 this.dragEvent();
+                this.setDragNode(this.ele); //设置拖动
                 // input[range]
                 that.rangeChange(true);
                 document.querySelector("#setBtnOpacityRange").addEventListener("input",that.rangeChange);
@@ -3002,6 +3003,12 @@
                 btnEle.innerHTML = btnStr;
                 this.ele.appendChild(btnEle);
 
+                // 可以拖动的顶栏
+                var dragDom = document.createElement("div");
+                dragDom.id = "dragDom";
+                dragDom.style.cssText = "height:16px;width:97%;position:absolute;top:0;cursor:move;";
+                this.ele.appendChild(dragDom);
+
                 // 增加搜索列表
                 var nSearchList = document.createElement("div");
                 nSearchList.id = "nSearchList";
@@ -3011,10 +3018,10 @@
 
                 // 关闭按钮
                 if(getSettingData.closeBtn){
-	                var closebtnELe = document.createElement("span");
-	                closebtnELe.id = "xin-close";
-	                closebtnELe.setAttribute("title","close 关闭");
-	                this.ele.appendChild(closebtnELe);
+                    var closebtnELe = document.createElement("span");
+                    closebtnELe.id = "xin-close";
+                    closebtnELe.setAttribute("title","close 关闭");
+                    this.ele.appendChild(closebtnELe);
                 }
             },
             show: function(){
@@ -3027,7 +3034,7 @@
                 this.windowResize();
 
                 if(document.querySelector("xin-newtab")){
-                	document.querySelector("#xin-newtab").querySelectorAll("option")[getSettingData.newtab].setAttribute("selected","selected");
+                    document.querySelector("#xin-newtab").querySelectorAll("option")[getSettingData.newtab].setAttribute("selected","selected");
                 }
 
                 setTimeout(function () {
@@ -3190,7 +3197,7 @@
                 this.addItemBoxRemove();
             },
             addItemBoxRemove: function(ele){
-            	ele = ele?ele:"#newSearchBox"
+                ele = ele?ele:"#newSearchBox"
                 var newBox = document.querySelector(ele);
                 if(newBox){
                     newBox.style.transform = "scale(0.01, 0.01)";
@@ -3539,25 +3546,25 @@
 
             // “设置按钮” 透明度
             setBtnOpacityFun: function(){
-            	if(~window.navigator.userAgent.indexOf("Chrome")){
-            	    var odom = document.querySelector("#setBtnOpacityRange");
-            	    var odomV = odom.value;
-            	    // odom.style.backgroundSize = odom.value*100 +"% 100%";
-            	    console.log(odomV,getSettingData.setBtnOpacity);
-            	    if(getSettingData.setBtnOpacity<0){
-            	        document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = odomV;
-            	        odom.style.background = "-webkit-linear-gradient(left,#3ABDC1,#83e7ea) no-repeat, #fff";
-            	    }else{
-            	        document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = "禁用";
-            	        odom.style.background = "-webkit-linear-gradient(left,#bdbdbd,#c6c7c7) no-repeat, #fff";
-            	    }
-            	    odom.style.backgroundSize = odom.value*100 +"% 100%";
+                if(~window.navigator.userAgent.indexOf("Chrome")){
+                    var odom = document.querySelector("#setBtnOpacityRange");
+                    var odomV = odom.value;
+                    // odom.style.backgroundSize = odom.value*100 +"% 100%";
+                    console.log(odomV,getSettingData.setBtnOpacity);
+                    if(getSettingData.setBtnOpacity<0){
+                        document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = odomV;
+                        odom.style.background = "-webkit-linear-gradient(left,#3ABDC1,#83e7ea) no-repeat, #fff";
+                    }else{
+                        document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = "禁用";
+                        odom.style.background = "-webkit-linear-gradient(left,#bdbdbd,#c6c7c7) no-repeat, #fff";
+                    }
+                    odom.style.backgroundSize = odom.value*100 +"% 100%";
 
-            	    getSettingData.setBtnOpacity = -getSettingData.setBtnOpacity;
-            	} else {
-            	    console.log("非chrome");
-            	    iqxinShowTip("抱歉，目前只支持chrome类浏览器",2500);
-            	}
+                    getSettingData.setBtnOpacity = -getSettingData.setBtnOpacity;
+                } else {
+                    console.log("非chrome");
+                    iqxinShowTip("抱歉，目前只支持chrome类浏览器",2500);
+                }
             },
 
             // 标题点击 （开关搜索列表）（可以并入到下面的点击事件）
@@ -3611,7 +3618,7 @@
                 if(targetid === "addSearchListBoxCancel"){
                     debug("移除盒子");
                     // this.boxClose("#newSearchListBox");
-                	this.addItemBoxRemove("#newSearchListBox");
+                    this.addItemBoxRemove("#newSearchListBox");
 
                 };
 
@@ -3666,12 +3673,12 @@
 
                 // 关闭"设置菜单按钮"
                 if(targetClass === "iqxin-setBtnOpacityRangeValue"){
-                	this.setBtnOpacityFun();
+                    this.setBtnOpacityFun();
                 }
 
                 // 关闭设置菜单
                 if (targetid === "xin-close"){
-                	this.hide();
+                    this.hide();
                 }
 
                 // 空白地方点击
@@ -3690,6 +3697,31 @@
                 this.addItemBoxRemove("#newSearchListBox"); // 添加新的搜索列表
                 this.boxClose("#iqxin-sortBox"); // 搜索列表排序
                 document.querySelector("#btnEle2").classList.remove("btnEle2active"); // 更多设置
+            },
+
+            // 窗口位置拖动
+            setDragNode: function(ele) {
+                var node = document.querySelector("#dragDom");
+
+                node.addEventListener("mousedown",function(event){
+                    ele.style.transition = "null";
+                    // offsetLeft 距离 body 的位置, 得到的 dis 即鼠标到窗口左上角的位置
+                    var disX = event.clientX - ele.offsetLeft;
+                    var disY = event.clientY - ele.offsetTop;
+
+                    var move = function(event) {
+                        //鼠标的位置减去到左上角的位置 即窗口的位置
+                        // console.log(event.clientX - disX,event.clientY - disY)
+                        ele.style.left = event.clientX - disX + "px";
+                        ele.style.top = event.clientY - disY  + "px";
+                    };
+
+                    document.addEventListener("mousemove",move);
+                    document.addEventListener("mouseup",function(){
+                        ele.style.transition = "0.5s";
+                        document.removeEventListener("mousemove",move);
+                    })
+                });
             },
 
             // 拖动
@@ -3965,7 +3997,7 @@
                         "display: flex;" +
                         "flex-wrap: wrap;" +
                         "padding: 20px;" +
-                        "margin: 25px 25px 100px 0px;" +
+                        "margin: 0px 25px 50px 5px;" +
                         "background-color: #fff;" +
                         "border-radius: 4px;" +
                         "position: absolute;" +
@@ -4234,7 +4266,7 @@
                          "color: #fff;" +
                     "}" +
                     "#iqxin-editCodeBox button{" +
-                    	"cursor:pointer;" +
+                        "cursor:pointer;" +
                     "}" +
 
                     // 关闭按钮
