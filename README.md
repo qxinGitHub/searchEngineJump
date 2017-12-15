@@ -18,7 +18,7 @@ __说明__
 ### 更新历史
 
 > version 5.15.1    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-15
-- 修复百度百科, 搜狗搜索, 360好搜的问题，[感谢评论区Ring反馈](https://greasyfork.org/zh-TW/forum/discussion/comment/44291#Comment_44291)
+- 修复百度百科, 搜狗搜索, 360好搜, facebook的问题，[感谢评论区Ring反馈](https://greasyfork.org/zh-TW/forum/discussion/comment/44291#Comment_44291)
 
 > version 5.15.0    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-13
 - 设置界面可以拖动

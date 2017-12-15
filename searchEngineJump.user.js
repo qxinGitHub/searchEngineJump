@@ -1934,6 +1934,8 @@
                 // 1.93更新 360界面变动
                 if(getSettingData.modifySearchItems){
                     modifySearchItemsRuleFun("360",{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 120px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}});
+                    getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"https://www.facebook.com/search/results.php?q=%s","https://www.facebook.com/search/top/?q=%s")
+
                 }
 
                 // 更新本地版本 其他相关信息
