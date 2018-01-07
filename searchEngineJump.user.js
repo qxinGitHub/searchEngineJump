@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.15.1
+// @version        5.15.2
 // @created        2011-7-2
-// @lastUpdated    2017-12-15
+// @lastUpdated    2018-01-07
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -2920,7 +2920,7 @@
                             "<span id='xin-newtab' title='open newtab 是否采用新标签页打开的方式'>打开方式：" +
                                 "<select id='iqxin-globalNewtab'>" +
                                     "<option value='globalDef'>默认页面 ▽</option>" +
-                                    "<option value='globalNewtab'>新标签页 ▽</option>" +
+                                    "<option value='globalNewtab'" + (getSettingData.newtab?"selected":"")  + ">新标签页 ▽</option>" +
                                 "</select>" +
                             "</span> " +
                             "<span id='xin-addDel' title='add & del 增加新的或者删除现有的搜索'>增加 / 删除</span> " +
@@ -2959,9 +2959,9 @@
 
                 this.windowResize();
 
-                if(document.querySelector("xin-newtab")){
-                    document.querySelector("#xin-newtab").querySelectorAll("option")[getSettingData.newtab].setAttribute("selected","selected");
-                }
+                // if(document.querySelector("xin-newtab")){
+                //     document.querySelector("#xin-newtab").querySelectorAll("option")[getSettingData.newtab].setAttribute("selected","selected");
+                // }
 
                 setTimeout(function () {
                     style.opacity = 1;
