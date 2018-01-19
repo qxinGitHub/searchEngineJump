@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.15.3    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-01-19
+- 谷歌搜索界面，，错误地隐藏了下载分类下的谷歌搜索 [感谢评论区wsxy162 反馈](https://greasyfork.org/zh-CN/forum/discussion/comment/46012#Comment_46012)
+
 > version 5.15.2    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-01-07
 - “打开方式”总会自动跳回“默认页面”而不是“新标签打开” [感谢评论区cll12反馈](https://greasyfork.org/zh-CN/forum/discussion/comment/45425#Comment_45425)
 

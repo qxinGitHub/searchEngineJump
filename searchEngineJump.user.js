@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.15.2
+// @version        5.15.3
 // @created        2011-7-2
-// @lastUpdated    2018-01-07
+// @lastUpdated    2018-01-19
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -1535,7 +1535,8 @@
         engineList.download[1] = {
             name: '谷歌搜索',
             blank:true,
-            url: 'https://www.google.com/cse?q=%s&newwindow=1&cx=006100883259189159113%3Atwgohm0sz8q',
+            // url: 'https://www.google.com/cse?q=%s&newwindow=1&cx=006100883259189159113%3Atwgohm0sz8q',
+            url: 'https://cse.google.com/?q=%s&newwindow=1&cx=006100883259189159113%3Atwgohm0sz8q',
             favicon: icon.google,
         };
         engineList.download[2] = {
@@ -1882,7 +1883,7 @@
                     "(engineDetails: 第一个值为分类列表标题名称，第二个值与enginelist相关联，必须匹配,第三个值true为显示列表，false为禁用列表。可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页，同脚本中的rules设置相同，优先级高于。自带了360搜索，可仿写)...",
-            "version":1.93,
+            "version":1.94,
             "addSearchItems":true,
             "modifySearchItems":true,
             "connectToTheServer":true,
@@ -1925,18 +1926,23 @@
                 // }
 
                 // 1.92更新 优酷搜索变动
-                if(getSettingData.modifySearchItems){
-                    getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"http://www.soku.com/v?keyword=%s","http://www.soku.com/search_video/q_%s")
-                    //  5.11.0(2017.8.18) 的变动，但从未主动去修复它
-                    getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"http://www.jav11b.com/cn/vl_searchbyid.php?keyword=%s","http://www.ja14b.com/cn/vl_searchbyid.php?keyword=%s")
-                }
+                // if(getSettingData.modifySearchItems){
+                //     getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"http://www.soku.com/v?keyword=%s","http://www.soku.com/search_video/q_%s")
+                //     //  5.11.0(2017.8.18) 的变动，但从未主动去修复它
+                //     getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"http://www.jav11b.com/cn/vl_searchbyid.php?keyword=%s","http://www.ja14b.com/cn/vl_searchbyid.php?keyword=%s")
+                // }
 
                 // 1.93更新 360界面变动
-                if(getSettingData.modifySearchItems){
-                    modifySearchItemsRuleFun("360",{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 120px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}});
-                    getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"https://www.facebook.com/search/results.php?q=%s","https://www.facebook.com/search/top/?q=%s")
+                // if(getSettingData.modifySearchItems){
+                //     modifySearchItemsRuleFun("360",{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 120px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}});
+                //     getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"https://www.facebook.com/search/results.php?q=%s","https://www.facebook.com/search/top/?q=%s")
 
+                // }
+                // 1.93更新 360界面变动
+                if(getSettingData.modifySearchItems){
+                    getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"https://www.google.com/cse?q=%s&newwindow=1&cx=006100883259189159113%3Atwgohm0sz8q","https://cse.google.com/?q=%s&newwindow=1&cx=006100883259189159113%3Atwgohm0sz8q")
                 }
+
 
                 // 更新本地版本 其他相关信息
                 getSettingData.version = settingData.version;
