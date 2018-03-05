@@ -17,6 +17,12 @@ __说明__
 
 ### 更新历史
 
+> version 5.15.5    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-03-05
+- 修改a站搜索连接，修复a站样式
+
+> version 5.15.4    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-02-15
+- 添加搜狗搜索
+
 > version 5.15.3    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-01-19
 - 谷歌搜索界面，，错误地隐藏了下载分类下的谷歌搜索 [感谢评论区wsxy162 反馈](https://greasyfork.org/zh-CN/forum/discussion/comment/46012#Comment_46012)
 

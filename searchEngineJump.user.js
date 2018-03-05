@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.15.4
+// @version        5.15.5
 // @created        2011-7-2
-// @lastUpdated    2018-01-19
+// @lastUpdated    2018-03-05
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -491,11 +491,8 @@
                 engineList: "video",
                 fixedTop:46,
                 style: "\
-                    border-top: 1px solid #FFFFFF;\
-                    border-bottom: 1px solid #FFFFFF;\
-                    display:flex;\
-                    justify-content:center;\
-                    flex-wrap:wrap;\
+                    width:980px;\
+                    margin: 0 auto;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#search-text',
@@ -1422,7 +1419,7 @@
         };
         engineList.video[4] = {
             name: 'acfan',
-            url: 'http://www.acfun.tv/search.aspx#query=%s',
+            url: 'http://www.acfun.cn/search/?#query=%s',
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAADfElEQVQ4jX3MbUzUdQDA8b/1xrW1tlhrtmatF1qrVk5opajLUScgJtoIxXjQ1iobqzaV1MCWqZm2EumO8+C4Bw4OMsC8EGgeWkqi8vy/P8cBJ8cdTwccj/6u+4/79qLVy77b9+1Hcvb4Q2/oukS6SRZZ5YrItLpEpkUW71pkkVgRFO+b/xTZpjaRYXGLTKtLZJUrYpdZFhpdl6htHwpJSSVukkr7SDV5iNcqpJR5eK9S5hW74LjRyrcXCkmyTbKn0kuKsY94rUKa1cN2k4fXi3uRMiwusblYIafKS0FjgG0lCqvLwphs5/EVPk+sXZD9k4/kkl52mvspaAqwUddLvE4hy6IIKUHbKfKbAtwcmqfZO4dveoHnKiDb1EqbLpkXqyOsqoY1himGphZpH7mPdyrMSecIa87cEdLnlwbFF40BfmyZoEYOsQgMd15G+9UOFMMWhg3x1J3YSGdLHTfno/zcOcW/7atQhLTV0C2OXvHjUGbIKXcTBGZvFcEhCbX4SdA+AoclFp2HqFqE75tH/wMK6geFlGNTRFiNAnDs+hK3w9B2PgH13EOM6V5iTL+WvwofpjV/BUEV6obg+G/D2LtCHKsfFNIHdrcgusTcEuT5obPmBDN5EsEfnmBK/zKh4hcY18cy+tkDdBW9ybAKehe4/CEO/zIgpCyrIpx+ldnQGO1nXgXdMqKODSg6DSHtM8yeXo773AbUoBuqH6PxwxWw4CcgIMvqEtLRSx5xbQFqzPlwRCJ33TLWxq3nXscNVG0Mc2cfJSg3kLb3INt3ZhAtkGg8GYdjHs5e9QqpWRkXWj8cOfA23F3Jyth9SMtXoQYHWGo+yMwtI0QmiXn8aR6MWQfBWvK+/Jhv2iPc9k4KKc3YLVYXBflE7wChsL+ogafW5xIdbSI67UUdkWHOyabsU8Tt/RrCPnIvh3j2Ow/bDN1C2m2WRYK+l7fq70OfA3QfEf69HGabQa6CHjtMXyVyx86S9gD06Pm0IcBrF3ykl8n/AFvN99hT42f8j2oi1aeIdNcy0X+N8dZaxlouMqE4CSu/ol48zex1C/sdwySU+cgwuYSUWOom1eRmt9XDFtsomivzaCrHSDQMkGwLkGIbJbF0EI0tQGLDPBr7OO+YPaSX95OgdyPV3h0KbSrsEOkmWewwKiL1/y51iVSjItJNsthc1CFMN7yhvwH03PqrfJ8h8gAAAABJRU5ErkJggg==',
         };
         engineList.video[5] = {
@@ -1889,7 +1886,7 @@
                     "(engineDetails: 第一个值为分类列表标题名称，第二个值与enginelist相关联，必须匹配,第三个值true为显示列表，false为禁用列表。可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页，同脚本中的rules设置相同，优先级高于。自带了360搜索，可仿写)...",
-            "version":1.95,
+            "version":1.96,
             "addSearchItems":true,
             "modifySearchItems":true,
             "connectToTheServer":true,
@@ -1950,10 +1947,15 @@
                 // }
 
                 // 1.95更新 添加搜狗搜索
-                if(getSettingData.addSearchItems && getSettingData.engineList.hasOwnProperty("web")){
-                    engineList.web[6].disable = true; // 对于老用户，默认禁用的状态添加
-                    getSettingData.engineList["web"].push(engineList.web[6])
+                // if(getSettingData.addSearchItems && getSettingData.engineList.hasOwnProperty("web")){
+                //     engineList.web[6].disable = true; // 对于老用户，默认禁用的状态添加
+                //     getSettingData.engineList["web"].push(engineList.web[6])
+                // }
+                // 1.96 更新 修改a站搜索链接
+                if(getSettingData.modifySearchItems){
+                    getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"http://www.acfun.tv/search.aspx#query=%s","http://www.acfun.cn/search/?#query=%s")
                 }
+
 
                 // 更新本地版本 其他相关信息
                 getSettingData.version = settingData.version;
@@ -2340,6 +2342,7 @@
         ///test -------------- 测试 end
 
         if (!iTarget || !iInput) {
+            console.log("脚本 searchEngineJump 搜索引擎快捷跳转 遇到了错误： ");
             console.log("目标有误： iTarget：" + iTarget + "\niInput: " + iInput);
             return;
         }
