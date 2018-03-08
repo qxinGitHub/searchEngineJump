@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.15.5
+// @version        5.15.6
 // @created        2011-7-2
-// @lastUpdated    2018-03-05
+// @lastUpdated    2018-03-08
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -94,7 +94,7 @@
                 // 是否启用.
                 enabled: true,
                 // 在哪个网站上加载,正则.
-                url: /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^?]+\?(?:&?q=|(?:[^#](?!&tbm=))+?&q=)(?:.(?!&tbm=))*$/,
+                url: /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^?]+\?(?!tbm=)(?:&?q=|(?:[^#](?!&tbm=))+?&q=)(?:.(?!&tbm=))*$/,
                 // 加载哪个类型的列表:
                 // ['web'|'music'|'video'|'image'|'download'|'shopping'|'translate'|'knowledge'|'sociality']
                 engineList: 'web',
@@ -251,6 +251,22 @@
                     target: "css;.header",
                     where: "afterEnd",
                 },
+            },
+            {name: "google网页分类搜索",
+                enabled: true,
+                url: /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^?]+\?(?:tbm=)(?:&?q=|(?:[^#](?!&tbm=))+?&q=)(?:.(?!&tbm=))*$/,
+                engineList: 'web',
+                style: '\
+                    margin-left: 142px;\
+                    z-index: 100;\
+                    margin-top:5px;\
+                ',
+                insertIntoDoc: {
+                    target: 'css;#appbar',
+                    keyword: '//input[@name="q"]',
+                    where: 'beforeBegin',
+                },
+                stylish: 'body.vasq #hdtbMenus.hdtb-td-o{top:100px !important}'
             },
 
             // 知识
@@ -1128,8 +1144,6 @@
                 enabled: true,
                 engineList: "scholar",
                 style: '\
-                    border-top:1px solid #D9E1F7;\
-                    border-bottom:1px solid #D9E1F7;\
                     text-align: center;\
                     margin:0px;\
                     top:0px;\
@@ -1137,7 +1151,7 @@
                     ',
                 insertIntoDoc: {
                     keyword: 'css;input#kw',
-                    target: 'css;#topnav',
+                    target: 'css;#head_wr',
                     where: 'afterEnd',
                 },
             },
@@ -1146,8 +1160,6 @@
                 url: /^https?:\/\/scholar\.google(?:\.\D{1,3}){1,2}\/scholar\?/,
                 engineList: "scholar",
                 style: '\
-                    border-bottom:1px solid #E5E5E5;\
-                    border-top:1px solid #E5E5E5;\
                     z-index:999;\
                     position:relative;\
                 ',
@@ -1892,7 +1904,7 @@
             "connectToTheServer":true,
             "closeBtn":true,
             "newtab":0,
-            "foldlist":false,
+            "foldlist":true,
             "setBtnOpacity":0.8,
             "debug":false,
             "fixedTop":true,

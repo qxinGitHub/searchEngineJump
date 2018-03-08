@@ -17,6 +17,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.15.6    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-03-08
+- 修复谷歌图书会被错误隐藏的问题[感谢评论区 tensun tsai  反馈](https://greasyfork.org/zh-CN/forum/discussion/comment/48233#Comment_48233)
+- 百度学术界面无搜索框
+- 此版本开始默认折叠当前搜索分类
+
 > version 5.15.5    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-03-05
 - 修改a站搜索连接，修复a站样式
 
