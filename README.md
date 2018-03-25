@@ -17,21 +17,24 @@ __说明__
 
 ### 更新历史
 
-> version 5.15.6    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-03-08
+> version 5.15.7    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-03-25
+- 必应图片搜索错位
+
+> version 5.15.6    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-03-08
 - 修复谷歌图书会被错误隐藏的问题[感谢评论区 tensun tsai  反馈](https://greasyfork.org/zh-CN/forum/discussion/comment/48233#Comment_48233)
 - 百度学术界面无搜索框
 - 此版本开始默认折叠当前搜索分类
 
-> version 5.15.5    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-03-05
+> version 5.15.5    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-03-05
 - 修改a站搜索连接，修复a站样式
 
-> version 5.15.4    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-02-15
+> version 5.15.4    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-02-15
 - 添加搜狗搜索
 
-> version 5.15.3    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-01-19
+> version 5.15.3    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-01-19
 - 谷歌搜索界面，，错误地隐藏了下载分类下的谷歌搜索 [感谢评论区wsxy162 反馈](https://greasyfork.org/zh-CN/forum/discussion/comment/46012#Comment_46012)
 
-> version 5.15.2    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-01-07
+> version 5.15.2    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-01-07
 - “打开方式”总会自动跳回“默认页面”而不是“新标签打开” [感谢评论区cll12反馈](https://greasyfork.org/zh-CN/forum/discussion/comment/45425#Comment_45425)
 
 > version 5.15.1    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-12-15
