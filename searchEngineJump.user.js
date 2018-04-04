@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.15.7
+// @version        5.15.8
 // @created        2011-7-2
-// @lastUpdated    2018-03-25
+// @lastUpdated    2018-04-04
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -497,7 +497,7 @@
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#search-keyword',
-                    target: 'css;.so-wrap',
+                    target: 'css;.filter-wrap',
                     where: 'beforeBegin',
                 },
             },
@@ -3325,10 +3325,15 @@
                 element.classList.remove("iqxin-pointer-events");
 
                 var flag = document.querySelector("#titleEdit");
-                if(flag){
-                    element.innerHTML = element.firstChild.value?element.firstChild.value:"空";
-                    element.classList.add("iqxin-pointer-events");
-                }else{
+                // 存在编辑的标题 && 之前的编辑的节点与点击的节点是同一个节点
+                if(flag && flag.parentNode == element){
+                        element.innerHTML = element.firstChild.value?element.firstChild.value:"空";
+                        element.classList.add("iqxin-pointer-events");
+                } else {
+                    //  存在编辑的标题，但与点击的不是同一个节点
+                    if(flag){
+                        flag.parentNode.innerHTML = flag.parentNode.firstChild.value;
+                    }
                     var oldhtml = element.innerHTML;
                     var newobj = document.createElement("input");
                     newobj.id = "titleEdit";
