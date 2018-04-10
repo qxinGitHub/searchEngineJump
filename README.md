@@ -17,7 +17,10 @@ __说明__
 
 ### 更新历史
 
-> version 5.15.8    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-03-25
+> version 5.15.9    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-04-08
+- 若对百度页面使用了style调整样式，可以修改配置文件中的baiduOffset修复二级菜单的偏移
+
+> version 5.15.8    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-04-04
 - b站搜索栏丢失的问题
 - 设置中，正在编辑标题不点确认的情况下，点击另一个标题编辑会使标题名称出错的问题
 

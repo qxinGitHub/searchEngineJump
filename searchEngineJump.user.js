@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.15.8
+// @version        5.15.9
 // @created        2011-7-2
-// @lastUpdated    2018-04-04
+// @lastUpdated    2018-04-10
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -1893,6 +1893,7 @@
                     "(settingOpacity: 设置按钮的透明度，值为0-1之间的数，0为透明，1为完全显示，中间值半透明。注：-1为直接关闭按钮，关闭之前请确定自己知道如何再次打开它)..." +
                     "(debug: debug模式，开启后，控制台会输出一些信息，“关闭并保存”按钮将不会在刷新页面)..." +
                     "(fixedTop: 将搜索栏固定到顶端。 true开启，false关闭)..." +
+                    "(baiduOffset: 在百度页面二级菜单会出现位移，若有使用其他的style样式，可以修改这个来修复二级菜单的偏移)..." +
                     "(engineDetails: 第一个值为分类列表标题名称，第二个值与enginelist相关联，必须匹配,第三个值true为显示列表，false为禁用列表。可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页，同脚本中的rules设置相同，优先级高于。自带了360搜索，可仿写)...",
@@ -1906,6 +1907,7 @@
             "setBtnOpacity":0.8,
             "debug":false,
             "fixedTop":true,
+            "baiduOffset":-120,
             "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],["下载","download",true],['mine', 'mine',false]],
             "engineList":{},
             "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 120px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}}]
@@ -1929,7 +1931,7 @@
             }
 
             // 获取版本，用于搜索列表更新
-            // console.log("当前版本号和目标版本号: ",getSettingData.version,settingData.version);
+                // console.log("当前版本号和目标版本号: ",getSettingData.version,settingData.version);
             if(parseFloat(getSettingData.version) < settingData.version){
                 console.log("版本过低，开始更新,当前版本号和目标版本号: ",getSettingData.version,settingData.version);
                 // 1.91更新 添加海词; 版本号已蹦，应该从1.01而不是1.1开始计算。
@@ -2561,7 +2563,8 @@
                 if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
                     // top -= 90;
                     top = 26;
-                    left -= 120;
+                    // left -= 120;
+                    left += getSettingData.baiduOffset;
                 }
 
                 style.top = top + 6 + 'px';
@@ -2749,7 +2752,11 @@
                     //console.log(objLeft,marginLeft);
 
                     obj.style.top = height - marginTop + 'px';
-                    obj.style.background = '#fff';
+                    
+                    // 如果之前未设置颜色，则默认设置为白色
+                    if(objstyle.backgroundColor === "rgba(0, 0, 0, 0)"){
+                        obj.style.background = '#fff'; 
+                    }
                     // obj.style.zIndex = '999';
 
                     obj.style.left = getElementLeft(obj) - marginLeft + "px";
