@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.15.9
+// @version        5.15.10
 // @created        2011-7-2
-// @lastUpdated    2018-04-10
+// @lastUpdated    2018-05-10
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -2754,7 +2754,7 @@
                     obj.style.top = height - marginTop + 'px';
                     
                     // 如果之前未设置颜色，则默认设置为白色
-                    if(objstyle.backgroundColor === "rgba(0, 0, 0, 0)"){
+                    if(objstyle.backgroundColor === "rgba(0, 0, 0, 0)" || objstyle.backgroundColor === "transparent"){
                         obj.style.background = '#fff'; 
                     }
                     // obj.style.zIndex = '999';
