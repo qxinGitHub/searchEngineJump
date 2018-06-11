@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单，能更友好的自定义设置，修复百度搜索样式丢失的问题
-// @version        5.15.10
+// @version        5.15.11
 // @created        2011-7-2
 // @lastUpdated    2018-05-10
 
@@ -367,9 +367,9 @@
                     padding: 5px 20px; \
                 ",
                 insertIntoDoc: {
-                    keyword: 'css;.SearchBar-input input',
+                    keyword: 'css;.SearchBarExperiment input',
                     target:"css;.Search-container",
-                    where: 'beforeBegin',
+                    where: 'beforeBegin', //beforeBegin
                 },
                 stylish:".TopSearch.Card{margin:30px auto;}",
             },

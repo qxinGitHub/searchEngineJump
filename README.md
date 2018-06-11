@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.15.11    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-06-11
+- 知乎网页调整
+
 > version 5.15.10    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-05-10
 - dge浏览器中分类背景是透明的 [感谢Github评论区 	WLYYL   反馈](https://github.com/qxinGitHub/searchEngineJump/issues/6)
 
