@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.15.12    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-06-17
+- 增加 yandex 搜索页面的搜索样式。 有瑕疵，会遮盖源网页的内容
+
 > version 5.15.11    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-06-11
 - 知乎网页调整
 
