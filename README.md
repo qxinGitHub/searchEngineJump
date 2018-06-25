@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.15.13    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-06-25
+- 增加了广告
+
 > version 5.15.12    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-06-17
 - 增加 yandex 搜索页面的搜索样式。 有瑕疵，会遮盖源网页的内容
 
