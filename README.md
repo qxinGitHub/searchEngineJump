@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.15.15    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-06-29
+- 更新了广告
+
 > version 5.15.14    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-06-25
 - 添加新的搜索分类 - 新闻搜索  [感谢Github评论区 	Hipd 建议](https://github.com/qxinGitHub/searchEngineJump/issues/9) , 以及 chinchihyu 提供的网址，由[奔跑的奶酪整理的搜索引擎](https://www.runningcheese.com/search-engines)
 - 知识搜索列表中添加 quora , stackoverflow
