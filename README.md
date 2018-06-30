@@ -6,7 +6,7 @@ __说明__
 > 5.0.0.0
 > 增加设置，可以自行打开关闭搜索列表，搜索项目(列表)可拖拽排序
 > 拖动排序和有些拖拽手势插件冲突(原因未知), 拖拽手势插件一般按ctrl忽视手势; 
-![例图](http://odp4cbmbx.bkt.clouddn.com/setting20170806230906.png)
+![例图](http://odp4cbmbx.bkt.clouddn.com/%E6%90%9C%E7%B4%A2%E8%B7%B3%E8%BD%AC%E6%BC%94%E7%A4%BA.gif)
 
 
 已知问题： 与脚本[网页解除限制](https://greasyfork.org/zh-CN/scripts/14146-%E7%BD%91%E9%A1%B5%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4)有[冲突](https://greasyfork.org/zh-CN/forum/discussion/21298/x)，开启后，无法进行跳转。可以暂时先用我修改后的[网页解除限制](https://greasyfork.org/zh-CN/scripts/28497-%E7%BD%91%E9%A1%B5%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4),大刀阔斧的修改，与原脚本使用上有较大的变化。或者自己修改下原作者的脚本, 使用 exclude 排除相关网页。
@@ -17,8 +17,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.16.1    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-06-30
+- 添加新的搜索分类 电子书，从导入中添加 。  设置 - 更多设置 - 导入 ； 由[奔跑中的奶酪](https://www.runningcheese.com/search-engines)整理。
+
 > version 5.16.0    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-06-29
-- 增加导入功能，目前只能导入我设置好的， 设置 - 更多设置 - 导入 ； 只添加了 一个搜索类别， 后续会逐渐补充
+- 增加导入功能，目前只能导入我设置好的， 设置 - 更多设置 - 导入 ； 只添加了 一个搜索类别， 后续会逐渐补充。 先补充由奔跑中的奶酪整理的[精选搜索引擎大全](https://www.runningcheese.com/search-engines)
 - 删掉成人网站的搜索链接
 
 > version 5.15.15    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-06-29
