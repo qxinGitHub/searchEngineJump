@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.16.2    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-07-02
+- 移除广告
+
 > version 5.16.1    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-06-30
 - 添加新的搜索分类 电子书，从导入中添加 。  设置 - 更多设置 - 导入 ； 由[奔跑中的奶酪](https://www.runningcheese.com/search-engines)整理。
 
