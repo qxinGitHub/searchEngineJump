@@ -17,6 +17,10 @@ __说明__
 
 ### 更新历史
 
+> version 5.17.0    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-08-03
+- 增加图标选项，当用户添加自定义搜索时，可以选择使用google获取图标，或者域名获取，或者dnspot获取。 设置 - 更多设置 - 配置菜单 - getIcon 。具体可查看当中的message进行相关设置
+- 导入中增加网盘搜索 由[奔跑中的奶酪](https://www.runningcheese.com/resources)整理。
+
 > version 5.16.2    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-07-02
 - 移除广告
 
