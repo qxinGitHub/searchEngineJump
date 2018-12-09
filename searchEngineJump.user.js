@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.17.0
+// @version        5.17.1
 // @created        2011-07-02
-// @lastUpdated    2018-08-03
+// @lastUpdated    2018-12-09
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -99,7 +99,7 @@
                 // ['web'|'music'|'video'|'image'|'download'|'shopping'|'translate'|'knowledge'|'sociality']
                 engineList: 'web',
                 // 若固定到顶栏,是否给一个高度
-                // fixedTop: 100,
+                fixedTop: 52,
                 // 给引擎列表的样式
                 style: '\
                     margin-left: 142px;\
@@ -529,7 +529,7 @@
                     where: 'beforeBegin',
                 },
             },
-            {name: "bilibili",
+            {name: "哔哩哔哩",
                 url: /^https?:\/\/search\.bilibili\.com\/all/,
                 enabled: true,
                 engineList: "video",
@@ -544,7 +544,7 @@
                     where: 'beforeBegin',
                 },
             },
-            {name: "acfan",
+            {name: "AcFun",
                 url: /^https?:\/\/www\.acfun\.cn\/search/,
                 enabled: true,
                 engineList: "video",
@@ -559,15 +559,15 @@
                     where: 'afterBegin',
                 },
             },
-            {name: "youtube",
+            {name: "YouTube",
                 url: /^https?:\/\/www\.youtube\.com\/results/,
                 enabled: true,
                 engineList: "video",
                 fixedTop:56,
                 style: "\
-                    padding-left: 240px; \
                     margin-top: 62px;\
                     margin-bottom: -80px;\
+                    text-align: center;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;input#search',
@@ -590,7 +590,7 @@
                     where: 'beforeBegin',
                 },
             },
-            {name: "iqiyi",
+            {name: "Iqiyi",
                  url: /^https?:\/\/so\.iqiyi\.com\/so\/q/,
                  enabled: true,
                  engineList: "video",
@@ -1360,6 +1360,49 @@
                             },
                    target:'css;.results-search-form',
                    where:'afterEnd',
+               }
+            },
+
+            // 其他补充， 这个脚本将会朝重型方向发展，如果嫌弃代码过多，可自行删减无用代码
+            {
+                name: "infinitynewtab",
+                enabled:true,
+                //https://google.infinitynewtab.com/?q=苹果
+                url:/^https?:\/\/google\.infinitynewtab\.com\/\?q/,
+                engineList:"web",
+                style:'\
+                    text-align:center;\
+                    position:fixed;\
+                    z-index:99999;\
+                    top:0;\
+                   ',
+               insertIntoDoc: {
+                   target: 'css;.searchbox-results',
+                   // keyword: '//input[@name="search"]',
+                   keyword: 'css;input.gsc-input',
+                   where: 'beforeBegin',
+               }
+            },
+             {
+                name: "startpage",
+                enabled:true,
+                //https://www.startpage.com/do/search?q=
+                url:/^https?:\/\/www\.startpage\.com\/do\/search/,
+                engineList:"web",
+                fixedTop:70,
+                style:'\
+                    text-align:center;\
+                    position:fixed;\
+                    z-index:99999;\
+                    top:70px;\
+                    margin-left:257px;\
+                    background-color:#fff;\
+                   ',
+               insertIntoDoc: {
+                   target: 'css;.header',
+                   keyword: '//input[@name="query"]',
+                   // keyword: 'css;input#gsc-i-id1',
+                   where: 'beforeEnd',
                }
             },
 
