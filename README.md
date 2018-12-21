@@ -17,13 +17,14 @@ __说明__
 
 ### 更新历史
 
+> version 5.17.2    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-12-21
+- 添加搜索 购物 - 什么值得买  [感谢	iqeq 建议](https://greasyfork.org/zh-CN/forum/discussion/48023/x)
+
 > version 5.17.1    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-12-09
 - "固定到顶端" 开启后，谷歌搜索中，搜索栏被遮挡的问题(有瑕疵)
 - 将 YouTube 搜索栏置中，已知问题：无法固定到顶端
 - www.startpage.com 网站添加搜索栏
 - 个别名称更改
-
-
 
 > version 5.17.0    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-08-03
 - 增加图标选项，当用户添加自定义搜索时，可以选择使用google获取图标，或者域名获取，或者dnspot获取。 设置 - 更多设置 - 配置菜单 - getIcon 。具体可查看当中的message进行相关设置

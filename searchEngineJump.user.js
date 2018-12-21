@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.17.1
+// @version        5.17.2
 // @created        2011-07-02
 // @lastUpdated    2018-12-09
 
@@ -1110,6 +1110,22 @@
                     where: 'afterEnd',
                 },
             },
+            {name: "什么值得买",
+               // http://search.smzdm.com/?c=home&s=%E8%A5%BF%E6%B8%B8%E8%AE%B0
+                url: /^https?:\/\/search\.smzdm\.com\/\?/i,
+                enabled: true,
+                engineList: "shopping",
+                fixedTop:34,
+                style: "\
+                    text-align: center;\
+                    z-index: 999;\
+                ",
+                insertIntoDoc: {
+                    keyword: 'css;#J_search_input',
+                    target: 'css;.search-inner',
+                    where: 'afterEnd',
+                },
+            },
 
 
             //社交
@@ -1710,6 +1726,12 @@
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAqUlEQVQ4jaWTsRGAIAxFs4Gj0DgGtTtQOIY7sAO1EzCOOxgLiCQRUfTf/TtE/zPBCAAAGAPiMvU5BgQRJjkj1zfe7JAguEw5tKfQPBYAX5NWn/YzpADmsQRWLyHcdP8C0IGa+H4TUGtFgy8AZ2Tp3RVwgH7b6wpaLfw6g8cWuGpnwStErHxG/aA2Vw4XQAxpLBtj2xxl+h82OwgQXd/5DGudpX0VOtMVPgBRELV9pv7F+wAAAABJRU5ErkJggg==',
             blank:true,
         };
+        engineList.shopping[7] = {
+            name: '值得买',
+            url: 'http://search.smzdm.com/?c=home&s=%s',
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACQElEQVR4nG2ST0iUURTFf+d9g2V/NKSgRYSriLCZ0jLie+Gi3LWqoKCFEYG0tHBTREgQSLWQCIRoWVCbKKKC/oD0fVGG5Iy2KDCiRQTBUBJh+vluC2dkHDurxzvvnnvuuU/U4H1X17ooy16Y2QAAUgfwEedWyawH6MknyefaGlc9FON4CFiH1C7nHkjaXEjTi5Juy+wm4Amhpej9rWUCRe+v5NO0L8qyu4uMdB3AYHZtFDVKinHunaBY8v7ZUgdmW8e7uppcLre/ShgMAwh2T2fZDzNLK9RQMBsoen8EwI3v3dsm6eDOkZGfYX7+PmZfgIvAyep0SI8Nphe7Sq8E3QDORdFEzUgHkFqBAUEGQAinsxD6CknSXDs7Zm8n4vhQNcQ/1CGfJKtL3hvSnpw0Vs8bDJnU7xbyUnfJ+zMG56sPJuN4s8FVpBOSNtYLSFpj0OkW3Nh34FqUZcOYXV45O9scYFAhTLlyeYXB14rtl0tEwDmgAEwBtL15U0Y6t2V0dBrp2Bw8DC0tf4EblZrbdUYm3fYkmay3V/T+iEGIzDKDe4LBUhzPVbJRPkkEFAL0C6DkvVVquw0OyyyYtB44YHB8R5I8Le7bd4oQLlXzMLOZQpo2OgBXLq+oJNvuzO4ibSokyVGg18GTkvcms5s1YfZGudyGSg4L+NTZ2TTT0PArnySqcbR0dWa/JZ2dC+FRx+vX35YIVFHyfgJoq7u+Y/ABswuFNG2s28T/UfL+gZm1CrYBz2dnZg7vGhtb9uH+Affd7MpRvsLpAAAAAElFTkSuQmCC',
+            blank:true,
+        };
 
         //翻译列表
         engineList.translate = [];
@@ -2230,7 +2252,7 @@
                     "(engineDetails: 第一个值为分类列表标题名称,第二个值与enginelist相关联,必须匹配,第三个值true为显示列表,false为禁用列表。排列顺序与跳转栏上的显示顺序相同，可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页,同脚本中的rules设置相同,优先级高于。自带了360搜索,可仿写)...",
-            "version":3,
+            "version":3.01,
             "addSearchItems":true,
             "modifySearchItems":true,
             "connectToTheServer":true,
@@ -2280,18 +2302,15 @@
                 //     //  5.11.0(2017.8.18) 的变动,但从未主动去修复它
                 //     getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"http://www.jav11b.com/cn/vl_searchbyid.php?keyword=%s","http://www.ja14b.com/cn/vl_searchbyid.php?keyword=%s")
                 // }
-
                 // 1.93更新 360界面变动
                 // if(getSettingData.modifySearchItems){
                 //     modifySearchItemsRuleFun("360",{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 120px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}});
                 //     getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"https://www.facebook.com/search/results.php?q=%s","https://www.facebook.com/search/top/?q=%s")
-
                 // }
                 // 1.93更新 360界面变动
                 // if(getSettingData.modifySearchItems){
                 //     getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"https://www.google.com/cse?q=%s&newwindow=1&cx=006100883259189159113%3Atwgohm0sz8q","https://cse.google.com/?q=%s&newwindow=1&cx=006100883259189159113%3Atwgohm0sz8q")
                 // }
-
                 // 1.95更新 添加搜狗搜索
                 // if(getSettingData.addSearchItems && getSettingData.engineList.hasOwnProperty("web")){
                 //     engineList.web[6].disable = true; // 对于老用户,默认禁用的状态添加
@@ -2301,7 +2320,7 @@
                 // if(getSettingData.modifySearchItems){
                 //     getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"http://www.acfun.tv/search.aspx#query=%s","http://www.acfun.cn/search/?#query=%s")
                 // }
-                // 版本2 更新 修改a站搜索链接
+                // 版本2.0 更新 修改a站搜索链接
                 // if(getSettingData.addSearchItems){
                 //     getSettingData.engineDetails = getSettingData.engineDetails.concat([["新闻","news",false]]);
                 //     getSettingData.engineList.news = engineList.news;
@@ -2312,9 +2331,12 @@
                 //     engineList.knowledge[10].disable = true; // 对于老用户,默认禁用的状态添加
                 //     getSettingData.engineList["knowledge"].push(engineList.knowledge[10])
                 // }
-                // 版本3 添加了geticon，更新了message信息
-
-
+                // 版本3.0 添加了geticon，更新了message信息
+                // 版本3.01 添加 购物网站-什么值得买
+                if(getSettingData.addSearchItems && getSettingData.engineList.hasOwnProperty("shopping")){
+                    engineList.shopping[7].disable = true; // 对于老用户,默认禁用的状态添加
+                    getSettingData.engineList["shopping"].push(engineList.shopping[7])
+                }
                 // 更新本地版本 其他相关信息
                 getSettingData.version = settingData.version;
                 getSettingData.message = settingData.message;
