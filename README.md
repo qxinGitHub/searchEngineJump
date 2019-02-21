@@ -19,6 +19,7 @@ __说明__
 
 > version 5.17.3    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2019-02-21
 - 搜狗搜索页面改版 [感谢 Fordo 反馈](https://greasyfork.org/zh-CN/forum/discussion/51921/x)
+- 自用里面添加搜狗表情搜索
 - 好久不见，愿每个人都会被温柔的对待
 
 > version 5.17.2    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-12-21
