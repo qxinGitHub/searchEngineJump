@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.17.2
+// @version        5.17.3
 // @created        2011-07-02
-// @lastUpdated    2018-12-09
+// @lastUpdated    2019-02-21
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -245,12 +245,17 @@
                 enabled: true,
                 engineList: "web",
                 fixedTop:60,
-                style: "top:100px;padding-left:114px;z-index:99;",
+                style: "\
+                        top:-46px;\
+                        z-index:99;\
+                        margin-left:-5px;\
+                ",
                 insertIntoDoc: {
                     keyword: "css;#upquery",
-                    target: "css;.header",
-                    where: "afterEnd",
+                    target: "css;#wrapper",
+                    where: "afterBegin",
                 },
+                stylish:"#float_uphint{display:none;}",
             },
             {name:"yandex",
                 url:/^https?:\/\/yandex\.com\/search/i,

@@ -17,6 +17,10 @@ __说明__
 
 ### 更新历史
 
+> version 5.17.3    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2019-02-21
+- 搜狗搜索页面改版 [感谢 Fordo 反馈](https://greasyfork.org/zh-CN/forum/discussion/51921/x)
+- 好久不见，愿每个人都会被温柔的对待
+
 > version 5.17.2    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2018-12-21
 - 添加搜索 购物 - 什么值得买  [感谢	iqeq 建议](https://greasyfork.org/zh-CN/forum/discussion/48023/x)
 
