@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.18.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2019-02-28
+- 当固定到顶端后，增加只有上拉才出现的选项： 设置-更多设置-配置文件 fixedTopUpward 将false改为true [感谢 黄志东  建议](https://greasyfork.org/zh-CN/forum/discussion/50315/x)
+
 > version 5.17.3    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2019-02-21
 - 搜狗搜索页面改版 [感谢 Fordo 反馈](https://greasyfork.org/zh-CN/forum/discussion/51921/x)
 - 自用里面添加搜狗表情搜索

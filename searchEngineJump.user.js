@@ -3,74 +3,15 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.17.3
+// @version        5.18.0
 // @created        2011-07-02
-// @lastUpdated    2019-02-21
+// @lastUpdated    2019-02-28
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
 
 // @icon           data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFSElEQVR4nMWXX4hdVxXGf2vfe89kJg61ia0DYzMTMWnoQ0FJtKmtJsFixT8DBSmYtGMLgq0PCqMEKwmxYzSGyUPBB7XRNi0FC6JtwYovgcS0klJD8SHakoExYhLQFkwn9/aeOfv7fDi3SStJ5o4muN4O7L32b33rz94H/s8WS10cvR3yVQaY++wnkESkwDK2sMy1EwXDtzRRziBhu+dGDG48smSA5kUP//wmAFIkrNwiGMOsBzYAQwTzEEeBY8BJO1fYtF+4laGPv/i/Afz1C1sAYwngZiKmsDcDI0DrHUtL4DRwMGAmUnVcCtpHPsrQbS/1DZDe+VFHblKziIjYBjwD3Iu5ARBwBjgJnAkwMAa+z+ZZqXEX8VZg0T784aUDzH3uk0DtVQvlVsMjwGpMB3gauAu8ieB2YDPwxR5gF/gQ+MeoNUFzACI4d+imvgDOp0BVRWo2AW62eRi8wvY/wNtrgGhDL+7a/gIcBLYBu4HrsPdSzr8K/JlcLk2BaCQstSxN2VptuYO93an7WES0UyORGg1Wfu0QKivyQhfb56yhn4B3Ynew1kD1oDTfJF20vi8NYBvjMVubbWHrOdtPhwaAYPVvfs8Hf1u32bJbDtXVbgFvAj4AOgTGzhPhGMdV/wCvbtmAJSyttzRiuWv7CdttAlY/f/iimwdvfQGiAfmtczg/jnOJ8/txtRbnvgAu6FSPtg1AC3wGPAvgWGRYqiSowLwC1Ru4GoFyFPc3ZM8DfGPLB1jZXlhe74sS6AAc+O6vL+tg6LaX2LP/SSA6tkpcYeee36/0D/C7Ve9BwZs97iLMEMDAE5N07z1wSQebvl/y3KkAGDIUsrHpRp8ACeDGw38kZdPMPtrILhvZ1yZ5TZJxvnwuW40GzSSaDa1vJq1oJXVbKZ9qpv5qoO6Cqr5ULB+zfNrygOX7LS+PlCgeu+eimz/1w0yWaTTScIqYTEERcDoiXovFauddAAA22CeRDyKD/Bnkbd32PNgUj09S/GwrUMt+x14hiWVFI1LEVyPidggi4hfOnuv3nr8AEGC5sj1j+4TtAcu7i4HlDwLLqRawMmtmnidn6JYLGIa7C/mbwHeAgYATQexPjVCVxcZd7SUACDCEfRyznXoMr8Sawf4lcDdwI7AKWAdss/0r2dOyr6kFpCn7hiyPRlDY5mM7z10W4F1KFT+/p6ZwDkgT2HuN19Tz3yXWG+NnJ8uR9h0FSStSRAFBwAmbpu3xbP/T9rzkp2zvtt2RzcvfG15EAaC8/8m6FkgmpWdsTyD/COtv9esnj1haZXvEtiXP2d5jc6es+3qHv8/2uO1v2d4hedA2H/n2vxZX4LwS+78E1PcDqprAOPZao9Gxs5PNkc6dXUKnIuI1Z8+lRijLo8AR2+OWqeeBS8n7bE8bd2x4Zc97FwcAaP307vqyiXi7QzBi7OyXGel8GkJEBAFUWUREIXlnL/LCvgBheZ9h2lLHyvxp5rrFAZZiG3e16zliBm3vsD0lu6i5ja0awppWrjrKmeOPjAL/UQP/rf1h11BPJHckT/dkL+vDjeXC0pRy3qGcB22x9oHZKwcAcPTh5UimzrWnexGXlrCFlAvlakq5eiiX3eLtSXnFAABe3j1c/0PgTp1z77NUKmesjHMulKuttq9X/eq+sgAAx35wTZ0OqWNrWqr2KVelqoqcF3DOL1r5dStfHQCoW03K9ApuWrnam/PCnHN+StZDRHSK1jLgCnXBpeymr/8dS+SFbmH7eiu/TkQnNRrkqmL20XVXFwBg7QOzRASSsDJFaxndssPso+uu9tH92b8BowSyPc/iZtEAAAAASUVORK5CYII=
 
-// @include        *google*
-// @include        *baidu.com*
-// @include        *bing.com*
-// @include        *duckduckgo.com*
-// @include        *youdao.com*
-// @include        *so.com*
-// @include        *soku.com*
-// @include        *bilibili.tv*
-// @include        *bilibili.com*
-// @include        *acfun.tv*
-// @include        *acfun.cn*
-// @include        *youtube.com*
-// @include        *so.tv.sohu.com*
-// @include        *so.letv.com*
-// @include        *so.1ting.com*
-// @include        *xiami.com*
-// @include        *music.163.com*
-// @include        *music.qq.com*
-// @include        *so.yinyuetai.com*
-// @include        *pixiv.net*
-// @include        *flickr.com*
-// @include        *huaban.com*
-// @include        *www.nicovideo.jp*
-// @include        *cn.picsearch.com*
-// @include        *deviantart.com*
-// @include        *jpg4.info*
-// @include        *yyets.com*
-// @include        *baiduyun.me*
-// @include        *oabt.org*
-// @include        *ktxp.com*
-// @include        *dmhy.org*
-// @include        *shooter.cn*
-// @include        *simplecd.me*
-// @include        *ed2000.com*
-// @include        *taobao.com*
-// @include        *list.tmall.com*
-// @include        *search.jd.com*
-// @include        *search.suning.com*
-// @include        *search.dangdang.com*
-// @include        *search.yhd.com*
-// @include        *amazon.cn*
-// @include        *s.mall.360.cn*
-// @include        *iciba.com*
-// @include        *dict.cn*
-// @include        *dict.hjenglish.com*
-// @include        *zdic.net*
-// @include        *wikipedia.org*
-// @include        *zhihu.com*
-// @include        *so.hudong.com*
-// @include        *docin.com*
-// @include        *ishare.iask.sina.com.cn*
-// @include        *s.weibo.com*
-// @include        *douban.com*
-// @include        *search.t.qq.com*
-// @include        *twitter.com*
-// @include        *facebook.com*
-// @include        *runoob.com*
-// @include        *pinterest.com*
-// @include        *github.com*
 // @match          *://*/*
 
 // @grant       GM_getValue
@@ -2263,7 +2204,7 @@
                     "(engineDetails: 第一个值为分类列表标题名称,第二个值与enginelist相关联,必须匹配,第三个值true为显示列表,false为禁用列表。排列顺序与跳转栏上的显示顺序相同，可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页,同脚本中的rules设置相同,优先级高于。自带了360搜索,可仿写)...",
-            "version":3.02,
+            "version":4,
             "addSearchItems":true,
             "modifySearchItems":true,
             "connectToTheServer":true,
@@ -2273,6 +2214,7 @@
             "setBtnOpacity":0.8,
             "debug":false,
             "fixedTop":true,
+            "fixedTopUpward":false,
             "baiduOffset":-120,
             "getIcon":0,
             "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],["下载","download",true],["新闻","news",false],['mine', 'mine',false]],
@@ -2301,53 +2243,11 @@
                 // console.log("当前版本号和目标版本号: ",getSettingData.version,settingData.version);
             if(parseFloat(getSettingData.version) < settingData.version){
                 console.log("版本过低,开始更新,当前版本号和目标版本号: ",getSettingData.version,settingData.version);
-                // 1.91更新 添加海词; 版本号已蹦,应该从1.01而不是1.1开始计算。
-                // if(getSettingData.addSearchItems && getSettingData.engineList.hasOwnProperty("translate")){
-                //     engineList.translate[7].disable = true; // 对于老用户,默认禁用的状态添加
-                //     getSettingData.engineList["translate"].push(engineList.translate[7])
-                // }
-
-                // 1.92更新 优酷搜索变动
-                // if(getSettingData.modifySearchItems){
-                //     getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"http://www.soku.com/v?keyword=%s","http://www.soku.com/search_video/q_%s")
-                //     //  5.11.0(2017.8.18) 的变动,但从未主动去修复它
-                //     getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"http://www.jav11b.com/cn/vl_searchbyid.php?keyword=%s","http://www.ja14b.com/cn/vl_searchbyid.php?keyword=%s")
-                // }
-                // 1.93更新 360界面变动
-                // if(getSettingData.modifySearchItems){
-                //     modifySearchItemsRuleFun("360",{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 120px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}});
-                //     getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"https://www.facebook.com/search/results.php?q=%s","https://www.facebook.com/search/top/?q=%s")
-                // }
-                // 1.93更新 360界面变动
-                // if(getSettingData.modifySearchItems){
-                //     getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"https://www.google.com/cse?q=%s&newwindow=1&cx=006100883259189159113%3Atwgohm0sz8q","https://cse.google.com/?q=%s&newwindow=1&cx=006100883259189159113%3Atwgohm0sz8q")
-                // }
-                // 1.95更新 添加搜狗搜索
-                // if(getSettingData.addSearchItems && getSettingData.engineList.hasOwnProperty("web")){
-                //     engineList.web[6].disable = true; // 对于老用户,默认禁用的状态添加
-                //     getSettingData.engineList["web"].push(engineList.web[6])
-                // }
                 // 1.96 更新 修改a站搜索链接
                 // if(getSettingData.modifySearchItems){
                 //     getSettingData.engineList = modifySearchItemsFun(getSettingData.engineList,"http://www.acfun.tv/search.aspx#query=%s","http://www.acfun.cn/search/?#query=%s")
                 // }
-                // 版本2.0 更新 修改a站搜索链接
-                // if(getSettingData.addSearchItems){
-                //     getSettingData.engineDetails = getSettingData.engineDetails.concat([["新闻","news",false]]);
-                //     getSettingData.engineList.news = engineList.news;
-                // }
-                // if(getSettingData.addSearchItems && getSettingData.engineList.hasOwnProperty("knowledge")){
-                //     engineList.knowledge[9].disable = true; // 对于老用户,默认禁用的状态添加
-                //     getSettingData.engineList["knowledge"].push(engineList.knowledge[9])
-                //     engineList.knowledge[10].disable = true; // 对于老用户,默认禁用的状态添加
-                //     getSettingData.engineList["knowledge"].push(engineList.knowledge[10])
-                // }
-                // 版本3.0 添加了geticon，更新了message信息
-                // 版本3.01 添加 购物网站-什么值得买
-                // if(getSettingData.addSearchItems && getSettingData.engineList.hasOwnProperty("shopping")){
-                //     engineList.shopping[7].disable = true; // 对于老用户,默认禁用的状态添加
-                //     getSettingData.engineList["shopping"].push(engineList.shopping[7])
-                // }
+
                 // 版本3.02 添加 自用网站-搜狗表情
                 if(getSettingData.addSearchItems && getSettingData.engineList.hasOwnProperty("mine")){
                     // engineList.mine[8].disable = true; // 对于老用户,默认禁用的状态添加
@@ -2374,7 +2274,6 @@
         var engineDetails = getSettingData.engineDetails;
         //列表分类显示情况
         var getDetails = engineDetails.map(function(value,index){
-            // console.log(value,value[2]);
             return value[2]?index:-index;
         })
 
@@ -2386,8 +2285,6 @@
         };
         engineList.details = details;
 
-        // debug
-        // getSettingData.debug = true;
         reloadDebug(getSettingData.debug);
 
         ///test -------------- 测试 start
@@ -2484,7 +2381,6 @@
                 actualLeft += current.offsetLeft;
                 current = current.offsetParent;
             }
-            //console.log(actualLeft);
             return actualLeft;
         };
         // --------------------可设置项结束------------------------
@@ -3101,9 +2997,22 @@
         if(matchedRule.stylish){GM_addStyle(matchedRule.stylish);};
         //固定搜索栏
         if(getSettingData.fixedTop){
-            window.onscroll = function(){
-                fixedTopFun(matchedRule.fixedTop);
-            };
+            // 判断是否需要只在向上滚动时显示
+            if(getSettingData.fixedTopUpward){
+                window.onmousewheel = document.onmousewheel = function(eee){
+                    console.log("mousewheel",eee.wheelDelta);
+                    if(eee.wheelDelta>0){
+                        fixedTopFun(matchedRule.fixedTop);
+                    }else{
+                        var obj = document.getElementById("sej-container");
+                        obj.style.cssText = matchedRule.style;
+                    }
+                }    
+            } else {
+                window.onscroll = function(){
+                    fixedTopFun(matchedRule.fixedTop);
+                };
+            }
             // 固定搜索栏
             function fixedTopFun(height){
                 var obj = document.getElementById("sej-container");
@@ -3117,7 +3026,6 @@
                 }
 
                 var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-                // console.log("obj.offsetLeft",obj.offsetLeft);
 
                 if(height){
                     objTop = height;
@@ -3141,8 +3049,6 @@
                     if(objstyle.backgroundColor === "rgba(0, 0, 0, 0)" || objstyle.backgroundColor === "transparent"){
                         obj.style.background = '#fff'; 
                     }
-                    // obj.style.zIndex = '999';
-
                     obj.style.left = getElementLeft(obj) - marginLeft + "px";
                     // obj.style.left = getElementLeft(obj) + "px";
                     debug("objLeft: ",objLeft,"marginLeft: ",marginLeft,"marginRight: ",marginRight,"getElementLeft: ",getElementLeft(obj));
@@ -3643,7 +3549,6 @@
                 btnEle.parentNode.insertBefore(odiv,btnEle);
             },
 
-
             boxClose: function(ele){
                 var odiv = document.querySelector(ele);
                 if(odiv){
@@ -3834,7 +3739,6 @@
                 }
             },
 
-
             // 导入窗口
             addImportingBox: function(){
                 var odiv = document.querySelector("#importingBox");
@@ -3873,7 +3777,6 @@
                 newDiv.innerHTML=a;
 
                 this.ele.appendChild(newDiv);
-
             },
             addImportingEnger:function(e){
                 // console.log(e);
@@ -4241,7 +4144,6 @@
                         that.online = true;
                     }else{
                         myImage.src = undefined;
-                        // that.online = "哈哈";
                     };
                 },2000);
             },
@@ -4263,8 +4165,6 @@
 
             // 设置按钮透明度设置
             rangeChange: function(bool){
-                // console.log(this);
-                // console.log(bool);
                 var odom = document.querySelector("#setBtnOpacityRange");
                 if(getSettingData.setBtnOpacity<0){
                     odom.style.background = "-webkit-linear-gradient(left,#bdbdbd,#c6c7c7) no-repeat, #fff";
