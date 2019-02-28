@@ -17,6 +17,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.18.1   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2019-02-28
+- 添加 startpage 网页搜索 
+- 添加 当当网 购物搜索
+- 添加 酷我音乐 5sing 歌曲搜索
+
 > version 5.18.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2019-02-28
 - 当固定到顶端后，增加只有上拉才出现的选项： 设置-更多设置-配置文件 fixedTopUpward 将false改为true [感谢 黄志东  建议](https://greasyfork.org/zh-CN/forum/discussion/50315/x)
 
