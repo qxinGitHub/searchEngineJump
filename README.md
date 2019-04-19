@@ -17,6 +17,10 @@ __说明__
 
 ### 更新历史
 
+> version 5.18.2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2019-04-19
+- 添加秘迹搜索，[感谢 swearwr的帮助和lukemin的建议](https://greasyfork.org/zh-CN/forum/discussion/55490/x)
+- YouTube 通过搜索播放视频时，会在视频上方出现搜索栏，可以刷新一遍网页暂时去除，等待后续更好的处理办法
+
 > version 5.18.1   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2019-02-28
 - 添加 startpage 网页搜索 
 - 添加 当当网 购物搜索

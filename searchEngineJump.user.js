@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.18.1
+// @version        5.18.2
 // @created        2011-07-02
-// @lastUpdated    2019-02-28
+// @lastUpdated    2019-04-19
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -243,6 +243,22 @@
                     keyword: '//input[@name="query"]',
                     where: 'beforeBegin',
                 },
+            },
+            {name:"mijisou",
+                url:/^https?:\/\/mijisou.com\/\?q/i,
+                engineList:"web",
+                enabled:true,
+                fixedTop:75,
+                style:"\
+                    margin-left:-10px;\
+                    margin-bottom:10px;\
+                ",
+                insertIntoDoc:{
+                    keyword:'css;#q',
+                    target:'css;#cat',
+                    where:'beforeBegin',
+                },
+                stylish:'.default-container{margin-top:50px;}',  // 此处应该仅在需要置顶的时候才会有影响，后期需要在加一个判断，2019-04-19 22:52:38
             },
 
             // 知识
@@ -1472,6 +1488,11 @@
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA9ElEQVR4nO2WTUoDQRBGX5txIMRs/EFBAm49iEfxBN5J8AAeZwwkgmTR6e6ZHsNMDO2iFkEyibqQcVG1+aq74KvXteky9w8p0WMc9dlcARRAARRAARTgXwBk+z5jYyA/3p7zvDv/Ltp2N2/XoilBNj4Rw6sLuDyXwuRa9OxUdDz6ajoc/hwAYLUSrertnV2KmpT6XUiyvzBtGplxjPLksooA+FAB4HzZDdA0a2Ksmb2+4XzJYmFxPlBM51jr8aHCLgPOBQDqd5ntx2ZzECgbDPbWzOPTcyqmM5wvKV7mOw26zA8Z/jbMze2dLqUKoAAKoAC9xic+GmK9S0OJvAAAAABJRU5ErkJggg==',
             disable:true,
         };
+        engineList.web[8] = {
+            name: '秘迹搜索',
+            url: 'https://mijisou.com/?q=%s&category_general=on&time_range=&language=zh-CN',
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADHklEQVR4nLXXXYhVVRQH8N9cJxzRoXLGFKK0SQvRyRJ9kCAq6iH6JBNliB6CYhIfJCoMpHwoUCqiMJR6UHooqCAoKoIesrTQCckUI/ogLSoLScKISpse1j6c45kz9547d/zDZe9z9vr4r33X2msfJh+7z4JNMAXPYlMbOl24ZjKcz8fnGE2/7YlQEb2T4agKDRzCFbgdQwUi52FBSb6/MD+3U+dTsBF/FpwWfxcWZHsq9JdP1PEtOJKc7MH0Cpnr8Ddm4dOK9csK832YV9f5OfIIr28hO4qH0vzqwvtpOFHXYREjyehNNeUzouvRhx3p/WAaP2ploFGYd2EZ/sJ7NQl8k8ZpWIHF6bk7jdeW5AfGMzSQHD9X03GGNWIH/sWWNP+4sP5BXUPvJuWpbRK4MundjUfFjjxp7A7e2crQKL5s03mG73EQe/F1spUdUkNY2Ey5gRlpvnOCBL7CcRzDi/gCP4nzY4YagT0hmE8UW+XV8FQaYRhLMVuelN1l5YbI3n0dEDiBb0WT2oXfcU+a7xfVdSrJnhqrzq9Y2wGB++U78Goal4uS3IBFuCqRGYMGzscfHRA4LXrFSyIPiGP3ArwvKuJSbK5S7sZ3uKgDAnNEr7hPlNu9ItqZuA1z5XkxBo3Een4HBHrFQXRa5FOvyIkRPINbk9xwSe/ibHKHSI6+CRJ4WZ4Dz8v7yR6x9S3RlxQeaCJT1Y4zvIMfxaXlgAhmJd5K67UaWxZBFXbgrnHWesTWZ/pHsVoE04035cf7qmYE9iYDXRVrg6JJvVCxtiTp7RRZ/iFuSGuPp/GHZo6L2Ip/REuuQn9y9h9ewdOixLLob8RjIvMz+bYwNRk61kRmvSjb8t1wGJeLJNzozK5avJrN1uL2PBeHcVL0+lbICBzHz4X3A/Im1yyBKzGzYPiSGgQ+w9sVazfXcVaVdBnmiVbaI7Z9F17DLyK6deIEfR1viEhPisOtduK1Qj+2qf4mGBVVAA+K/58zvxUmDb+JrZ4lvweOlGTKX0iDpefxqqsWlopbThb5J6KLwsNpHCrplE/WRzohUBcb2lX4H+8RvvN6tC5LAAAAAElFTkSuQmCC',
+        };
 
         // 视频搜索列表
         engineList.video = [];
@@ -2244,7 +2265,7 @@
                     "(engineDetails: 第一个值为分类列表标题名称,第二个值与enginelist相关联,必须匹配,第三个值true为显示列表,false为禁用列表。排列顺序与跳转栏上的显示顺序相同，可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页,同脚本中的rules设置相同,优先级高于脚本中自带的规则。自带了360搜索,可仿写)...",
-            "version":4.01,
+            "version":4.02,
             "addSearchItems":true,
             "modifySearchItems":true,
             "connectToTheServer":true,
@@ -2293,17 +2314,24 @@
                 //     getSettingData.engineList["mine"].push(engineList.mine[8])
                 // }
                 // 4.01 
+                // if(getSettingData.addSearchItems){
+                //     // engineList.mine[8].disable = true; // 对于老用户,默认禁用的状态添加
+                //     if(getSettingData.engineList.hasOwnProperty("web")){
+                //         getSettingData.engineList["web"].push(engineList.web[7])
+                //     }
+                //     if(getSettingData.engineList.hasOwnProperty("shopping")){
+                //         getSettingData.engineList["shopping"].push(engineList.shopping[8])
+                //     }
+                //     if(getSettingData.engineList.hasOwnProperty("music")){
+                //         getSettingData.engineList["music"].push(engineList.music[6])
+                //         getSettingData.engineList["music"].push(engineList.music[7])
+                //     }
+                // }
+                // 4.02
                 if(getSettingData.addSearchItems){
                     // engineList.mine[8].disable = true; // 对于老用户,默认禁用的状态添加
                     if(getSettingData.engineList.hasOwnProperty("web")){
-                        getSettingData.engineList["web"].push(engineList.web[7])
-                    }
-                    if(getSettingData.engineList.hasOwnProperty("shopping")){
-                        getSettingData.engineList["shopping"].push(engineList.shopping[8])
-                    }
-                    if(getSettingData.engineList.hasOwnProperty("music")){
-                        getSettingData.engineList["music"].push(engineList.music[6])
-                        getSettingData.engineList["music"].push(engineList.music[7])
+                        getSettingData.engineList["web"].push(engineList.web[8])
                     }
                 }
 
