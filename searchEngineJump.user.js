@@ -2657,7 +2657,7 @@
                 // alert(f);
             } else{
                 //console.log(value);
-                target.href = target.getAttribute('url').replace('%s', value);
+                target.href = target.getAttribute('url').replace('%s', encodeURIComponent(value));
             }
         };
          //获取  POST 的表单的 HTML
