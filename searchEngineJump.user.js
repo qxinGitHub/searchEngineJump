@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.18.2
+// @version        5.19.0
 // @created        2011-07-02
-// @lastUpdated    2019-04-19
+// @lastUpdated    2020-01-26
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -29,6 +29,7 @@
 
     function iqxinstart(){
         // 根据规则把搜索引擎列表插入到指定网站
+        console.log("执行iqixnstart")
         var rules = [
             // 网页搜索/////////////第一个可以当模板看
             {name: "google网页搜索",// 你要加载的网站的名字(方便自己查找)
@@ -260,6 +261,36 @@
                 },
                 stylish:'.default-container{margin-top:50px;}',  // 此处应该仅在需要置顶的时候才会有影响，后期需要在加一个判断，2019-04-19 22:52:38
             },
+            {name: "infinitynewtab",
+                enabled: true,
+                url:/^https?:\/\/google\.infinitynewtab\.com\/\?q/i,
+                engineList: 'web',
+                style: '\
+                    z-index: 100;\
+                    margin-top: 20px;\
+                ',
+                insertIntoDoc: {
+                    target: 'css;.search-types',
+                    // keyword: 'css;input.gsc-input',
+                    keyword: '//input[@name="search"]',
+                    where: 'afterBegin',
+                },
+            },
+            {name: "dogedoge",
+                enabled: true,
+                url:/^https?:\/\/www\.dogedoge\.com\/results\?q/i,
+                engineList: 'web',
+                fixedTop: 105,
+                style: '\
+                    z-index: 100;\
+                ',
+                insertIntoDoc: {
+                    target: 'css;#links_wrapper',
+                    // keyword: 'css;input.gsc-input',
+                    keyword: '//input[@name="q"]',
+                    where: 'afterBegin',
+                },
+            },
 
             // 知识
             {name: "百度百科词条",
@@ -359,9 +390,9 @@
                     padding: 5px 20px; \
                 ",
                 insertIntoDoc: {
-                    keyword: 'css;.SearchBarExperiment input',
-                    target:"css;.Search-container",
-                    where: 'beforeBegin', //beforeBegin
+                    keyword: 'css;.Input',
+                    target:"css;.App-main .SearchTabs",
+                    where: 'afterEnd', //beforeBegin
                 },
                 stylish:".TopSearch.Card{margin:30px auto;}",
             },
@@ -659,13 +690,14 @@
                 url: /^https?:\/\/music\.163\.com\/.*?#\/search/i,
                 enabled: true,
                 engineList: 'music',
+                fixedTop:80,
                 style:"\
                     text-align: center;\
                     padding-top:8px;\
                     ",
                 insertIntoDoc: {
                     keyword: (function(){return decodeURI(document.URL.match(/s=(.+?)(&|$)/)[1]);}),
-                    target: 'css;.shadow',
+                    target: 'css;.m-subnav.m-subnav-up.f-pr.j-tflag',
                     where: 'afterEnd',
                 },
             },
@@ -1441,8 +1473,10 @@
             // 搜索引擎的站点图标
             // favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACyElEQVQ4jXWT72tTdxTGv4yN+cY/oMFGqQpD7ZjtsAF/oPEXGFhtbUEn4mSTatSJVua0UNNSEG/01UAH0m6dN1hdW5SbrE3sgkr1hb9lRTFW3Upqcy1NzE1yc/Prfvaia7dM+7w853keznM4R4h38aHdbt8gSZJbURSv3++/Jsuyp6GhwWm1Wsvew/8XNptteTAYvMEMiKjquMvlahVCzHpHXFdXV69pWhLAHHtNSm7nbdMhYo170U61kLkZnDZSFMUrhJg9La6qqrLpum4A6FcuM+5YReRTK5HyUiLlViJLSolULiB2eA+mFgdAlmWPEOIDIYT4aHBw8DaA3tODavuESMV8orvqSZ7/Af1XD/HW71HXVKKdbsPUU9OT1NTU1Aq73b4BgPhLJrYtY2zxQuKtxzATWlH+/MvnYJpFtUAgMCDcbvcZAHOkjXSHIH50LYW3iZn2WIRoNBoTiqJ4AfIPq8n1CwrDB4pIPw5kcP6k0+hJ0+hJ8+0vaU5eNdCzk30RCAQGAPL311PwCnjVXGSw+7zOvIMa5UcTVDQl+Ox4Aoc7yfg/QwpZlj0A5pNvML2Cp/d2FhmExgrceZHn0Z952q9nqGhKsONsCiMP2Ww2J5xO534A481V3N1lLL24md/Dd96b2dWdZfF3Gi29xqR5KDQsSkpK5kaj0ZhhFtgVbKOkfTUru7+kK+RjNKkSzyR4FgvRHOzn8+YJVrakefxXHgBJkk4LIYRwuVytAOHUG7b2H8basZr5netY2/sVm737WHZpC3M6VrDk3Aku3Jq8g9HR0TGLxWKdOsaPfT7fbwBaLsWZBx1svPI1i+RNlP28jsquLWz3H8E3cg0AwzAyDofji/+/w+zOzs4LU3mTZprHE8+4q/7BcGJkeg/hcPh1dXV1zYwfWVtbW9fX1+dXVXV8SpTL5fJDQ0NPJElyWyyW0v/y/wbuo60BpWkyAAAAAABJRU5ErkJggg==',
             favicon: icon.google,
-            // 搜索引擎编码（默认utf-8）如果跳转后乱码可以填写 'gbk'
-            encoding: 'utf-8',
+            // 弃用；搜索引擎编码（默认utf-8）如果跳转后乱码可以填写 'gbk'
+            // 弃用：encoding: 'utf-8',
+            // 如果网站使用的gbk编码
+            gbk:false,
             // 新标签页打开
             // blank:true,
             // 禁用
@@ -1493,6 +1527,12 @@
             url: 'https://mijisou.com/?q=%s&category_general=on&time_range=&language=zh-CN',
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADHklEQVR4nLXXXYhVVRQH8N9cJxzRoXLGFKK0SQvRyRJ9kCAq6iH6JBNliB6CYhIfJCoMpHwoUCqiMJR6UHooqCAoKoIesrTQCckUI/ogLSoLScKISpse1j6c45kz9547d/zDZe9z9vr4r33X2msfJh+7z4JNMAXPYlMbOl24ZjKcz8fnGE2/7YlQEb2T4agKDRzCFbgdQwUi52FBSb6/MD+3U+dTsBF/FpwWfxcWZHsq9JdP1PEtOJKc7MH0Cpnr8Ddm4dOK9csK832YV9f5OfIIr28hO4qH0vzqwvtpOFHXYREjyehNNeUzouvRhx3p/WAaP2ploFGYd2EZ/sJ7NQl8k8ZpWIHF6bk7jdeW5AfGMzSQHD9X03GGNWIH/sWWNP+4sP5BXUPvJuWpbRK4MundjUfFjjxp7A7e2crQKL5s03mG73EQe/F1spUdUkNY2Ey5gRlpvnOCBL7CcRzDi/gCP4nzY4YagT0hmE8UW+XV8FQaYRhLMVuelN1l5YbI3n0dEDiBb0WT2oXfcU+a7xfVdSrJnhqrzq9Y2wGB++U78Goal4uS3IBFuCqRGYMGzscfHRA4LXrFSyIPiGP3ArwvKuJSbK5S7sZ3uKgDAnNEr7hPlNu9ItqZuA1z5XkxBo3Een4HBHrFQXRa5FOvyIkRPINbk9xwSe/ibHKHSI6+CRJ4WZ4Dz8v7yR6x9S3RlxQeaCJT1Y4zvIMfxaXlgAhmJd5K67UaWxZBFXbgrnHWesTWZ/pHsVoE04035cf7qmYE9iYDXRVrg6JJvVCxtiTp7RRZ/iFuSGuPp/GHZo6L2Ip/REuuQn9y9h9ewdOixLLob8RjIvMz+bYwNRk61kRmvSjb8t1wGJeLJNzozK5avJrN1uL2PBeHcVL0+lbICBzHz4X3A/Im1yyBKzGzYPiSGgQ+w9sVazfXcVaVdBnmiVbaI7Z9F17DLyK6deIEfR1viEhPisOtduK1Qj+2qf4mGBVVAA+K/58zvxUmDb+JrZ4lvweOlGTKX0iDpefxqqsWlopbThb5J6KLwsNpHCrplE/WRzohUBcb2lX4H+8RvvN6tC5LAAAAAElFTkSuQmCC',
         };
+        engineList.web[9] = {
+            name: 'Yandex',
+            url: 'https://yandex.com/search/?text=%s',
+            favicon: 'data:image/ico;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAAAAAAsAAAAUwAAAF8AAABfAAAAXwAAAF8AAABfAAAAXwAAAF8AAABfAAAAXwAAADjBwcEAwcHBAMHBwQDBwcEAAAAAUbq6uurExMT/xMTE/8TExP/ExMT/xMTE/8TExP/ExMT/xMTE/8TExP9ubm6QAAAALcTExADExMQAxMTEAAAAAFrHx8f/x8fH/8fHx/+7u8j/AADS/wAA0v+wsMj/x8fH/8fHx//Hx8f/vr6+7h4eHmQAAAAQx8fHAMfHxwAAAABXy8vL/8vLy//Ly8v/v7/M/wAA2/8AANv/s7PN/8vLy//Ly8v/y8vL/8vLy/+kpKS6AAAAM8vLywDLy8sAAAAAU9DQ0P/Q0ND/0NDQ/8TE0f8AAOX/AADl/7i40v/Q0ND/0NDQ/9DQ0P/Q0ND/0NDQ/2VlZXsAAAAk0NDQAAAAAE/U1NT/1NTU/9TU1P/IyNb/AADw/wAA8P+7u9f/1NTU/9TU1P/U1NT/1NTU/9TU1P/JycnkDw8PUwAAAAcAAABL2dnZ/9nZ2f/Z2dn/np7i/wAA+f8AAPn/goLm/9nZ2f/Z2dn/2dnZ/9nZ2f/Z2dn/2dnZ/6ioqKYAAAAqAAAASOLi4v/i4uL/4uLi/0hI9v8AAP//BQX+/yAg+//f3+L/4uLi/+Li4v/i4uL/4uLi/+Li4v/g4OD7AAAARgAAAETx8fH/8fHx/9jZ8v8LD///HiL+/3h6+P8IDP//lJX3//Hx8f/x8fH/8fHx//Hx8f/x8fH/7+/v+wAAAEIAAABA9vb2//b29v+Ah/v/Ex///3N6+//Z2vf/FiL//ys2/v/r7Pb/9vb2//b29v/29vb/9vb2/8jIyKMAAAAkAAAAPPn5+f/09Pn/NEf+/yA0///Gy/r/+fn5/1hn/f8gNP//jpj8//n5+f/5+fn/+fn5//Dw8OMXFxdBAAAABgAAADj7+/v/tb/8/y5K//9GX///+/v7//v7+/+zvfz/Lkr//zhS///l6Pv/+/v7//v7+/+Tk5NnAAAAGfv7+wAAAAA1/f39/3OM/v85Xf//mqz+//39/f/9/f3/9vf9/0do//85Xf//fpX+//39/f/c3NysAAAAH/39/QD9/f0AAAAAMv7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v+VrP//QWn//0Fp///T3PrtPj4+PgAAAAn+/v4A/v7+AAAAACn39/fi////////////////////////////////////////////////tbW1cgAAABf///8A////AP///wAAAAAVAAAAKAAAAC4AAAAuAAAALgAAAC4AAAAuAAAALgAAAC4AAAAuAAAALgAAABv///8A////AP///wD///8AAA8AAAAHAAAAAwAAAAMAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAMAAAADAAAABwAAAA8AAA==',
+        };
+
 
         // 视频搜索列表
         engineList.video = [];
@@ -1518,7 +1558,7 @@
             favicon: 'data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACNUlEQVR4nK2SS0iUYRSGn/P/42UcLCXDIoykaKhlSVCbGlu1MkgSJKE20saoyG2Q7QNpF0RIi6goXKQkLoIQhjBCNBAddFLGWw0q3ua/nxa/82eF0KID3+K7vC/Peb8DO+pKWi80p9W5mtbH/GPJzs3loUAFkOKp6GylbSR7UmLtZmDoAI06gE4P78+2nj7FvorPuB64HnieHF41tdD00c/sSqDvREHpPXF2zj24eAgRBBida2d4phORkCiEMu73peTh7wZvRQGeNJzbiu/JVYSC0EQERnIdfJm9HRmpqDN40SxHQp2BDTjgyHLcsn2aEkNcivfjOAa2E3Cytpu2M/WUmrPYruI6lKbe+0GqX4+GBM8MRaA7VYsI3Kqbj/BWvEle5htDIoGJpTbS2a5tOiHmm/UGFmBBwfax7AAliAyqY8e5eSBHmVeHZfkcqerBdn0sByxH2fDd0Rh2mJBl+wjClreKIWa4MBlf72Vxc4piNpZtIGj41aJPY1gCohTsAAE2/B+YlLDsZHk+3RKFZ3s1vB4ZRUTDFmAqc6PsTgw7jHtzrdqPlefNnonrLBbGoz5F4EPmBQtrKRDdNtQ3ufZ4M0AMJ+x374qxtVITVH5b/RoJx+Y7GVsozsI2NpLMd8QniznFsJnAkGTD0rLftzdARPg084ip/DUoCgFBX63fS7T8NYkAerdkMBuv+p5MZFqVkl8X4W3WtRLHeCDBn+LoSVRdGx4iZjggOqR+4vxuwv9WPwHg2/J5NFR2OgAAAABJRU5ErkJggg==',
         };
         engineList.video[4] = {
-            name: 'acfan',
+            name: 'AcFun',
             url: 'http://www.acfun.cn/search/?#query=%s',
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAADfElEQVQ4jX3MbUzUdQDA8b/1xrW1tlhrtmatF1qrVk5opajLUScgJtoIxXjQ1iobqzaV1MCWqZm2EumO8+C4Bw4OMsC8EGgeWkqi8vy/P8cBJ8cdTwccj/6u+4/79qLVy77b9+1Hcvb4Q2/oukS6SRZZ5YrItLpEpkUW71pkkVgRFO+b/xTZpjaRYXGLTKtLZJUrYpdZFhpdl6htHwpJSSVukkr7SDV5iNcqpJR5eK9S5hW74LjRyrcXCkmyTbKn0kuKsY94rUKa1cN2k4fXi3uRMiwusblYIafKS0FjgG0lCqvLwphs5/EVPk+sXZD9k4/kkl52mvspaAqwUddLvE4hy6IIKUHbKfKbAtwcmqfZO4dveoHnKiDb1EqbLpkXqyOsqoY1himGphZpH7mPdyrMSecIa87cEdLnlwbFF40BfmyZoEYOsQgMd15G+9UOFMMWhg3x1J3YSGdLHTfno/zcOcW/7atQhLTV0C2OXvHjUGbIKXcTBGZvFcEhCbX4SdA+AoclFp2HqFqE75tH/wMK6geFlGNTRFiNAnDs+hK3w9B2PgH13EOM6V5iTL+WvwofpjV/BUEV6obg+G/D2LtCHKsfFNIHdrcgusTcEuT5obPmBDN5EsEfnmBK/zKh4hcY18cy+tkDdBW9ybAKehe4/CEO/zIgpCyrIpx+ldnQGO1nXgXdMqKODSg6DSHtM8yeXo773AbUoBuqH6PxwxWw4CcgIMvqEtLRSx5xbQFqzPlwRCJ33TLWxq3nXscNVG0Mc2cfJSg3kLb3INt3ZhAtkGg8GYdjHs5e9QqpWRkXWj8cOfA23F3Jyth9SMtXoQYHWGo+yMwtI0QmiXn8aR6MWQfBWvK+/Jhv2iPc9k4KKc3YLVYXBflE7wChsL+ogafW5xIdbSI67UUdkWHOyabsU8Tt/RrCPnIvh3j2Ow/bDN1C2m2WRYK+l7fq70OfA3QfEf69HGabQa6CHjtMXyVyx86S9gD06Pm0IcBrF3ykl8n/AFvN99hT42f8j2oi1aeIdNcy0X+N8dZaxlouMqE4CSu/ol48zex1C/sdwySU+cgwuYSUWOom1eRmt9XDFtsomivzaCrHSDQMkGwLkGIbJbF0EI0tQGLDPBr7OO+YPaSX95OgdyPV3h0KbSrsEOkmWewwKiL1/y51iVSjItJNsthc1CFMN7yhvwH03PqrfJ8h8gAAAABJRU5ErkJggg==',
         };
@@ -1737,6 +1777,13 @@
             url: 'http://search.dangdang.com/?key=%s',
             favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAAAIADzAQAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAbpJREFUeJylk0ssXGEUx39zZ+a2g1QX7DxjMwzKJF2IR0iEWIxlV6KZeGQaEhZWbHRTsVCPJq5IG48IiYiFErZNmngUCYmgqGBFMljWq2Nx6l7XXAvxT76c73z/c/7fOd/DBhDyuqcAH0/Dd9vqVrmiJ794CZ29Bp2TB/NrYgHiEqBLA5frLsIX8rqnFH3nji9QUATdfULn5oOqQkys+K2fIL/Q4P+LKPq0vgaWF6EhIL7TKVZVxVZXwMoS1L439WELed0h3XM64eoKJqYhOcWI2tyAto/we0v4e1BMXm0drGxK8p89aGmCo0NI9cDwuLTwAEYFJWXQ9hnOzyDgh51tI8qTCdo3iIyCdz7Y27UQcDjg+jpsBx2JSTA5C1oPfNUsBHLy5OQf4uYfHOzD5DjM/YCICCh4q9MOfdalSRVWmJsRgZNj8GSYKCOj8QNkZllUcAOnQVDsEBcPZ6ePCMz/lPEY0tIh+jV0tpuWjWssLoVfG7CwLmXePSCXC95kw8AYXF7CyKBJwDhEd5qM5law2+HiLwSD8pRVVZIDflhbDRMI/4mVVeCvgVfR0v9AP4wOWzU2ZIPnfedbccyGGmWXmM8AAAAASUVORK5CYII=',
             blank:true,
+        };
+        engineList.shopping[9] = {
+            name: '1688',
+            url: 'https://s.1688.com/selloffer/offer_search.htm?keywords=%s',
+            favicon: 'data:image/ico;base64,AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAQAEAAAAAAAAAAAAAAAEAAAAAAAAICBAAAIiMAABwiAAATEwABIz4AAx0+AAAyMwAGChIADBQiAAAnKwALEh4ACBYWAAAwMgANGjMACAwQAAwYKgABHyAAAwsLAAEzPgABKz4ADh47AAE7OwAMEBYABgwMAAYIDAAHIz4AACwsAAAkJgABFxcAASc+AAcfPgABNTcAAQ8RAA8XJwARGCQADhIWAAsbNwANDxQAEBwwAAA3OwABLz4ABis+AAU7PgAGJz4ABRYWAAYPEAAPHTcABTc+AAUvPgACBgYAACAiAAQjPgACID4AACouAAAqLAAKDhQAEBosAAAMDgAEMz4ACx0+AAE7PgAMEBoABgwOAAoKCgAALjAABCYoAAQnPgABNz4ABT4+AAQNDgAMID4AAT4+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8AQUREREQqQxIoKDApKysZGT5HR0dHRzw8QxIoExMdBBkUIEdHR0dHPDxDEigTEx0rOzsYBkdHR0dHPEMSEhMTKTs7HjgnR0dHR0c8QxISKCk7OzsNFUdHR0dHRzxDQxIwOzs7DTEAESA5MQM8PENDEjs7Ozs7RUdHR0dHIBwcPBIoOzs7OztFR0dHR0cDRzxDEyg7Ozs7DkdHR0dHR0dHPB0TKDs7Oz8BR0dHR0dHR0QdHRMoGTs7OyERG0dHR0dEBAQdEygTOzs7OzshGBwfRDQEBB0TKBIdOzs7OzseLggFNAQEHRMoKBITOzs7Ozs7BQU0BAQdExMoEkNDKTs7OwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
+            blank:true,
+            gbk:true,
         };
 
         //翻译列表
@@ -2282,6 +2329,7 @@
             "engineList":{},
             "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 120px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}}]
         }
+        // --------------------可设置项结束------------------------
         // GM_deleteValue("searchEngineJumpData");
         var getSettingData = GM_getValue("searchEngineJumpData");
         if(getSettingData){
@@ -2456,6 +2504,20 @@
             }
         };
 
+        // gbk 编码   引自 https://segmentfault.com/a/1190000006919102
+        function gbkEncode(str) {
+          return str.replace(/./g, function (a) {
+            var code = a.charCodeAt(0);
+            if (isAscii(code)) {
+              return encodeURIComponent(a);
+            } else {
+              var key = code.toString(16);
+              if (key.length != 4)key = ('000' + key).match(/....$/)[0];
+              return U2Ghash[key] || a;
+            }
+          });
+        }
+
         function getElementLeft(element){
             var actualLeft = element.offsetLeft;
             var current = element.offsetParent;
@@ -2465,7 +2527,6 @@
             }
             return actualLeft;
         };
-        // --------------------可设置项结束------------------------
         // console.log("engineList: ",engineList);
         //xpath 获取单个元素
         function getElementByXPath(xPath, contextNode, doc) {
@@ -2639,6 +2700,13 @@
                 };
             };
 
+            // 编码 解码
+               // 对搜索词编码 (未做解码处理，浏览器自动处理) 网站1688采用gbk编码
+            if (matchedRule.gbk){
+                value = gbkEncode(value)
+            } else {
+                value = encodeURIComponent(value);
+            }
             // // @name     searchEngineJump-NextStage
             if (document.characterSet != "UTF-8") value = encodeURIComponent(value);
 
@@ -4833,24 +4901,33 @@
     // }
     // 给谷歌和百度搜索的主页单独加个列表
     var url = window.location.href;
-
     var hashList = [
         /^https?:\/\/www\.baidu\.com\/$/i,
         /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/$/i,
         /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^#]*#(?:&?q=|.+?&q=).+/,
         // /^https?:\/\/searx\.me\//i,
     ];
-    var hashtag = hashList.some(function hashUrl(element, index, array){
+    // 部分网站或内因或外因的原因加载缓慢，所以推迟插入
+    var delayList = [
+        /^https?:\/\/google\.infinitynewtab\.com\/\?q/,
+        /^https?:\/\/www\.zhihu\.com\/search\?/,
+    ]
+
+    var hashListTag = hashList.some(function hashUrl(element, index, array){
             return ~url.search(element);
         });
-    if (hashtag){
+    var delayListTag = delayList.some(function hashUrl(element, index, array){
+            return ~url.search(element);
+        });
+
+    if (hashListTag){
         var oldTitle = document.title;
         var newTitle = "";
         var timer = setInterval(function(){
-             // console.log("循环中",newTitle,oldTitle);
+            // console.log("循环中",newTitle,oldTitle);
             newTitle = document.title;
             if (document.querySelector("#appbar") && !document.querySelector("sejspan")){
-                console.log("new");
+                // console.log("new");
                 iqxinstart();
             } else if (document.querySelector("sejspan")){
                 // console.log("已存在");
@@ -4860,9 +4937,13 @@
                 iqxinstart();
             }
         },1000)
+    } else if (delayListTag){
+        // console.log("延时运行");
+        setTimeout(function(){iqxinstart();},2000);
     } else {
         // console.log("普通插入");
         iqxinstart();
     }
 
 })();
+

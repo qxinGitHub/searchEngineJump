@@ -17,6 +17,13 @@ __说明__
 
 ### 更新历史
 
+> version 5.19.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-01-26
+- 编码问题，默认所有搜索进行转码(可以搜索c#而不会变成c了)。其中1688采用gbk编码，规则中添加gbk选项
+- 添加网站样式 google.infinitynewtab.com | www.dogedoge.com
+- 增加搜索引擎 Yandex
+- 修复知乎网站  网易云(依旧有问题:无法固定到顶端)
+- 时光不弃 岁月静好 新年平安
+
 > version 5.18.2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2019-04-19
 - 添加秘迹搜索，[感谢 swearwr的帮助和lukemin的建议](https://greasyfork.org/zh-CN/forum/discussion/55490/x)
 - YouTube 通过搜索播放视频时，会在视频上方出现搜索栏，可以刷新一遍网页暂时去除，等待后续更好的处理办法
