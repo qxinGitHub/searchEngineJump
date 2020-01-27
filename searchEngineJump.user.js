@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.19.0
+// @version        5.20.0
 // @created        2011-07-02
-// @lastUpdated    2020-01-26
+// @lastUpdated    2020-01-27
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -20,6 +20,7 @@
 // @grant       GM_deleteValue
 // @grant       GM_setClipboard
 // @grant       GM_registerMenuCommand
+// @grant       GM_openInTab
 // @run-at      document-end
 
 // ==/UserScript==
@@ -2325,6 +2326,7 @@
             "fixedTopUpward":false,
             "baiduOffset":-120,
             "getIcon":0,
+            "allOpen":false,
             "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],["下载","download",true],["新闻","news",false],['mine', 'mine',false]],
             "engineList":{},
             "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 120px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}}]
@@ -2711,7 +2713,23 @@
             if (document.characterSet != "UTF-8") value = encodeURIComponent(value);
 
             var targetURL = target.getAttribute('url');
-            // console.log(targetURL);
+
+            // 一键搜索  
+            if(getSettingData.allOpen && target.classList.contains("sej-drop-list-trigger")){
+                var list = engineList[target.dataset.iqxincategory]
+                console.log("allOpen")
+                console.log(list)
+                for(var i=0;i<list.length;i++){
+                    if (matchedRule.url.test(list[i].url)) continue ;
+                    if (list[i].disable) continue ;
+                    var href = list[i].url.replace('%s', value);
+                    GM_openInTab(href)
+                }
+                target.setAttribute("onclick","return false;");
+                return 
+            }
+
+
             // 如果有post请求
             var postSign = targetURL.indexOf('$post$');
             if(~postSign){
@@ -2773,7 +2791,6 @@
             });
         }
 
-        // console.log(matchedRule);
         if (!matchedRule || !matchedRule.enabled) return;
 
         var iTarget = getElement(matchedRule.insertIntoDoc.target);
@@ -3026,7 +3043,7 @@
         var pageEncoding = (document.characterSet || document.charset).toLowerCase();
 
         // 创建dom
-        var aPattern = '<a href="" class="sej-engine" target="$blank$" encoding="$encoding$" url="$url$"><img src="$favicon$" class="sej-engine-icon" />$name$</a>';
+        var aPattern = '<a href="" class="sej-engine" target="$blank$" data-iqxincategory="$category$" encoding="$encoding$" url="$url$"><img src="$favicon$" class="sej-engine-icon" />$name$</a>';
         var container = document.createElement('sejspan');
         container.id = 'sej-container';
         container.className = "rwl-exempt";
@@ -3058,7 +3075,8 @@
                 if(engine.disable) return;
                 var a = aPattern.replace('$encoding$', (engine.encoding || 'utf-8').toLowerCase())
                     .replace('$url$', engineUrl)
-                    .replace('$name$', engine.name);
+                    .replace('$name$', engine.name)
+                    .replace("$category$",category);
 
                 if (engine.favicon) {
                     a = a.replace('$favicon$', engine.favicon);
@@ -3356,12 +3374,14 @@
                 var btnEle2 = document.createElement("div");
                 btnEle2.id = "btnEle2"
                 var fixedTop_checked = getSettingData.fixedTop?"checked":"";
+                var fixedTopUpward_checked = getSettingData.fixedTopUpward?"checked":"";
                 var debug_checked = getSettingData.debug?"checked":"";
                 var foldlist_checked = getSettingData.foldlist?"checked":"";
+                var allOpen_checked = getSettingData.allOpen?"checked":"";
 
                 // var setBtnOpacity_value = getSettingData.setBtnOpacity;
                 var btnStr2 = "<div>" +
-                            "<span id='xin-reset' title='慎点,出厂重置'>清空设置</span>" +
+                            // "<span id='xin-reset' title='慎点,出厂重置'>清空设置</span>" +
                             "<span id='xin-modification' title='edit 分享自己的配置或清空配置'>配置文件</span>" +
                             "<span id='xin-importing' title='importing 导入更为专业的搜索引擎'>导入</span>" +
                             // "<span id='iqxin-debugS' title='对设置菜单有一定的影响'>" +
@@ -3369,7 +3389,7 @@
                             //         debug_checked +
                             //     " style='vertical-align:middle;'></label>" +
                             // "</span>" +
-                            "<span id='xin-foldlists'>" +
+                            "<span id='xin-foldlists' title='将当前所在搜索分类折叠'>" +
                                 "<label>折叠当前搜索分类<input id='iqxin-foldlist' type='checkbox' name='' " +
                                     foldlist_checked +
                                 " style='vertical-align:middle;'></label>" +
@@ -3377,6 +3397,11 @@
                             "<span id='iqxin-fixedTopS' title='fixedTop 当滚动页面时,固定到页面顶端。某些页面的样式存在问题'>" +
                                 "<label>固定到顶端<input id='iqxin-fixedTop' type='checkbox' name='' " +
                                     fixedTop_checked +
+                                " style='vertical-align:middle;'></label>" +
+                            "</span>" +
+                            "<span id='iqxin-fixedTopUpward' title='固定到顶端后,仅向上滚动才显示,需要刷新网页生效'>" +
+                                "<label>仅上拉显示<input id='iqxin-fixedTopUpward-item' type='checkbox' name='' " +
+                                    fixedTopUpward_checked +
                                 " style='vertical-align:middle;'></label>" +
                             "</span>" +
                             "<span id='xin-setBtnOpacity' title='设置按钮透明度'>设置按钮透明度 <input type='range' step='0.01'  min='0' max='1' value='"+ (getSettingData.setBtnOpacity<0?-getSettingData.setBtnOpacity:getSettingData.setBtnOpacity) +"' id='setBtnOpacityRange'><i style='display:inline-block;width:3em;text-align:center;' class='iqxin-setBtnOpacityRangeValue' title='按钮 显示/隐藏(非透明)),请确定知道自己如何再次打开; 火狐非高级玩家建议别禁用'></i></span>" +
@@ -3391,9 +3416,13 @@
                 btnEle.id = "btnEle"
 
                 var btnStr = "<div class='btnEleLayer'>" +
-                            "<span class='feedback'><a target='_blank' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>反馈 greasyfork</a></span>" +
-                            "<span class='feedback'><a target='_blank' href='https://github.com/qxinGitHub/searchEngineJump'>反馈 GitHub</a></span>" +
-                            "<span id='moreSet' title='more set'>更多设置</span>" +
+                            "<span class='feedback' title='在 GreasyFork 进行反馈'><a target='_blank' href='https://greasyfork.org/zh-CN/scripts/27752-searchenginejump'>Greasy Fork</a></span>" +
+                            "<span class='feedback' title='在 Github 进行反馈'><a target='_blank' href='https://github.com/qxinGitHub/searchEngineJump'>GitHub</a></span>" +
+                            "<span id='xin-allOpen' title='后台打开该搜索分类的所有网站'>" +
+                                "<label>一键搜索<input id='iqxin-allOpen-item' type='checkbox' name='' " +
+                                    allOpen_checked +
+                                " style='vertical-align:middle;'></label>" +
+                            "</span>" +
                             "<span id='xin-newtab' title='open newtab 是否采用新标签页打开的方式'>打开方式：" +
                                 "<select id='iqxin-globalNewtab'>" +
                                     "<option value='globalDef'>默认页面 ▽</option>" +
@@ -3401,6 +3430,7 @@
                                 "</select>" +
                             "</span> " +
                             "<span id='xin-addDel' title='add & del 增加新的或者删除现有的搜索'>增加 / 删除</span> " +
+                            "<span id='moreSet' title='more set'>更多设置</span>" +
                             "<span id='xin-save' title='save & close'>保存并关闭</span>" +
                             "</div>";
                 btnEle.innerHTML = btnStr;
@@ -4402,6 +4432,8 @@
                 getData.setBtnOpacity = getSettingData.setBtnOpacity;
                 // getData.debug = document.querySelector("#iqxin-debug").checked;
                 getData.fixedTop = document.querySelector("#iqxin-fixedTop").checked;
+                getData.allOpen = document.querySelector("#iqxin-allOpen-item").checked;
+                getData.fixedTopUpward = document.querySelector("#iqxin-fixedTopUpward-item").checked;
                 getData.engineDetails = engineDetails;
                 getData.engineList = obj;
 

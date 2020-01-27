@@ -17,6 +17,10 @@ __说明__
 
 ### 更新历史
 
+> version 5.20.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-01-27
+- 增加一键搜索。点击该搜索分类的图标后，会在后台打开该分类所有的搜索网站进行搜索
+- 设置页面微改
+
 > version 5.19.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-01-26
 - 编码问题，默认所有搜索进行转码(可以搜索c#而不会变成c了)。其中1688采用gbk编码，规则中添加gbk选项
 - 添加网站样式 google.infinitynewtab.com | www.dogedoge.com
