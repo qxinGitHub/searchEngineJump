@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.20.0
+// @version        5.21.0
 // @created        2011-07-02
-// @lastUpdated    2020-01-27
+// @lastUpdated    2020-02-03
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -49,6 +49,11 @@
                     z-index: 100;\
                     margin-top:5px;\
                 ',
+                style_ACBaidu: '\
+                    text-align: center;\
+                    z-index: 100;\
+                    margin-top:5px;\
+                ',
 
                 // 插入文档,相关
                 // target 将引擎跳转工具栏插入到文档的某个元素
@@ -80,6 +85,11 @@
                     z-index: 100;\
                     margin-top:5px;\
                 ',
+                style_ACBaidu: '\
+                    text-align: center;\
+                    z-index: 100;\
+                    margin-top:5px;\
+                ',
                 insertIntoDoc: {
                     target: 'css;#appbar',
                     keyword: function () {
@@ -94,12 +104,20 @@
                 url: /^https?:\/\/www\.baidu\.com\/(?:s|baidu)/,
                 enabled: true,
                 engineList: "web",
-                fixedTop:56,
+                fixedTop:55,
                 style: '\
                     margin-top:8px;\
                     margin-bottom: -5px;\
                     z-index: 99;\
                     margin-left: 113px;\
+                ',
+                style_ACBaidu: '\
+                    margin-top: 8px;\
+                    margin-left: -120px;\
+                    margin-bottom: -5px;\
+                    z-index: 99;\
+                    text-align: center;\
+                    padding-left:0px !important;\
                 ',
                 insertIntoDoc: {
                     keyword: 'css;input#kw',
@@ -116,6 +134,12 @@
                     padding-left:15px;\
                     margin-top:10px;\
                     margin-left: 100px;\
+                    margin-bottom:-20px;\
+                ',
+                style_ACBaidu: '\
+                    text-align: center;\
+                    margin-left: -120px;\
+                    margin-right: 0px;\
                     margin-bottom:-20px;\
                 ',
                 insertIntoDoc: {
@@ -192,6 +216,12 @@
                         top:-46px;\
                         z-index:99;\
                         margin-left:-5px;\
+                ",
+                style_ACBaidu: "\
+                        top:-46px;\
+                        z-index:99;\
+                        margin-left:60px;\
+                        padding-left: 0px !important;\
                 ",
                 insertIntoDoc: {
                     keyword: "css;#upquery",
@@ -2310,6 +2340,8 @@
                     "(fixedTopUpward: 固定顶端后，搜索栏下拉不会出现，只有上拉时才出现。 true开启,false关闭)..." +
                     "(baiduOffset: 在百度页面鼠标划过的菜单会出现位移,若有使用其他的style样式,可以修改这个来修复二级菜单的偏移)..." +
                     "(getIcon: 自己添加搜索后获取图标的方式。0为自动，能连接谷歌的情况下用谷歌获取，无法连接的情况下，域名加favicon.ico获取；1为域名加favicon获取，2为使用谷歌获取，3为使用dnspot的服务获取(不建议使用)。或者添加网址，关键字使用%s代替，未测试)..." +
+                    "(allOpen:一键搜索，点击相关分类后，打开该分类下的所有搜索)..." +
+                    "(center:是否居中显示，主要是为了兼容脚本 ac 百度  ： 0 不居中，强制在左。 1, 强制居中 。 2,自动判断)..." +
                     "(engineDetails: 第一个值为分类列表标题名称,第二个值与enginelist相关联,必须匹配,第三个值true为显示列表,false为禁用列表。排列顺序与跳转栏上的显示顺序相同，可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页,同脚本中的rules设置相同,优先级高于脚本中自带的规则。自带了360搜索,可仿写)...",
@@ -2327,6 +2359,7 @@
             "baiduOffset":-120,
             "getIcon":0,
             "allOpen":false,
+            "center":2,
             "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],["下载","download",true],["新闻","news",false],['mine', 'mine',false]],
             "engineList":{},
             "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 120px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}}]
@@ -3011,7 +3044,11 @@
                     // top -= 90;
                     top = 26;
                     // left -= 120;
-                    left += getSettingData.baiduOffset;
+                    if(document.querySelector("#myuser") && getSettingData.center != 0){
+                         left += 120;
+                    } else {
+                        left += getSettingData.baiduOffset;
+                    }
                 }
 
                 style.top = top + 6 + 'px';
@@ -3051,6 +3088,16 @@
         container.addEventListener('mousedown', mousedownhandler, true);
 
         if (matchedRule.style) {
+            // 判断是否存在脚本 “AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列”
+            if(getSettingData.center==2){    // 自动判断是否添加
+                if(document.querySelector("#myuser") && matchedRule.style_ACBaidu){
+                    console.log("检测到脚本：“AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列”   ------自动添加");
+                    matchedRule.style = matchedRule.style_ACBaidu;
+                }
+            } else if (getSettingData.center==1){   //  强制添加
+                console.log("检测到脚本：“AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列”   ------强制添加");
+                matchedRule.style = matchedRule.style_ACBaidu?matchedRule.style_ACBaidu:matchedRule.style;
+            }     // 
             container.style.cssText = matchedRule.style;
         };
 
@@ -3423,6 +3470,13 @@
                                     allOpen_checked +
                                 " style='vertical-align:middle;'></label>" +
                             "</span>" +
+                            "<span id='xin-centerDisplay' title='center 居中显示。主要是兼容AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列'>居中：" +
+                                "<select id='iqxin-center'>" +
+                                    "<option value='original'" + (getSettingData.center == 0?"selected":"")  + ">原始 ▽</option>" +
+                                    "<option value='force'" + (getSettingData.center == 1?"selected":"")  + ">强制 ▽</option>" +
+                                    "<option value='auto'" + (getSettingData.center == 2?"selected":"")  + ">自动 ▽</option>" +
+                                "</select>" +
+                            "</span> " +
                             "<span id='xin-newtab' title='open newtab 是否采用新标签页打开的方式'>打开方式：" +
                                 "<select id='iqxin-globalNewtab'>" +
                                     "<option value='globalDef'>默认页面 ▽</option>" +
@@ -4431,6 +4485,7 @@
                 getData.foldlist = foldlist;
                 getData.setBtnOpacity = getSettingData.setBtnOpacity;
                 // getData.debug = document.querySelector("#iqxin-debug").checked;
+                getData.center = document.querySelector("#iqxin-center").selectedIndex;
                 getData.fixedTop = document.querySelector("#iqxin-fixedTop").checked;
                 getData.allOpen = document.querySelector("#iqxin-allOpen-item").checked;
                 getData.fixedTopUpward = document.querySelector("#iqxin-fixedTopUpward-item").checked;
@@ -4690,6 +4745,7 @@
                         "color: #333;" +
                         "transition:0.3s;" +
                     "}" +
+                    "#xin-centerDisplay select," +
                     "#xin-newtab select{" +
                         "height:auto;" +
                         "border: none;" +

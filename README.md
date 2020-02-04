@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.21.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-02-04
+- 兼容脚本 [AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列](https://greasyfork.org/zh-CN/scripts/14178), 在设置菜单中添加相关选项
+
 > version 5.20.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-01-27
 - 增加一键搜索。点击该搜索分类的图标后，会在后台打开该分类所有的搜索网站进行搜索
 - 设置页面微改
