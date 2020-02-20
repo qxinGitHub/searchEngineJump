@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.21.1   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-02-20
+- 样式微调
+
 > version 5.21.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-02-04
 - 兼容脚本 [AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列](https://greasyfork.org/zh-CN/scripts/14178), 在设置菜单中添加相关选项
 

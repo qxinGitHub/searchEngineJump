@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.21.0
+// @version        5.21.1
 // @created        2011-07-02
 // @lastUpdated    2020-02-03
 
@@ -28,9 +28,9 @@
 (function () {
     'use strict';
 
+    console.log("脚本: 搜索引擎快捷跳转 --- 开始执行 --- 发布者: qxin --- GitHub:https://github.com/qxinGitHub/searchEngineJump ← 问题反馈地址")
     function iqxinstart(){
         // 根据规则把搜索引擎列表插入到指定网站
-        console.log("执行iqixnstart")
         var rules = [
             // 网页搜索/////////////第一个可以当模板看
             {name: "google网页搜索",// 你要加载的网站的名字(方便自己查找)
@@ -4130,13 +4130,10 @@
                 };
 
                 if(~e.target.className.indexOf("iqxin-additem")){
-                    // console.log("此处会有个弹框添加新搜索");
                     this.parentNode = e.target.parentNode;
                     this.addItemBox();
-                    // console.log(this);
                 };
                 if(e.target.className==="sej-engine"){
-                    console.log("sej-engine 被点击");
                     e.target.dataset.iqxindisabled = e.target.dataset.iqxindisabled?"":"true";
                 };
                 if(~targetClass.indexOf("addItemBoxCancel")){
@@ -4164,7 +4161,6 @@
 
                 // 修改搜索 确定
                 if(~targetClass.indexOf("editItemBoxEnter")){
-                    // console.log(e);
                     this.addEditBoxEnger();
                 };
 
@@ -4188,7 +4184,6 @@
                 } else if( targetid === "xin-codeboxsave"){
                     this.editCodeBoxSave();
                 } else if( targetid === "xin-copyCode"){
-                    // this.copyCode();
                     GM_setClipboard(JSON.stringify(getSettingData,false,4));
                     iqxinShowTip("复制成功");
                 }
@@ -4267,12 +4262,8 @@
                     dragEl = this.parentNode;
                 } else{
                     dragEl = this;
-
                 }
                 dragData = dragEl.innerHTML;
-                    console.info("start");
-                    console.info(e.target);
-
                     e.dataTransfer.effectAllowed = "move";
                     e.dataTransfer.setData("text/html",dragEl.innerHTML);
             },
@@ -4609,6 +4600,7 @@
                     "#btnEle a{" +
                         "color: #999;" +
                         "text-decoration: none;" +
+                        "font-family: auto;" +
                     "}" +
                     "#btnEle a:hover{" +
                         "text-decoration: underline;" +
@@ -4645,6 +4637,38 @@
                         "visibility:visible;" +
                         "opacity:1;" +
                         "transform:translate(0,53px);" +
+                    "}" +
+                    "#settingLayerMask input[type=checkbox]{" +
+                        "width: 12px;" +
+                        "height: 12px;" +
+                        "display: inline-block;" +
+                        "text-align: center;" +
+                        "vertical-align: middle;" +
+                        "line-height: 18px!important;" +
+                        "margin: 0 5px 5px 5px!important;" +
+                        "position: relative;" +
+                    "}" +
+                    "#settingLayerMask input[type=checkbox]:before{" +
+                        "content: '';" +
+                        "position: absolute;" +
+                        "top: 0;" +
+                        "left: 0;" +
+                        "background: #fff;" +
+                        "width: 100%;" +
+                        "height: 100%;" +
+                        "border: 1px solid #d9d9d9;" +
+                    "}" +
+                    "#settingLayerMask input[type=checkbox]:checked:after{" +
+                        'content: "✔";' +
+                        "background-color: #63d4d8;" +
+                        "position: absolute;" +
+                        "top: 0;" +
+                        "left: 0;" +
+                        "width: 12px;" +
+                        "height: 12px;" +
+                        "border: 1px solid #63d4d8;" +
+                        "color: #fff;" +
+                        "font-size: 17px;" +
                     "}" +
                     ".drop-over{" +
                         "opacity: 0.6;" +
