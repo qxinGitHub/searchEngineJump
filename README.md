@@ -17,6 +17,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.21.2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-05-04
+- 修复谷歌图片
+- 修复A站链接
+- 兼容脚本“知乎排版优化”
+
 > version 5.21.1   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-02-20
 - 样式微调
 
