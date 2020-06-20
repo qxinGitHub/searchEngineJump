@@ -2935,7 +2935,6 @@
                     text-decoration: none;
                     font-weight:500;
                     color: #333 !important;
-                    transition: background-color 0.15s ease-in-out;
                 }
                 .sej-drop-list-trigger {
 
@@ -2955,12 +2954,8 @@
                     border-left: 5px solid transparent;
                     border-bottom: 0px solid transparent;
                     vertical-align: middle;
-                    transition: -webkit-transform 0.3s ease-in-out;
-                    transition: transform 0.3s ease-in-out;
                 }
                 .sej-drop-list-trigger-shown::after {
-                    -webkit-transform: rotate(180deg);
-                    transform: rotate(180deg);
                 }
                 .sej-engine:hover {
                     background-color: #EAEAEA;
@@ -3000,8 +2995,6 @@
                     -webkit-box-shadow: 0 5px 20px rgba(26,26,26,.1);
                     box-shadow: 0 5px 20px rgba(26,26,26,.1);
                     background-color: white;
-                    transition: opacity 0.2s ease-in-out,
-                        top 0.2s ease-in-out;
                 }
                 @keyframes sejopen {
                     0% {
