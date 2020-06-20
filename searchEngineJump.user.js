@@ -2975,7 +2975,7 @@
                 }
 
                 .sej-engine-icon {
-                    display: inline-block;
+                    display: none;
                     width: 16px;
                     height: 16px;
                     border: none;
