@@ -2991,13 +2991,14 @@
                     top: -10000px;
                     left: 0;
                     min-width: 90px;
-                    border: 1px solid #FAFAFA;
+					border: 1px solid #EBEBEB !important;
+					border-radius: 4px !important;
                     padding: 5px 0;
                     text-align: left;
                     font-size: 13px;
-                    -moz-box-shadow: 2px 2px 5px #ccc;
-                    -webkit-box-shadow: 2px 2px 5px #ccc;
-                    box-shadow: 2px 2px 5px #ccc;
+                    -moz-box-shadow: 0 5px 20px rgba(26,26,26,.1);
+                    -webkit-box-shadow: 0 5px 20px rgba(26,26,26,.1);
+                    box-shadow: 0 5px 20px rgba(26,26,26,.1);
                     background-color: white;
                     transition: opacity 0.2s ease-in-out,
                         top 0.2s ease-in-out;
