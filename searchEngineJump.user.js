@@ -3036,8 +3036,8 @@
 
         DropDownList.prototype = {
             hidden: true,
-            showDelay: 233,
-            hideDelay: 233,
+            showDelay: 0,
+            hideDelay: 0,
             aShownClass: 'sej-drop-list-trigger-shown',
 
             init: function () {
