@@ -3,13 +3,13 @@
 // @author         NLF&锐经(修改) & iqxin(再修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.21.2
+// @version        5.22.0
 // @created        2011-07-02
-// @lastUpdated    2020-05-04
+// @lastUpdated    2020-08-01
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
-
+// @require        https://greasyfork.org/scripts/408009-togbk/code/toGBK.js?version=832799
 // @icon           data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFSElEQVR4nMWXX4hdVxXGf2vfe89kJg61ia0DYzMTMWnoQ0FJtKmtJsFixT8DBSmYtGMLgq0PCqMEKwmxYzSGyUPBB7XRNi0FC6JtwYovgcS0klJD8SHakoExYhLQFkwn9/aeOfv7fDi3SStJ5o4muN4O7L32b33rz94H/s8WS10cvR3yVQaY++wnkESkwDK2sMy1EwXDtzRRziBhu+dGDG48smSA5kUP//wmAFIkrNwiGMOsBzYAQwTzEEeBY8BJO1fYtF+4laGPv/i/Afz1C1sAYwngZiKmsDcDI0DrHUtL4DRwMGAmUnVcCtpHPsrQbS/1DZDe+VFHblKziIjYBjwD3Iu5ARBwBjgJnAkwMAa+z+ZZqXEX8VZg0T784aUDzH3uk0DtVQvlVsMjwGpMB3gauAu8ieB2YDPwxR5gF/gQ+MeoNUFzACI4d+imvgDOp0BVRWo2AW62eRi8wvY/wNtrgGhDL+7a/gIcBLYBu4HrsPdSzr8K/JlcLk2BaCQstSxN2VptuYO93an7WES0UyORGg1Wfu0QKivyQhfb56yhn4B3Ynew1kD1oDTfJF20vi8NYBvjMVubbWHrOdtPhwaAYPVvfs8Hf1u32bJbDtXVbgFvAj4AOgTGzhPhGMdV/wCvbtmAJSyttzRiuWv7CdttAlY/f/iimwdvfQGiAfmtczg/jnOJ8/txtRbnvgAu6FSPtg1AC3wGPAvgWGRYqiSowLwC1Ru4GoFyFPc3ZM8DfGPLB1jZXlhe74sS6AAc+O6vL+tg6LaX2LP/SSA6tkpcYeee36/0D/C7Ve9BwZs97iLMEMDAE5N07z1wSQebvl/y3KkAGDIUsrHpRp8ACeDGw38kZdPMPtrILhvZ1yZ5TZJxvnwuW40GzSSaDa1vJq1oJXVbKZ9qpv5qoO6Cqr5ULB+zfNrygOX7LS+PlCgeu+eimz/1w0yWaTTScIqYTEERcDoiXovFauddAAA22CeRDyKD/Bnkbd32PNgUj09S/GwrUMt+x14hiWVFI1LEVyPidggi4hfOnuv3nr8AEGC5sj1j+4TtAcu7i4HlDwLLqRawMmtmnidn6JYLGIa7C/mbwHeAgYATQexPjVCVxcZd7SUACDCEfRyznXoMr8Sawf4lcDdwI7AKWAdss/0r2dOyr6kFpCn7hiyPRlDY5mM7z10W4F1KFT+/p6ZwDkgT2HuN19Tz3yXWG+NnJ8uR9h0FSStSRAFBwAmbpu3xbP/T9rzkp2zvtt2RzcvfG15EAaC8/8m6FkgmpWdsTyD/COtv9esnj1haZXvEtiXP2d5jc6es+3qHv8/2uO1v2d4hedA2H/n2vxZX4LwS+78E1PcDqprAOPZao9Gxs5PNkc6dXUKnIuI1Z8+lRijLo8AR2+OWqeeBS8n7bE8bd2x4Zc97FwcAaP307vqyiXi7QzBi7OyXGel8GkJEBAFUWUREIXlnL/LCvgBheZ9h2lLHyvxp5rrFAZZiG3e16zliBm3vsD0lu6i5ja0awppWrjrKmeOPjAL/UQP/rf1h11BPJHckT/dkL+vDjeXC0pRy3qGcB22x9oHZKwcAcPTh5UimzrWnexGXlrCFlAvlakq5eiiX3eLtSXnFAABe3j1c/0PgTp1z77NUKmesjHMulKuttq9X/eq+sgAAx35wTZ0OqWNrWqr2KVelqoqcF3DOL1r5dStfHQCoW03K9ApuWrnam/PCnHN+StZDRHSK1jLgCnXBpeymr/8dS+SFbmH7eiu/TkQnNRrkqmL20XVXFwBg7QOzRASSsDJFaxndssPso+uu9tH92b8BowSyPc/iZtEAAAAASUVORK5CYII=
 
 // @match          *://*/*
@@ -21,6 +21,7 @@
 // @grant       GM_setClipboard
 // @grant       GM_registerMenuCommand
 // @grant       GM_openInTab
+// @grant       GM_xmlhttpRequest
 // @run-at      document-end
 
 // ==/UserScript==
@@ -104,16 +105,16 @@
                 url: /^https?:\/\/www\.baidu\.com\/(?:s|baidu)/,
                 enabled: true,
                 engineList: "web",
-                fixedTop:55,
+                fixedTop:70,
                 style: '\
                     margin-top:8px;\
                     margin-bottom: -5px;\
                     z-index: 99;\
-                    margin-left: 113px;\
+                    margin-left: 130px;\
                 ',
                 style_ACBaidu: '\
                     margin-top: 8px;\
-                    margin-left: -120px;\
+                    margin-left: -128px;\
                     margin-bottom: -5px;\
                     z-index: 99;\
                     text-align: center;\
@@ -2800,8 +2801,9 @@
 
             // 编码 解码
                // 对搜索词编码 (未做解码处理，浏览器自动处理) 网站1688采用gbk编码
-            if (matchedRule.gbk){
-                value = gbkEncode(value)
+            var ogbk = target.getAttribute('gbk');
+            if (ogbk){
+                value = toGBK(value)
             } else {
                 value = encodeURIComponent(value);
             }
@@ -2829,14 +2831,44 @@
             // 如果有post请求
             var postSign = targetURL.indexOf('$post$');
             if(~postSign){
-                // var targetBlank =
                 var f=getPostFormHTML(targetURL.substring(0,postSign),[targetURL.substring(postSign+6),value],target.getAttribute('target'))
-                // a = a.replace("$form$", f);
                 target.appendChild(f)
-                // a = a.replace("$onclick$", "this.getElementsByTagName('form')[0].submit();return false;");
-                // target.removeAttribute('onclick');
                 target.setAttribute("onclick","this.getElementsByTagName('form')[0].submit();return false;");
-                // alert(f);
+
+                // var postURL = parseUri(target.getAttribute('url'));
+                // console.log(postURL);
+                // target.setAttribute("onclick","return false;");
+                // GM_xmlhttpRequest({
+                //     method: "post",
+                //     url: target.url,
+                //     data: targetURL.substring(postSign + 6) + '=' + value ,
+                //     get data() {
+                //         return this._data;
+                //     },
+                //     set data(value) {
+                //         this._data = value;
+                //     },
+                //     headers:  {
+                //         "Content-Type": "application/x-www-form-urlencoded",
+                //         "Origin":postURL.host,
+                //         "Referer":postURL.host
+                //     },
+                //     onload: function(res){
+                //         if(res.status === 200){
+                //             console.log('成功')
+                //             location.innerHTML = responseXML
+                //             console.log(response);
+                //         }else{
+                //             console.log('失败')
+                //             console.log(res)
+                //         }
+                //     },
+                //     onerror : function(err){
+                //         console.log('error')
+                //         console.log(err)
+                //     }
+                // });
+                
             } else{
                 //console.log(value);
                 target.href = target.getAttribute('url').replace('%s', value);
@@ -3143,7 +3175,7 @@
         var pageEncoding = (document.characterSet || document.charset).toLowerCase();
 
         // 创建dom
-        var aPattern = '<a href="" class="sej-engine" target="$blank$" data-iqxincategory="$category$" encoding="$encoding$" url="$url$"><img src="$favicon$" class="sej-engine-icon" />$name$</a>';
+        var aPattern = '<a href="" class="sej-engine" target="$blank$" data-iqxincategory="$category$" encoding="$encoding$" gbk="$gbk$" url="$url$"><img src="$favicon$" class="sej-engine-icon" />$name$</a>';
         var container = document.createElement('sejspan');
         container.id = 'sej-container';
         container.className = "rwl-exempt";
@@ -3196,11 +3228,19 @@
                     .replace('$name$', engine.name)
                     .replace("$category$",category);
 
+                // 图标
                 if (engine.favicon) {
                     a = a.replace('$favicon$', engine.favicon);
                 } else {
                     a = a.replace('src="$favicon$"', '');
                 };
+                // gbk编码
+                if (engine.gbk) {
+                    a = a.replace('$gbk$', engine.gbk);
+                } else {
+                    a = a.replace('gbk="$gbk$"', '');
+                };
+                // 新标签页
                 if (getSettingData.newtab || engine.blank) {
                     a = a.replace('$blank$', "_blank");
                 } else {
@@ -3424,6 +3464,7 @@
                                 ' data-iqxinlink="$link$" ' +
                                 ' data-iqxintarget="$blank$" ' +
                                 ' data-iqxindisabled="$disabled$" ' +
+                                ' data-iqxingbk="$gbk$" ' +
                                 '><img src="$favicon$" class="sej-engine-icon" style="padding-bottom:3px;"/><span>$name$</span></span>' +
                                 ' <span class="iqxin-set-edit" title="编辑 Edit"><img class="sej-engine-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAACDklEQVR4nJXVzUtUURjH8Y/mSNKkki2iwiApxHQ1q/6C+gusoCB6oxbRRqFNL4sWtRKqhVSLIDe1CqpNiwjKIilKLKKFEr2Z2qI0xxHN0+LOm+PMOPOc1T2H7/f5ncO991BdNer30zmxKrl0xV2zKJjRoy6aqkkvbbdVLPuUq+8+5uGXnVILki7qsxgtNDtrTNLcijHvrdYsft0/wQ8DZgSzeqMUDW4IJceYHcvwCd1ies0KZvWI1TnhIH6574Olgg0E74zmhZ902j304by4Cxp5LPjtQNmjy3XPVK2rgmCBCcGgdVXhdBgUBCMEwVMNVeIvBMFLifKC8vgrndFBlRJUhJcWFMd3ZfGuzFRxwWrdu3KTxQQVhi8lqApfKVhf0d4bc2/OckG9Pkur7r3TEw+1FRO0GxdM2Vc2/HHBgr1If935UTfigbt5+C27MeSo9+m5GJYitlCwWR2G8oQZ/FgWX1aFgnZMG852v5nFR4rhMn+2dDVJYFpKqy0SDksUhF9FsE0bWgyIa9bIanihoEUcDTrSz4ueOVMOLxQkzVkrZcaoNz755rmpcnihYNghm3w26Ys/5cGcIKgRBJDyqCIquj8C1PqKZvHK+qVrJ5bMRwmGterU64pkkZupWO3RjXkzUZj9+jVZMGK6IsEaHTbgjpOSUYZL/pa5m4qPIbtyznpHvJaqGB53O33h4T/3VzLuzDhE6AAAAABJRU5ErkJggg=="/></span>' +
                                 ' <span class="iqxin-set-del" title="删除 Delete"><img class="sej-engine-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAADAFBMVEUAAADsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVHsbVH///9VVVVWVlZXV1dYWFhZWVlaWlpbW1tcXFxdXV1eXl5fX19gYGBhYWFiYmJjY2NkZGRlZWVmZmZnZ2doaGhpaWlqampra2tsbGxtbW1ubm5vb29wcHBxcXFycnJzc3N0dHR1dXV2dnZ3d3d4eHh5eXl6enp7e3t8fHx9fX1+fn5/f3+AgICBgYGCgoKDg4OEhISFhYWGhoaHh4eIiIiJiYmKioqLi4uMjIyNjY2Ojo6Pj4+QkJCRkZGSkpKTk5OUlJSVlZWWlpaXl5eYmJiZmZmampqbm5ucnJydnZ2enp6fn5+goKChoaGioqKjo6OkpKSlpaWmpqanp6eoqKipqamqqqqrq6usrKytra2urq6vr6+wsLCxsbGysrKzs7O0tLS1tbW2tra3t7e4uLi5ubm6urq7u7u8vLy9vb2+vr6/v7/AwMDBwcHCwsLDw8PExMTFxcXGxsbHx8fIyMjJycnKysrLy8vMzMzNzc3Ozs7Pz8/Q0NDR0dHS0tLT09PU1NTV1dXW1tbX19fY2NjZ2dna2trb29vc3Nzd3d3e3t7f39/g4ODh4eHi4uLj4+Pk5OTl5eXm5ubn5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7///8dej9TAAAAU3RSTlMAAABm7P/sZgAAABPO////zhQAAB/i/////////+IfAAAe4fvk4AAAAAAd/+Q3GxwAFR85FQBjz+LPY+v////r6//////rZM/h4c9jABUdHRUAAP0EcPoAAAEuSURBVHic7ZRnc8IwDIbdEUZHGB0kDsMOMcOMttBBB93Qvcj//y9VjB0Czh13/dz3ixT5OVmSYyMktLK6tm74oYxEMpVGUW1sbm2bM8DMZHP5OWBnd2+/YNnYAWHbKhRL5cocQKjrWFWPuSDmVS3HpUQu1eoNQkiTM9xqd7oHoG6n3cKMNyHcqNfQ4VGPUsr7nh0FbK/PIdw7PkGnZwOZNrqF9AfnF+jyaigLixYp/eH1Dbq9u4eAHyOAHh5HaPz0DCnjANjm5fUNvX98QoGCxyo5Fjmh0K/vH2hzAi0KnqnymMgJrU6gzemQBM+DZpX1/XBYUyAYTTAuZTUg+Aw8Zf+BvwJLR730sPTjXgD0H2YB0BUClXKpGAeE1y+fy2ZMfX12gdOpZMLQAfkE/AL7e5vGZF+dOQAAAABJRU5ErkJggg=="></span>' +
@@ -3475,6 +3516,11 @@
                             a = a.replace('$disabled$', "true");
                         } else {
                             a = a.replace('data-iqxindisabled="$disabled$"', '');
+                        };
+                        if (engineListItme[jj].gbk) {
+                            a = a.replace('$gbk$', "true");
+                        } else {
+                            a = a.replace('data-iqxingbk="$gbk$"', '');
                         };
 
                         oDivConStr += a;
@@ -4592,6 +4638,9 @@
                         };
                         if(data[ii].dataset.iqxindisabled){
                             obj[id][ij].disable=data[ii].dataset.iqxindisabled;
+                        };
+                        if(data[ii].dataset.iqxingbk){
+                            obj[id][ij].gbk=data[ii].dataset.iqxingbk;
                         };
                     }
                 }
