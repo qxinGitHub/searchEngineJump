@@ -17,7 +17,13 @@ __说明__
 
 ### 更新历史
 
-> version 5.22.1   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-08-02
+> version 5.22.3   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-08-02
+- dogedoge 堆叠顺序过高的问题
+- 翻译列表增加 DeepL
+- 与脚本“AC-baidu”的兼容问题
+- （上一个版本错误 少了v_5.22.1）
+
+> version 5.22.2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-08-02
 - 图标微调
 - 增加"雅虎日本搜索"支持
 

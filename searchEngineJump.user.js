@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.22.2
+// @version        5.22.3
 // @created        2011-07-02
 // @lastUpdated    2020-08-02
 
@@ -114,7 +114,6 @@
                 ',
                 style_ACBaidu: '\
                     margin-top: 8px;\
-                    margin-left: -128px;\
                     margin-bottom: -5px;\
                     z-index: 99;\
                     text-align: center;\
@@ -330,7 +329,7 @@
                 engineList: 'web',
                 fixedTop: 105,
                 style: '\
-                    z-index: 100;\
+                    z-index: 14;\
                 ',
                 insertIntoDoc: {
                     target: 'css;#links_wrapper',
@@ -1653,7 +1652,7 @@
         engineList.music[0] = {
             name: '网易音乐',
             url: 'http://music.163.com/#/search/m/?s=%s',
-            favicon: 'data:image/png;base64,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',
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAF8WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDggNzkuMTY0MDM2LCAyMDE5LzA4LzEzLTAxOjA2OjU3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjEuMCAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIwLTA4LTAyVDIwOjA0OjI3KzA4OjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMC0wOC0wMlQyMDowNzoxNyswODowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMC0wOC0wMlQyMDowNzoxNyswODowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2MWUyOTJkOC0xNDFiLWI2NDctOGIwNS00MzcwMzdhN2Q3M2MiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDpmMmFlNTY4MC0xZTcxLTFkNGQtOTM2MC0zMWMyNWJhNGMyZWEiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowYmNhMDM5MC00MDZhLTFmNGEtYjJmMC04YjI5ZTBkOTYzYTEiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjBiY2EwMzkwLTQwNmEtMWY0YS1iMmYwLThiMjllMGQ5NjNhMSIgc3RFdnQ6d2hlbj0iMjAyMC0wOC0wMlQyMDowNDoyNyswODowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDIxLjAgKFdpbmRvd3MpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MWUyOTJkOC0xNDFiLWI2NDctOGIwNS00MzcwMzdhN2Q3M2MiIHN0RXZ0OndoZW49IjIwMjAtMDgtMDJUMjA6MDc6MTcrMDg6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMS4wIChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4TmZhWAAACOUlEQVRYw8WXy1LCMBSG26K2XBxx58KdGxeOK0ZezLfyady7dXSmMkOBgdKmiTmlaQ6huZTWcXEGKGny5T+XnHiMMe8/Tf7wwq7GKLfcD2nmhwX81o7tG4BWizPFOAj9c4BqEcaaAYpKje4ASFZmeM4XjQrCP3+uRu/LwfBrNRh9dwLgk1HFr0cQOjCjuQLs0eQAsQuijJ4udPjf0/j7XIBM2TXV7FCMyf0eASrJS6MWeUUQioCLn2dPnQBSPyI4il3yXo18eAbuSy7H69YAOZJ9Ob751OU9czAB4wyw5ylki2rhGlFoKulrFcQc2DV7VUmDAsySUkwuJHeHAUT1IxKwtCMIDQBzBYAJCUq7zWCYilhQJUfVsCxSVgCYPAknC9vu26TjCZwJwJDPDPtZtwiA8IKV4/8gs6BQ1WrYFLABNFW96pk2faUb+LiuCmgWoKY5qpjpB6ApBpALqCkOnADiu/s3W9mFcdsgImvIAE+eGzYXagGIfFmbhmkwzGzVrylAnQCwTKbDByIaV0N8EKVBeY54FoDCFcDYYBA0oZp2qiVXkyWM5fC5UYHFw+OrK0AbE41Nwls062lIZJrZjmMnwwVoE0Qr54ZEAJA2rZa5dlDnjmh1MdrieCBnuIMo2XG0EZeecHl9+yHyvSwunr09A9v5UYaO6kPNUFVs05bnhosHtm0QprA4GK6Ijd1y24uJ6HAa7gaN1zFUJ/q9GwqX1G6R32vJDZWw/7thPJtP45f5tPW7COAXq9nxB6GSCiwAAAAASUVORK5CYII=',
         };
 
         engineList.music[1] = {
@@ -1894,6 +1893,12 @@
             name: '海词',
             url: 'http://dict.cn/%s',
             favicon: "data:image/x-icon;base64,AAABAAEAEBAAAAAAIACAAgAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAkdJREFUeJx1k81LbVUYxn9n7y1+g3qPWYMosaKyVBp07yDJwFuUUKOoaU0v0SwuTRravHF/QFA0CQoHJTQJvHDR6IMUvXCvYpkfR49Hj573eRrsvY9KtWCxWO96n2e9H89bAZhd2XoVuG08aXvIMna5hWVUnqE9W8uSPl16eXyhMruyddPwre2USyCVJFJ+j9IuLCE5JL2eGX9sO82d//fXS2CXJKmk25nl59ogm7epc+OhQY4ED/d1U+3qpNY44ZuNTb6sQ8MgqSDXRCKrKuXsUyc1br0wzlBPN+XK0pSx4Wt8+OIEn48/Qn80kQJFEBHVrMgHWzzdnQKQVip89fs6PR0d9HZkjA/0MjP6KE+NDPPJaJ0PVneKOgTZlbwSA5BU4KfOwTzvM/H1doPV3Z957YnHeOXJUR7/4wFrkWCJRKF2SK0Qp62g2cptEWWo4vvDJmQd/Lr9F890pvm7gkwReQoSh9Fku37MTqNBblf7LQGqPV1gk2BKXKZoV5TaWZP7h8fsHDWIKPudR/NmtZ+hrk4AlmonSBUkkYWi7Xhu2Nzb56TVYjpt4sSkmJdGhnhn8lkAfly7x0YLrEAuIigJxgb6eHcqd3yPf6/N/Rof3V29UGVOELuSrlkCZ/8Bg3qzyRfLv/HZ+g57RdcK4f1def67Oz9YmpFEn87pcSADhdNpmN0IWqaYC7d1Y3sxU8S8pGkr0gOZ/aI4V7TfnhNdmlKH7fnkl7nrC4rWnEKLCh2EotDFRQesizpZOrC0aOmNP99/a+EfiilTPoj1fYcAAAAASUVORK5CYII=",
+        };
+        engineList.translate[8] = {
+            name: 'DeepL',
+            url: 'https://www.deepl.com/translator#zh/en/%s',
+            favicon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAACNwAAAjcB9wZEwgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGZSURBVDiNjZKxaxRBFMZ/b2ZHbWITUxkRC4PnBUW0k1gkoFlMYmIR8R+w0UZBFAvtLAMS0ipC0guCd0GOa23EJGTPkBRCSCNHKiEgMzvPwmjCuiv3lft97zff7BuhQraWTouJLwE0mmf518a7spwUPxwZvlmLms8B4wWrLZhHPvuwUg44N9afGPcc4T5gK4pFgSUv/jHrre8HgKHJE4nzHWBgn/sZdBuYqQB1Q+5rbLR2DUBy1J89GIbEmNmQNW8DqxWAgcS5IQBT5vqYP3H1Gw9AHyosAKECVA4QuKfIPMhHVKygV4OVU8ByT4BDsiI6rWpusdbYUdgpBpLSMeGTRLYx2o5q9kT0ja2P3xU401ODQJz1neYdVRkT9C1gyob/Ngg/3VbifJf9TVg1L2Q43UC1eo3eb8KfB7O7uRf7T782Yo8hXBG4DFwvaRgFFoP4GTqt7u/bFuTOp5dU9BUw8u/BOhqy5fZ//4HvNL6ErHlNkSmFb4e9YM1WMV+5xjxrvM+P99VBngI/qnK96UI66OrpEhcnThatXx/tiqJJdDA6AAAAAElFTkSuQmCC",
+            disable:true,
         };
 
         //知识列表
@@ -2425,7 +2430,7 @@
                     "(engineDetails: 第一个值为分类列表标题名称,第二个值与enginelist相关联,必须匹配,第三个值true为显示列表,false为禁用列表。排列顺序与跳转栏上的显示顺序相同，可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页,同脚本中的rules设置相同,优先级高于脚本中自带的规则。自带了360搜索,可仿写)...",
-            "version":4.02,
+            "version":4.03,
             "addSearchItems":true,
             "modifySearchItems":true,
             "connectToTheServer":true,
@@ -2490,11 +2495,11 @@
                 //         getSettingData.engineList["music"].push(engineList.music[7])
                 //     }
                 // }
-                // 4.02
+                // 4.03
                 if(getSettingData.addSearchItems){
                     // engineList.mine[8].disable = true; // 对于老用户,默认禁用的状态添加
-                    if(getSettingData.engineList.hasOwnProperty("web")){
-                        getSettingData.engineList["web"].push(engineList.web[8])
+                    if(getSettingData.engineList.hasOwnProperty("translate")){
+                        getSettingData.engineList["translate"].push(engineList.translate[8])
                     }
                 }
 
@@ -3151,14 +3156,14 @@
                 var top = scrolled.y + aBCRect.bottom;
                 var left = scrolled.x + aBCRect.left;
 
+                // 百度界面二级搜索会出现偏移的问题
                 if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
-                    // top -= 90;
                     top = 26;
-                    // left -= 120;
                     if(document.querySelector("#myuser") && getSettingData.center != 0){
-                         left += 120;
+                        left += 0;
                     } else {
-                        left += getSettingData.baiduOffset;
+                        // left += getSettingData.baiduOffset;   不需要用户自己修改，直接写死
+                        left += -131;
                     }
                 }
 
