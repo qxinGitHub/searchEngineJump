@@ -17,6 +17,14 @@ __说明__
 
 ### 更新历史
 
+> version 5.22.1   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-08-02
+- 图标微调
+- 增加"雅虎日本搜索"支持
+
+> version 5.22.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-08-01
+- 1688出现乱码的问题
+- 百度出现遮挡的问题
+
 > version 5.21.2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-05-04
 - 修复谷歌图片
 - 修复A站链接
