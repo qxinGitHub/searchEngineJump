@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.22.3
+// @version        5.22.4
 // @created        2011-07-02
-// @lastUpdated    2020-08-02
+// @lastUpdated    2020-09-05
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -279,17 +279,32 @@
             },
             {name: "startpage",
                 enabled: true,
-                url:/^https?:\/\/www\.startpage\.com\/do\/asearch/i,
+                url:/^https?:\/\/(www\.)?startpage\.com\/[a-zA-Z]{2,3}\/search/,
                 engineList: 'web',
-                fixedTop:69,
                 style: '\
                     z-index: 100;\
                     margin-left: 260px;\
                 ',
                 insertIntoDoc: {
-                    target: 'css;.column--main',
+                    target: 'css;.header',
                     keyword: '//input[@name="query"]',
-                    where: 'beforeBegin',
+                    // where: 'beforeBegin',
+                    where: 'beforeEnd',
+                },
+            },
+            {name: "startpage2",
+                enabled: true,
+                url:/^https?:\/\/www\.startpage\.com\/do\/asearch/,
+                engineList: 'web',
+                style: '\
+                    z-index: 100;\
+                    margin-left: 260px;\
+                ',
+                insertIntoDoc: {
+                    target: 'css;.header',
+                    keyword: '//input[@name="query"]',
+                    // where: 'beforeBegin',
+                    where: 'beforeEnd',
                 },
             },
             {name:"mijisou",
@@ -347,7 +362,6 @@
                 enabled: true,
                 style: "\
                     text-align: center;\
-                    z-index: 999999;\
                     background: #fff;\
                 ",
                 insertIntoDoc: {
@@ -1416,18 +1430,13 @@
                 url:/^https?:\/\/github\.com\/search/,
                 engineList:"mine",
                 style:'\
-                    border-bottom:1px solid #E5E5E5;\
-                    border-top:1px solid #E5E5E5;\
                     position:relative;\
                     text-align:center;\
-                    position:fixed;\
-                    z-index:99999;\
-                    top:0;\
                    ',
                insertIntoDoc: {
-                   keyword:'//input[@name="s"]',
-                   target:'css;body',
-                   where:'afterBegin',
+                   keyword:'//input[@name="q"]',
+                   target:'css;.Header',
+                   where:'afterEnd',
                }
             },
             {
@@ -1469,28 +1478,7 @@
                    where: 'beforeBegin',
                }
             },
-             {
-                name: "startpage",
-                enabled:true,
-                //https://www.startpage.com/do/search?q=
-                url:/^https?:\/\/www\.startpage\.com\/do\/search/,
-                engineList:"web",
-                fixedTop:70,
-                style:'\
-                    text-align:center;\
-                    position:fixed;\
-                    z-index:99999;\
-                    top:70px;\
-                    margin-left:257px;\
-                    background-color:#fff;\
-                   ',
-               insertIntoDoc: {
-                   target: 'css;.header',
-                   keyword: '//input[@name="query"]',
-                   // keyword: 'css;input#gsc-i-id1',
-                   where: 'beforeEnd',
-               }
-            },
+
 
             // 回家没网,用8090端口离线测试使用。
             {
@@ -2624,20 +2612,6 @@
             }
         };
 
-        // gbk 编码   引自 https://segmentfault.com/a/1190000006919102
-        function gbkEncode(str) {
-          return str.replace(/./g, function (a) {
-            var code = a.charCodeAt(0);
-            if (isAscii(code)) {
-              return encodeURIComponent(a);
-            } else {
-              var key = code.toString(16);
-              if (key.length != 4)key = ('000' + key).match(/....$/)[0];
-              return U2Ghash[key] || a;
-            }
-          });
-        }
-
         function getElementLeft(element){
             var actualLeft = element.offsetLeft;
             var current = element.offsetParent;
@@ -2877,8 +2851,6 @@
                 //     onload: function(res){
                 //         if(res.status === 200){
                 //             console.log('成功')
-                //             location.innerHTML = responseXML
-                //             console.log(response);
                 //         }else{
                 //             console.log('失败')
                 //             console.log(res)
@@ -5153,7 +5125,6 @@
                 // sej_edit.addEventListener("click",function(e){sejSet.addEdit(e);});
                 sej_edit.addEventListener("click",function(){sejSet.editCodeBox();});
 
-                //
                 window.addEventListener("resize",sejSet.windowResize.bind(sejSet));
             }
             sejSet.show();

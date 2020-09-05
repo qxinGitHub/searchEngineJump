@@ -17,6 +17,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.22.4   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-09-05
+- 百度百科 层级过高的问题
+- startpage.com 网站修复
+- github.com 网站修复
+
 > version 5.22.3   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-08-02
 - dogedoge 堆叠顺序过高的问题
 - 翻译列表增加 DeepL
