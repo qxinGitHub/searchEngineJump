@@ -18,8 +18,8 @@ __说明__
 ### 更新历史
 
 > version 5.22.5   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-10-15
-- 删除腾讯微博,google+ [wsxy162](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/64302)
-- www.dogedoge.com 兼容“ac百度” [benzBrake](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/64242)
+- 删除腾讯微博,google+ [感谢wsxy162](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/64302)
+- 网站dogedoge兼容“ac百度” [感谢benzBrake](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/64242)
 - 视频增加樱花动漫 特别感谢[storyInAugest](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/30535)的贡献
 - 增加 “启用”、“禁用” 的提示
 
