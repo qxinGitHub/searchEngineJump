@@ -17,6 +17,31 @@ __说明__
 
 ### 更新历史
 
+> version 5.22.5   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-10-15
+- 删除腾讯微博,google+ [感谢wsxy162](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/64302)
+- 网站dogedoge兼容“ac百度” [感谢benzBrake](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/64242)
+- 视频增加樱花动漫 特别感谢[storyInAugest](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/30535)的贡献
+- 增加 “启用”、“禁用” 的提示
+
+> version 5.22.4   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-09-05
+- 百度百科 层级过高的问题
+- startpage.com 网站修复
+- github.com 网站修复
+
+> version 5.22.3   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-08-02
+- dogedoge 堆叠顺序过高的问题
+- 翻译列表增加 DeepL
+- 与脚本“AC-baidu”的兼容问题
+- （上一个版本错误 少了v_5.22.1）
+
+> version 5.22.2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-08-02
+- 图标微调
+- 增加"雅虎日本搜索"支持
+
+> version 5.22.0   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-08-01
+- 1688出现乱码的问题
+- 百度出现遮挡的问题
+
 > version 5.21.2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-05-04
 - 修复谷歌图片
 - 修复A站链接
