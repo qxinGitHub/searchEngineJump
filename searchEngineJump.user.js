@@ -29,7 +29,7 @@
 (function () {
     'use strict';
 
-    console.log("脚本: 搜索引擎快捷跳转 --- 开始执行 --- 发布者: qxin --- GitHub:https://github.com/qxinGitHub/searchEngineJump ← 问题反馈地址")
+    // console.log("脚本: 搜索引擎快捷跳转 --- 开始执行 --- 发布者: qxin --- GitHub:https://github.com/qxinGitHub/searchEngineJump ← 问题反馈地址")
     function iqxinstart(){
         // 根据规则把搜索引擎列表插入到指定网站
         var rules = [
