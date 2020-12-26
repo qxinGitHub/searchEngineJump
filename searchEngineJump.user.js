@@ -4,8 +4,8 @@
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
 // @version        5.23.2
-// @created        2011-07-02
-// @lastUpdated    2020-12-23
+// @created        2011-07-03
+// @lastUpdated    2020-12-26
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -61,10 +61,6 @@
 // @match          *://*.imomoe.in/*
 // @match          *://*.infinitynewtab.com/*
 // @match          *://*.iqiyi.com/*
-// @match          *://*.ja14b.com/*
-// @match          *://*.jable.tv/*
-// @match          *://*.javbus.com/*
-// @match          *://*.javlibrary.com/*
 // @match          *://*.jd.com/*
 // @match          *://*.jiumodiary.com/*
 // @match          *://*.jstor.org/*
@@ -78,12 +74,8 @@
 // @match          *://*.mozilla.org/*
 // @match          *://*.nicovideo.jp/*
 // @match          *://*.nyaa.si/*
-// @match          *://*.pan115.com/*
-// @match          *://*.panc.cc/*
-// @match          *://*.panduoduo.net/*
 // @match          *://*.pinterest.com/*
 // @match          *://*.pixiv.net/*
-// @match          *://*.pornhub.com/*
 // @match          *://*.qq.com/*
 // @match          *://*.quora.com/*
 // @match          *://*.rs05.com/*
@@ -100,7 +92,6 @@
 // @match          *://*.springer.com/*
 // @match          *://*.stackoverflow.com/*
 // @match          *://*.startpage.com/*
-// @match          *://*.subhd.com/*
 // @match          *://*.suning.com/*
 // @match          *://*.taobao.com/*
 // @match          *://*.thepiratebay.org/*

@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.23.3   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-12-26
+- 优化:删掉部分不需要匹配的网站
+
 > version 5.23.2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-12-23
 - 修复: 必应页面搜索栏未对齐的问题 [感谢 小时候骑上竹马咱就是将军](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump-%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%BF%AB%E6%8D%B7%E8%B7%B3%E8%BD%AC/discussions/71057)
 
