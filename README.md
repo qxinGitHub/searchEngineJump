@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.23.4   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-12-27
+- 优化:删掉部分不需要匹配的网站
+
 > version 5.23.3   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-12-26
 - 优化:删掉部分不需要匹配的网站
 

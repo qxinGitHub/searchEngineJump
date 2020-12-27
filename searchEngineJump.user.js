@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.23.2
-// @created        2011-07-03
-// @lastUpdated    2020-12-26
+// @version        5.23.4
+// @created        2011-07-02
+// @lastUpdated    2020-12-27
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -19,7 +19,6 @@
 // @match          *://*.3dmgame.com/*
 // @match          *://*.56wangpan.com/*
 // @match          *://*.acfun.cn/*
-// @match          *://*.airav.cc/*
 // @match          *://*.alternativeto.net/*
 // @match          *://*.amazon.cn/*
 // @match          *://*.assrt.net/*
