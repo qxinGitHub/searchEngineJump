@@ -17,6 +17,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.23.5   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2021-03-07
+- 修复: AcFun网站 
+- 优化: duckduckgo Yandex
+- 删除: 虾米音乐 一号店 闲鱼
+
 > version 5.23.4   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2020-12-27
 - 优化:删掉部分不需要匹配的网站
 
