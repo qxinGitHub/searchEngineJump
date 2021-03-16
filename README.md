@@ -17,6 +17,14 @@ __说明__
 
 ### 更新历史
 
+> version 5.23.6   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2021-03-16
+- 修复: 什么值得买 层级过高
+- 修复: 列表退出动画缺失
+- 修复: 百度界面子列表偏移
+- 修复: 谷歌图片下拉不显示
+- 优化: 域名匹配规则   // @include *://*.yahoo.tld/*
+- 界面: 增加部分毛玻璃效果, 部分进入退出动画修改
+
 > version 5.23.5   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2021-03-07
 - 修复: AcFun网站 
 - 优化: duckduckgo Yandex
