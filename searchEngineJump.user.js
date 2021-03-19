@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.23.6
+// @version        5.23.7
 // @created        2011-07-02
-// @lastUpdated    2021-03-16
+// @lastUpdated    2021-03-19
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -924,8 +924,8 @@
                 url: /^https?:\/\/image\.baidu\.com\/search/i,
                 enabled: true,
                 engineList: "image",
-                // fixedTop:95,  关闭关联提示的情况下
-                fixedTop:135,
+                fixedTop:95,  //关闭关联联想的情况下
+                // fixedTop:135,  // 
                 style: '\
                     margin-left:127px;\
                     ',
@@ -1738,7 +1738,7 @@
         engineList.video[1] = {
             name: 'bilibili',
             url: 'http://search.bilibili.com/all?keyword=%s',
-            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACTElEQVQ4jY2QMUsbcRjGH7n73z+m4g0OblkDpkOgRT/AKeRCYvwHzxDBBOLUzU/gF+gkjlLoKlTBxQvxCqe5u4iFkw6CATfddLPSCIWnU8/E1rYP/Jbnfd/f8ALPIqUsj4+Pe1LK8lCXBeAB8AzDeP38JokQ4u309PSP2dlZmqbZByANw8iZpvm1UCgwn88znU5/+pvgzcTExGB/f5+O4xDAewC5hYUFPj4+cn5+/huA+osCADAMw8lms8zlcpycnPySTqff2bbNVqtFALWX7kpSSk8I4aVSqVDXdY6NjdE0TU5NTVHXdQJgKpWKhBCelNLTNO0DAAkAlVar9T0MQ/Z6PYZhyDAMGUURgyBgt9tNul/96ekpd3d3mclkDqDrenR+fs7t7W0qpVitVhOUUgnD/fLyMm9ubri2tkYIIT73ej0Wi0Vubm7S930GQcBOp8N2u50w3M/MzNB1XTabTUII4UVRRKUUz87OuLOzQ8dxeH19zeFsbW1xZWWFd3d3rNVqPDw8ZKPReBJUq1WGYUilFAHw+Ph4RGBZFgEwjmPW63W6rjsqUEqx0+mw3+/T930OBoMRweXlJX3f5/39Pcvl8p8F7XY7OdjY2ODc3FzCxcVFMisUCr8LlpaW6Pt+shTH8cgTHx4eklmpVHr6ga7rQRzHrFQqzOfztG2btm3TcRzW6/WExcVF2rbNYrFI0zTZ7Xa5vr5OaJr2cW9vj1dXVzw6OqLruv/k5OSEt7e3tCxrAACvMpnMwerqKhuNxn/RbDZpWdZA07TKT3uI/eaBFtmBAAAAAElFTkSuQmCC',
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAwElEQVQ4ja2Syw2DQAxEhwvdIHEklENFUIIN5EAftGAjigA6cA58krBZaZMwki+7nqfR7gC7zCLQUKDRBD41moCGAmaRe9mOKUgMrAsayVyzZGBdQGJox9QFmEVgbT9CXs2k9/cEncUgKcEyrQsBs+6W6CwGSMpgozslQDKDxFBr7n28s2rNN8CMg/atDt8ZwNqDtXcM53MvwJfIu3d5glBdCZi3ht2Czfs3skwAa/VzkVirZ5WPJEEzg7Vaq/ynHh0yOLrBLqn3AAAAAElFTkSuQmCC',
         };
         engineList.video[2] = {
             name: '优酷',
@@ -2538,7 +2538,7 @@
                     "(engineDetails: 第一个值为分类列表标题名称,第二个值与enginelist相关联,必须匹配,第三个值true为显示列表,false为禁用列表。排列顺序与跳转栏上的显示顺序相同，可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 将搜索样式插入到目标网页,同脚本中的rules设置相同,优先级高于脚本中自带的规则。自带了360搜索,可仿写)...",
-            "version":4.03,
+            "version":4.04,
             "addSearchItems":true,
             "modifySearchItems":true,
             "connectToTheServer":true,
@@ -2592,24 +2592,21 @@
                 // }
                 // 4.01
                 // if(getSettingData.addSearchItems){
-                //     // engineList.mine[8].disable = true; // 对于老用户,默认禁用的状态添加
-                //     if(getSettingData.engineList.hasOwnProperty("web")){
-                //         getSettingData.engineList["web"].push(engineList.web[7])
-                //     }
-                //     if(getSettingData.engineList.hasOwnProperty("shopping")){
-                //         getSettingData.engineList["shopping"].push(engineList.shopping[8])
-                //     }
                 //     if(getSettingData.engineList.hasOwnProperty("music")){
                 //         getSettingData.engineList["music"].push(engineList.music[6])
                 //         getSettingData.engineList["music"].push(engineList.music[7])
                 //     }
                 // }
                 // 4.03
-                if(getSettingData.addSearchItems){
-                    // engineList.mine[8].disable = true; // 对于老用户,默认禁用的状态添加
-                    if(getSettingData.engineList.hasOwnProperty("translate")){
-                        getSettingData.engineList["translate"].push(engineList.translate[8])
-                    }
+                // if(getSettingData.addSearchItems){
+                //     // engineList.mine[8].disable = true; // 对于老用户,默认禁用的状态添加
+                //     if(getSettingData.engineList.hasOwnProperty("translate")){
+                //         getSettingData.engineList["translate"].push(engineList.translate[8])
+                //     }
+                // }
+                // 4.04 更改 b站图标 
+                if(getSettingData.modifySearchItems){
+                    getSettingData.engineList.video = modifySearchItemsIcon(getSettingData.engineList.video,"http://search.bilibili.com/all?keyword=%s",engineList.video[1].favicon)
                 }
 
                 // 更新本地版本 其他相关信息
@@ -2659,6 +2656,16 @@
                         item[i].url = newURL;
                         return engineList;
                     }
+                }
+            }
+            return engineList;
+        }
+        // 更新图标
+        function modifySearchItemsIcon(engineList,url,newIcon){
+            for (let i=0;i<engineList.length;i++){
+                if(engineList[i].url ==url){   //用户可能自己更改网站名称,所以此处用url来匹配
+                    engineList[i].favicon=newIcon;
+                    console.log("发现旧的图标");
                 }
             }
             return engineList;
@@ -3215,7 +3222,8 @@
                             self.show();
                         }, self.showDelay);
                     } else {
-                        var style = list.style;
+                        var style = list.style; 
+                        style.top = parseInt(list.style.top) -6 +"px";
                         style.zIndex = DropDownList.zIndex ++;
                         style.opacity = 0.96;
                     };
@@ -3238,9 +3246,9 @@
                     clearTimeout(self.hideTimerId);
                     
                     var style = list.style;
-                    style.zIndex = DropDownList.zIndex --;
+                    style.zIndex = DropDownList.zIndex ++;
                     style.opacity = 0.96;
-                    list.style.top = parseInt(list.style.top)-6 +"px";
+                    style.top = parseInt(list.style.top) -6 +"px";
                 });
 
                 mouseEventListener.add('mouseleave', list, function () {
