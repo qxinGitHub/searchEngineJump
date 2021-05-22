@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.23.8
+// @version        5.23.9
 // @created        2011-07-02
 // @lastUpdated    2021-05-22
 
@@ -175,7 +175,7 @@
                     where: 'beforeBegin',
                 },
                 // 修改源网页用来适应跳转栏（可选）
-                stylish: 'body.vasq #hdtbMenus.hdtb-td-o{top:100px !important}'
+                stylish: 'body.vasq #hdtbMenus.hdtb-td-o{top:100px !important;} #hdtbMenus{top:92px;}'
             },
             {name: "google-hash-query",// 不刷新页面显示搜索结果的google
                 enabled: true,
@@ -4874,11 +4874,12 @@
                         "display: flex;" +
                         "flex-wrap: wrap;" +
                         "padding: 20px;" +
-                        "margin: 0px 25px 50px 5px;" +
+                        "margin: 2% 25px 50px 5px;" +
                         "background-color: #fff;" +
                         "border-radius: 4px;" +
                         "position: absolute;" +
                         "min-width: 700px;" +
+                        "max-width: 94%;" +
                         "transition:0.5s;" +
                     "}" +
                     ".iqxin-items{" +
