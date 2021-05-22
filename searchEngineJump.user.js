@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.23.7
+// @version        5.23.8
 // @created        2011-07-02
-// @lastUpdated    2021-03-19
+// @lastUpdated    2021-05-22
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -209,7 +209,7 @@
                 style: '\
                     margin-top:8px;\
                     margin-bottom: -5px;\
-                    z-index: 99;\
+                    z-index: 101;\
                     margin-left: 134px;\
                 ',
                 style_ACBaidu: '\
@@ -2604,10 +2604,11 @@
                 //         getSettingData.engineList["translate"].push(engineList.translate[8])
                 //     }
                 // }
-                // 4.04 更改 b站图标 
-                if(getSettingData.modifySearchItems){
-                    getSettingData.engineList.video = modifySearchItemsIcon(getSettingData.engineList.video,"http://search.bilibili.com/all?keyword=%s",engineList.video[1].favicon)
-                }
+                // 4.04 更改 b站图标  
+                    // 导致了5.23.7 的严重bug, 致使无法使用。原因是用户已经删除了相关列表, 但是脚本依旧去读取,出现了读取错误。
+                // if(getSettingData.modifySearchItems){
+                //     getSettingData.engineList.video = modifySearchItemsIcon(getSettingData.engineList.video,"http://search.bilibili.com/all?keyword=%s",engineList.video[1].favicon)
+                // }
 
                 // 更新本地版本 其他相关信息
                 getSettingData.version = settingData.version;

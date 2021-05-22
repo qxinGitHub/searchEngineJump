@@ -17,6 +17,10 @@ __说明__
 
 ### 更新历史
 
+> version 5.23.8   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2021-03-19
+- 修复: 5.23.7 版本导致部分用户无法使用的情况(原因是调用了已经被用户删除的列表,导致错误)
+- 修复: 百度页面搜索翻译内容,底色缺失的问题,调整了父元素的index至101
+
 > version 5.23.7   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2021-03-19
 - 修复: 鼠标从分类列表移到到菜单上,会导致列表不断下移的情况 [感谢 kidzgy](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/79010)
 - 界面: b站图标 [感谢 kidzgy](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/79010)
