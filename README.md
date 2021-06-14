@@ -17,6 +17,9 @@ __说明__
 
 ### 更新历史
 
+> version 5.23.10   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2021-06-14
+- 增加: 对www.ecosia.org网站的支持 [感谢lisariel](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/90001)
+
 > version 5.23.9   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2021-05-22
 - 修复: 谷歌搜索页面与自带的工具重叠的问题
 - 优化: 在设置界面,搜索列表过多时,增加了与边缘的空隙
