@@ -17,6 +17,10 @@ __说明__
 
 ### 更新历史
 
+> version 5.24.0   2021-06-21
+- 增加: 设置中增加关闭动画效果的选项
+- 增加: 天眼查,企查查 感谢[kidzgy](https://greasyfork.org/zh-CN/scripts/27752/discussions/90497)的代码提供
+
 > version 5.23.10   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2021-06-14
 - 增加: 对www.ecosia.org网站的支持 [感谢lisariel](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/90001)
 

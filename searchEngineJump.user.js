@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.23.10
+// @version        5.24.0
 // @created        2011-07-02
 // @lastUpdated    2021-05-22
 
@@ -114,6 +114,8 @@
 // @match          *://*.zhihu.com/*
 // @match          *://*.zimuzu.tv/*
 // @match          *://*.ecosia.org/*
+// @match          *://*.qcc.com/*
+// @match          *://*.tianyancha.com/*
 
 // @grant       GM_getValue
 // @grant       GM_setValue
@@ -1627,6 +1629,44 @@
                    where: 'beforeBegin',
                }
             },
+            //  用户补充: kidzgy
+            //  https://greasyfork.org/zh-CN/scripts/27752/discussions/90497
+            {
+                name: "企查查",
+                url: /^https?:\/\/www\.qcc\.com\/(?:web|firm)/,
+                engineList: 'enterprise',
+                enabled: true,
+                fixedTop:56,
+                style: '\
+                    width:1250px;\
+                    margin: 0 auto;\
+                    padding-left: 15px;\
+                ',
+                insertIntoDoc: {
+                keyword: 'css;#searchKey',
+                target: 'css;.app-nheader',
+                where: 'AfterEnd',
+                },
+                stylish: ' .bigsearch-nav.fixed > .nav-wrap { position: static !important; }',
+            },
+            {
+                name: "天眼查",
+                url: /^https?:\/\/www\.tianyancha\.com\/(?:search|company)/,
+                engineList: 'enterprise',
+                enabled: true,
+                fixedTop:73,
+                style: '\
+                    top:80px;\
+                    margin: 0 auto;\
+                    width:1248px;\
+                ',
+                insertIntoDoc: {
+                keyword: 'css;#header-company-search',
+                target: 'css;.tyc-header',
+                where: 'AfterEnd',
+                },
+                stylish: '#web-content.mt122{margin-top:90px !important} .search-bar{position:static !important}',
+            },
 
 
             // 回家没网,用8090端口离线测试使用。
@@ -2552,10 +2592,11 @@
                     "(allOpen:一键搜索，点击相关分类后，打开该分类下的所有搜索)..." +
                     "(center:是否居中显示，主要是为了兼容脚本 ac 百度  ： 0 不居中，强制在左。 1, 强制居中 。 2,自动判断)..." +
                     "(icon: 图标的显示方式, true显示抽象图标,false显示网站图标。当脚本中不存在抽象图标时,显示网站图标)..." +
+                    "(transtion: 是否有动画效果, true为开启所有动画效果,false关闭所有动画(包括模糊效果)。)" +
                     "(engineDetails: 第一个值为分类列表标题名称,第二个值与enginelist相关联,必须匹配,第三个值true为显示列表,false为禁用列表。排列顺序与跳转栏上的显示顺序相同，可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
-                    "(rules: 将搜索样式插入到目标网页,同脚本中的rules设置相同,优先级高于脚本中自带的规则。自带了360搜索,可仿写)...",
-            "version":4.04,
+                    "(rules: 已弃用--将搜索样式插入到目标网页,同脚本中的rules设置相同,优先级高于脚本中自带的规则。自带了360搜索,可仿写)...",
+            "version":4.05,
             "addSearchItems":true,
             "modifySearchItems":true,
             "connectToTheServer":true,
@@ -2571,6 +2612,7 @@
             "allOpen":false,
             "center":2,
             "icon":false,
+            "transtion":true,
             "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],["下载","download",false],["新闻","news",false],['mine', 'mine',false]],
             "engineList":{},
             "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 120px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}}]
@@ -3090,7 +3132,7 @@
                     font-size: 13px;
                     font-family: arial,sans-serif;
                     transform-origin: top center;
-                    animation: sejopen 0.3s !important;
+                    animation: sejopen 0.3s;
                     border-bottom-right-radius: 4px;
                     border-bottom-left-radius: 4px;
                     color: #333;
@@ -3210,6 +3252,24 @@
             */
         }).cssText;
         document.head.appendChild(globalStyle);
+        
+        // 工具列表动画
+        if(!getSettingData.transtion){
+            GM_addStyle(".sej-engine," +
+                        ".sej-drop-list-trigger," +
+                        ".sej-drop-list{" +
+                            "transition:none!important;" +
+                        "}" +
+                        "#sej-container{" +
+                            "animation:none!important;" +
+                        "}" +
+                        ".sej-drop-list {" +
+                            "backdrop-filter:none!important;" +
+                            "background-color: rgba(255,255,255,.9)!important;" +
+                            "}" +
+                        ""
+            )
+        }
 
         // 列表对象
         function DropDownList(a, list) {
@@ -3230,6 +3290,12 @@
                 var list = this.list;
 
                 var self = this;
+
+                // 关闭动画
+                if(!getSettingData.transtion){
+                    this.showDelay = 0;
+                    this.hideDelay = 0;
+                }
 
                 // 进入显示
                 mouseEventListener.add('mouseenter', a, function () {
@@ -3717,7 +3783,8 @@
                 btnEle2.id = "btnEle2"
                 var fixedTop_checked = getSettingData.fixedTop?"checked":"";
                 var fixedTopUpward_checked = getSettingData.fixedTopUpward?"checked":"";
-                var debug_checked = getSettingData.debug?"checked":"";
+                // var debug_checked = getSettingData.debug?"checked":"";
+                var transition_checked = getSettingData.transtion?"checked":"";
                 var foldlist_checked = getSettingData.foldlist?"checked":"";
                 var allOpen_checked = getSettingData.allOpen?"checked":"";
 
@@ -3731,6 +3798,11 @@
                             //         debug_checked +
                             //     " style='vertical-align:middle;'></label>" +
                             // "</span>" +
+                            "<span id='xin-transtion' title='动画,该设置需要刷新页面生效'>" +
+                                "<label>动画<input id='iqxin-transtion' type='checkbox' name='' " +
+                                transition_checked +
+                                " style='vertical-align:middle;'></label>" +
+                            "</span>" +
                             "<span id='xin-foldlists' title='将当前所在搜索分类折叠'>" +
                                 "<label>折叠当前搜索分类<input id='iqxin-foldlist' type='checkbox' name='' " +
                                     foldlist_checked +
@@ -4858,6 +4930,7 @@
                 getData.fixedTop = document.querySelector("#iqxin-fixedTop").checked;
                 getData.allOpen = document.querySelector("#iqxin-allOpen-item").checked;
                 getData.fixedTopUpward = document.querySelector("#iqxin-fixedTopUpward-item").checked;
+                getData.transtion = document.querySelector("#iqxin-transtion").checked;
                 getData.engineDetails = engineDetails;
                 getData.engineList = obj;
 
@@ -5275,6 +5348,26 @@
                 style.type = 'text/css';
                 style.innerHTML = css;
                 head.appendChild(style);
+                
+                // 关闭设置菜单中的所有动画效果 
+                if(!getSettingData.transtion){
+                    GM_addStyle("#settingLayer," +
+                        "#btnEle span," +
+                        "#btnEle2," +
+                        ".iqxin-set-del," +
+                        "span.iqxin-additem," +
+                        "#newSearchBox," +
+                        ".addItemBoxBtn," +
+                        "#xin-close," +
+                        "#settingLayerMask{" +
+                            "transition:none;"+
+                        "}"+
+                        "#settingLayerMask{" +
+                            "backdrop-filter:none;" +
+                            "background-color: rgba(0,0,0,.7);" +
+                        "}"+
+                        "");
+                }
             }
         };
 
