@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.0
+// @version        5.24.1
 // @created        2011-07-02
 // @lastUpdated    2021-05-22
 
@@ -1359,8 +1359,24 @@
                  keyword: 'css;#twotabsearchtextbox',
                  target: 'css;.sg-row',
                  where: 'afterBegin',
-             },
-         },
+                },
+            },
+             {name: "1688",
+            // https://s.1688.com/selloffer/offer_search.htm?keywords=%
+             url: /^https?:\/\/s\.1688\.com\/selloffer\/offer_search/i,
+             enabled: true,
+             engineList: "shopping",
+             fixedTop:88,
+             style: "\
+                 margin:6px auto -20px;\
+                 width:1390px;\
+             ",
+             insertIntoDoc: {
+                 keyword: '//input[@name="keywords"]',
+                 target: 'css;.header-container',
+                 where: 'afterEnd',
+                },
+            },
 
 
             //社交
@@ -1633,7 +1649,7 @@
             //  https://greasyfork.org/zh-CN/scripts/27752/discussions/90497
             {
                 name: "企查查",
-                url: /^https?:\/\/www\.qcc\.com\/(?:web|firm)/,
+                url: /^https?:\/\/www\.qcc\.com\/(?:web|firm|)/,
                 engineList: 'enterprise',
                 enabled: true,
                 fixedTop:56,

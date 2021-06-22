@@ -17,6 +17,10 @@ __说明__
 
 ### 更新历史
 
+> version 5.24.1   2021-06-23
+- 修复: 企查查的搜索链接不准确的问题。感谢[kidzgy](https://greasyfork.org/zh-CN/scripts/27752/discussions/90497)
+- 增加: 1688网站添加搜索栏
+
 > version 5.24.0   2021-06-21
 - 增加: 设置中增加关闭动画效果的选项
 - 增加: 天眼查,企查查 感谢[kidzgy](https://greasyfork.org/zh-CN/scripts/27752/discussions/90497)的代码提供
