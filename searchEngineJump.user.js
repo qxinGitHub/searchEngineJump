@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.1
+// @version        5.24.2
 // @created        2011-07-02
-// @lastUpdated    2021-05-22
+// @lastUpdated    2021-06-30
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -116,6 +116,7 @@
 // @match          *://*.ecosia.org/*
 // @match          *://*.qcc.com/*
 // @match          *://*.tianyancha.com/*
+// @match          *://www.iciba.com/*
 
 // @grant       GM_getValue
 // @grant       GM_setValue
@@ -1192,21 +1193,20 @@
                     where: 'beforeEnd',
                 },
             },
-            {name: "有道翻译",
+            {name: "有道翻译2",
                 url: /^https?:\/\/dict\.youdao\.com\/w/i,
                 enabled: true,
                 engineList: "translate",
+                fixedTop:64,
                 style: '\
                     padding-left:0px;\
-                    border-top:1px solid #D9E1F7;\
-                    border-bottom:1px solid #D9E1F7;\
-                    margin-top:0px;\
+                    margin-top:2px;\
                     text-align:center;\
                 ',
                 insertIntoDoc: {
                     keyword: 'css;#query',
-                    target: 'css;#scontainer',
-                    where: 'beforeBegin',
+                    target: 'css;.c-topbar-wrapper',
+                    where: 'beforeEnd',
                 },
             },
             {name: "海词",
@@ -1226,6 +1226,21 @@
                    where: 'afterEnd'
                }
            },
+           {name: "金山词霸",
+                //    https://www.iciba.com/word?w=test
+                url: /^https?:\/\/www\.iciba\.com\/word/i,
+                enabled: true,
+                engineList: "translate",
+                fixedTop:122,
+                style: '\
+                    z-index : 0;\
+                ',
+                insertIntoDoc: {
+                    keyword: '//input[@type="search"]',
+                    target: 'css;.Search_input__1qgiU',
+                    where: 'afterEnd',
+                },
+            },
 
             // 购物
             {name: "淘宝搜索",
@@ -2100,6 +2115,12 @@
             url: 'https://www.deepl.com/translator#zh/en/%s',
             favicon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAACNwAAAjcB9wZEwgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGZSURBVDiNjZKxaxRBFMZ/b2ZHbWITUxkRC4PnBUW0k1gkoFlMYmIR8R+w0UZBFAvtLAMS0ipC0guCd0GOa23EJGTPkBRCSCNHKiEgMzvPwmjCuiv3lft97zff7BuhQraWTouJLwE0mmf518a7spwUPxwZvlmLms8B4wWrLZhHPvuwUg44N9afGPcc4T5gK4pFgSUv/jHrre8HgKHJE4nzHWBgn/sZdBuYqQB1Q+5rbLR2DUBy1J89GIbEmNmQNW8DqxWAgcS5IQBT5vqYP3H1Gw9AHyosAKECVA4QuKfIPMhHVKygV4OVU8ByT4BDsiI6rWpusdbYUdgpBpLSMeGTRLYx2o5q9kT0ja2P3xU401ODQJz1neYdVRkT9C1gyob/Ngg/3VbifJf9TVg1L2Q43UC1eo3eb8KfB7O7uRf7T782Yo8hXBG4DFwvaRgFFoP4GTqt7u/bFuTOp5dU9BUw8u/BOhqy5fZ//4HvNL6ErHlNkSmFb4e9YM1WMV+5xjxrvM+P99VBngI/qnK96UI66OrpEhcnThatXx/tiqJJdDA6AAAAAElFTkSuQmCC",
             disable:true,
+        };
+        engineList.translate[9] = {
+            name: '金山词霸',
+            url: 'https://www.iciba.com/word?w=%s',
+            favicon: "data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACGElEQVQ4y6WTzUuUURTGf+e87+v3BwxYToupoYVYgViLFiPtIrBNELZsIUIUFEXQqk1I/0JU24oWZRFFiyD7WhhBDWYfq4zCsRETdfwYHL33tHhtdLSF0IEH7r1cnnOe55wjPP1u/EeEYrLuaogpoJi4LREoBhiIQa3Btbb3DLZdQbwQIdSJIC7+8y+IPP5pAKnqEgMdz+lYusGvwm/uVo3Qu7OeOoXsbIkzw9OMLDiQDRLi7CED/gJ7x94R1o2RTF7naFBFz9AEuZLnVKqewcw2Ol/kyS0b601T84AJNbnPMD+BD3ZgzSc5/naKN7OOb4vGpS8FsjMlTqcbMGeYp4wQDyCUabWVeRcwWjS8xc9iytc5T7I6Qpxguq4C8UJMsuqKG6U5WOJgY4B4JTAlckImETAyvYQhiF+DmlfWKA21GdzkVR52tXAuXcuxlognXQn2J2oYmiwhpphfg+IVvJYlGDA+dZvzH4p0p5q43NnCx3ml/9MCDw4laK9VlAi8gFdCMQMzRFb7I5AYVnpeXWTWe+aAtEAARJkDDJ7o497NO5xt7QZzcRsBzMAESq+TRI+2c1iHN0/d/SzLE+Ps3nMEKXhMIMQLSOxs8VkT+rIBdIZNCyKCNTQx3Z6ht5Be9VwIzeIW/pAUxVwEDsz9dWMDQeMu+hb3kfflwhFu5S0+RIiyaVQrwhtmKxXUsQTAWMH8VvavMsMfIrbvQBU3VlgAAAAASUVORK5CYII=",
+            blank:true,
         };
 
         //知识列表
@@ -3223,6 +3244,7 @@
                     padding: 0;
                     margin: 0 3px 0 0;
                     vertical-align: text-bottom;
+                    box-sizing:unset;
                 }
 
                 .sej-drop-list {
@@ -5298,6 +5320,7 @@
                         "top: -20px;" +
                         "right:-20px;" +
                         "position: absolute;" +
+                        "box-sizing: unset;" +
                     "}" +
                     "#xin-close::before{" +
                         "content:'\\2716';" +
@@ -5517,6 +5540,7 @@
     var delayList = [
         /^https?:\/\/google\.infinitynewtab\.com\/\?q/,
         /^https?:\/\/www\.zhihu\.com\/search\?/,
+        /^https?:\/\/www\.iciba\.com\/word\?/,
     ]
 
     var hashListTag = hashList.some(function hashUrl(element, index, array){

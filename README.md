@@ -17,6 +17,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.24.2   2021-06-30
+- 修复: 在有道搜索页面再次搜索时缺失的问题。感谢[spn](https://greasyfork.org/zh-CN/scripts/27752/discussions/90926)
+- 增加: 金山词霸的支持. 感谢[spn](https://greasyfork.org/zh-CN/scripts/27752/discussions/91053)的代码提供
+- 修复: 部分网站,例如金山词霸网站中, 设置界面图标不正常的问题。
+
 > version 5.24.1   2021-06-23
 - 修复: 企查查的搜索链接不准确的问题。感谢[kidzgy](https://greasyfork.org/zh-CN/scripts/27752/discussions/90497)
 - 增加: 1688网站添加搜索栏
