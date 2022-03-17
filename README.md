@@ -17,6 +17,16 @@ __说明__
 
 ### 更新历史
 
+> version 5.24.3   2022-03-15
+- 尚未解决的问题: 头条搜索无法跳转到淘宝;
+-  下面增加新的搜索, 还有搜索网站顺序的调整不影响老用户
+- 增加: 增加f搜的支持。感谢[ZZH-qwq](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/119203)的代码提供, 由于处于该搜索处于内测阶段,未验证代码的准确性。
+- 增加: 对今日头条搜索的支持,修复今日头条搜索链接错误的问题
+- 增加: 抖音搜索, 在社交列表; 对抖音搜索的支持(颜色显示有问题)
+- 修复: 雅虎日本搜索失效的问题
+- 修复: 哔哩哔哩搜索改版导致失效的问题,[看不见我看不见我 反馈](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/123251)
+- 界面: 删除一听音乐www.1ting.com、音悦台yinyuetai.com、图片easyicon.net、人人影视zimuzu.tv、果壳guokr.com、秘迹搜索mijisou.com、DOG duckduckgo.com 等网站
+
 > version 5.24.2   2021-06-30
 - 修复: 在有道搜索页面再次搜索时缺失的问题。感谢[spn](https://greasyfork.org/zh-CN/scripts/27752/discussions/90926)
 - 增加: 金山词霸的支持. 感谢[spn](https://greasyfork.org/zh-CN/scripts/27752/discussions/91053)的代码提供
