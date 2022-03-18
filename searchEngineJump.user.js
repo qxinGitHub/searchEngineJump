@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.3
+// @version        5.24.4
 // @created        2011-07-02
-// @lastUpdated    2022-03-15
+// @lastUpdated    2022-03-18
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -720,15 +720,31 @@
                 url: /^https?:\/\/search\.bilibili\.com\/all/,
                 enabled: true,
                 engineList: "video",
-                fixedTop:62,
+                // fixedTop:62,
                 style: "\
                     width:980px;\
                     margin:10px auto -5px;\
                     text-align:center;\
                 ",
                 insertIntoDoc: {
-                    keyword: 'css;.search-input-el',
-                    target: 'css;.search-input',
+                    // keyword: 'css;#search-keyword',   //旧
+                    // target: 'css;.filter-wrap',     //旧
+                    // keyword: 'css;.search-input-el',
+                    keyword: function(){
+                        if(document.querySelector("#search-keyword")){
+                            return document.querySelector("#search-keyword").value;
+                        } else{
+                            return document.querySelector(".search-input-el").value;
+                        }
+                    },
+                    // target: 'css;.search-input',
+                    target: function(){
+                        if(document.querySelector(".head-contain")){
+                            return  document.querySelector(".head-contain");
+                        } else{
+                            return  document.querySelector(".search-input");
+                        }
+                    },
                     where: 'afterEnd',
                 },
             },
@@ -3103,11 +3119,12 @@
 
         if (!matchedRule || !matchedRule.enabled) return;
 
-        var iTarget = getElement(matchedRule.insertIntoDoc.target);
+        // var iTarget = getElement(matchedRule.insertIntoDoc.target);
+        var iTarget = typeof matchedRule.insertIntoDoc.target == "function" ? matchedRule.insertIntoDoc.target() : getElement(matchedRule.insertIntoDoc.target);
         var iInput = typeof matchedRule.insertIntoDoc.keyword == 'function' ? matchedRule.insertIntoDoc.keyword : getElement(matchedRule.insertIntoDoc.keyword);
 
         ///test -------------- 测试 start
-        debug("searchEngineJump test iTarget, iInput: ",iTarget, iInput);
+        // console.log("searchEngineJump test iTarget, iInput: ",iTarget, iInput);
         ///test -------------- 测试 end
 
         if (!iTarget || !iInput) {
