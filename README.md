@@ -17,8 +17,11 @@ __说明__
 
 ### 更新历史
 
+> version 5.24.5   2022-03-19
+- 修复: 在5.24.3版本 错误删除duckduckgo.com网站, 恢复一听音乐www.1ting.com [感谢JY3提醒](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/123460#comment-279499)
+
 > version 5.24.4   2022-03-18
-- 修复: 兼容bilibili搜索界面的新旧两种版面。带来的问题就是在b站固定到顶端几乎没法使用,属于两害相较取其轻了。
+- 修复: 兼容bilibili搜索界面的新旧两种版面。带来的问题就是在b站固定到顶端几乎没法使用,属于两害相较取其轻了。[感谢iamking22反馈](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/123330)
 
 > version 5.24.3   2022-03-15
 - 尚未解决的问题: 头条搜索无法跳转到淘宝;
