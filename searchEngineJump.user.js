@@ -5533,6 +5533,7 @@
         /^https?:\/\/google\.infinitynewtab\.com\/\?q/,
         /^https?:\/\/www\.zhihu\.com\/search\?/,
         /^https?:\/\/www\.iciba\.com\/word\?/,
+        /^https?:\/\/fsofso\.com\/search/,
     ]
 
     var hashListTag = hashList.some(function hashUrl(element, index, array){
