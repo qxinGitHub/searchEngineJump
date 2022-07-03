@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.5
+// @version        5.24.6
 // @created        2011-07-02
-// @lastUpdated    2022-03-19
+// @lastUpdated    2022-07-03
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -215,6 +215,8 @@
                     z-index: 99;\
                     text-align: center;\
                     padding-left:0px !important;\
+                    background: rgba(248,248,248,0.4);\
+                    backdrop-filter: blur(10px);\
                 ',
                 insertIntoDoc: {
                     keyword: 'css;input#kw',
@@ -3380,6 +3382,7 @@
 
                 var scrolled = getScrolled();
                 var aBCRect = this.a.getBoundingClientRect();
+                var thisBCRect = this.a.parentNode.getBoundingClientRect()
 
                 var style = this.list.style;
 
@@ -3390,7 +3393,8 @@
                 if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
                     top = 26;
                     if(document.querySelector("#myuser") && getSettingData.center != 0){
-                        left += 0;
+                        // left += 0;
+                        left = aBCRect.x -thisBCRect.x
                     } else {
                         // left += getSettingData.baiduOffset;   不需要用户自己修改，直接写死
                         left += -134;
@@ -3399,6 +3403,12 @@
 
                 style.top = top + 6 + 'px';
                 style.left = left + 'px';
+
+                // console.log(aBCRect)
+                // console.log(thisBCRect)
+                // style.left = aBCRect.x + "px";
+                // style.top = aBCRect.y + aBCRect.height + "px";
+
                 style.zIndex = DropDownList.zIndex --;
                 style.display = 'block';
 
@@ -3570,6 +3580,9 @@
         if (matchedRule.style) {
             // 判断是否存在脚本 “AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列”
             if(getSettingData.center==2){    // 自动判断是否添加
+                // console.log("判断是否自动添加");
+                // console.log(document.querySelector("#myuser"));
+                // console.log(matchedRule.style_ACBaidu);
                 if(document.querySelector("#myuser") && matchedRule.style_ACBaidu){
                     console.log("检测到脚本：“AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列”   ------自动添加");
                     matchedRule.style = matchedRule.style_ACBaidu;
