@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.7
+// @version        5.24.8
 // @created        2011-07-02
-// @lastUpdated    2022-07-03
+// @lastUpdated    2022-07-04
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -203,6 +203,9 @@
                 enabled: true,
                 engineList: "web",
                 fixedTop:70,
+                fixedTop2:88,
+                fixedTopTarget: "css;.s_form ",
+                fixedTopWhere:"beforeEnd",
                 style: '\
                     margin-top:8px;\
                     margin-bottom: -5px;\
@@ -3390,16 +3393,16 @@
                 var left = scrolled.x + aBCRect.left;
 
                 // 百度界面二级搜索会出现偏移的问题
-                if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
-                    top = 26;
-                    if(document.querySelector("#myuser") && getSettingData.center != 0){
-                        // left += 0;
-                        left = aBCRect.x -thisBCRect.x
-                    } else {
-                        // left += getSettingData.baiduOffset;   不需要用户自己修改，直接写死
-                        left += -134;
-                    }
-                }
+                // if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
+                //     top = 26;
+                //     if(document.querySelector(".AC-style-logo") && getSettingData.center != 0){
+                //         // left += 0;
+                //         left = aBCRect.x -thisBCRect.x
+                //     } else {
+                //         // left += getSettingData.baiduOffset;   不需要用户自己修改，直接写死
+                //         left += -134;
+                //     }
+                // }
 
                 style.top = top + 6 + 'px';
                 style.left = left + 'px';
@@ -3538,20 +3541,20 @@
 
         // 将主搜索插入网页中
         switch (matchedRule.insertIntoDoc.where.toLowerCase()) {
-            case 'beforebegin' :
+            case 'beforebegin' :    // 'beforeBegin'(插入到给定元素的前面) ;
                 iTarget.parentNode.insertBefore(container, iTarget);
             break;
-            case 'afterbegin' :
+            case 'afterbegin' :     // 'afterBegin'(作为给定元素的第一个子元素) ;
                 if (iTarget.firstChild) {
                     iTarget.insertBefore(container, iTarget.firstChild);
                 } else {
                     iTarget.appendChild(container);
                 };
             break;
-            case 'beforeend' :
+            case 'beforeend' :   // 'beforeEnd' (作为给定元素的最后一个子元素) ;
                 iTarget.appendChild(container);
             break;
-            case 'afterend' :
+            case 'afterend' :  // 'afterEnd'(插入到给定元素的后面);.
                 if (iTarget.nextSibling) {
                     iTarget.parentNode.insertBefore(container, iTarget.nextSibling);
                 } else {
@@ -3561,20 +3564,21 @@
         };
 
         // todo: 此处与上面重复,在百度页面会插入两次
-        if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
-            var sej = document.getElementsByTagName("sejspan")[0];
-            sej.appendChild(globalStyle);
+            // 2022-07-04 重复插入后, 会导致百度界面中下拉搜索偏移,已经忘了当初加入这个是为了解决什么bug了, 但是这几行代码又引来了源源不断的bug。
+        // if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
+        //     var sej = document.getElementsByTagName("sejspan")[0];
+        //     sej.appendChild(globalStyle);
 
-            dropLists.forEach(function (item) {
-                container.appendChild(item[0]);
-                // document.body.appendChild(item[1]);
-                var sej = document.getElementsByTagName("sejspan")[0];
-                sej.appendChild(item[1]);
-                item[1].addEventListener('mousedown', mousedownhandler, true);
+        //     dropLists.forEach(function (item) {
+        //         container.appendChild(item[0]);
+        //         // document.body.appendChild(item[1]);
+        //         var sej = document.getElementsByTagName("sejspan")[0];
+        //         sej.appendChild(item[1]);
+        //         item[1].addEventListener('mousedown', mousedownhandler, true);
 
-                new DropDownList(item[0], item[1]);
-            });
-        };
+        //         new DropDownList(item[0], item[1]);
+        //     });
+        // };
 
         // 兼容其他修改网页的脚本
         if (matchedRule.style) {
@@ -3583,7 +3587,7 @@
                 // console.log("判断是否自动添加");
                 // console.log(document.querySelector("#myuser"));
                 // console.log(matchedRule.style_ACBaidu);
-                if(document.querySelector("#myuser") && matchedRule.style_ACBaidu){
+                if(document.querySelector(".AC-style-logo") && matchedRule.style_ACBaidu){
                     console.log("检测到脚本：“AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列”   ------自动添加");
                     matchedRule.style = matchedRule.style_ACBaidu;
                 }
@@ -3601,6 +3605,17 @@
             }
             container.style.cssText = matchedRule.style;
         };
+
+        //兼容ac百度中lite选项, fixedtop和正常的不一样
+        setTimeout(function(){
+            if(document.querySelector(".AC-baiduLiteStyle") && matchedRule.fixedTop2){
+                console.log("检测到 AC-baiduLiteStyle")
+                matchedRule.fixedTop = matchedRule.fixedTop2
+            }else{
+                console.log("没找到 AC-baiduLiteStyle")
+            }
+        },2500)
+
                 
         // 由于与要插入网页的样式无法很好的兼容,更改源网页的样式
         if(matchedRule.stylish){GM_addStyle(matchedRule.stylish);};
@@ -3622,63 +3637,109 @@
                     fixedTopFun(matchedRule.fixedTop, matchedRule.fixedTopColor);
                 };
             }
-            // 固定搜索栏
-            function fixedTopFun(height, color){
-                var obj = document.getElementById("sej-container");
-                var objTop = obj.offsetTop ;
-                var objLeft = obj.offsetLeft ;
-
-                var current = obj.offsetParent;
-                while (current !== null){
-                    objLeft += current.offsetLeft;
-                    current = current.offsetParent;
-                }
-
-                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-
-                if(height){
-                    objTop = height;
-                }else{
-                    height = 0;
-                }
-
-                if(scrollTop <= objTop){
-                    obj.style.cssText = matchedRule.style;
-                }else if(obj.style.position!="fixed"){
-                    // console.log(scrollTop,objTop,scrollTop - objTop);
-                    var objstyle = window.getComputedStyle(obj , null);
-                    var marginTop = parseInt(objstyle.marginTop);
-                    var marginLeft = parseInt(objstyle.marginLeft);
-                    var marginRight = parseInt(objstyle.marginRight);
-                    //console.log(objLeft,marginLeft);
-
-                    obj.style.top = height - marginTop + 'px';
-
-                    // 如果之前未设置颜色,则默认设置为白色
-                        // 2020-12-19 增加选项,可以通过代码自定义颜色,但是无法通过网站自动获取
-                    if(color){
-                        obj.style.background = color;
-                    } else if(objstyle.backgroundColor === "rgba(0, 0, 0, 0)" || objstyle.backgroundColor === "transparent"){
-                        obj.style.background = '#fff';
-                    }
-                    obj.style.left = getElementLeft(obj) - marginLeft + "px";
-                    // obj.style.left = getElementLeft(obj) + "px";
-                    debug("objLeft: ",objLeft,"marginLeft: ",marginLeft,"marginRight: ",marginRight,"getElementLeft: ",getElementLeft(obj));
-                    // 知乎等网站的情况 利用 margin 居中
-                    if(marginRight === marginLeft && marginRight != 0){
-                        obj.style.left = marginLeft + "px";
-                    }
-                    // 淘宝等网站的情况 利用 text-align 居中
-                    if(obj.style.textAlign === "center"){
-                        obj.style.width = objstyle.width;
-                    }
-
-                    obj.style.position = 'fixed';
-                }
-            }
         } else {
             window.onscroll = function(){
                 return true;
+            };
+        };
+
+        // 固定搜索栏
+        function fixedTopFun(height, color){
+            var obj = document.getElementById("sej-container");
+            var objTop = obj.offsetTop ;
+            var objLeft = obj.offsetLeft ;
+
+            var current = obj.offsetParent;
+            while (current !== null){
+                objLeft += current.offsetLeft;
+                current = current.offsetParent;
+            }
+
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+            if(height){
+                objTop = height;
+            }else{
+                height = 0;
+            }
+
+            if(scrollTop <= objTop){
+                obj.style.cssText = matchedRule.style;
+            }else if(obj.style.position!="fixed"){
+                // console.log("固定到顶端");
+                // console.log(scrollTop,objTop,scrollTop - objTop);
+                var objstyle = window.getComputedStyle(obj , null);
+                var marginTop = parseInt(objstyle.marginTop);
+                var marginLeft = parseInt(objstyle.marginLeft);
+                var marginRight = parseInt(objstyle.marginRight);
+                //console.log(objLeft,marginLeft);
+
+                obj.style.top = height - marginTop + 'px';
+
+                // 如果之前未设置颜色,则默认设置为白色
+                    // 2020-12-19 增加选项,可以通过代码自定义颜色,但是无法通过网站自动获取
+                if(color){
+                    obj.style.background = color;
+                } else if(objstyle.backgroundColor === "rgba(0, 0, 0, 0)" || objstyle.backgroundColor === "transparent"){
+                    obj.style.background = '#fff';
+                }
+                obj.style.left = getElementLeft(obj) - marginLeft + "px";
+                // obj.style.left = getElementLeft(obj) + "px";
+                
+                debug("objLeft: ",objLeft,"marginLeft: ",marginLeft,"marginRight: ",marginRight,"getElementLeft: ",getElementLeft(obj));
+                // 知乎等网站的情况 利用 margin 居中
+                if(marginRight === marginLeft && marginRight != 0){
+                    obj.style.left = marginLeft + "px";
+                }
+                // 淘宝等网站的情况 利用 text-align 居中
+                if(obj.style.textAlign === "center"){
+                    obj.style.width = objstyle.width;
+                }
+                obj.style.position = 'fixed';
+
+                // if(document.querySelectorAll("input[name='sp-ac-a_force_style_baidu']").length !=0){
+                //     console.log("检测到 ac脚本单列居中选项")
+                //     if((document.querySelectorAll("input[name='sp-ac-a_force_style_baidu']")[2].checked)){
+                        // obj.style.display = "none";
+                        // obj.style.transform = "translate(-50%, 0)";
+                        // obj.style.top = "none" ;
+                        // obj.style.position = 'fixed';
+                        // fixedTopFun2(matchedRule.fixedTopTarget,matchedRule.fixedTopWhere);
+                        // return;
+                    // }
+                // }
+            }
+        }
+        function fixedTopFun2(Target,where){
+            var obj = document.getElementById("sej-container");
+            
+            var oTarget = getElement(Target)
+
+            console.log("fixedTopFun2");
+            console.log(Target);
+            console.log(where);
+            
+            switch (where.toLowerCase()) {
+                case 'beforebegin' :    // 'beforeBegin'(插入到给定元素的前面) ;
+                oTarget.parentNode.insertBefore(obj, oTarget);
+                break;
+                case 'afterbegin' :     // 'afterBegin'(作为给定元素的第一个子元素) ;
+                if (oTarget.firstChild) {
+                    oTarget.insertBefore(obj, oTarget.firstChild);
+                } else {
+                        oTarget.appendChild(obj);
+                    };
+                    break;
+                case 'beforeend' :   // 'beforeEnd' (作为给定元素的最后一个子元素) ;
+                oTarget.appendChild(obj);
+                break;
+                case 'afterend' :  // 'afterEnd'(插入到给定元素的后面);.
+                if (oTarget.nextSibling) {
+                    oTarget.parentNode.insertBefore(obj, oTarget.nextSibling);
+                } else {
+                    oTarget.parentNode.appendChild(obj);
+                };
+                break;
             };
         };
 
