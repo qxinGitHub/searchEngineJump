@@ -108,7 +108,7 @@
 // @match          *://*.qcc.com/*
 // @match          *://*.tianyancha.com/*
 // @match          *://www.iciba.com/*
-// @match          *://fsofso.com/*
+// @match          *://fsoufsou.com/*
 // @match          *://*.douyin.com/*
 
 // @grant       GM_getValue
