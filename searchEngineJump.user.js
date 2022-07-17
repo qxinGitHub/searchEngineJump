@@ -108,7 +108,7 @@
 // @match          *://*.qcc.com/*
 // @match          *://*.tianyancha.com/*
 // @match          *://www.iciba.com/*
-// @match          *://fsofso.com/*
+// @match          *://fsoufsou.com/*
 // @match          *://*.douyin.com/*
 
 // @grant       GM_getValue
@@ -446,7 +446,7 @@
             },
             {name: "f搜",
                 enabled: true,
-                url: /^https?:\/\/fsofso\.com\/search/,
+                url: /^https?:\/\/fsoufsou\.com\/search/,
                 engineList: 'web',
                 style: '\
                     margin-left: 50px;\
