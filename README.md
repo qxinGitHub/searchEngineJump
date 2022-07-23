@@ -13,9 +13,14 @@ __说明__
 
 
 本脚本修改自[searchEngineJump modified version from NLF 4.0.5.3](https://greasyfork.org/zh-CN/scripts/18315-searchenginejump-modified-version-from-nlf)
-此类脚本的鼻祖为 NLF 写的 [搜索引擎跳转（searchEngineJump）](http://userscripts.org/scripts/show/84970) , 不过目前该网站已经无法打开， [相关网页快照](http://web.archive.org/web/*/http://userscripts.org/scripts/show/84970)
+此类脚本的鼻祖应该为 NLF 写的 [搜索引擎跳转（searchEngineJump）](http://userscripts.org/scripts/show/84970) , 不过目前该网站已经无法打开， [相关网页快照](http://web.archive.org/web/*/http://userscripts.org/scripts/show/84970)
 
 ### 更新历史
+
+> version 5.24.9  2022-07-23
+- 修复: 列表超过10个无法添加的问题。[感谢HelloWeirdTourist反馈](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/142261)
+- 修复: 调整知网搜索网址。[感谢Holiday2019的帮助](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/116013)
+- 修复: 淘宝页面样式的问题
 
 > version 5.24.8   2022-07-04
 - 修复: 开启"AC-baidu-重定向优化百度搜狗谷歌必应搜索_favicon_双列"脚本的百度lite后,遮挡的问题
