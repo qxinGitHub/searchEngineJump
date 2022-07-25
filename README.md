@@ -16,6 +16,10 @@ __说明__
 此类脚本的鼻祖应该为 NLF 写的 [搜索引擎跳转（searchEngineJump）](http://userscripts.org/scripts/show/84970) , 不过目前该网站已经无法打开， [相关网页快照](http://web.archive.org/web/*/http://userscripts.org/scripts/show/84970)
 
 ### 更新历史
+- 佛系更新, 具体功能以更新历史为准
+
+> version 5.24.10  2022-07-25
+- 修复: 一键搜索无法打开包含site搜索的问题 [[感谢HelloWeirdTourist反馈](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/142314)
 
 > version 5.24.9  2022-07-23
 - 修复: 列表超过10个无法添加的问题。[感谢HelloWeirdTourist反馈](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/142261)

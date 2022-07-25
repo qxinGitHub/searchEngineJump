@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.9
+// @version        5.24.10
 // @created        2011-07-02
-// @lastUpdated    2022-07-23
+// @lastUpdated    2022-07-25
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -3030,12 +3030,13 @@
             // 一键搜索
             if(getSettingData.allOpen && target.classList.contains("sej-drop-list-trigger")){
                 var list = engineList[target.dataset.iqxincategory]
-                console.log("allOpen")
-                console.log(list)
+                // console.log("allOpen")
+                // console.log(list)
+
                 for(var i=0;i<list.length;i++){
-                    if (matchedRule.url.test(list[i].url)) continue ;
+                    if (list[i].url.indexOf("site:")<0 && matchedRule.url.test(list[i].url)) continue ;
                     if (list[i].disable) continue ;
-                    var href = list[i].url.replace('%s', value);
+                    var href = list[i].url.replaceAll('%s', value);
                     GM_openInTab(href)
                 }
                 target.setAttribute("onclick","return false;");
@@ -3084,7 +3085,7 @@
 
             } else{
                 //console.log(value);
-                target.href = target.getAttribute('url').replace('%s', value);
+                target.href = target.getAttribute('url').replaceAll('%s', value);
             }
         };
          //获取  POST 的表单的 HTML
