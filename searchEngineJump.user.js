@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.10
+// @version        5.24.11
 // @created        2011-07-02
-// @lastUpdated    2022-07-25
+// @lastUpdated    2022-07-31
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -108,8 +108,10 @@
 // @match          *://*.qcc.com/*
 // @match          *://*.tianyancha.com/*
 // @match          *://www.iciba.com/*
-// @match          *://fsofso.com/*
+// @match          *://fsoufsou.com/*
 // @match          *://*.douyin.com/*
+// @match          *谷歌.ml/*
+// @match          *xn--flw351e.ml/*
 
 // @grant       GM_getValue
 // @grant       GM_setValue
@@ -135,7 +137,7 @@
                 // 是否启用.
                 enabled: true,
                 // 在哪个网站上加载,正则.
-                url: /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^?]+\?(?!tbm=)(?:&?q=|(?:[^#](?!&tbm=))+?&q=)(?:.(?!&tbm=))*$/,
+                url: /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^?]+\?(?!tbm=)(?:&?q=|(?:[^#](?!&tbm=))+?&q=)(?:.(?!&tbm=))*$|(^https?:\/\/xn--flw351e\.ml\/search\?q=)/,
                 // 加载哪个类型的列表:
                 // ['web'|'music'|'video'|'image'|'download'|'shopping'|'translate'|'knowledge'|'sociality']
                 engineList: 'web',
@@ -446,8 +448,9 @@
             },
             {name: "f搜",
                 enabled: true,
-                url: /^https?:\/\/fsofso\.com\/search/,
+                url: /^https?:\/\/fsoufsou\.com\/search/,
                 engineList: 'web',
+                fixedTop: 111,
                 style: '\
                     margin-left: 50px;\
                     z-index: -99999;\
@@ -5580,19 +5583,24 @@
         // hashchange 和 popstate 都无法检测到谷歌和百度搜索时网址的变化,不理解
     if (window.self != window.top) return;
     // 下面这种方法百度一直报错无法使用,遂用定时器
-    // if (true) {
-    //     console.log('iqxin添加标题节点监视器: title');
+        // 2022-07-31  能用。 可以解决百度页面不刷新,直接显示搜索结果导致样式丢失的问题
+    if (true) {
+        console.log('iqxin添加标题节点监视器: title');
 
-    //     var watch = document.querySelector('title');
-    //     console.log("titile: ",watch);
-    //     console.log("titile: ",document.title);
-    //     new (window.MutationObserver || window.WebKitMutationObserver)(function(mutations){
-    //         console.log('iqxin标题发生了变化', document.title);
-    //         if(!document.querySelector('sejspan')){
-    //          runInPageContext(contentScript);
-    //         }
-    //     }).observe(watch, {childList: true, subtree: true, characterData: true});
-    // }
+        var watch = document.querySelector('title');
+        // console.log("titile: ",watch);
+        // console.log("titile: ",document.title);
+        new (window.MutationObserver || window.WebKitMutationObserver)(function(mutations){
+            console.log('iqxin标题发生了变化', document.title);
+            var sejSpan = document.querySelector('sejspan')
+            if(!sejSpan){
+             iqxinstart();
+            }else{
+                sejSpan.parentNode.removeChild (sejSpan);
+                iqxinstart();
+            }
+        }).observe(watch, {childList: true, subtree: true, characterData: true});
+    }
     // 给谷歌和百度搜索的主页单独加个列表
     var url = window.location.href;
     var hashList = [

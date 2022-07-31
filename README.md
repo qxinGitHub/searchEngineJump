@@ -18,6 +18,11 @@ __说明__
 ### 更新历史
 - 佛系更新, 具体功能以更新历史为准
 
+> version 5.24.11  2022-07-31
+- 修复: 百度页面更换搜索词或者点击下一页导致 样式丢失的问题。大概率是本月初 v5.24.6 更新导致的问题,当时为了兼容“ac百度”删除了关于百度搜索的部分代码。目前不确定是否解决, 具体有问题在反馈
+- 修复: f搜网址的变更 [感谢ZZH-qwq反馈](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump-%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%BF%AB%E6%8D%B7%E8%B7%B3%E8%BD%AC/discussions/119203)
+- 增加: 支持谷歌镜像网站的跳转,谷歌.ml  xn--flw351e.ml  [感谢nvfddbgfh意见](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump-%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%BF%AB%E6%8D%B7%E8%B7%B3%E8%BD%AC/discussions/64397#comment-310585)
+
 > version 5.24.10  2022-07-25
 - 修复: 一键搜索无法打开包含site搜索的问题 [[感谢HelloWeirdTourist反馈](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump/discussions/142314)
 
