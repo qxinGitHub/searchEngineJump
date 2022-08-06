@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.11
+// @version        5.24.12
 // @created        2011-07-02
 // @lastUpdated    2022-07-31
 
@@ -432,7 +432,7 @@
             },
             {name: "ecosia",
                 enabled: true,
-                url:/^https?:\/\/www\.ecosia\.org\/search\?q/i,
+                url:/^https?:\/\/www\.ecosia\.org\/search\?/i,
                 engineList: 'web',
                 style: '\
                     margin-left: -10px;\
@@ -5642,8 +5642,15 @@
             }
         },1000)
     } else if (delayListTag){
-        // console.log("延时运行");
-        setTimeout(function(){iqxinstart();},2000);
+        setTimeout(function(){
+            // console.log("延时运行");
+            var sejSpan = document.querySelector('sejspan');
+            if(sejSpan){
+                return;
+               } else{
+                   iqxinstart();
+               }
+        },2000);
     } else {
         // console.log("普通插入");
         iqxinstart();
