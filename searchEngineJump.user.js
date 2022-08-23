@@ -3,14 +3,15 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.12
+// @version        5.24.13
 // @created        2011-07-02
-// @lastUpdated    2022-07-31
+// @lastUpdated    2022-08-23
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
 // @require        https://greasyfork.org/scripts/408009-togbk/code/toGBK.js?version=832799
 // @icon           data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFSElEQVR4nMWXX4hdVxXGf2vfe89kJg61ia0DYzMTMWnoQ0FJtKmtJsFixT8DBSmYtGMLgq0PCqMEKwmxYzSGyUPBB7XRNi0FC6JtwYovgcS0klJD8SHakoExYhLQFkwn9/aeOfv7fDi3SStJ5o4muN4O7L32b33rz94H/s8WS10cvR3yVQaY++wnkESkwDK2sMy1EwXDtzRRziBhu+dGDG48smSA5kUP//wmAFIkrNwiGMOsBzYAQwTzEEeBY8BJO1fYtF+4laGPv/i/Afz1C1sAYwngZiKmsDcDI0DrHUtL4DRwMGAmUnVcCtpHPsrQbS/1DZDe+VFHblKziIjYBjwD3Iu5ARBwBjgJnAkwMAa+z+ZZqXEX8VZg0T784aUDzH3uk0DtVQvlVsMjwGpMB3gauAu8ieB2YDPwxR5gF/gQ+MeoNUFzACI4d+imvgDOp0BVRWo2AW62eRi8wvY/wNtrgGhDL+7a/gIcBLYBu4HrsPdSzr8K/JlcLk2BaCQstSxN2VptuYO93an7WES0UyORGg1Wfu0QKivyQhfb56yhn4B3Ynew1kD1oDTfJF20vi8NYBvjMVubbWHrOdtPhwaAYPVvfs8Hf1u32bJbDtXVbgFvAj4AOgTGzhPhGMdV/wCvbtmAJSyttzRiuWv7CdttAlY/f/iimwdvfQGiAfmtczg/jnOJ8/txtRbnvgAu6FSPtg1AC3wGPAvgWGRYqiSowLwC1Ru4GoFyFPc3ZM8DfGPLB1jZXlhe74sS6AAc+O6vL+tg6LaX2LP/SSA6tkpcYeee36/0D/C7Ve9BwZs97iLMEMDAE5N07z1wSQebvl/y3KkAGDIUsrHpRp8ACeDGw38kZdPMPtrILhvZ1yZ5TZJxvnwuW40GzSSaDa1vJq1oJXVbKZ9qpv5qoO6Cqr5ULB+zfNrygOX7LS+PlCgeu+eimz/1w0yWaTTScIqYTEERcDoiXovFauddAAA22CeRDyKD/Bnkbd32PNgUj09S/GwrUMt+x14hiWVFI1LEVyPidggi4hfOnuv3nr8AEGC5sj1j+4TtAcu7i4HlDwLLqRawMmtmnidn6JYLGIa7C/mbwHeAgYATQexPjVCVxcZd7SUACDCEfRyznXoMr8Sawf4lcDdwI7AKWAdss/0r2dOyr6kFpCn7hiyPRlDY5mM7z10W4F1KFT+/p6ZwDkgT2HuN19Tz3yXWG+NnJ8uR9h0FSStSRAFBwAmbpu3xbP/T9rzkp2zvtt2RzcvfG15EAaC8/8m6FkgmpWdsTyD/COtv9esnj1haZXvEtiXP2d5jc6es+3qHv8/2uO1v2d4hedA2H/n2vxZX4LwS+78E1PcDqprAOPZao9Gxs5PNkc6dXUKnIuI1Z8+lRijLo8AR2+OWqeeBS8n7bE8bd2x4Zc97FwcAaP307vqyiXi7QzBi7OyXGel8GkJEBAFUWUREIXlnL/LCvgBheZ9h2lLHyvxp5rrFAZZiG3e16zliBm3vsD0lu6i5ja0awppWrjrKmeOPjAL/UQP/rf1h11BPJHckT/dkL+vDjeXC0pRy3qGcB22x9oHZKwcAcPTh5UimzrWnexGXlrCFlAvlakq5eiiX3eLtSXnFAABe3j1c/0PgTp1z77NUKmesjHMulKuttq9X/eq+sgAAx35wTZ0OqWNrWqr2KVelqoqcF3DOL1r5dStfHQCoW03K9ApuWrnam/PCnHN+StZDRHSK1jLgCnXBpeymr/8dS+SFbmH7eiu/TkQnNRrkqmL20XVXFwBg7QOzRASSsDJFaxndssPso+uu9tH92b8BowSyPc/iZtEAAAAASUVORK5CYII=
+// @license        MIT
 
 // @match          *://*.163.com/*
 // @match          *://*.1688.com/*
@@ -25,6 +26,7 @@
 // @match          *://*.bbc.co.uk/*
 // @match          *://*.bilibili.com/*
 // @match          *://*.bing.com/*
+// @match          *://*.brave.com/*
 // @match          *://*.caniuse.com/*
 // @match          *://*.cnki.net/*
 // @match          *://*.cnn.com/*
@@ -62,6 +64,7 @@
 // @match          *://*.moegirl.org/*
 // @match          *://*.mozilla.org/*
 // @match          *://*.nicovideo.jp/*
+// @match          *://*.neeva.com/*
 // @match          *://*.nyaa.si/*
 // @match          *://*.pinterest.com/*
 // @match          *://*.pixiv.net/*
@@ -97,6 +100,7 @@
 // @match          *://*.xiaoso.net/*
 // @include        *://*.yahoo.tld/*
 // @match          *://*.yandex.com/*
+// @match          *://*.yandex.ru/*
 // @match          *://*.yhd.com/*
 // @match          *://*.yinyuetai.com/*
 // @match          *://*.youdao.com/*
@@ -142,10 +146,10 @@
                 // ['web'|'music'|'video'|'image'|'download'|'shopping'|'translate'|'knowledge'|'sociality']
                 engineList: 'web',
                 // 若固定到顶栏,是否给一个高度
+                class: "s6JM6d",  // 添加一个class, 用来使用目标网站的样式
                 fixedTop: 52,
                 // 给引擎列表的样式 （“style_ACBaidu” 可选,是为了兼容 “AC Baidu” 脚本）
                 style: '\
-                    margin-left: 170px;\
                     z-index: 100;\
                     margin-top:5px;\
                 ',
@@ -181,7 +185,7 @@
                 url: /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^#]*#(?:&?q=|.+?&q=).+/,
                 engineList: 'web',
                 style: '\
-                    margin-left: 138px;\
+                    margin-left: 142px;\
                     z-index: 100;\
                     margin-top:5px;\
                 ',
@@ -212,7 +216,7 @@
                     margin-top:8px;\
                     margin-bottom: -5px;\
                     z-index: 101;\
-                    margin-left: 134px;\
+                    margin-left: 144px;\
                 ',
                 style_ACBaidu: '\
                     margin-top: 8px;\
@@ -350,13 +354,13 @@
                 stylish:"#float_uphint{display:none;}",
             },
             {name:"yandex",
-                url:/^https?:\/\/yandex\.com\/search/i,
+                url:/^https?:\/\/yandex\.(?:com|ru)\/search/i,
                 engineList:"web",
                 enabled:true,
                 fixedTop:56,
                 style:"\
                     margin-top:10px;\
-                    padding-left:110px;\
+                    padding-left:130px;\
                 ",
                 insertIntoDoc:{
                     keyword:'css;.input__control',
@@ -470,6 +474,36 @@
                     where: 'beforeEnd',
                 },
                 stylish: '.tabs-bottom-border{transform: translate(0, 32px); !important}'
+            },
+            {name: "brave",
+                enabled: true,
+                // https://search.brave.com/search?q=0
+                url:/^https?:\/\/search\.brave\.com\/search\?/i,
+                engineList: 'web',
+                class: "container-80",
+                style: '\
+                    z-index:1;\
+                ',
+                insertIntoDoc: {
+                    target: 'css;#search-main',
+                    keyword: '//input[@name="q"]',
+                    where: 'beforeBegin',
+                },
+            },
+            {name: "neeva",
+                enabled: true,
+                // https://neeva.com/search?q=0
+                url:/^https?:\/\/neeva\.com\/search\?/i,
+                engineList: 'web',
+                fixedTop: 80,
+                style: '\
+                    z-index:1;\
+                ',
+                insertIntoDoc: {
+                    target: 'css;#search header',
+                    keyword: '//input[@name="q"]',
+                    where: 'afterEnd',
+                },
             },
 
             // 知识
@@ -780,10 +814,11 @@
                 engineList: "video",
                 fixedTop:56,
                 style: "\
-                    z-index:0;\
+                    z-index:9;\
                     margin-top: 62px;\
                     margin-bottom: -80px;\
                     text-align: center;\
+                    backgroud:#fff;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;input#search',
@@ -2625,6 +2660,7 @@
                     "(baiduOffset: 在百度页面鼠标划过的菜单会出现位移,若有使用其他的style样式,可以修改这个来修复二级菜单的偏移)..." +
                     "(getIcon: 自己添加搜索后获取图标的方式。0为自动，能连接谷歌的情况下用谷歌获取，无法连接的情况下，域名加favicon.ico获取；1为域名加favicon获取，2为使用谷歌获取，3为使用dnspot的服务获取(不建议使用)。或者添加网址，关键字使用%s代替，未测试)..." +
                     "(allOpen:一键搜索，点击相关分类后，打开该分类下的所有搜索)..." +
+                    "(HideTheSameLink:隐藏同站链接。默认开启,百度页面会隐藏百度搜索。如果想在同一个搜索网站,但是想通过不同语言来搜索, 可以选择false来实现)..." +
                     "(center:是否居中显示，主要是为了兼容脚本 ac 百度  ： 0 不居中，强制在左。 1, 强制居中 。 2,自动判断)..." +
                     "(icon: 图标的显示方式, true显示抽象图标,false显示网站图标。当脚本中不存在抽象图标时,显示网站图标)..." +
                     "(transtion: 是否有动画效果, true为开启所有动画效果,false关闭所有动画(包括模糊效果)。)" +
@@ -2645,6 +2681,7 @@
             "baiduOffset":-120,
             "getIcon":0,
             "allOpen":false,
+            "HideTheSameLink":true,
             "center":2,
             "icon":false,
             "transtion":true,
@@ -3164,7 +3201,7 @@
                     display: block;
                     position: relative;
                     z-index: 2;
-                    padding: 1px 5px 1px 5px;
+                    // padding: 1px 5px 1px 5px;
                     line-height: 1.5;
                     font-size: 13px;
                     font-family: arial,sans-serif;
@@ -3175,7 +3212,9 @@
                     color: #333;
                     //transition:0.3s;
                 }
-
+                #sej-container a{
+                    border-radius:2px;
+                }
                 #sej-expanded-category {
                     font-weight: bold;
                 }
@@ -3234,6 +3273,7 @@
                     padding-top: 4px;
                     padding-bottom: 4px;
                     top: 0px;
+                    border-radius:4px;
                 }
 
                 .sej-engine-icon {
@@ -3445,6 +3485,11 @@
         var container = document.createElement('sejspan');
         container.id = 'sej-container';
         container.className = "rwl-exempt";
+
+        // 添加 class 以获取目标网站相同的样式。
+        if(matchedRule.class){
+            container.className = container.className + " " + matchedRule.class;
+        }
         
         container.addEventListener('mousedown', mousedownhandler, true);
         
@@ -3466,8 +3511,10 @@
                     siteMark = /([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}/.test(siteURL);
                     // console.log(/([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}/.test(siteURL),siteURL);
                 }
+                console.log(matchedRule.url,engineUrl)
+                console.log(matchedRule.url.test(engineUrl))
+                if (getSettingData.HideTheSameLink && !siteMark && matchedRule.url.test(engineUrl)) return;// 去掉跳转到当前引擎的引擎
 
-                if (!siteMark && matchedRule.url.test(engineUrl)) return;// 去掉跳转到当前引擎的引擎
                 if(engine.disable) return;
                 var a = aPattern.replace('$encoding$', (engine.encoding || 'utf-8').toLowerCase())
                     .replace('$url$', engineUrl)
@@ -3894,6 +3941,7 @@
                 var transition_checked = getSettingData.transtion?"checked":"";
                 var foldlist_checked = getSettingData.foldlist?"checked":"";
                 var allOpen_checked = getSettingData.allOpen?"checked":"";
+                var HideTheSameLink_checked = getSettingData.HideTheSameLink?"checked":"";
 
                 // var setBtnOpacity_value = getSettingData.setBtnOpacity;
                 var btnStr2 = "<div>" +
@@ -3925,7 +3973,12 @@
                                     fixedTopUpward_checked +
                                 " style='vertical-align:middle;'></label>" +
                             "</span>" +
-                            "<span id='xin-setBtnOpacity' title='设置按钮透明度'>设置按钮透明度 <input type='range' step='0.01'  min='0' max='1' value='"+ (getSettingData.setBtnOpacity<0?-getSettingData.setBtnOpacity:getSettingData.setBtnOpacity) +"' id='setBtnOpacityRange'><i style='display:inline-block;width:3em;text-align:center;' class='iqxin-setBtnOpacityRangeValue' title='按钮 显示/隐藏(非透明)),请确定知道自己如何再次打开; 火狐非高级玩家建议别禁用'></i></span>" +
+                            "<span id='xin-HideTheSameLink' title='隐藏同站链接,如果想在同一个搜索网站,但是想通过不同语言来搜索, 可以取消该选项'>" +
+                                "<label>隐藏同站链接<input id='iqxin-HideTheSameLink' type='checkbox' name='' " +
+                                    HideTheSameLink_checked +
+                                " style='vertical-align:middle;'></label>" +
+                            "</span>" +
+                            "<span id='xin-setBtnOpacity' title='设置按钮透明度'>设置按钮透明度 <input type='range' step='0.05'  min='0' max='1' value='"+ (getSettingData.setBtnOpacity<0?-getSettingData.setBtnOpacity:getSettingData.setBtnOpacity) +"' id='setBtnOpacityRange'><i style='display:inline-block;width:3em;text-align:center;' class='iqxin-setBtnOpacityRangeValue' title='按钮 显示/隐藏(非透明)),请确定知道自己如何再次打开; 火狐非高级玩家建议别禁用'></i></span>" +
 
                             "</div>" ;
                             // "<div><span>test</span></div>";
@@ -5038,6 +5091,7 @@
                 getData.allOpen = document.querySelector("#iqxin-allOpen-item").checked;
                 getData.fixedTopUpward = document.querySelector("#iqxin-fixedTopUpward-item").checked;
                 getData.transtion = document.querySelector("#iqxin-transtion").checked;
+                getData.HideTheSameLink = document.querySelector("#iqxin-HideTheSameLink").checked;
                 getData.engineDetails = engineDetails;
                 getData.engineList = obj;
 
@@ -5107,6 +5161,11 @@
                         "margin:4px 0;" +
                         "line-height:1.7;" +
                         "border-radius:4px;" +
+                    "}" +
+                    "#settingLayerMask .iqxin-set-edit," +
+                    "#settingLayerMask .iqxin-set-del{" +
+                        "border-radius:4px;" +
+                        "line-height: 1em;" +
                     "}" +
                     ".sejtitle:not([data-xin^='-']):hover{" +
                     "background:#cff9ff;" +
@@ -5204,7 +5263,7 @@
                         "display: inline-block;" +
                         "text-align: center;" +
                         "vertical-align: middle;" +
-                        "line-height: 18px!important;" +
+                        "line-height: 10px!important;" +
                         "margin: 0 5px 5px 5px!important;" +
                         "position: relative;" +
                     "}" +
@@ -5228,7 +5287,7 @@
                         "height: 12px;" +
                         "border: 1px solid #63d4d8;" +
                         "color: #fff;" +
-                        "font-size: 17px;" +
+                        "font-size: 10px;" +
                     "}" +
                     ".drop-over{" +
                         "opacity: 0.6;" +
@@ -5393,6 +5452,7 @@
                     "}" +
                     "#xin-close::before{" +
                         "content:'\\2716';" +
+                        "margin:-10px;" +
                     "}" +
                     "#xin-close:hover{" +
                         "background: indianred;" +
@@ -5615,6 +5675,7 @@
         /^https?:\/\/google\.infinitynewtab\.com\/\?q/,
         /^https?:\/\/www\.zhihu\.com\/search\?/,
         /^https?:\/\/www\.iciba\.com\/word\?/,
+        /^https?:\/\/neeva\.com\/search\?/i,
     ]
 
     var hashListTag = hashList.some(function hashUrl(element, index, array){
