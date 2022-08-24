@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.13
+// @version        5.24.14
 // @created        2011-07-02
-// @lastUpdated    2022-08-23
+// @lastUpdated    2022-08-24
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -145,14 +145,18 @@
                 // 加载哪个类型的列表:
                 // ['web'|'music'|'video'|'image'|'download'|'shopping'|'translate'|'knowledge'|'sociality']
                 engineList: 'web',
+                // 添加一个class, 用来使用目标网站的样式
+                class: "s6JM6d",  
                 // 若固定到顶栏,是否给一个高度
-                class: "s6JM6d",  // 添加一个class, 用来使用目标网站的样式
                 fixedTop: 52,
-                // 给引擎列表的样式 （“style_ACBaidu” 可选,是为了兼容 “AC Baidu” 脚本）
+                // 固定到顶栏, 兼容ac百度用
+                // fixedTop2:88,
+                //  给引擎列表的样式 
                 style: '\
                     z-index: 100;\
                     margin-top:5px;\
-                ',
+                    ',
+                // 给引擎列表的样式 （“style_ACBaidu” 可选,是为了兼容 “AC Baidu” 脚本）
                 style_ACBaidu: '\
                     text-align: center;\
                     z-index: 100;\
@@ -357,16 +361,17 @@
                 url:/^https?:\/\/yandex\.(?:com|ru)\/search/i,
                 engineList:"web",
                 enabled:true,
-                fixedTop:56,
+                fixedTop:96,
+                class:"main__center",
                 style:"\
-                    margin-top:10px;\
-                    padding-left:130px;\
+                    padding-top:40px;\
                 ",
                 insertIntoDoc:{
                     keyword:'css;.input__control',
                     target:'css;.navigation',
-                    where:'beforeBegin',
+                    where:'afterEnd',
                 },
+                stylish:".main .main__center{padding-top:0px}"
             },
             {name: "google网页分类搜索",
                 enabled: true,
@@ -983,7 +988,7 @@
                 url: /^https?:\/\/image\.baidu\.com\/search/i,
                 enabled: true,
                 engineList: "image",
-                fixedTop:95,  //关闭关联联想的情况下
+                fixedTop:70,  //关闭关联联想的情况下
                 // fixedTop:135,  // 
                 style: '\
                     margin-left:127px;\
@@ -998,7 +1003,7 @@
                 url: /^https?:\/\/\w{2,10}\.google(?:\.\D{1,3}){1,2}\/[^?]+\?.*&tbm=isch/i,
                 enabled: true,
                 engineList: "image",
-                fixedTop:54,
+                fixedTop:52,
                 style: '\
                     margin-left:136px;\
                     padding: 10px 5px 1px 22px;\
@@ -1015,7 +1020,6 @@
                 url: /^https?:\/\/.*\.bing\.com\/images\/search/i,
                 enabled: true,
                 engineList: "image",
-                fixedTop: 62,
                 style: '\
                     padding-left:90px;\
                     margin-top:-6px;\
@@ -1176,13 +1180,12 @@
                 enabled: true,
                 engineList: "translate",
                 style: '\
-                    padding-left:1px;\
-                    margin:-1px 0 0 20px;\
+                    margin:10px 0px 0px 0px;\
                 ',
                 insertIntoDoc: {
-                    keyword: 'css;#source',
-                    target: 'css;#gba',
-                    where: 'afterEnd',
+                    keyword: 'css;.D5aOJc ',
+                    target: 'css;.MOkH4e ',
+                    where: 'afterBegin',
                 },
             },
             {name: "百度翻译",
@@ -1190,25 +1193,24 @@
                 enabled: true,
                 engineList: "translate",
                 style: '\
-                    padding-left:1px;\
-                    margin:0px auto;\
-                    width:1220px;\
+                    margin: -20px 0 10px 0;\
                 ',
                 insertIntoDoc: {
                     keyword: function(){
                         return document.querySelector("#baidu_translate_input").value;
                     },
-                    target: 'css;.header',
-                    where: 'afterEnd',
+                    target: 'css;.inner',
+                    where: 'afterBegin',
                 },
             },
-            {name: "必应翻译",
+            {name: "必应词典",
                 url: /^https?:\/\/.*\.bing\.com\/dict\/search\?q\=/i,
                 enabled: true,
                 engineList: "translate",
                 style: '\
-                    padding-left:110px;\
-                    margin-top:-0px;\
+                    padding-left:15px;\
+                    margin-top:6px;\
+                    margin-left: 148px;\
                 ',
                 insertIntoDoc: {
                     keyword: 'css;#sb_form_q',
@@ -1287,7 +1289,8 @@
                 enabled: true,
                 engineList: "shopping",
                 style: "\
-                    margin:10px auto -10px;\
+                    margin:0px 0 -10px 0px;\
+                    padding-left:35px;\
                     text-align: center;\
                     z-index: 99;\
                 ",
@@ -1303,8 +1306,8 @@
                            }
                         }
                     },
-                    target: 'css;#main',
-                    where: 'beforeBegin',
+                    target: 'css;.header-wraper',
+                    where: 'afterEnd',
                 },
             },
             {name: "天猫超市搜索",
@@ -1345,14 +1348,10 @@
                 url: /^https?:\/\/search\.jd\.com\/Search/,
                 enabled: true,
                 engineList: "shopping",
-                style: "\
-                    margin: 10px auto -10px;\
-                    text-align: center;\
-                ",
                 insertIntoDoc: {
                     keyword: 'css;#key',
-                    target: 'css;#header-2013',
-                    where: 'beforeBegin',
+                    target: 'css;#search-2014',
+                    where: 'beforeEnd',
                 },
             },
             {name: "苏宁",
@@ -1393,6 +1392,7 @@
                 fixedTop:40,
                 style: "\
                     text-align: center;\
+                    margin: -15px 0 10px 0;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#J_search_input',
@@ -1736,7 +1736,8 @@
                     if (input) return input.value;
                 },
                    where: 'beforeEnd',
-               }
+               },
+               stylish:".J122YuOM{padding-top:14px}",
             },
             //  用户补充: kidzgy
             //  https://greasyfork.org/zh-CN/scripts/27752/discussions/90497
@@ -2116,7 +2117,7 @@
             blank:true,
         };
         engineList.translate[3] = {
-            name: '必应翻译',
+            name: '必应词典',
             url: 'http://cn.bing.com/dict/search?q=%s',
             favicon: icon.bing
         };
@@ -2419,55 +2420,6 @@
         };
 
 
-        // 福利列表
-        var engineList_fuli = [];
-        engineList_fuli[0] = {
-            "status":3,
-            "version":1,
-            "message":"福利列表，默认隐藏，",
-            "name":"福利",
-            "engineDetails":['福利',"iqxin_fuli",true],
-            "engineList":[
-                {
-                    name: 'JAVlibrary',
-                    url: 'http://www.javlibrary.com/cn/vl_searchbyid.php?keyword=%s',
-                    favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAAAIAA3AQAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAP5JREFUeJylkzFKBDEUhr+3SQZdF8vFxmobwT2AtXgHCzsbQbyANuJVbLyAnR7BTlFBrGwUsRBcGdckz2JFd5zMzA7+Vf6Q9+XPSyIfc2fKP9RJznYNZncZpBkgpQQC2fvGjx3Pn7dLIP2seds6gD6N0YccgHj63AiwpQSrPbCC374injy2BHQN7mJtMnbp/v5VYZXZXPo1ruIKsg6yspAGYKeKTBpgj4fo7WgGQEUAffksllQC+g73uk7YukRHAfGKRiXs3dQApurtwYBwdI8Me4gAi5a4f1c+UjroROZwUPAhASj2II/w5iEP4PXbB/zOdeWTLv+FlprttdToC7F9R7urpLwHAAAAAElFTkSuQmCC',
-                    blank:true
-                },
-                {
-                    name: 'javbus',
-                    url: 'https://www.javbus.com/search/%s',
-                    favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAAAAMxWAADM2wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzNsAAMxWAADM2wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM2wAAzP8AAMz/AADM/wAAzP8AAMz/AADL/wAAzP8BAcz/AADL/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/BATN/0VF2v+Jief/kZHp/15e3/8PD8//AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADL/0hI2v/q6vv//Pz+//b2/f/6+v7/iIjn/wUFzf8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wEBzP+YmOr//////4uL6P9LS9v/4eH5/9zc+P8dHdL/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8CAsz/Skrb/39/5v8oKNT/DAzO/7+/8v/t7fv/Li7V/wAAy/8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAy/8AAMz/AADM/w0Nz/++vvL/7e38/zAw1v8AAMv/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8NDc//vr7y/+3t+/8wMNb/AADL/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/DQ3P/76+8v/t7fv/MDDW/wAAy/8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/w0Nz/++vvL/7e37/zAw1v8AAMv/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8NDc//urrx/+jo+v8vL9X/AADL/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/BATN/0BA2f9QUNz/EBDP/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMv/AADL/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzNsAAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzNsAAMxWAADM2wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzP8AAMz/AADM/wAAzNsAAMxWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==',
-                    blank:true
-                },
-                {
-                    name: '草榴',
-                    url: 'https://www.google.com/search?q=site:www.t66y.com %s',
-                    // 长
-                    favicon: 'data:image/x-icon;base64,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',
-                    blank:true
-                },
-                {
-                    name: 'sukebei',
-                    url: 'https://sukebei.nyaa.si/?f=0&c=0_0&q=%s',
-                    favicon: 'data:image/png;base64,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',
-                    blank:true
-                },
-                {
-                    name: 'jable',
-                    url: 'https://jable.tv/search/%s',
-                    favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAmklEQVQ4jWP4m9xX9y+p9+e/pL7/pOHen3+T++oYyNMMxz8ZKND8/19S33/CBmRM+v9v3dH//5qWkmlA/vT///////9v8d5RAxbvoacByf0IdvcaiAEzt5FgwPxd//89efP/351n////+v3//5uP///lTCXBgKKZkEDbcOz/vwW7///LnUZBSiSAKcxMvT8ZyM/OfT//J/fVAQB8gvyNVegtUAAAAABJRU5ErkJggg==',
-                    blank:true
-                },
-                {
-                    name: 'PornHub',
-                    url: 'https://cn.pornhub.com/video/search?search=%s',
-                    favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAABorAAACAwAAwP8AAG+5AAA0VgAAUYkAAInkAAA/aQAAMFEAAJf/AABZlAAAmv8AAGSnAAAaLAAAERwAAKP/AABHZAAABAcAAC0xAACp/wAArP8AALL/AABDcAAAbowAAI/uAAAKEAAAht4AALv/AAAtSwAAiOEAAI3sAACV/wAAmP8AAJv/AAABAQAAnv8AAHrHAABlpwAA//8AAND/AACh/wAAiOIAAC9PAABqsgAApP8AAEVkAABJegAAp/8AADFSAACq/wAAGSoAAAECAACt/wAAM1UAAIjjAAA+aAAAfcgAALb/AAAdMAAAT4MAADpjAABAawAAuf8AAAsQAAC//wAAAAYAAML/AAADBgAACQ4AAMX/AACW/wAAmf8AADdcAACc/wAAn/8AABAcAABRhwAAov8AAIXdAADX/wAAqP8AAKv/AACQ8AAAWI0AAC5NAACx/wAAIEMAALT/AACF3gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISAxISEhISCIiSEgMIkhICkpWLSBIIUg1MEcgEDUiCk4ZCAQUSCQiMTwUNQ0xHxBSTwAvQ0sQSgAzWBw4AFkyUSoABjpOPykANihQCwA3UVEHAjRCRVQyD0wuETs0B1FRNyNVGAkAJh0CGkASAgdRUR4ALCdOAD0BVUFGTQA3UVIbAEQTAAA5AA4/Az4AWTJOUxcFV0klNSs8FDUNMR8QCkoWFhZYNSEVMEcgEDUiCkhIDAwMSEhIIiJISAwiSEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
-                    blank:true
-                },
-            ]
-        }
-
         // 导入列表
         var engineList_plus = [];
         engineList_plus[0] = {
@@ -2649,11 +2601,10 @@
                     "(version: 若有新功能加入,靠这个版本号识别)..." +
                     "(addSearchItems: 允许更新时,添加新的搜索网站到你的搜索列表)..." +
                     "(modifySearchItems: 允许更新时,修改你的搜索列表中的项目)..." +
-                    "(connectToTheServer: 允许连接到我的服务器(更新列表,将图标转换为base64等),将来更新使用或永不使用)..." +
                     "(closeBtn: 设置页面右上角的“关闭”按钮是否显示。true显示,false隐藏)..." +
                     "(newtab: 新标签页打开。0为默认设置,1为新标签页打开)..." +
                     "(foldlist: 折叠当前搜索分类列表。true为折叠,false为展开。)..." +
-                    "(settingOpacity: 设置按钮的透明度,值为0-1之间的数,0为透明,1为完全显示,中间值半透明。注：-1为直接关闭按钮,关闭之前请确定自己知道如何再次打开它)..." +
+                    "(setBtnOpacity: 设置按钮的透明度,值为0-1之间的数,0为透明,1为完全显示,中间值半透明。注：-1为直接关闭按钮,关闭之前请确定自己知道如何再次打开它)..." +
                     "(debug: debug模式,开启后,控制台会输出一些信息,“关闭并保存”按钮将不会在刷新页面)..." +
                     "(fixedTop: 将搜索栏固定到顶端。 true开启,false关闭)..." +
                     "(fixedTopUpward: 固定顶端后，搜索栏下拉不会出现，只有上拉时才出现。 true开启,false关闭)..." +
@@ -2662,15 +2613,14 @@
                     "(allOpen:一键搜索，点击相关分类后，打开该分类下的所有搜索)..." +
                     "(HideTheSameLink:隐藏同站链接。默认开启,百度页面会隐藏百度搜索。如果想在同一个搜索网站,但是想通过不同语言来搜索, 可以选择false来实现)..." +
                     "(center:是否居中显示，主要是为了兼容脚本 ac 百度  ： 0 不居中，强制在左。 1, 强制居中 。 2,自动判断)..." +
-                    "(icon: 图标的显示方式, true显示抽象图标,false显示网站图标。当脚本中不存在抽象图标时,显示网站图标)..." +
+                    "(icon: 图标的显示方式, 0 关闭文字, 只保留图标, 1 显示网站图标,2 显示抽象图标。当脚本中不存在抽象图标时,显示网站图标)..." +
                     "(transtion: 是否有动画效果, true为开启所有动画效果,false关闭所有动画(包括模糊效果)。)" +
                     "(engineDetails: 第一个值为分类列表标题名称,第二个值与enginelist相关联,必须匹配,第三个值true为显示列表,false为禁用列表。排列顺序与跳转栏上的显示顺序相同，可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 已弃用--将搜索样式插入到目标网页,同脚本中的rules设置相同,优先级高于脚本中自带的规则。自带了360搜索,可仿写)...",
-            "version":4.05,
+            "version":5,
             "addSearchItems":true,
             "modifySearchItems":true,
-            "connectToTheServer":true,
             "closeBtn":true,
             "newtab":0,
             "foldlist":true,
@@ -2683,11 +2633,11 @@
             "allOpen":false,
             "HideTheSameLink":true,
             "center":2,
-            "icon":false,
+            "icon":1,
             "transtion":true,
             "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],["下载","download",false],["新闻","news",false],['mine', 'mine',false]],
             "engineList":{},
-            "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 120px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}}]
+            "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "margin-left: 140px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}}]
         }
         // --------------------可设置项结束------------------------
         // GM_deleteValue("searchEngineJumpData");
@@ -2740,6 +2690,8 @@
                 // if(getSettingData.modifySearchItems){
                 //     getSettingData.engineList.video = modifySearchItemsIcon(getSettingData.engineList.video,"http://search.bilibili.com/all?keyword=%s",engineList.video[1].favicon)
                 // }
+                // v5 更改图标的显示样式
+                getSettingData.icon = 1;
 
                 // 更新本地版本 其他相关信息
                 getSettingData.version = settingData.version;
@@ -3054,6 +3006,10 @@
                 };
             };
 
+            // 如果搜索内容是通过某一网站搜索, 就去掉。 例: 0 site:zhihu.com  只保留0, 后面的网站会去掉
+            value = value.replace(/site[^\s]+/, "");
+
+
             // 编码 解码
                // 对搜索词编码 (未做解码处理，浏览器自动处理) 网站1688采用gbk编码
             var ogbk = target.getAttribute('gbk');
@@ -3229,31 +3185,6 @@
                     font-weight:500;
                     transition: background-color 0.15s ease-in-out;
                 }
-                .sej-drop-list-trigger {
-
-                }
-                .sej-drop-list-trigger-shown {
-                    background-color: #DEEDFF !important;
-                }
-                .sej-drop-list-trigger::after {
-                    content: '';
-                    display: inline-block;
-                    margin: 0 0 0 3px;
-                    padding: 0;
-                    width: 0;
-                    height: 0;
-                    border-top: 6px solid #BCBCBC;
-                    border-right: 5px solid transparent;
-                    border-left: 5px solid transparent;
-                    border-bottom: 0px solid transparent;
-                    vertical-align: middle;
-                    transition: -webkit-transform 0.3s ease-in-out;
-                    transition: transform 0.3s ease-in-out;
-                }
-                .sej-drop-list-trigger-shown::after {
-                    -webkit-transform: rotate(180deg);
-                    transform: rotate(180deg);
-                }
                 .sej-drop-list a:visited,
                 .sej-drop-list a:hover,
                 .sej-engine a:visited,
@@ -3347,6 +3278,39 @@
                             "}" +
                         ""
             )
+        }
+        // 隐藏箭头
+        if(getSettingData.icon){
+            GM_addStyle("" +
+                ".sej-drop-list-trigger-shown {" +
+                    "background-color: #DEEDFF !important;" +
+                "}" +
+                ".sej-drop-list-trigger::after {" +
+                    "content: '';" +
+                    "display: inline-block;" +
+                    "margin: 0 0 0 3px;" +
+                    "padding: 0;" +
+                    "width: 0;" +
+                    "height: 0;" +
+                    "border-top: 6px solid #BCBCBC;" +
+                    "border-right: 5px solid transparent;" +
+                    "border-left: 5px solid transparent;" +
+                    "border-bottom: 0px solid transparent;" +
+                    "vertical-align: middle;" +
+                    "transition: -webkit-transform 0.3s ease-in-out;" +
+                    "transition: transform 0.3s ease-in-out;" +
+                "}" +
+                ".sej-drop-list-trigger-shown::after {" +
+                    "-webkit-transform: rotate(180deg);" +
+                    "transform: rotate(180deg);" +
+                "}" +
+            +"")
+        }else{
+            GM_addStyle("" +
+                ".sej-drop-list-trigger {" +
+                    "margin-right:8px;" +
+                "}" +
+            +"")
         }
 
         // 列表对象
@@ -3502,20 +3466,12 @@
             var engines = [];
 
             engineList[category].forEach(function (engine) {
-                // 检测是否用搜索搜某一网站 site:xxx.xx
-                var engineUrl = engine.url;
-                var siteIndex = engineUrl.lastIndexOf("site");
-                var siteMark = null;
-                if(~siteIndex){
-                    var siteURL = engineUrl.slice(siteIndex);
-                    siteMark = /([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}/.test(siteURL);
-                    // console.log(/([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}/.test(siteURL),siteURL);
-                }
-                console.log(matchedRule.url,engineUrl)
-                console.log(matchedRule.url.test(engineUrl))
-                if (getSettingData.HideTheSameLink && !siteMark && matchedRule.url.test(engineUrl)) return;// 去掉跳转到当前引擎的引擎
-
                 if(engine.disable) return;
+
+                var engineUrl = engine.url;
+
+                if (getSettingData.HideTheSameLink && matchedRule.url.test(engineUrl)) return;// 去掉跳转到当前引擎的引擎
+
                 var a = aPattern.replace('$encoding$', (engine.encoding || 'utf-8').toLowerCase())
                     .replace('$url$', engineUrl)
                     .replace('$name$', engine.name)
@@ -3559,6 +3515,12 @@
                 // dropList: 搜索子菜单
                 var a = dropList.firstElementChild.cloneNode(true);
                 a.className = a.className + ' sej-drop-list-trigger';
+                
+                // 隐藏主搜索菜单的图标
+                if(!getSettingData.icon){
+                    cName = "";
+                }
+
                 a.lastChild.nodeValue = cName;
                 dropLists.push([a, dropList]);
             };
@@ -3573,7 +3535,7 @@
             // console.log(item[0].innerText);  // 网页
             // console.log(item[1]);
 
-            if(getSettingData.icon){
+            if(getSettingData.icon == 2){
                 console.log(icon[item[0].dataset.iqxincategory])
                 if(icon[item[0].dataset.iqxincategory]){
                     item[0].querySelector("img").src = icon[item[0].dataset.iqxincategory]
@@ -3746,6 +3708,8 @@
                     obj.style.width = objstyle.width;
                 }
                 obj.style.position = 'fixed';
+
+                obj.style.padding = "0px 5px 0px 0px";  // 重置padding, 因为用了 fixed 定位, 没必要继续用padding,反而会带来遮挡
 
                 // if(document.querySelectorAll("input[name='sp-ac-a_force_style_baidu']").length !=0){
                 //     console.log("检测到 ac脚本单列居中选项")
@@ -4477,7 +4441,6 @@
                     "<button id='xin-copyCode'>复制</button> &nbsp;&nbsp;&nbsp;" +
                     "<button id='codeboxclose' class='iqxin-closeBtn'>关闭</button> &nbsp;&nbsp;&nbsp;" +
                     "<button id='xin-codeboxsave' class='iqxin-enterBtn'>保存</button>" +
-                    "<button id='xin-fulibtn' class='iqxin-fuliBtn'>福利</button>" +
                 "";
                 // console.log(JSON.stringify(getSettingData,4));
                 // console.log(JSON.stringify(getSettingData,null,4));
@@ -4617,76 +4580,6 @@
                 var btnEle = document.querySelector("#btnEle");
                 btnEle.parentNode.insertBefore(odiv,btnEle);
             },
-            // 添加福利搜索  与上面的函数大量重复，可提出一个共用函数
-            addImportingFuLiEnger:function(e){
-                // console.log(e);
-                // console.log("第几个： ",e.target.getAttribute("xin-importing-id"));
-                // var engineListID = e.target.getAttribute("xin-importing-id");
-                // var engineList_temp = engineList_plus[engineListID];
-                var elist = engineList_fuli[0].engineList;
-
-                var name = engineList_fuli[0].engineDetails[0];
-                var innerName = engineList_fuli[0].engineDetails[1];
-
-                var odiv = document.createElement("div");
-                odiv.id = innerName;
-                odiv.className = "iqxin-items";
-                var innerHTML = "" +
-                    '<div class="sejtitle" data-iqxintitle="' + innerName + '" data-xin="99">' +
-                        '<span class="iqxin-pointer-events">'+ name +'</span>' +
-                        '<span class="iqxin-title-edit" title="编辑 Edit">' +
-                            '<img class="sej-engine-icon" src="' + icon.edit + '">' +
-                        '</span> ' +
-                        '<span class="iqxin-set-title-del iqxin-set-active" title="删除 Delete">' +
-                            '<img class="sej-engine-icon" src="' + icon.del + '">' +
-                        '</span>' +
-                    '</div>' +
-                    '<div class="sejcon">' +
-                    "";
-
-                // 具体列表
-                for(let i=0;i<elist.length;i++){
-                    var a = '<span draggable="true" class="drag">' +
-                                '<span class="sej-engine"' +
-                                ' data-iqxinimg="$img$" ' +
-                                ' data-iqxintitle="$title$" ' +
-                                ' data-iqxinlink="$link$" ' +
-                                ' data-iqxintarget="$blank$" ' +
-                                '><img src="$favicon$" class="sej-engine-icon" />$name$</span>' +
-                                '<span class="iqxin-set-edit" title="编辑 Edit">' +
-                                    '<img class="sej-engine-icon" src="' + icon.edit + '">' +
-                                '</span> ' +
-                                '<span class="iqxin-set-del iqxin-set-active" title="删除 Delete">' +
-                                    '<img class="sej-engine-icon" src="' + icon.del + '">' +
-                                '</span>' +
-                            '</span>';
-
-                    a = a.replace("$img$", elist[i].favicon)
-                        .replace("$title$", elist[i].name)
-                        .replace("$link$", elist[i].url);
-
-                    if (elist[i].blank){
-                        a = a.replace('$blank$', "_blank");
-                    } else {
-                        a = a.replace('data-iqxintarget="$blank$"', '');
-                    };
-
-                    a = a.replace('$name$', elist[i].name)
-                        .replace('$favicon$', elist[i].favicon);
-
-                    innerHTML += a;
-                }
-
-                 innerHTML += "" +
-                    '<span class="iqxin-additem iqxin-set-active">+</span>' +
-                    '</div>' +
-                "";
-
-                odiv.innerHTML = innerHTML;
-
-                var btnEle = document.querySelector("#btnEle");
-                btnEle.parentNode.insertBefore(odiv,btnEle);
-            },
 
             // “设置按钮” 透明度
             setBtnOpacityFun: function(){
@@ -4788,8 +4681,6 @@
                     this.reset();
                 } else if( targetid === "xin-codeboxsave"){
                     this.editCodeBoxSave();
-                } else if( targetid === "xin-fulibtn"){
-                    this.addImportingFuLiEnger();
                 } else if( targetid === "xin-copyCode"){
                     GM_setClipboard(JSON.stringify(getSettingData,false,4));
                     iqxinShowTip("复制成功");
@@ -5424,12 +5315,6 @@
                     "#iqxin-editCodeBox button{" +
                         "cursor:pointer;" +
                     "}" +
-                    ".iqxin-fuliBtn{" +
-                        "border: none;" +
-                        "background: none;" +
-                        "color: #ccc;" +
-                        "margin-left: 30px;" +
-                    "}" +
 
                     // 关闭按钮
                     "#xin-close{" +
@@ -5676,6 +5561,7 @@
         /^https?:\/\/www\.zhihu\.com\/search\?/,
         /^https?:\/\/www\.iciba\.com\/word\?/,
         /^https?:\/\/neeva\.com\/search\?/i,
+        /^https?:\/\/s\.taobao\.com\/search/,
     ]
 
     var hashListTag = hashList.some(function hashUrl(element, index, array){
