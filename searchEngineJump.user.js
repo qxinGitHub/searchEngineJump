@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.14
+// @version        5.24.15
 // @created        2011-07-02
 // @lastUpdated    2022-08-24
 
@@ -155,6 +155,7 @@
                 style: '\
                     z-index: 100;\
                     margin-top:5px;\
+                    margin-bottom:-5px;\
                     ',
                 // 给引擎列表的样式 （“style_ACBaidu” 可选,是为了兼容 “AC Baidu” 脚本）
                 style_ACBaidu: '\
@@ -1289,8 +1290,7 @@
                 enabled: true,
                 engineList: "shopping",
                 style: "\
-                    margin:0px 0 -10px 0px;\
-                    padding-left:35px;\
+                    margin:0px 0 -10px 170px;\
                     text-align: center;\
                     z-index: 99;\
                 ",
@@ -1898,7 +1898,7 @@
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAwElEQVQ4ja2Syw2DQAxEhwvdIHEklENFUIIN5EAftGAjigA6cA58krBZaZMwki+7nqfR7gC7zCLQUKDRBD41moCGAmaRe9mOKUgMrAsayVyzZGBdQGJox9QFmEVgbT9CXs2k9/cEncUgKcEyrQsBs+6W6CwGSMpgozslQDKDxFBr7n28s2rNN8CMg/atDt8ZwNqDtXcM53MvwJfIu3d5glBdCZi3ht2Czfs3skwAa/VzkVirZ5WPJEEzg7Vaq/ynHh0yOLrBLqn3AAAAAElFTkSuQmCC',
         };
         engineList.video[1] = {
-            name: 'youtube',
+            name: 'YouTube',
             url: 'https://www.youtube.com/results?search_query=%s',
             favicon: 'data:image/x-icon;base64,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/gkAAP5yAAD+qwAA/sgAAP7WAAD+4wAA/u0AAP7wAAD+8gAA/vMAAP7zAAD+8gAA/u8AAP7sAAD+4wAA/tYAAP7HAAD+rQEA/XMABfcJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AMAAAwDAAAMAz//xAI+f8QCfh/kAn4P5AJ+A+QCfgPkAn4P5AJ+P+QCPn/EAz//xAMAAAwDAAAMA////AP///wD///8A////AP///wA=',
         };
@@ -3658,6 +3658,7 @@
         // 固定搜索栏
         function fixedTopFun(height, color){
             var obj = document.getElementById("sej-container");
+            if(!obj){return};
             var objTop = obj.offsetTop ;
             var objLeft = obj.offsetLeft ;
 
@@ -5477,12 +5478,6 @@
         // get_data();
     }
 
-    // 从此处开始执行
-    var debug;
-    function reloadDebug(bool) {
-        debug = bool ? console.info.bind(console) : function() {};
-    }
-
     // 消息提示框
         // 目前只是为了给用户一个反馈。 - 成功了么 - 嗯,成功了
     var iqxinTimerGlobalTip = null
@@ -5524,37 +5519,21 @@
         }
     }
 
-    // hash-query  不刷新页面的搜索
-        // hashchange 和 popstate 都无法检测到谷歌和百度搜索时网址的变化,不理解
-    if (window.self != window.top) return;
-    // 下面这种方法百度一直报错无法使用,遂用定时器
-        // 2022-07-31  能用。 可以解决百度页面不刷新,直接显示搜索结果导致样式丢失的问题
-    if (true) {
-        console.log('iqxin添加标题节点监视器: title');
-
-        var watch = document.querySelector('title');
-        // console.log("titile: ",watch);
-        // console.log("titile: ",document.title);
-        new (window.MutationObserver || window.WebKitMutationObserver)(function(mutations){
-            console.log('iqxin标题发生了变化', document.title);
-            var sejSpan = document.querySelector('sejspan')
-            if(!sejSpan){
-             iqxinstart();
-            }else{
-                sejSpan.parentNode.removeChild (sejSpan);
-                iqxinstart();
-            }
-        }).observe(watch, {childList: true, subtree: true, characterData: true});
+    // 从此处开始执行
+    var debug;
+    function reloadDebug(bool) {
+        debug = bool ? console.info.bind(console) : function() {};
     }
-    // 给谷歌和百度搜索的主页单独加个列表
+
+    if (window.self != window.top) return;
+
     var url = window.location.href;
-    var hashList = [
-        /^https?:\/\/www\.baidu\.com\/$/i,
-        /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/$/i,
-        /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^#]*#(?:&?q=|.+?&q=).+/,
-        /^https?:\/\/www\.youtube\.com\/results/,
-        // /^https?:\/\/searx\.me\//i,
-    ];
+    // var hashList = [
+    //     /^https?:\/\/www\.baidu\.com\/$/i,
+    //     /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/$/i,
+    //     /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^#]*#(?:&?q=|.+?&q=).+/,
+    //     // /^https?:\/\/searx\.me\//i,
+    // ];
     // 部分网站或内因或外因的原因加载缓慢，所以推迟插入
     var delayList = [
         /^https?:\/\/google\.infinitynewtab\.com\/\?q/,
@@ -5564,44 +5543,65 @@
         /^https?:\/\/s\.taobao\.com\/search/,
     ]
 
-    var hashListTag = hashList.some(function hashUrl(element, index, array){
-            return ~url.search(element);
-        });
+    // var hashListTag = hashList.some(function hashUrl(element, index, array){
+    //         return ~url.search(element);
+    // });
     var delayListTag = delayList.some(function hashUrl(element, index, array){
-            return ~url.search(element);
-        });
+        return ~url.search(element);
+    });
 
-    if (hashListTag){
-        var oldTitle = document.title;
-        var newTitle = "";
-        var timer = setInterval(function(){
-            // console.log("循环中",newTitle,oldTitle);
-            newTitle = document.title;
-            if (document.querySelector("#appbar") && !document.querySelector("sejspan")){
-                // console.log("new");
-                iqxinstart();
-            } else if (document.querySelector("sejspan")){
-                // console.log("已存在");
-                clearInterval(timer);
-            }else if (oldTitle!=newTitle){
-                // console.log("不存在开始插入");
-                iqxinstart();
-            }
-        },1000)
-    } else if (delayListTag){
+    
+    // if (hashListTag){
+    //     var oldTitle = document.title;
+    //     var newTitle = "";
+    //     var timer = setInterval(function(){
+    //         // console.log("循环中",newTitle,oldTitle);
+    //         newTitle = document.title;
+    //         if (document.querySelector("#appbar") && !document.querySelector("sejspan")){
+    //             // console.log("new");
+    //             iqxinstart();
+    //         } else if (document.querySelector("sejspan")){
+    //             // console.log("已存在");
+    //             clearInterval(timer);
+    //         }else if (oldTitle!=newTitle){
+    //             // console.log("不存在开始插入");
+    //             iqxinstart();
+    //         }
+    //     },1000)
+    // } else 
+    if (delayListTag){
         setTimeout(function(){
             // console.log("延时运行");
             var sejSpan = document.querySelector('sejspan');
             if(sejSpan){
                 return;
-               } else{
+            } else{
                    iqxinstart();
-               }
+                }
         },2000);
     } else {
         // console.log("普通插入");
         iqxinstart();
     }
-
+        
+    if (true) {
+        // console.log('iqxin添加标题节点监视器: title');
+        // 延时添加标题监视器, 应对 youtube
+        setTimeout(function(){
+            var watch = document.querySelector('title');
+            // console.log("titile: ",watch);
+            // console.log("titile: ",document.title);
+            new (window.MutationObserver || window.WebKitMutationObserver)(function(mutations){
+                console.log('iqxin标题发生了变化', document.title);
+                var sejSpan = document.querySelector('sejspan')
+                if(!sejSpan){
+                    iqxinstart();
+                }else{
+                    sejSpan.parentNode.removeChild (sejSpan);
+                    iqxinstart();
+                }
+            }).observe(watch, {childList: true, subtree: true, characterData: true});
+        },1000)
+    }
 })();
 
