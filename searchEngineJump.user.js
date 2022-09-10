@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.17
+// @version        5.24.18
 // @created        2011-07-02
 // @lastUpdated    2022-09-10
 
@@ -3013,7 +3013,9 @@
             };
 
             // 如果搜索内容是通过某一网站搜索, 就去掉。 例: 0 site:zhihu.com  只保留0, 后面的网站会去掉
-            // value = value.replace(/site[^\s]+/, "");
+            if(!getSettingData.HideTheSameLink){
+                value = value.replace(/site[^\s]+/, "");
+            }
 
 
             // 编码 解码
