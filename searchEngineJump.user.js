@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.24.18
+// @version        5.24.19
 // @created        2011-07-02
-// @lastUpdated    2022-09-10
+// @lastUpdated    2022-09-28
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -61,6 +61,7 @@
 // @match          *://*.letv.com/*
 // @match          *://*.mebook.cc/*
 // @match          *://*.microsoft.com/*
+// @match          *://*.manmanbuy.com/*
 // @match          *://*.moegirl.org/*
 // @match          *://*.mozilla.org/*
 // @match          *://*.nicovideo.jp/*
@@ -1434,6 +1435,20 @@
                  keyword: '//input[@name="keywords"]',
                  target: 'css;.header-container',
                  where: 'afterEnd',
+                },
+            },
+            {name: "慢慢买",
+            // http://ss.manmanbuy.com/Default.aspx?key=%s
+             url: /^https?:\/\/ss\.manmanbuy\.com\/Default\.aspx\?key/i,
+             enabled: true,
+             engineList: "shopping",
+             style: "\
+                 text-align:center;\
+             ",
+             insertIntoDoc: {
+                 keyword: '//input[@name="key"]',
+                 target: 'css;#resultcomment',
+                 where: 'beforeBegin',
                 },
             },
 
