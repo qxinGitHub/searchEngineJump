@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.25.0
+// @version        5.25.1
 // @created        2011-07-02
 // @lastUpdated    2022-09-28
 
@@ -1743,13 +1743,13 @@
                 url:/^https?:\/\/www\.douyin\.com\/search/,
                 engineList:"web",
                 enabled:true,
-                fixedTop:116,
+                fixedTop:175,
                 fixedTopColor:"rgb(22 23 34)",
                 style:'\
-                    margin:-10px 0 0 -10px;\
+                    margin:-10px 0 0 -6px;\
                     z-index:99999;\
                    ',
-               insertIntoDoc: {
+                insertIntoDoc: {
                    target: 'css;.CHUUyANc',
                    // keyword: '//input[@name="search"]',
                    keyword: function () {
@@ -1757,8 +1757,20 @@
                     if (input) return input.value;
                 },
                    where: 'beforeEnd',
-               },
-               stylish:".J122YuOM{padding-top:14px}",
+                },
+                stylish:`.J122YuOM{padding-top:14px}
+                    body {
+                        --font-color-qxin:#ccc;
+                        --background-color-qxin: #161722;
+                        --background-avtive-color-qxin: #424242;
+                        --background-active-enable-qxin:#274144;
+                        --background-active-disable-qxin:#583535;
+                        --background-hover-color-qxin: #424242;
+                        --trigger-shown-qxin: #424242 !important;
+                        --sej-drop-list-background-qxin:rgba(0,0,0,0.3);
+                        --background-btn-qxin:#292f36;
+                    }
+                    `,
             },
             //  用户补充: kidzgy
             //  https://greasyfork.org/zh-CN/scripts/27752/discussions/90497
@@ -3181,7 +3193,7 @@
                     animation: sejopen 0.3s;
                     border-bottom-right-radius: 4px;
                     border-bottom-left-radius: 4px;
-                    color: #333;
+                    color:var(--font-color-qxin);
                     //transition:0.3s;
                 }
                 #sej-container a{
@@ -3208,14 +3220,14 @@
                 #sej-container a:visited,
                 #sej-container a:hover{
                     // color:#333;
-                    color:var(--font-color);
+                    color:var(--font-color-qxin);
                 }
                 .sej-engine:hover {
-                    background-color: var(--background-hover-color);
+                    background-color: var(--background-hover-color-qxin);
                 }
                 .sej-drop-list > .sej-engine:hover {
                     // background-color: #DEEDFF;
-                    background-color: var(--background-hover-color);
+                    background-color: var(--background-hover-color-qxin);
                 }
                 .sej-drop-list > .sej-engine {
                     display: block;
@@ -3250,7 +3262,7 @@
                     -webkit-box-shadow: 2px 2px 5px #999;
                     box-shadow: 2px 2px 5px #999;
                     // background-color: rgba(255,255,255,.7);
-                    background-color: var(--sej-drop-list-background);
+                    background-color: var(--sej-drop-list-background-qxin);
                     backdrop-filter: blur(7px);
                     border-bottom-right-radius: 3px;
                     border-bottom-left-radius: 3px;
@@ -3292,29 +3304,29 @@
         }
         GM_addStyle(`
             body {
-                --font-color:#333;
-                --background-color: #fff;
-                --background-avtive-color: #ccc;
-                --background-active-enable:#cff9ff;
-                --background-active-disable:#ffa2a2;
-                --background-hover-color: #EAEAEA;
-                --trigger-shown:: #DEEDFF !important;
-                --sej-drop-list-background:rgba(255,255,255,0.7);
-                --background-btn:#EFF4F8;
+                --font-color-qxin:#333;
+                --background-color-qxin: #fff;
+                --background-avtive-color-qxin: #ccc;
+                --background-active-enable-qxin:#cff9ff;
+                --background-active-disable-qxin:#ffa2a2;
+                --background-hover-color-qxin: #EAEAEA;
+                --trigger-shown-qxin: #DEEDFF !important;
+                --sej-drop-list-background-qxin:rgba(255,255,255,0.7);
+                --background-btn-qxin:#EFF4F8;
             }
             body[qxintheme="dark"] {
-                --font-color:#BDC1BC;
-                --background-color: #202124;
-                --background-avtive-color: #424242;
-                --background-active-enable:#274144;
-                --background-active-disable:#583535;
-                --background-hover-color: #424242;
-                --trigger-shown:: #424242 !important;
-                --sej-drop-list-background:rgba(0,0,0,0.3);
-                --background-btn:#292f36;
+                --font-color-qxin:#BDC1BC;
+                --background-color-qxin: #202124;
+                --background-avtive-color-qxin: #424242;
+                --background-active-enable-qxin:#274144;
+                --background-active-disable-qxin:#583535;
+                --background-hover-color-qxin: #424242;
+                --trigger-shown-qxin: #424242 !important;
+                --sej-drop-list-background-qxin:rgba(0,0,0,0.3);
+                --background-btn-qxin:#292f36;
             }
             #sej-container{
-                background: var(--background-color);
+                background: var(--background-color-qxin);
             }
         `)
         
@@ -4000,7 +4012,7 @@
                                     HideTheSameLink_checked +
                                 " style='vertical-align:middle;'></label>" +
                             "</span>" +
-                            "<span id='xin-setBtnOpacity' title='设置按钮透明度'>设置按钮透明度 <input type='range' step='0.05'  min='0' max='1' value='"+ (getSettingData.setBtnOpacity<0?-getSettingData.setBtnOpacity:getSettingData.setBtnOpacity) +"' id='setBtnOpacityRange'><i style='display:inline-block;width:3em;text-align:center;' class='iqxin-setBtnOpacityRangeValue' title='按钮 显示/隐藏(非透明)),请确定知道自己如何再次打开; 火狐非高级玩家建议别禁用'></i></span>" +
+                            "<span id='xin-setBtnOpacity' title='设置按钮透明度,需要刷新页面'>设置按钮透明度 <input type='range' step='0.05'  min='0' max='1' value='"+ (getSettingData.setBtnOpacity<0?-getSettingData.setBtnOpacity:getSettingData.setBtnOpacity) +"' id='setBtnOpacityRange'><i style='display:inline-block;width:3em;text-align:center;' class='iqxin-setBtnOpacityRangeValue' title='按钮 显示/隐藏(非透明)),请确定知道自己如何再次打开; 火狐非高级玩家建议别禁用'></i></span>" +
 
                             "</div>" ;
                             // "<div><span>test</span></div>";
@@ -4647,7 +4659,7 @@
                     // odom.style.backgroundSize = odom.value*100 +"% 100%";
                     console.log(odomV,getSettingData.setBtnOpacity);
                     if(getSettingData.setBtnOpacity<0){
-                        document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = odomV;
+                        document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = odomV.toString().padEnd(4,"0");
                         odom.style.background = "-webkit-linear-gradient(left,#3ABDC1,#83e7ea) no-repeat, #fff";
                     }else{
                         document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = "禁用";
@@ -4954,7 +4966,15 @@
                 } else{
                     odom.style.background = "-webkit-linear-gradient(left,#3ABDC1,#83e7ea) no-repeat, #fff";
                     odom.style.backgroundSize = odom.value*100 +"% 100%";
-                    document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = odom.value;
+                    let value = odom.value;
+                    if(value==0){
+                        value = "0.00";
+                    }else if(value==1){
+                        value = "1.00";
+                    } else {
+                        value = odom.value.toString().padEnd(4,"0");
+                    }
+                    document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = value;
                     getSettingData.setBtnOpacity = odom.value;
                 }
             },
@@ -5069,13 +5089,14 @@
                         "-moz-user-select: none;" +
                         "padding-bottom: 80px;" +
                         "box-sizing: border-box;" +
+                        "color: var(--font-color-qxin);" +
                     "}" +
                     "#settingLayer{" +
                         "display: flex;" +
                         "flex-wrap: wrap;" +
                         "padding: 20px 20px 50px 20px;" +
                         "margin: 2% 25px 50px 5px;" +
-                        "background-color: var(--background-color);" +
+                        "background-color: var(--background-color-qxin);" +
                         "border-radius: 4px;" +
                         "position: absolute;" +
                         "min-width: 700px;" +
@@ -5121,21 +5142,21 @@
                     "}" +
                     "#settingLayerMask [data-iqxindisabled='true']," +
                     "[data-xin^='-']{" +
-                        "background-color: var(--background-avtive-color);" +
+                        "background-color: var(--background-avtive-color-qxin);" +
                         "text-decoration: line-through;" +
                         "text-decoration-color:red;" +
                         "border-radius:2px;" +
                         "transition:.3s;" +
                     "}" +
                     ".sejtitle:not([data-xin^='-']):hover{" +
-                        "background:var(--background-active-enable);" +
+                        "background:var(--background-active-enable-qxin);" +
                     "}" +
                     "#settingLayerMask .sej-engine:hover{" +
-                        "background-color: var(--background-active-enable);" +
+                        "background-color: var(--background-active-enable-qxin);" +
                     "}" +
                     "#settingLayerMask [data-iqxindisabled='true']:hover," +
                     "[data-xin^='-']:hover{" +
-                        "background-color: var(--background-active-disable);" +
+                        "background-color: var(--background-active-disable-qxin);" +
                     "}" +
                     "#settingLayerMask label{" +
                         "cursor:pointer;" +
@@ -5149,13 +5170,13 @@
                         "width:100%;" +
                         "bottom: 0px;" +
                         "right: 0;" +
-                        "background: var(--background-color);" +
+                        "background: var(--background-color-qxin);" +
                         "border-radius: 4px;" +
                     "}" +
                     "#btnEle2 span," +
                     "#btnEle span{" +
                         "display: inline-block;" +
-                        "background: var(--background-btn);" +
+                        "background: var(--background-btn-qxin);" +
                         "border: 1px solid #3abdc1;" +
                         "margin: 12px auto 10px;" +
                         "color: #3abdc1;" +
@@ -5191,7 +5212,7 @@
                         "width: 100%;" +
                         "display:flex;" +
                         "justify-content: space-around;" +
-                        "background: var(--background-btn);" +
+                        "background: var(--background-btn-qxin);" +
                         "border-radius: 4px;" +
                     "}" +
                     "#btnEle2{" +
@@ -5350,7 +5371,7 @@
                         "padding: 0px 5px;" +
                         "cursor: pointer;" +
                         "text-decoration: underline;" +
-                        "background: var(--background-btn);" +
+                        "background: var(--background-btn-qxin);" +
                     "}" +
                     "#titleEdit{" +
                         "width:6em;" +
@@ -5494,7 +5515,7 @@
                             "opacity:1;" +
                         "}" +
                         "");
-            setBtn.innerHTML = "<img style='margin:0 0 -3px 6px;width:16px;vertical-align: baseline;display:inline-block;cursor:pointer;' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSklEQVR4nGNkIAPYy8tzhLS2f0cWy42JYiTHLLI0TV6y7D82cXIcwUSqhr658/bhkaaeAyYvWfZ/0qLFW9HVs7JzOOLR8w+bObhCjIEBh4vxaaAEYIsijBCgleW4zGYipIDawEpYVgqnA8jNSqSAY28fP8PpgIEALORoUlWQwyp++8Ejks0iKQQYGRlxWs7AgNth+ABKCLRPmhqHT7GKvCwDAwMDQ11gxMRTr58UIMtNmzbjuZKejoSqghyhkGBkYGD4j8xhYGAgnANgvmvyj5RGT0gwYC4mU9y4bkUPAwPh6IAleEZisx7MAR42Nnhzyo4jR/4T4wAYICoNIFlOUH1dULglAwMDg7S4GPUcgAQIhtapV09PMDAwMHBxchBlIMvHj++JUEZ86tbnlxdgYGBg+PL1KwMxZhMVAmcuXmRgYEDELz7QuXXpewYGBoYbd+4QYzQDU012NuOmxvZJRKkmDIguyjc2dfrWZGczomhomToVrw9N9PUZGBiw54T1O3emc3Jzz2BgQIQYLlCTnQ3Xj2EQPkcYaGszsLDgL71JsZyBgcRccOHqVbwWELIcGyCrMiLHIlxgwKtjFAeYSkkJD6gD/Kur39DaQjNxmWScDkBPodQGWxrbU0+9fDIXpwNwOWJTQ8eSzY3tC4m1aHNje8mmhvY+FLGG9qQTr57MQVeL08cW4jJmJ14+OYUuTqiwwuYBczFpvZOvnl7Cpp7kIPdQUWG3KSz8QazlhADJ2XDHnTs/SdVDVQcwMDAwLJs6lR1djNwEDAB1JMSK2b7KxQAAAABJRU5ErkJggg=='>"
+            setBtn.innerHTML = `<img style='margin:0 0 -3px 6px;width:16px;vertical-align: baseline;display:inline-block;cursor:pointer;' src="data:image/svg+xml,%3Csvg t='1666950165377' class='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='11048' width='32' height='32'%3E%3Cpath d='M337.333 517.667c77.406 0 141.974 54.967 156.8 127.998l440.534 0.002c17.673 0 32 14.327 32 32 0 17.496-14.042 31.713-31.471 31.995l-0.53 0.005-440.534 0.001C479.307 782.7 414.74 837.667 337.333 837.667S195.36 782.699 180.534 709.668l-99.2-0.001c-17.674 0-32-14.327-32-32 0-17.497 14.041-31.713 31.47-31.996l0.53-0.004 99.2-0.002c14.825-73.03 79.393-127.998 156.8-127.998z m0 64c-53.019 0-96 42.98-96 96 0 53.019 42.981 96 96 96 53.02 0 96-42.981 96-96 0-53.02-42.98-96-96-96z m341.334-405.334c77.406 0 141.974 54.968 156.799 127.999l99.2 0.001c17.674 0 32 14.327 32 32 0 17.497-14.041 31.713-31.47 31.996l-0.53 0.004-99.2 0.003c-14.826 73.03-79.394 127.997-156.8 127.997-77.405 0-141.973-54.967-156.798-127.997l-440.535-0.003c-17.673 0-32-14.327-32-32 0-17.496 14.042-31.713 31.471-31.995l0.53-0.005 440.534-0.001c14.825-73.031 79.393-127.999 156.799-127.999z m0 64c-53.02 0-96 42.981-96 96 0 53.02 42.98 96 96 96 53.019 0 96-42.98 96-96 0-53.019-42.981-96-96-96z' p-id='11049'%3E%3C/path%3E%3C/svg%3E">`
             document.querySelector("#sej-container").appendChild(setBtn);
             var sejSet = null;
 
