@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.25.1
+// @version        5.26.0
 // @created        2011-07-02
-// @lastUpdated    2022-09-28
+// @lastUpdated    2022-11-03
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -117,6 +117,7 @@
 // @match          *://*.douyin.com/*
 // @match          *谷歌.ml/*
 // @match          *xn--flw351e.ml/*
+// @match        *://**/*
 
 // @grant       GM_getValue
 // @grant       GM_setValue
@@ -601,7 +602,7 @@
                 url: /^https?:\/\/www\.zhihu\.com\/search\?/i,
                 engineList: "knowledge",
                 enabled: true,
-                fixedTop:53,
+                fixedTop:52,
                 style: "\
                     margin: 5px auto 0px;\
                     width:960px;\
@@ -1427,9 +1428,9 @@
              enabled: true,
              engineList: "shopping",
              fixedTop:88,
+             class:"tab-container",
              style: "\
-                 margin:6px auto -20px;\
-                 width:1390px;\
+                 margin:-10px auto 5px;\
              ",
              insertIntoDoc: {
                  keyword: '//input[@name="keywords"]',
@@ -1767,8 +1768,9 @@
                         --background-active-disable-qxin:#583535;
                         --background-hover-color-qxin: #424242;
                         --trigger-shown-qxin: #424242 !important;
-                        --sej-drop-list-background-qxin:rgba(0,0,0,0.3);
+                        --sej-drop-list-background-qxin:rgba(0,0,0,0.7);
                         --background-btn-qxin:#292f36;
+                        --background-setting-qxin: #161722;
                     }
                     `,
             },
@@ -2641,6 +2643,7 @@
                     "(center:是否居中显示，主要是为了兼容脚本 ac 百度  ： 0 不居中，强制在左。 1, 强制居中 。 2,自动判断)..." +
                     "(icon: 图标的显示方式, 0 关闭文字, 只保留图标, 1 显示网站图标,2 显示抽象图标。当脚本中不存在抽象图标时,显示网站图标)..." +
                     "(transtion: 是否有动画效果, true为开启所有动画效果,false关闭所有动画(包括模糊效果)。)" +
+                    "(selectSearch: 划词搜索功能, true为开启划词搜索,false关闭)" +
                     "(engineDetails: 第一个值为分类列表标题名称,第二个值与enginelist相关联,必须匹配,第三个值true为显示列表,false为禁用列表。排列顺序与跳转栏上的显示顺序相同，可以用它将分类列表按自己喜欢排序)..." +
                     "(engineList: 各个搜索的相关信息)" +
                     "(rules: 已弃用--将搜索样式插入到目标网页,同脚本中的rules设置相同,优先级高于脚本中自带的规则。自带了360搜索,可仿写)...",
@@ -2650,7 +2653,7 @@
             "closeBtn":true,
             "newtab":0,
             "foldlist":true,
-            "setBtnOpacity":0.6,
+            "setBtnOpacity":0.2,
             "debug":false,
             "fixedTop":true,
             "fixedTopUpward":false,
@@ -2661,6 +2664,7 @@
             "center":2,
             "icon":1,
             "transtion":true,
+            "selectSearch":true,
             "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],["下载","download",false],["新闻","news",false],['mine', 'mine',false]],
             "engineList":{},
             "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "margin-left: 140px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}}]
@@ -3047,7 +3051,7 @@
                 value = encodeURIComponent(value);
             }
             // // @name     searchEngineJump-NextStage
-            if (document.characterSet != "UTF-8") value = encodeURIComponent(value);
+            // if (document.characterSet != "UTF-8") value = encodeURIComponent(value);
 
             var targetURL = target.getAttribute('url');
 
@@ -3111,6 +3115,9 @@
                 //console.log(value);
                 target.href = target.getAttribute('url').replaceAll('%s', value);
             }
+            if(selectSearchMode){
+                target.target="_blank";
+            }
         };
          //获取  POST 的表单的 HTML
         function getPostFormHTML(url, value, newTab) {
@@ -3131,9 +3138,50 @@
             return ospan;
         };
 
+        // 滑词搜索
+        function selectSearch(e){
+            // console.log("滑词搜索");
+            // console.log(window.getSelection());
+            let selectText = window.getSelection().toString();
+            let sejContainer = document.querySelector("#sej-container");
+            if(matchedRule) return; // 该界面已经匹配到相关规则, 说明是在搜索网站的搜索界面
+            if(e.button !=0) return;    // 排除非左键点击
+            if (selectText.length < 1) {
+                if(sejContainer){
+                    sejContainer.style.top = "-50px";
+                }
+                return;
+            }; 
+
+            if(document.activeElement.tagName.toUpperCase() == "INPUT" 
+            || document.activeElement.tagName.toUpperCase() == "TEXTAREA") return;   // 排除inpu和textarea内的文本
+
+            iTarget = document.body;
+            iTargetWhere = "beforeend";
+            iInput = {};
+            iInput.textContent = selectText;
+            if(sejContainer){
+                sejContainer.style.top = "0px";
+                return;
+            };
+            selectSearchMode = true;
+            
+            addSEJ()
+        }
+
+        let iTargetWhere;   // 如何插入
+        let iTarget;    // 插入位置
+        let iInput; // 搜索词
+        let selectSearchMode = false;
+        // 滑词搜索
+        if(getSettingData.selectSearch){
+            document.onmouseup = selectSearch;
+        }
+
         // iframe 禁止加载
         if (window.self != window.top) return;
 
+        // 准备往页面插入列表 
         var url = location.href;
         var matchedRule;
         var marchedSign;
@@ -3162,8 +3210,8 @@
         if (!matchedRule || !matchedRule.enabled) return;
 
         // var iTarget = getElement(matchedRule.insertIntoDoc.target);
-        var iTarget = typeof matchedRule.insertIntoDoc.target == "function" ? matchedRule.insertIntoDoc.target() : getElement(matchedRule.insertIntoDoc.target);
-        var iInput = typeof matchedRule.insertIntoDoc.keyword == 'function' ? matchedRule.insertIntoDoc.keyword : getElement(matchedRule.insertIntoDoc.keyword);
+        iTarget = typeof matchedRule.insertIntoDoc.target == "function" ? matchedRule.insertIntoDoc.target() : getElement(matchedRule.insertIntoDoc.target);
+        iInput = typeof matchedRule.insertIntoDoc.keyword == 'function' ? matchedRule.insertIntoDoc.keyword : getElement(matchedRule.insertIntoDoc.keyword);
 
         ///test -------------- 测试 start
         // console.log("searchEngineJump test iTarget, iInput: ",iTarget, iInput);
@@ -3174,13 +3222,41 @@
             console.log("目标有误：\n iTarget：" + iTarget + "\niInput(keyword): " + iInput);
             return;
         }
+        iTargetWhere = matchedRule.insertIntoDoc.where.toLowerCase();
+        addSEJ()
+        function addSEJ(){
 
-        // 添加全局样式
-        var globalStyle = document.createElement('style');
-        globalStyle.type = 'text/css';
-        globalStyle.textContent = getMStr(function(){
-            var cssText;
-            /*
+            // 搜索列表的样式(此处没有 “设置” 的css样式)
+            let styleText = "";
+            // 配色
+            styleText += `
+                body {
+                    --font-color-qxin:#333;
+
+                    --background-avtive-color-qxin: #ccc;
+                    --background-active-enable-qxin:#cff9ff;
+                    --background-active-disable-qxin:#ffa2a2;
+                    --background-hover-color-qxin: #EAEAEA;
+                    --trigger-shown-qxin: #DEEDFF !important;
+                    --sej-drop-list-background-qxin:rgba(255,255,255,0.7);
+                    --background-btn-qxin:#EFF4F8;
+                    --background-setting-qxin:#fff;
+                }
+                body[qxintheme="dark"] {
+                    --font-color-qxin:#BDC1BC;
+                    --background-color-qxin: #202124;
+                    --background-avtive-color-qxin: #424242;
+                    --background-active-enable-qxin:#274144;
+                    --background-active-disable-qxin:#583535;
+                    --background-hover-color-qxin: #424242;
+                    --trigger-shown-qxin: #424242 !important;
+                    --sej-drop-list-background-qxin:rgba(0,0,0,0.7);
+                    --background-btn-qxin:#292f36;
+                    --background-setting-qxin:#202124;
+                }
+                `
+            // 搜索列表的样式
+            styleText += `
                 #sej-container {
                     display: block;
                     position: relative;
@@ -3190,11 +3266,29 @@
                     font-size: 13px;
                     font-family: arial,sans-serif;
                     transform-origin: top center;
-                    animation: sejopen 0.3s;
+                    animation: sejopen 0.2s;
                     border-bottom-right-radius: 4px;
                     border-bottom-left-radius: 4px;
                     color:var(--font-color-qxin);
-                    //transition:0.3s;
+                    background: var(--background-color-qxin);
+                    // transition:0.3s;
+                }
+                /* 滑词搜索样式 */
+                #sej-container.selectSearch{
+                    position:fixed;
+                    top:0;
+                    left:0;
+                    right:0;
+                    z-index: 99999;
+                    text-align: center;
+                    transition: 0.3s;
+                    background: #ffffffba;
+                    backdrop-filter: blur(25px);
+                    padding: 5px 0;
+                    box-shadow: 2px 2px 10px #eee;
+                }
+                .selectSearch .sej-engine{
+                    margin-left:5px;
                 }
                 #sej-container a{
                     border-radius:2px;
@@ -3208,7 +3302,7 @@
                     display: inline-block;
                     margin: 0 0px 0 0;
                     border: none;
-                    padding: 0 6px;
+                    padding: 0 8px;
                     text-decoration: none;
                     font-weight:500;
                     transition: background-color 0.15s ease-in-out;
@@ -3217,13 +3311,14 @@
                 .sej-drop-list a:hover,
                 .sej-engine a:visited,
                 .sej-engine a:hover,
+                #sej-container a:link,
                 #sej-container a:visited,
                 #sej-container a:hover{
-                    // color:#333;
                     color:var(--font-color-qxin);
                 }
                 .sej-engine:hover {
                     background-color: var(--background-hover-color-qxin);
+                    text-decoration: none;
                 }
                 .sej-drop-list > .sej-engine:hover {
                     // background-color: #DEEDFF;
@@ -3289,543 +3384,503 @@
                         opacity: 1;
                     }
                 }
-            */
-        }).cssText;
-        document.head.appendChild(globalStyle);
+            `
 
-        // 夜间模式
-        let scheme = document.getElementsByTagName('meta')['color-scheme']
-        if(scheme){
-            console.log("搜索到相关选项, ", scheme.content);
-            if(scheme.content=="dark"){
-                console.log("设置为夜间模式");
-                document.body.setAttribute("qxintheme","dark")
+            // 工具列表动画
+            if(!getSettingData.transtion){
+                styleText += `
+                    .sej-engine,
+                    .sej-drop-list-trigger,
+                    .sej-drop-list{
+                        transition:none!important;
+                    }
+                    #sej-container{
+                        animation:none!important;
+                    }
+                    .sej-drop-list {
+                        backdrop-filter:none!important;
+                        }
+                 `
             }
-        }
-        GM_addStyle(`
-            body {
-                --font-color-qxin:#333;
-                --background-color-qxin: #fff;
-                --background-avtive-color-qxin: #ccc;
-                --background-active-enable-qxin:#cff9ff;
-                --background-active-disable-qxin:#ffa2a2;
-                --background-hover-color-qxin: #EAEAEA;
-                --trigger-shown-qxin: #DEEDFF !important;
-                --sej-drop-list-background-qxin:rgba(255,255,255,0.7);
-                --background-btn-qxin:#EFF4F8;
-            }
-            body[qxintheme="dark"] {
-                --font-color-qxin:#BDC1BC;
-                --background-color-qxin: #202124;
-                --background-avtive-color-qxin: #424242;
-                --background-active-enable-qxin:#274144;
-                --background-active-disable-qxin:#583535;
-                --background-hover-color-qxin: #424242;
-                --trigger-shown-qxin: #424242 !important;
-                --sej-drop-list-background-qxin:rgba(0,0,0,0.3);
-                --background-btn-qxin:#292f36;
-            }
-            #sej-container{
-                background: var(--background-color-qxin);
-            }
-        `)
-        
-        // 工具列表动画
-        if(!getSettingData.transtion){
-            GM_addStyle(".sej-engine," +
-                        ".sej-drop-list-trigger," +
-                        ".sej-drop-list{" +
-                            "transition:none!important;" +
-                        "}" +
-                        "#sej-container{" +
-                            "animation:none!important;" +
-                        "}" +
-                        ".sej-drop-list {" +
-                            "backdrop-filter:none!important;" +
-                            "background-color: rgba(255,255,255,.9)!important;" +
-                            "}" +
-                        ""
-            )
-        }
-        // 隐藏箭头
-        if(getSettingData.icon){
-            GM_addStyle("" +
-                ".sej-drop-list-trigger-shown {" +
-                    // "background-color: #DEEDFF !important;" +
-                    "background-color: var(--trigger-show)" +
-                "}" +
-                ".sej-drop-list-trigger::after {" +
-                    "content: '';" +
-                    "display: inline-block;" +
-                    "margin: 0 0 0 3px;" +
-                    "padding: 0;" +
-                    "width: 0;" +
-                    "height: 0;" +
-                    "border-top: 6px solid #BCBCBC;" +
-                    "border-right: 5px solid transparent;" +
-                    "border-left: 5px solid transparent;" +
-                    "border-bottom: 0px solid transparent;" +
-                    "vertical-align: middle;" +
-                    "transition: -webkit-transform 0.3s ease-in-out;" +
-                    "transition: transform 0.3s ease-in-out;" +
-                "}" +
-                ".sej-drop-list-trigger-shown::after {" +
-                    "-webkit-transform: rotate(180deg);" +
-                    "transform: rotate(180deg);" +
-                "}" +
-            +"")
-        }else{
-            GM_addStyle("" +
-                ".sej-drop-list-trigger {" +
-                    "margin-right:8px;" +
-                "}" +
-            +"")
-        }
-
-        // 列表对象
-        function DropDownList(a, list) {
-            this.a = a;
-            this.list = list;
-            this.init();
-        };
-        DropDownList.zIndex = 100000000;
-
-        DropDownList.prototype = {
-            hidden: true,
-            showDelay: 233,
-            hideDelay: 233,
-            aShownClass: 'sej-drop-list-trigger-shown',
-
-            init: function () {
-                var a = this.a;
-                var list = this.list;
-
-                var self = this;
-
-                // 关闭动画
-                if(!getSettingData.transtion){
-                    this.showDelay = 0;
-                    this.hideDelay = 0;
+            // 隐藏箭头
+            // if(getSettingData.icon){
+            //     styleText += `
+            //         .sej-drop-list-trigger-shown {
+            //             /* background-color: #DEEDFF !important; */
+            //             background-color: var(--trigger-show)
+            //         }
+            //         .sej-drop-list-trigger::after {
+            //             /* content: ''; */
+            //             display: inline-block;
+            //             margin: 0 0 0 3px;
+            //             padding: 0;
+            //             width: 0;
+            //             height: 0;
+            //             border-top: 6px solid #BCBCBC;
+            //             border-right: 5px solid transparent;
+            //             border-left: 5px solid transparent;
+            //             border-bottom: 0px solid transparent;
+            //             vertical-align: middle;
+            //             transition: -webkit-transform 0.3s ease-in-out;
+            //             transition: transform 0.3s ease-in-out;
+            //         }
+            //         .sej-drop-list-trigger-shown::after {
+            //             -webkit-transform: rotate(180deg);
+            //             transform: rotate(180deg);
+            //         }
+            //     `
+            // }else{
+            //     styleText += `
+            //         .sej-drop-list-trigger {
+            //             margin-right:8px;
+            //         }
+            //     `
+            // }
+            GM_addStyle(styleText);
+                
+            // 夜间模式
+            let scheme = document.getElementsByTagName('meta')['color-scheme']
+            if(scheme){
+                console.log("搜索到相关选项, ", scheme.content);
+                if(scheme.content=="dark"){
+                    console.log("设置为夜间模式");
+                    document.body.setAttribute("qxintheme","dark")
                 }
-
-                // 进入显示
-                mouseEventListener.add('mouseenter', a, function () {
-                    clearTimeout(self.hideTimerId);
-                    
-                    if (self.hidden) {
-                        self.showTimerId = setTimeout(function () {
-                            self.show();
-                        }, self.showDelay);
-                    } else {
-                        var style = list.style; 
-                        style.top = parseInt(list.style.top) -6 +"px";
+            }
+    
+            // 列表对象
+            function DropDownList(a, list) {
+                this.a = a;
+                this.list = list;
+                this.init();
+            };
+            DropDownList.zIndex = 100000000;
+    
+            DropDownList.prototype = {
+                hidden: true,
+                showDelay: 233,
+                hideDelay: 233,
+                aShownClass: 'sej-drop-list-trigger-shown',
+    
+                init: function () {
+                    var a = this.a;
+                    var list = this.list;
+    
+                    var self = this;
+    
+                    // 关闭动画
+                    if(!getSettingData.transtion){
+                        this.showDelay = 0;
+                        this.hideDelay = 0;
+                    }
+    
+                    // 进入显示
+                    mouseEventListener.add('mouseenter', a, function () {
+                        clearTimeout(self.hideTimerId);
+                        
+                        if (self.hidden) {
+                            self.showTimerId = setTimeout(function () {
+                                self.show();
+                            }, self.showDelay);
+                        } else {
+                            var style = list.style; 
+                            style.top = parseInt(list.style.top) -6 +"px";
+                            style.zIndex = DropDownList.zIndex ++;
+                            style.opacity = 0.96;
+                        };
+                    });
+    
+                    // 离开隐藏
+                    mouseEventListener.add('mouseleave', a, function () {
+                        clearTimeout(self.showTimerId);
+                        
+                        if (!self.hidden) {
+                            list.style.top = parseInt(list.style.top)+6 +"px";
+                            list.style.opacity = 0.04;
+                            self.hideTimerId = setTimeout(function () {
+                                self.hide();
+                            }, self.hideDelay);
+                        };
+                    });
+    
+                    mouseEventListener.add('mouseenter', list, function () {
+                        clearTimeout(self.hideTimerId);
+                        
+                        var style = list.style;
                         style.zIndex = DropDownList.zIndex ++;
                         style.opacity = 0.96;
-                    };
-                });
-
-                // 离开隐藏
-                mouseEventListener.add('mouseleave', a, function () {
-                    clearTimeout(self.showTimerId);
-                    
-                    if (!self.hidden) {
-                        list.style.top = parseInt(list.style.top)+6 +"px";
+                        style.top = parseInt(list.style.top) -6 +"px";
+                    });
+    
+                    mouseEventListener.add('mouseleave', list, function () {
+    
                         list.style.opacity = 0.04;
+                        list.style.top = parseInt(list.style.top)+6 +"px";
                         self.hideTimerId = setTimeout(function () {
                             self.hide();
                         }, self.hideDelay);
-                    };
-                });
-
-                mouseEventListener.add('mouseenter', list, function () {
-                    clearTimeout(self.hideTimerId);
-                    
-                    var style = list.style;
-                    style.zIndex = DropDownList.zIndex ++;
-                    style.opacity = 0.96;
-                    style.top = parseInt(list.style.top) -6 +"px";
-                });
-
-                mouseEventListener.add('mouseleave', list, function () {
-
-                    list.style.opacity = 0.04;
-                    list.style.top = parseInt(list.style.top)+6 +"px";
-                    self.hideTimerId = setTimeout(function () {
-                        self.hide();
-                    }, self.hideDelay);
-                });
-            },
-            show: function () {
-                if (!this.hidden) return;
-                this.hidden = false;
-
-                var scrolled = getScrolled();
-                var aBCRect = this.a.getBoundingClientRect();
-                var thisBCRect = this.a.parentNode.getBoundingClientRect()
-
-                var style = this.list.style;
-
-                var top = scrolled.y + aBCRect.bottom;
-                var left = scrolled.x + aBCRect.left;
-
-                // 百度界面二级搜索会出现偏移的问题
-                // if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
-                //     top = 26;
-                //     if(document.querySelector(".AC-style-logo") && getSettingData.center != 0){
-                //         // left += 0;
-                //         left = aBCRect.x -thisBCRect.x
-                //     } else {
-                //         // left += getSettingData.baiduOffset;   不需要用户自己修改，直接写死
-                //         left += -134;
-                //     }
-                // }
-
-                style.top = top + 6 + 'px';
-                style.left = left + 'px';
-
-                // console.log(aBCRect)
-                // console.log(thisBCRect)
-                // style.left = aBCRect.x + "px";
-                // style.top = aBCRect.y + aBCRect.height + "px";
-
-                style.zIndex = DropDownList.zIndex --;
-                style.display = 'block';
-
-                setTimeout(function () {
-                    style.opacity = 0.96;
-                    style.top = top + 'px';
-                }, 30);
-
-                this.a.classList.add(this.aShownClass);
-
-            },
-            hide: function () {
-                if (this.hidden) return;
-                this.hidden = true;
-
-                var style = this.list.style;
-                style.display = 'none';
-                style.opacity = 0.1;
-
-                this.a.classList.remove(this.aShownClass);
-
-            }
-        };
-
-        var pageEncoding = (document.characterSet || document.charset).toLowerCase();
-
-        // 创建dom
-        var container = document.createElement('sejspan');
-        container.id = 'sej-container';
-        container.className = "rwl-exempt";
-
-        // 添加 class 以获取目标网站相同的样式。
-        if(matchedRule.class){
-            container.className = container.className + " " + matchedRule.class;
-        }
-        
-        container.addEventListener('mousedown', mousedownhandler, true);
-        
-        var aPattern = '<a href="" class="sej-engine" target="$blank$" data-iqxincategory="$category$" encoding="$encoding$" gbk="$gbk$" url="$url$"><img src="$favicon$" class="sej-engine-icon" />$name$</a>';
-        var dropLists = [];
-        engineList.details.forEach(function (item) {
-            // console.log(item);  // 搜索菜单   ["网页", "web", true]
-            var category = item[1];   // "web"
-            var cName = item[0];    // "网页"
-            var engines = [];
-
-            engineList[category].forEach(function (engine) {
-                if(engine.disable) return;
-
-                var engineUrl = engine.url;
-
-                if (getSettingData.HideTheSameLink && matchedRule.url.test(engineUrl)) return;// 去掉跳转到当前引擎的引擎
-
-                var a = aPattern.replace('$encoding$', (engine.encoding || 'utf-8').toLowerCase())
-                    .replace('$url$', engineUrl)
-                    .replace('$name$', engine.name)
-                    .replace("$category$",category);
-
-                // 图标
-                if (engine.favicon) {
-                    a = a.replace('$favicon$', engine.favicon);
-                } else {
-                    a = a.replace('src="$favicon$"', '');
-                };
-                // gbk编码
-                if (engine.gbk) {
-                    a = a.replace('$gbk$', engine.gbk);
-                } else {
-                    a = a.replace('gbk="$gbk$"', '');
-                };
-                // 新标签页
-                if (getSettingData.newtab || engine.blank) {
-                    a = a.replace('$blank$', "_blank");
-                } else {
-                    a = a.replace('target="$blank$"', '');
-                };
-
-                engines.push(a);
-            });
-            // 非空列表
-            if (!engines.length) return;
-
-            engines = engines.join('');
-
-            // 展开当前搜索分类列表
-            if (!getSettingData.foldlist && category == matchedRule.engineList) {
-                container.innerHTML = engines;
-            } else {
-                var dropList = document.createElement('sejspan');
-                dropList.className = 'sej-drop-list rwl-exempt';
-                dropList.innerHTML = engines;
-
-                //  a:主搜索菜单
-                // dropList: 搜索子菜单
-                var a = dropList.firstElementChild.cloneNode(true);
-                a.className = a.className + ' sej-drop-list-trigger';
-                
-                // 隐藏主搜索菜单的图标
-                if(!getSettingData.icon){
-                    cName = "";
+                    });
+                },
+                show: function () {
+                    if (!this.hidden) return;
+                    this.hidden = false;
+    
+                    var scrolled = getScrolled();
+                    var aBCRect = this.a.getBoundingClientRect();
+                    var thisBCRect = this.a.parentNode.getBoundingClientRect()
+    
+                    var style = this.list.style;
+    
+                    var top = scrolled.y + aBCRect.bottom;
+                    var left = scrolled.x + aBCRect.left;
+    
+                    // 百度界面二级搜索会出现偏移的问题
+                    // if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
+                    //     top = 26;
+                    //     if(document.querySelector(".AC-style-logo") && getSettingData.center != 0){
+                    //         // left += 0;
+                    //         left = aBCRect.x -thisBCRect.x
+                    //     } else {
+                    //         // left += getSettingData.baiduOffset;   不需要用户自己修改，直接写死
+                    //         left += -134;
+                    //     }
+                    // }
+    
+                    style.top = top + 6 + 'px';
+                    style.left = left + 'px';
+    
+                    style.zIndex = DropDownList.zIndex --;
+                    style.display = 'block';
+                    // 二级搜索居中显示
+                    style.left = left- (this.list.getBoundingClientRect().width - aBCRect.width)/2 + "px";
+    
+                    setTimeout(function () {
+                        style.opacity = 0.96;
+                        style.top = top + 'px';
+                    }, 30);
+                    this.a.classList.add(this.aShownClass);
+    
+                },
+                hide: function () {
+                    if (this.hidden) return;
+                    this.hidden = true;
+    
+                    var style = this.list.style;
+                    style.display = 'none';
+                    style.opacity = 0.1;
+    
+                    this.a.classList.remove(this.aShownClass);
+    
                 }
-
-                a.lastChild.nodeValue = cName;
-                dropLists.push([a, dropList]);
             };
-        });
+    
+            // var pageEncoding = (document.characterSet || document.charset).toLowerCase();
+    
+            // 创建dom
+            var container = document.createElement('sejspan');
+            container.id = 'sej-container';
+            container.className = "rwl-exempt";
 
-        //将各个搜索列表插入文档中
-        dropLists.forEach(function (item) {
-
-            // console.log(item[0]);
-            // console.log(item[0].dataset.iqxincategory)    //"web"
-            // console.log(item[0].querySelector("img").src);   // 图片链接
-            // console.log(item[0].innerText);  // 网页
-            // console.log(item[1]);
-
-            if(getSettingData.icon == 2){
-                // console.log(icon[item[0].dataset.iqxincategory])
-                if(icon[item[0].dataset.iqxincategory]){
-                    item[0].querySelector("img").src = icon[item[0].dataset.iqxincategory]
-
-                }
+            // 没有匹配到样式, 说明是通过滑词搜索进入
+            if(!matchedRule){
+                container.classList.add("selectSearch");
             }
-
-
-            container.appendChild(item[0]);    //将搜索列表放入主搜索
-            document.body.appendChild(item[1]);  // 插入搜索子菜单
-            item[1].addEventListener('mousedown', mousedownhandler, true);
-
-            new DropDownList(item[0], item[1]);
-        });
-
-        // 将主搜索插入网页中
-        switch (matchedRule.insertIntoDoc.where.toLowerCase()) {
-            case 'beforebegin' :    // 'beforeBegin'(插入到给定元素的前面) ;
-                iTarget.parentNode.insertBefore(container, iTarget);
-            break;
-            case 'afterbegin' :     // 'afterBegin'(作为给定元素的第一个子元素) ;
-                if (iTarget.firstChild) {
-                    iTarget.insertBefore(container, iTarget.firstChild);
+    
+            // 添加 class 以获取目标网站相同的样式。
+            if(matchedRule?.class){
+                container.className = container.className + " " + matchedRule.class;
+            }
+            
+            container.addEventListener('mousedown', mousedownhandler, true);
+            
+            var aPattern = '<a href="" class="sej-engine" target="$blank$" data-iqxincategory="$category$" encoding="$encoding$" gbk="$gbk$" url="$url$"><img src="$favicon$" class="sej-engine-icon" />$name$</a>';
+            var dropLists = [];
+            engineList.details.forEach(function (item) {
+                // console.log(item);  // 搜索菜单   ["网页", "web", true]
+                var category = item[1];   // "web"
+                var cName = item[0];    // "网页"
+                var engines = [];
+    
+                engineList[category].forEach(function (engine) {
+                    if(engine.disable) return;
+    
+                    var engineUrl = engine.url;
+    
+                    if (getSettingData.HideTheSameLink && matchedRule?.url.test(engineUrl)) return;// 去掉跳转到当前引擎的引擎
+    
+                    var a = aPattern.replace('$encoding$', (engine.encoding || 'utf-8').toLowerCase())
+                        .replace('$url$', engineUrl)
+                        .replace('$name$', engine.name)
+                        .replace("$category$",category);
+    
+                    // 图标
+                    if (engine.favicon) {
+                        a = a.replace('$favicon$', engine.favicon);
+                    } else {
+                        a = a.replace('src="$favicon$"', '');
+                    };
+                    // gbk编码
+                    if (engine.gbk) {
+                        a = a.replace('$gbk$', engine.gbk);
+                    } else {
+                        a = a.replace('gbk="$gbk$"', '');
+                    };
+                    // 新标签页
+                    if (getSettingData.newtab || engine.blank) {
+                        a = a.replace('$blank$', "_blank");
+                    } else {
+                        a = a.replace('target="$blank$"', '');
+                    };
+    
+                    engines.push(a);
+                });
+                // 非空列表
+                if (!engines.length) return;
+    
+                engines = engines.join('');
+    
+                // 展开当前搜索分类列表
+                if (!getSettingData.foldlist && category == matchedRule?.engineList) {
+                    container.innerHTML = engines;
                 } else {
-                    iTarget.appendChild(container);
+                    var dropList = document.createElement('sejspan');
+                    dropList.className = 'sej-drop-list rwl-exempt';
+                    dropList.innerHTML = engines;
+    
+                    //  a:主搜索菜单
+                    // dropList: 搜索子菜单
+                    var a = dropList.firstElementChild.cloneNode(true);
+                    a.className = a.className + ' sej-drop-list-trigger';
+                    
+                    // 隐藏主搜索菜单的图标
+                    if(!getSettingData.icon){
+                        cName = "";
+                    }
+    
+                    a.lastChild.nodeValue = cName;
+                    dropLists.push([a, dropList]);
                 };
-            break;
-            case 'beforeend' :   // 'beforeEnd' (作为给定元素的最后一个子元素) ;
-                iTarget.appendChild(container);
-            break;
-            case 'afterend' :  // 'afterEnd'(插入到给定元素的后面);.
-                if (iTarget.nextSibling) {
-                    iTarget.parentNode.insertBefore(container, iTarget.nextSibling);
-                } else {
-                    iTarget.parentNode.appendChild(container);
-                };
-            break;
-        };
-
-        // todo: 此处与上面重复,在百度页面会插入两次
-            // 2022-07-04 重复插入后, 会导致百度界面中下拉搜索偏移,已经忘了当初加入这个是为了解决什么bug了, 但是这几行代码又引来了源源不断的bug。
-        // if(/^https?:\/\/www\.baidu\.com\/(?:s|baidu)/.test(url)){
-        //     var sej = document.getElementsByTagName("sejspan")[0];
-        //     sej.appendChild(globalStyle);
-
-        //     dropLists.forEach(function (item) {
-        //         container.appendChild(item[0]);
-        //         // document.body.appendChild(item[1]);
-        //         var sej = document.getElementsByTagName("sejspan")[0];
-        //         sej.appendChild(item[1]);
-        //         item[1].addEventListener('mousedown', mousedownhandler, true);
-
-        //         new DropDownList(item[0], item[1]);
-        //     });
-        // };
-
-        // 兼容其他修改网页的脚本
-        if (matchedRule.style) {
-            // 判断是否存在脚本 “AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列”
-            if(getSettingData.center==2){    // 自动判断是否添加
-                // console.log("判断是否自动添加");
-                // console.log(document.querySelector("#myuser"));
-                // console.log(matchedRule.style_ACBaidu);
-                if(document.querySelector(".AC-style-logo") && matchedRule.style_ACBaidu){
-                    console.log("检测到脚本：“AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列”   ------自动添加");
-                    matchedRule.style = matchedRule.style_ACBaidu;
-                }
-            } else if (getSettingData.center==1){   //  强制添加
-                console.log("检测到脚本：“AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列”   ------强制添加");
-                matchedRule.style = matchedRule.style_ACBaidu?matchedRule.style_ACBaidu:matchedRule.style;
-            }     //
-            // 判断是否存在脚本“知乎排版优化”
-            if(document.getElementById('SearchMain')){
-                if(document.getElementById('SearchMain').style.marginLeft=='150px'){
-                    matchedRule.style = matchedRule.style_ZhihuChenglinz;
-                    matchedRule.fixedTop = null;
-                    console.log("检测到‘知乎排版优化’脚本")
-                }
-            }
-            container.style.cssText = matchedRule.style;
-        };
-
-        //兼容ac百度中lite选项, fixedtop和正常的不一样
-        setTimeout(function(){
-            if(document.querySelector(".AC-baiduLiteStyle") && matchedRule.fixedTop2){
-                console.log("检测到 AC-baiduLiteStyle")
-                matchedRule.fixedTop = matchedRule.fixedTop2
-            }else{
-                console.log("没找到 AC-baiduLiteStyle")
-            }
-        },2500)
-
-                
-        // 由于与要插入网页的样式无法很好的兼容,更改源网页的样式
-        if(matchedRule.stylish){GM_addStyle(matchedRule.stylish);};
-        
-        //固定搜索栏
-        if(getSettingData.fixedTop){
-            // 判断是否需要只在向上滚动时显示
-            if(getSettingData.fixedTopUpward){
-                window.onmousewheel = document.onmousewheel = function(eee){
-                    if(eee.wheelDelta>0){
-                        fixedTopFun(matchedRule.fixedTop, matchedRule.fixedTopColor);
-                    }else{
-                        var obj = document.getElementById("sej-container");
-                        obj.style.cssText = matchedRule.style;
+            });
+    
+            //将各个搜索列表插入文档中
+            dropLists.forEach(function (item) {
+    
+                // console.log(item[0]);
+                // console.log(item[0].dataset.iqxincategory)    //"web"
+                // console.log(item[0].querySelector("img").src);   // 图片链接
+                // console.log(item[0].innerText);  // 网页
+                // console.log(item[1]);
+    
+                if(getSettingData.icon == 2){
+                    // console.log(icon[item[0].dataset.iqxincategory])
+                    if(icon[item[0].dataset.iqxincategory]){
+                        item[0].querySelector("img").src = icon[item[0].dataset.iqxincategory]
+    
                     }
                 }
-            } else {
-                window.onscroll = function(){
-                    fixedTopFun(matchedRule.fixedTop, matchedRule.fixedTopColor);
-                };
-            }
-        } else {
-            window.onscroll = function(){
-                return true;
-            };
-        };
-
-        // 固定搜索栏
-        function fixedTopFun(height, color){
-            var obj = document.getElementById("sej-container");
-            if(!obj){return};
-            var objTop = obj.offsetTop ;
-            var objLeft = obj.offsetLeft ;
-
-            var current = obj.offsetParent;
-            while (current !== null){
-                objLeft += current.offsetLeft;
-                current = current.offsetParent;
-            }
-
-            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-
-            if(height){
-                objTop = height;
-            }else{
-                height = 0;
-            }
-
-            if(scrollTop <= objTop){
-                obj.style.cssText = matchedRule.style;
-            }else if(obj.style.position!="fixed"){
-                // console.log("固定到顶端");
-                // console.log(scrollTop,objTop,scrollTop - objTop);
-                var objstyle = window.getComputedStyle(obj , null);
-                var marginTop = parseInt(objstyle.marginTop);
-                var marginLeft = parseInt(objstyle.marginLeft);
-                var marginRight = parseInt(objstyle.marginRight);
-                //console.log(objLeft,marginLeft);
-
-                obj.style.top = height - marginTop + 'px';
-
-                // 如果之前未设置颜色,则默认设置为白色
-                    // 2020-12-19 增加选项,可以通过代码自定义颜色,但是无法通过网站自动获取
-                if(color){
-                    obj.style.background = color;
-                } else if(objstyle.backgroundColor === "rgba(0, 0, 0, 0)" || objstyle.backgroundColor === "transparent"){
-                    obj.style.background = '#fff';
-                }
-                obj.style.left = getElementLeft(obj) - marginLeft + "px";
-                // obj.style.left = getElementLeft(obj) + "px";
-                
-                debug("objLeft: ",objLeft,"marginLeft: ",marginLeft,"marginRight: ",marginRight,"getElementLeft: ",getElementLeft(obj));
-                // 知乎等网站的情况 利用 margin 居中
-                if(marginRight === marginLeft && marginRight != 0){
-                    obj.style.left = marginLeft + "px";
-                }
-                // 淘宝等网站的情况 利用 text-align 居中
-                if(obj.style.textAlign === "center"){
-                    obj.style.width = objstyle.width;
-                }
-                obj.style.position = 'fixed';
-
-                obj.style.padding = "0px 5px 0px 0px";  // 重置padding, 因为用了 fixed 定位, 没必要继续用padding,反而会带来遮挡
-
-                // if(document.querySelectorAll("input[name='sp-ac-a_force_style_baidu']").length !=0){
-                //     console.log("检测到 ac脚本单列居中选项")
-                //     if((document.querySelectorAll("input[name='sp-ac-a_force_style_baidu']")[2].checked)){
-                        // obj.style.display = "none";
-                        // obj.style.transform = "translate(-50%, 0)";
-                        // obj.style.top = "none" ;
-                        // obj.style.position = 'fixed';
-                        // fixedTopFun2(matchedRule.fixedTopTarget,matchedRule.fixedTopWhere);
-                        // return;
-                    // }
-                // }
-            }
-        }
-        function fixedTopFun2(Target,where){
-            var obj = document.getElementById("sej-container");
-            
-            var oTarget = getElement(Target)
-
-            console.log("fixedTopFun2");
-            console.log(Target);
-            console.log(where);
-            
-            switch (where.toLowerCase()) {
+    
+                container.appendChild(item[0]);    //将搜索列表放入主搜索
+                document.body.appendChild(item[1]);  // 插入搜索子菜单
+                item[1].addEventListener('mousedown', mousedownhandler, true);
+    
+                new DropDownList(item[0], item[1]);
+            });
+    
+            // 将主搜索插入网页中
+            switch (iTargetWhere) {
                 case 'beforebegin' :    // 'beforeBegin'(插入到给定元素的前面) ;
-                oTarget.parentNode.insertBefore(obj, oTarget);
-                break;
+                    iTarget.parentNode.insertBefore(container, iTarget);
+                    break;
                 case 'afterbegin' :     // 'afterBegin'(作为给定元素的第一个子元素) ;
-                if (oTarget.firstChild) {
-                    oTarget.insertBefore(obj, oTarget.firstChild);
-                } else {
-                        oTarget.appendChild(obj);
+                    if (iTarget.firstChild) {
+                        iTarget.insertBefore(container, iTarget.firstChild);
+                    } else {
+                        iTarget.appendChild(container);
                     };
                     break;
                 case 'beforeend' :   // 'beforeEnd' (作为给定元素的最后一个子元素) ;
-                oTarget.appendChild(obj);
-                break;
+                    iTarget.appendChild(container);
+                    break;
                 case 'afterend' :  // 'afterEnd'(插入到给定元素的后面);.
-                if (oTarget.nextSibling) {
-                    oTarget.parentNode.insertBefore(obj, oTarget.nextSibling);
-                } else {
-                    oTarget.parentNode.appendChild(obj);
-                };
-                break;
+                    if (iTarget.nextSibling) {
+                        iTarget.parentNode.insertBefore(container, iTarget.nextSibling);
+                    } else {
+                        iTarget.parentNode.appendChild(container);
+                    };
+                    break;
+                default:
+                    iTarget.appendChild(container);
+                    break;
             };
-        };
+    
+            // 兼容其他修改网页的脚本
+            if (matchedRule?.style) {
+                // 判断是否存在脚本 “AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列”
+                if(getSettingData.center==2){    // 自动判断是否添加
+                    // console.log("判断是否自动添加");
+                    // console.log(document.querySelector("#myuser"));
+                    // console.log(matchedRule.style_ACBaidu);
+                    if(document.querySelector(".AC-style-logo") && matchedRule.style_ACBaidu){
+                        console.log("检测到脚本：“AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列”   ------自动添加");
+                        matchedRule.style = matchedRule.style_ACBaidu;
+                    }
+                } else if (getSettingData.center==1){   //  强制添加
+                    console.log("检测到脚本：“AC-baidu:重定向优化百度搜狗谷歌搜索_去广告_favicon_双列”   ------强制添加");
+                    matchedRule.style = matchedRule.style_ACBaidu?matchedRule.style_ACBaidu:matchedRule.style;
+                }     //
+                // 判断是否存在脚本“知乎排版优化”
+                if(document.getElementById('SearchMain')){
+                    if(document.getElementById('SearchMain').style.marginLeft=='150px'){
+                        matchedRule.style = matchedRule.style_ZhihuChenglinz;
+                        matchedRule.fixedTop = null;
+                        console.log("检测到‘知乎排版优化’脚本")
+                    }
+                }
+                container.style.cssText = matchedRule.style;
+            };
+    
+            //兼容ac百度中lite选项, fixedtop和正常的不一样
+            setTimeout(function(){
+                if(document.querySelector(".AC-baiduLiteStyle") && matchedRule.fixedTop2){
+                    console.log("检测到 AC-baiduLiteStyle")
+                    matchedRule.fixedTop = matchedRule.fixedTop2
+                }else{
+                    console.log("没找到 AC-baiduLiteStyle")
+                }
+            },2500)
+    
+                    
+            // 由于与要插入网页的样式无法很好的兼容,更改源网页的样式
+            if(matchedRule?.stylish){GM_addStyle(matchedRule.stylish);};
+            
+            //固定搜索栏
+            if(getSettingData.fixedTop && matchedRule){
+                // 判断是否需要只在向上滚动时显示
+                if(getSettingData.fixedTopUpward){
+                    window.onmousewheel = document.onmousewheel = function(eee){
+                        if(eee.wheelDelta>0){
+                            fixedTopFun(matchedRule.fixedTop, matchedRule.fixedTopColor);
+                        }else{
+                            var obj = document.getElementById("sej-container");
+                            obj.style.cssText = matchedRule.style;
+                        }
+                    }
+                } else {
+                    window.onscroll = function(){
+                        fixedTopFun(matchedRule.fixedTop, matchedRule.fixedTopColor);
+                    };
+                }
+            } else {
+                window.onscroll = function(){
+                    return true;
+                };
+            };
+    
+            // 固定搜索栏
+            function fixedTopFun(height, color){
+                var obj = document.getElementById("sej-container");
+                if(!obj){return};
+                var objTop = obj.offsetTop ;
+                var objLeft = obj.offsetLeft ;
+    
+                var current = obj.offsetParent;
+                while (current !== null){
+                    objLeft += current.offsetLeft;
+                    current = current.offsetParent;
+                }
+    
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    
+                if(height){
+                    objTop = height;
+                }else{
+                    height = 0;
+                }
+    
+                if(scrollTop <= objTop){
+                    obj.style.cssText = matchedRule.style;
+                }else if(obj.style.position!="fixed"){
+                    // console.log("固定到顶端");
+                    // console.log(scrollTop,objTop,scrollTop - objTop);
+                    var objstyle = window.getComputedStyle(obj , null);
+                    var marginTop = parseInt(objstyle.marginTop);
+                    var marginLeft = parseInt(objstyle.marginLeft);
+                    var marginRight = parseInt(objstyle.marginRight);
+                    //console.log(objLeft,marginLeft);
+    
+                    obj.style.top = height - marginTop + 'px';
+    
+                    // 如果之前未设置颜色,则默认设置为白色
+                        // 2020-12-19 增加选项,可以通过代码自定义颜色,但是无法通过网站自动获取
+                    if(color){
+                        obj.style.background = color;
+                    } else if(objstyle.backgroundColor === "rgba(0, 0, 0, 0)" || objstyle.backgroundColor === "transparent"){
+                        obj.style.background = '#fff';
+                    }
+                    obj.style.left = getElementLeft(obj) - marginLeft + "px";
+                    // obj.style.left = getElementLeft(obj) + "px";
+                    
+                    debug("objLeft: ",objLeft,"marginLeft: ",marginLeft,"marginRight: ",marginRight,"getElementLeft: ",getElementLeft(obj));
+                    // 知乎等网站的情况 利用 margin 居中
+                    if(marginRight === marginLeft && marginRight != 0){
+                        obj.style.left = marginLeft + "px";
+                    }
+                    // 淘宝等网站的情况 利用 text-align 居中
+                    if(obj.style.textAlign === "center"){
+                        obj.style.width = objstyle.width;
+                    }
+                    obj.style.position = 'fixed';
+    
+                    obj.style.padding = "0px 5px 0px 0px";  // 重置padding, 因为用了 fixed 定位, 没必要继续用padding,反而会带来遮挡
+    
+                    // if(document.querySelectorAll("input[name='sp-ac-a_force_style_baidu']").length !=0){
+                    //     console.log("检测到 ac脚本单列居中选项")
+                    //     if((document.querySelectorAll("input[name='sp-ac-a_force_style_baidu']")[2].checked)){
+                            // obj.style.display = "none";
+                            // obj.style.transform = "translate(-50%, 0)";
+                            // obj.style.top = "none" ;
+                            // obj.style.position = 'fixed';
+                            // fixedTopFun2(matchedRule.fixedTopTarget,matchedRule.fixedTopWhere);
+                            // return;
+                        // }
+                    // }
+                }
+            }
+            function fixedTopFun2(Target,where){
+                var obj = document.getElementById("sej-container");
+                
+                var oTarget = getElement(Target)
+    
+                console.log("fixedTopFun2");
+                console.log(Target);
+                console.log(where);
+                
+                switch (where.toLowerCase()) {
+                    case 'beforebegin' :    // 'beforeBegin'(插入到给定元素的前面) ;
+                    oTarget.parentNode.insertBefore(obj, oTarget);
+                    break;
+                    case 'afterbegin' :     // 'afterBegin'(作为给定元素的第一个子元素) ;
+                    if (oTarget.firstChild) {
+                        oTarget.insertBefore(obj, oTarget.firstChild);
+                    } else {
+                            oTarget.appendChild(obj);
+                        };
+                        break;
+                    case 'beforeend' :   // 'beforeEnd' (作为给定元素的最后一个子元素) ;
+                    oTarget.appendChild(obj);
+                    break;
+                    case 'afterend' :  // 'afterEnd'(插入到给定元素的后面);.
+                    if (oTarget.nextSibling) {
+                        oTarget.parentNode.insertBefore(obj, oTarget.nextSibling);
+                    } else {
+                        oTarget.parentNode.appendChild(obj);
+                    };
+                    break;
+                };
+            };
+        }
+
+
 
         // -------------------设置相关--------------------------------
         // 设置按钮相关
@@ -3973,6 +4028,7 @@
                 var fixedTopUpward_checked = getSettingData.fixedTopUpward?"checked":"";
                 // var debug_checked = getSettingData.debug?"checked":"";
                 var transition_checked = getSettingData.transtion?"checked":"";
+                var selectSearch_checked = getSettingData.selectSearch?"checked":"";
                 var foldlist_checked = getSettingData.foldlist?"checked":"";
                 var allOpen_checked = getSettingData.allOpen?"checked":"";
                 var HideTheSameLink_checked = getSettingData.HideTheSameLink?"checked":"";
@@ -3981,7 +4037,12 @@
                 var btnStr2 = "<div>" +
                             // "<span id='xin-reset' title='慎点,出厂重置'>清空设置</span>" +
                             "<span id='xin-modification' title='edit 分享自己的配置或清空配置'>配置文件</span>" +
-                            "<span id='xin-importing' title='importing 导入更为专业的搜索引擎'>导入</span>" +
+                            // "<span id='xin-importing' title='importing 导入更为专业的搜索引擎'>导入</span>" +
+                            "<span id='xin-selectSearch' title='划词搜索, 只有非搜索页面才会生效, 开关功能需要刷新页面'>" +
+                                "<label>划词搜索<input id='iqxin-selectSearch' type='checkbox' name='' " +
+                                selectSearch_checked +
+                                " style='vertical-align:middle;'></label>" +
+                            "</span>" +
                             // "<span id='iqxin-debugS' title='对设置菜单有一定的影响'>" +
                             //     "<label>debug<input id='iqxin-debug' type='checkbox' name='' " +
                             //         debug_checked +
@@ -4366,8 +4427,11 @@
                 var oicon = target.dataset.iqxinimg;
                 var otarget = target.dataset.iqxintarget;
                 var odisabled = target.dataset.iqxindisabled;
+                let oGBK = target.dataset.iqxingbk;
 
                 this.editTemp = target;
+
+                console.log(oicon);
 
                 var strblank;
                 if(otarget){
@@ -4376,9 +4440,9 @@
                     strblank = '<option value="default">新标签页打开</option><option value="newtab" selected="selected">当前页打开</option>';
                 }
 
-                var strdisable = "";
-                if(odisabled){
-                    strdisable = "checked='checked'";
+                var strGBK = "";
+                if(oGBK){
+                    strGBK = "checked='checked'";
                 }
 
                 var newDiv = document.createElement("div");
@@ -4386,36 +4450,35 @@
                 // 从鼠标点击所在的项目展开菜单(2021-03-16,从上线至今,动画一直有卡顿现象)
                 // newDiv.style.cssText = "top:"+(e.screenY-120) +"px;left:"+(e.screenX-140) +"px;";
                 newDiv.style.cssText = "top:43%;opacity:0.1;";
-                var innerHTML=""+
-                    "<span>标&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp题 : </span><input id='iqxin-newTitle' placeholder='必填' onfocus='this.select()' value='"+ otitle +"' /> <br/><br/>" +
-                    "<span>链&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp接 : </span><input id='iqxin-newLink' placeholder='必填' onfocus='this.select()' value='"+ olink +"' /> <br/><br/>" +
-                    "<span>图&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp标 : </span><input id='iqxin-newIcon' placeholder='选填,留空则自动获取' onfocus='this.select()' value='"+ oicon +"' /> <br/><br/>" +
-                    "<span>打开方式 : " +
-                        '<select id="iqxin-newTarget" style="border-radius: 4px;border: none;padding: 2px 0 2px 2px"> ' +
-                            '$strblank$' +
-                        '<select> ' +
-                    "</span>" +
-                    "<br/><br/>" +
-                    "<span style=''><label>禁用：<input type='checkbox' name='' id='iqxin-newDisabled' $checked$ style='vertical-align:middle;'></label></span>" +
-                    "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-                    "<button id='editItemBoxEnter' class='editItemBoxEnter addItemBoxBtn iqxin-enterBtn'>确定</button>&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp" +
-                    "<button id='addItemBoxCancel' class='addItemBoxCancel addItemBoxBtn iqxin-closeBtn'>取消</button>" +
-                    "";
+                var innerHTML=`
+                    <span>标&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp题 : </span><input id="iqxin-newTitle" placeholder="必填" onfocus="this.select()" value="${otitle}" /> <br/><br/>
+                    <span>链&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp接 : </span><input id="iqxin-newLink" placeholder="必填" onfocus="this.select()" value="${olink }" /> <br/><br/>
+                    <span>图&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp标 : </span><input id="iqxin-newIcon" placeholder="选填,留空则自动获取" onfocus="this.select()" value="${oicon }" /> <br/><br/>
+                    <span>打开方式 : 
+                        <select id="iqxin-newTarget" style="border-radius: 4px;border: none;padding: 2px 0 2px 2px"> 
+                            ${strblank}
+                        <select> 
+                    </span>
+                    <br/><br/>
+                    <span style=""><label>GBK编码：<input type="checkbox" name="" id="iqxin-newGBK" ${strGBK} style="vertical-align:middle;"></label></span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button id="editItemBoxEnter" class="editItemBoxEnter addItemBoxBtn iqxin-enterBtn">确定</button>&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp
+                    <button id="addItemBoxCancel" class="addItemBoxCancel addItemBoxBtn iqxin-closeBtn">取消</button>
+                    `
 
-                newDiv.innerHTML = innerHTML.replace("$strblank$", strblank)
-                                    .replace("$checked$",strdisable);
+                newDiv.innerHTML = innerHTML;
 
                 this.ele.appendChild(newDiv);
                 setTimeout(function(){newDiv.style.cssText="";},10);
                 document.querySelector("#iqxin-newTitle").select();
             },
             addEditBoxEnger: function(){
-                var otitle,olink,oimg,oblank,odisabled;
+                var otitle,olink,oimg,oblank,ogbk;
                 otitle = document.querySelector("#iqxin-newTitle").value;
                 olink = document.querySelector("#iqxin-newLink").value;
                 oimg = document.querySelector("#iqxin-newIcon").value;
                 oblank = document.querySelector("#iqxin-newTarget").selectedIndex;
-                odisabled = document.querySelector("#iqxin-newDisabled").checked;
+                ogbk = document.querySelector("#iqxin-newGBK").checked;
 
                 this.editTemp.dataset.iqxintitle = otitle;
                 this.editTemp.lastChild.innerText = otitle;  //文本节点
@@ -4431,10 +4494,10 @@
                     this.editTemp.dataset.iqxintarget = "_blank";
                 }
                 // 是否禁用
-                if (odisabled){
-                    this.editTemp.dataset.iqxindisabled = "true";
+                if (ogbk){
+                    this.editTemp.dataset.iqxingbk = "true";
                 } else{
-                    this.editTemp.removeAttribute("data-iqxindisabled");
+                    this.editTemp.removeAttribute("data-iqxingbk");
                 }
 
                 // 修改完成,移除添加框
@@ -4967,14 +5030,15 @@
                     odom.style.background = "-webkit-linear-gradient(left,#3ABDC1,#83e7ea) no-repeat, #fff";
                     odom.style.backgroundSize = odom.value*100 +"% 100%";
                     let value = odom.value;
+                    let valueStr = "";
                     if(value==0){
-                        value = "0.00";
+                        valueStr = "0.00";
                     }else if(value==1){
-                        value = "1.00";
+                        valueStr = "1.00";
                     } else {
-                        value = odom.value.toString().padEnd(4,"0");
+                        valueStr = odom.value.toString().padEnd(4,"0");
                     }
-                    document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = value;
+                    document.querySelector(".iqxin-setBtnOpacityRangeValue").innerHTML = valueStr;
                     getSettingData.setBtnOpacity = odom.value;
                 }
             },
@@ -5061,12 +5125,14 @@
                 getData.fixedTopUpward = document.querySelector("#iqxin-fixedTopUpward-item").checked;
                 getData.transtion = document.querySelector("#iqxin-transtion").checked;
                 getData.HideTheSameLink = document.querySelector("#iqxin-HideTheSameLink").checked;
+                getData.selectSearch = document.querySelector("#iqxin-selectSearch").checked;
                 getData.engineDetails = engineDetails;
                 getData.engineList = obj;
 
                 debug('将要保存的数据：',getData);
                 GM_setValue("searchEngineJumpData",getData);
             },
+            // 此处的样式主要是设置界面
             addGlobalStyle: function(){
                 var head, style;
                 var css =
@@ -5083,7 +5149,7 @@
                         "font-family: arial,sans-serif;" +
                         "min-height: 100%;" +
                         "font-size:16px;" +
-                        "transition:0.5s;" +
+                        "transition:0.3s;" +
                         "opacity:0;" +
                         "user-select: none;" +
                         "-moz-user-select: none;" +
@@ -5096,7 +5162,7 @@
                         "flex-wrap: wrap;" +
                         "padding: 20px 20px 50px 20px;" +
                         "margin: 2% 25px 50px 5px;" +
-                        "background-color: var(--background-color-qxin);" +
+                        "background-color: var(--background-setting-qxin);" +
                         "border-radius: 4px;" +
                         "position: absolute;" +
                         "min-width: 700px;" +
@@ -5170,7 +5236,7 @@
                         "width:100%;" +
                         "bottom: 0px;" +
                         "right: 0;" +
-                        "background: var(--background-color-qxin);" +
+                        "background: var(--background-setting-qxin);" +
                         "border-radius: 4px;" +
                     "}" +
                     "#btnEle2 span," +
@@ -5323,7 +5389,7 @@
                     "}" +
                     "#newSearchListBox," +
                     "#newSearchBox{" +
-                        "transition:0.6s;" +
+                        "transition:0.3s;" +
                         "transform : translateY(0%);" +
                         "opacity: 1;" +
                         "position:fixed;" +
@@ -5496,7 +5562,7 @@
                         "}"+
                         "#settingLayerMask{" +
                             "backdrop-filter:none;" +
-                            "background-color: rgba(0,0,0,.7);" +
+                            // "background-color: rgba(0,0,0,.7);" +
                         "}"+
                         "");
                 }
@@ -5511,7 +5577,7 @@
                             "opacity:"+getSettingData.setBtnOpacity+";"+
                             "transition:0.5s;"+
                         "}"+
-                        "#sej-container:hover span#setBtn{" +
+                        "span#setBtn:hover{" +
                             "opacity:1;" +
                         "}" +
                         "");
