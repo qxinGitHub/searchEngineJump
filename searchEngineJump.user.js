@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.26.2
+// @version        5.26.3
 // @created        2011-07-02
-// @lastUpdated    2022-11-21
+// @lastUpdated    2022-11-24
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -2920,7 +2920,9 @@
             target = getElementByXPath('ancestor-or-self::a[contains(@class, "sej-engine")]', target);
 
             // if (!target || target.className.indexOf('sej-engine') == -1) return;
-            if (!target || !this.contains(target)) return;
+            // 某些网站致下方的this无法达到原本的效果, 例 https://origenapellido.com/apellido-gavira/
+            // if (!target || !this.contains(target)) return;
+            if (!target) return;  
 
             var value;
             if (typeof iInput == 'function') {
@@ -3050,8 +3052,8 @@
                 return;
             }; 
 
-            if(document.activeElement.tagName.toUpperCase() == "INPUT" 
-            || document.activeElement.tagName.toUpperCase() == "TEXTAREA") return;   // 排除inpu和textarea内的文本
+            // if(document.activeElement.tagName.toUpperCase() == "INPUT" 
+            // || document.activeElement.tagName.toUpperCase() == "TEXTAREA") return;   // 排除inpu和textarea内的文本
 
             iTarget = document.body;
             iTargetWhere = "beforeend";
