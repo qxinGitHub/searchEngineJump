@@ -3114,7 +3114,7 @@
         iTarget = typeof matchedRule.insertIntoDoc.target == "function" ? matchedRule.insertIntoDoc.target() : getElement(matchedRule.insertIntoDoc.target);
         iInput = typeof matchedRule.insertIntoDoc.keyword == 'function' ? matchedRule.insertIntoDoc.keyword : getElement(matchedRule.insertIntoDoc.keyword);
 
-        // 解决谷歌浏览器登录后不显示的问题: chrome 登陆后输入框会变成 textarea
+        // 解决谷歌浏览器登录后不显示的问题: chrome 登录后输入框会变成 textarea
         iInput = iInput || getElementByXPath('//textarea[@name="q"]')
 
         ///test -------------- 测试 start
