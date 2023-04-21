@@ -78,7 +78,7 @@
                         // var input = document.getElementById('lst-ib');
                         // if (input) return input.value;
                     // },
-                    keyword: '//input[@name="q"]',
+                    keyword: '//textarea[@name="q"]',
                     where: 'beforeBegin',
                 },
                 // 修改源网页用来适应跳转栏（可选）
@@ -287,7 +287,7 @@
                 ',
                 insertIntoDoc: {
                     target: 'css;#appbar',
-                    keyword: '//input[@name="q"]',
+                    keyword: '//textarea[@name="q"]',
                     where: 'beforeBegin',
                 },
                 stylish: 'body.vasq #hdtbMenus.hdtb-td-o{top:100px !important}'
