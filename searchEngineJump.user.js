@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.26.4
+// @version        5.26.5
 // @created        2011-07-02
-// @lastUpdated    2022-11-24
+// @lastUpdated    2023-04-22
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -78,7 +78,7 @@
                         // var input = document.getElementById('lst-ib');
                         // if (input) return input.value;
                     // },
-                    keyword: '//input[@name="q"]',
+                    keyword: '//textarea[@name="q"]',
                     where: 'beforeBegin',
                 },
                 // 修改源网页用来适应跳转栏（可选）
@@ -2563,7 +2563,7 @@
             "center":2,
             "icon":1,
             "transtion":true,
-            "selectSearch":true,
+            "selectSearch":false,
             "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],["下载","download",false],["新闻","news",false],['mine', 'mine',false]],
             "engineList":{},
             "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "margin-left: 140px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}}]

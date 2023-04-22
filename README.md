@@ -11,6 +11,7 @@ __说明__
 ### 关于乱码
 虽然不会用 github, 但是各位的反馈还是能看到的, 所以问下乱码的各位, 你们都是在 Ubuntu 的环境下出现的乱码么? 是只有在导入配置的时候才会发生乱码么?  导出环境也是 Ubuntu 还是从 Windows 这边建了文本文档导入了 Ubuntu ?  文档在 Ubuntu 中打开时的编码是什么? 此时的中文已经乱码还是正常的?
 我用虚拟机配置了 ubuntu-22.04.1 , 但还是没找到问题所在。目前从反馈图片中的乱码能看出是由于以 ISO8859-1 的方式读取了 UTF8 的编码导致。
+目前已知的一种情况, 是因为使用了 TamperMonkey (测试时最新版是v4.16.1 )的导入导出功能, 选择 文件 - 导出 功能时, 再次导入就会出现乱码的问题, 如果使用 压缩包 的导出功能, 则不会出现乱码。 但这种情况的乱码可以通过 脚本的 设置 - 更多设置 - 配置文件 - 清空设置 恢复到默认搜索列表。
 
 已知问题： 与脚本[网页解除限制](https://greasyfork.org/zh-CN/scripts/14146-%E7%BD%91%E9%A1%B5%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4)有[冲突](https://greasyfork.org/zh-CN/forum/discussion/21298/x)，开启后，无法进行跳转。可以暂时先用我修改后的[网页解除限制](https://greasyfork.org/zh-CN/scripts/28497-%E7%BD%91%E9%A1%B5%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4),大刀阔斧的修改，与原脚本使用上有较大的变化。或者自己修改下原作者的脚本, 使用 exclude 排除相关网页。
 
@@ -20,6 +21,11 @@ __说明__
 
 ### 更新历史
 - 佛系更新, 具体功能以更新历史为准
+
+
+> version 5.26.5  2023-04-22
+- 修复: 谷歌页面失效的问题 [ahgan提供解决方案](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump-%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%BF%AB%E6%8D%B7%E8%B7%B3%E8%BD%AC/discussions/179543), 以及[Drwna等](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump-%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%BF%AB%E6%8D%B7%E8%B7%B3%E8%BD%AC/discussions/170149)在评论区帮忙解决问题
+- 调整: 默认关闭滑词搜索。 有用, 但是麻烦更多, 还有太多的地方需要优化。
 
 > version 5.26.4  2023-01-28
 - 修复: 百度失效的问题(治标不治本)
