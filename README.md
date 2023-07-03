@@ -22,6 +22,8 @@ __说明__
 ### 更新历史
 - 佛系更新, 具体功能以更新历史为准
 
+> version 5.26.6  2023-07-03
+- 调整: 抖音的搜索栏显示位置, 以及将抖音从`社交`分组移动到`视频`中。
 
 > version 5.26.5  2023-04-22
 - 修复: 谷歌页面失效的问题 [ahgan提供解决方案](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump-%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%BF%AB%E6%8D%B7%E8%B7%B3%E8%BD%AC/discussions/179543), 以及[Drwna等](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump-%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%BF%AB%E6%8D%B7%E8%B7%B3%E8%BD%AC/discussions/170149)在评论区帮忙解决问题
