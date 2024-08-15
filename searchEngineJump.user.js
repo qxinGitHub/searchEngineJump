@@ -3,7 +3,7 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.26.6
+// @version        5.26.6.1
 // @created        2011-07-02
 // @lastUpdated    2023-04-22
 
@@ -169,6 +169,7 @@
                 engineList: "web",
                 style: '\
                     margin-top:5px;\
+                    margin-left:150px;\
                 ',
                 insertIntoDoc: {
                     keyword: '//input[@name="q"]',
@@ -182,7 +183,7 @@
                 enabled:true,
                 fixedTop:54,
                 style:"\
-                    margin-left:122px;\
+                    margin-left:10px;\
                 ",
                 insertIntoDoc:{
                     keyword:'css;#yschsp',
@@ -214,27 +215,13 @@
                 enabled:true,
                 fixedTop:52,
                 style:"\
-                    margin-left:-10px;\
+                    margin-left:10px;\
                     margin-bottom:10px;\
                 ",
                 insertIntoDoc:{
                     keyword:'css;#yschsp',
                     target:'css;#results',
                     where:'afterBegin',
-                },
-            },
-            {name:"searx",
-                url:/^https?:\/\/searx\.me\/\?q/i,
-                engineList:"web",
-                enabled:true,
-                style:"\
-                    margin-left:-10px;\
-                    margin-bottom:10px;\
-                ",
-                insertIntoDoc:{
-                    keyword:'css;#q',
-                    target:'css;#categories',
-                    where:'beforeBegin',
                 },
             },
             {name: "搜狗",
@@ -270,7 +257,7 @@
                     padding-left:0px;\
                 ",
                 insertIntoDoc:{
-                    keyword:'css;.input__control',
+                    keyword:'css;.HeaderForm-Input.mini-suggest__input',
                     target:'css;.main',
                     where:'beforeBegin',
                 },
@@ -299,9 +286,10 @@
                 fixedTop:103,
                 style: '\
                     z-index: 100;\
+                    margin-left: 150px;\
                 ',
                 insertIntoDoc: {
-                    target: 'css;.layout-web__mainline',
+                    target: 'css;#filters-container',
                     keyword: '//input[@name="query"]',
                     // where: 'beforeBegin',
                     where: 'afterBegin',
@@ -312,20 +300,21 @@
                 url:/^https?:\/\/www\.startpage\.com\/do\/asearch/,
                 engineList: 'web',
                 fixedTop: 102,
-                fixedTopColor:"#202c46",
-                nightMode: true,
+                //fixedTopColor:"#202c46",
+                //nightMode: true,
                 style: '\
                     z-index: 100;\
-                    margin-left: 135px;\
-                    color:#ccc;\
+                    margin-left: 150px;\
+                    //color:#ccc;\
                 ',
                 insertIntoDoc: {
-                    target: 'css;.layout-web__header',
+                    target: 'css;#filters-container',
                     keyword: '//input[@name="query"]',
-                    // where: 'beforeBegin',
-                    where: 'beforeEnd',
+                    //where: 'beforeBegin',
+                    //where: 'beforeEnd',
+                    where: 'afterBegin',
                 },
-                stylish:".layout-web__body{margin-top:110px;}",
+                //stylish:".layout-web__body{margin-top:110px;}",
             },
             {name: "infinitynewtab",
                 enabled: true,
@@ -358,31 +347,6 @@
                     where: 'afterBegin',
                 },
             },
-            {name: "f搜",
-                enabled: true,
-                url: /^https?:\/\/fsoufsou\.com\/search/,
-                engineList: 'web',
-                fixedTop: 111,
-                style: '\
-                    margin-left: 50px;\
-                    z-index: -99999;\
-                    margin-top:5px;\
-                ',
-                style_ACBaidu: '\
-                    text-align: center;\
-                    z-index: -99999;\
-                    margin-top:5px;\
-                ',
-                insertIntoDoc: {
-                    target: 'css;.input-with-suggestion',
-                    keyword: function () {
-                        var input = document.getElementById('search-input');
-                        if (input) return input.value;
-                    },
-                    where: 'beforeEnd',
-                },
-                stylish: '.tabs-bottom-border{transform: translate(0, 32px); !important}'
-            },
             {name: "brave",
                 enabled: true,
                 // https://search.brave.com/search?q=0
@@ -393,24 +357,75 @@
                     z-index:1;\
                 ',
                 insertIntoDoc: {
-                    target: 'css;#search-main',
+                    target: 'css;#nav-tabs-container',
                     keyword: '//input[@name="q"]',
+                    //keyword: 'css;.searchbox',
                     where: 'beforeBegin',
                 },
             },
-            {name: "neeva",
+            //自定义模块，手动添加搜索引擎
+            {name: "swisscows",
                 enabled: true,
-                // https://neeva.com/search?q=0
-                url:/^https?:\/\/neeva\.com\/search\?/i,
+                url: /^https?:\/\/swisscows\.com\/*\/(?:web|s)?/i,
                 engineList: 'web',
-                fixedTop: 80,
                 style: '\
-                    z-index:1;\
+                        margin-left: 200px;\
+                        z-index: 100;\
+                        margin-top:5px;\
+                    ',
+                style_ACBaidu: '\
+                        text-align: center;\
+                        z-index: 100;\
+                        margin-top:5px;\
+                    ',
+                insertIntoDoc: {
+                    //使用xpath获取搜索框中的值
+                    //keyword: '//*[@id="viewport"]/header/div/form/div/input',
+                    keyword: '//input[@name="query"]',
+                    //使用css样式获取搜索框中的值
+                    //keyword: 'css;.input-search',
+                    //在<section class="page-results">中找到css样式用以定位插入位置
+                    target: 'css;.summary',
+                    //插入到page-results样式上方
+                    where: 'beforeBegin',
+                },
+                //stylish: '.tabs-bottom-border{top:172px !important}'
+            },
+            {name: "qwant",
+                enabled: true,
+                url: /^https?:\/\/www\.qwant\.com/,
+                engineList: 'web',
+                style: '\
+                    padding-left:5px;\
+                    margin-top:5px;\
+                    margin-left: 180px;\
+                    margin-bottom:-10px;\
+                ',
+                style_ACBaidu: '\
+                    text-align: center;\
+                    margin-left: -120px;\
+                    margin-right: 0px;\
+                    margin-bottom:-20px;\
                 ',
                 insertIntoDoc: {
-                    target: 'css;#search header',
                     keyword: '//input[@name="q"]',
-                    where: 'afterEnd',
+                    //keyword: '//*[@id="root"]/div[2]/div[1]/div[1]/div/div/div[1]/form/div/div[1]/input',
+                    target: 'css;.nr8JL._2loWJ._23lip',
+                    where: 'beforeBegin',
+                },
+            },
+            {name:"searxng",
+                url:/^https?:\/\/searx\.org\/search/i,
+                engineList:"web",
+                enabled:true,
+                style:"\
+                    margin-left:150px;\
+                    margin-bottom:10px;\
+                ",
+                insertIntoDoc:{
+                    keyword:'css;#q',
+                    target:'css;.search_filters',
+                    where:'beforeBegin',
                 },
             },
 
@@ -5581,8 +5596,13 @@
         /^https?:\/\/google\.infinitynewtab\.com\/\?q/,
         /^https?:\/\/www\.zhihu\.com\/search\?/,
         /^https?:\/\/www\.iciba\.com\/word\?/,
-        /^https?:\/\/neeva\.com\/search\?/i,
         /^https?:\/\/s\.taobao\.com\/search/,
+        /^https?:\/\/(www\.)?startpage\.com\/[a-zA-Z]{2,3}\/search/,
+        /^https?:\/\/www\.startpage\.com\/do\/asearch/,
+        /^https?:\/\/swisscows\.com\/*\/(?:web|s)?/i,
+        /^https?:\/\/search\.brave\.com\/search\?/i,
+        /^https?:\/\/www\.ecosia\.org\/search\?/i,
+        /^https?:\/\/www\.qwant\.com/
     ]
 
     // var hashListTag = hashList.some(function hashUrl(element, index, array){
