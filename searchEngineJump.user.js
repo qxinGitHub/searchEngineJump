@@ -369,7 +369,7 @@
                 url: /^https?:\/\/swisscows\.com\/*\/(?:web|s)?/i,
                 engineList: 'web',
                 style: '\
-                        margin-left: 200px;\
+                        margin-left: 280px;\
                         z-index: 100;\
                         margin-top:5px;\
                     ',
@@ -385,7 +385,7 @@
                     //使用css样式获取搜索框中的值
                     //keyword: 'css;.input-search',
                     //在<section class="page-results">中找到css样式用以定位插入位置
-                    target: 'css;.summary',
+                    target: 'css;.navigation.container',
                     //插入到page-results样式上方
                     where: 'beforeBegin',
                 },
