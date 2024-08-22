@@ -648,6 +648,20 @@
                     where: "afterEnd",
                 },
             },
+            {name: "小红书",
+                url: /^https?:\/\/www.xiaohongshu.com/i,
+                enabled: true,
+                engineList: "knowledge",
+                style: '\
+                    z-index: 100;\
+                    margin-bottom: 10px;\
+                ',
+                insertIntoDoc: {
+                    keyword: "css;#search-input",
+                    target: "css;.channel-container",
+                    where: "afterEnd",
+                },
+            },
 
 
             // 视频网站
@@ -2192,6 +2206,11 @@
             name: 'stackoverflow',
             url: 'https://stackoverflow.com/search?q=%s',
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACRklEQVR4nM3XXWjPURzH8dcfUVsekjuhZVa0mI3kIeUhzcMFkvJ0sSgXLpCSkljZhRQXKLlAUliJkodSyhXSPJQ8jF14KuXG04rR/i7Omf2a/2y/bf/9fet0zu90Ht7nez7fc84vk81mFdIGFHR2DOqqQXPthLxMXLz3Jf4DD/Q1wDTcRXkhAIbjJmbgEkb0N8BnbEIWpTiHgfkGGIhJie+L2B/L1ajLN8ARPMDmRN0+XI3lnVidL4BxWIEhOI4zKEIr1uEFMjiFyfkAeI2puB2/N+AeygQ9LI95ES5jVF8DwAcsxAFBfOW4j1V4HqGyKNGJKHsCsBbLEn1/YRdW4hOGoR6HcEPQhAh6sLcAw3EUV9CIbbGO4ObpeCTs/XbcwknhXPgmeKVXAKPxJJbH4zDeRqgyvMJMnI5t5qBBEGkFTvQW4CnmoipO8gNDsUVY3XXMw8aYvqMl9mvKNWBPRfgANRiDPXgvuL0a1/BMUP8iLMa7zgZKA7BEiO+J2tX8UTj5SrBGuIgI23EEs7VvWU7r8j2QsB2YH8vNeIyHgjceCsfweeFG3IoFONbVoGkAfuKLEGbFmBVTm7UIq23AHdTia48ATp2t/1NOHOTVwpaVCidgZcyrMBKDY11lbL9UiIr0ANHaXquZRF2rEP+NuJCoHxtBKmI+RdRD/fi6LKxu2p0cp1sAaexNTJfSdkwDkPb9nnPFHa3gj9I0HujWitJawT2QyfVrFsOwr//ZMjXr/36dFdwD/9JAXva8oxXcAzk10J/2Gw08e05AgXJ5AAAAAElFTkSuQmCC',
+        };
+        engineList.knowledge[10] = {
+            name: '小红书',
+            url: 'https://www.xiaohongshu.com/search_result/?keyword=%s',
+            favicon: 'data:image/x-icon;base64,AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQCj/IEIl/2BCJP+vQST/z0Il/99CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Il/99CJf/fQiT/r0Ak/3BAIP8QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEIl/2BCJf/fQiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik/+9CJf9gAAAAAAAAAAAAAAAAAAAAAAAAAABCJP+BQiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP+BAAAAAAAAAAAAAAAAQCX/YEIk//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9AJf9gAAAAAEAg/xBCJP/vQiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0El/99AIP8gQiT/cEIk//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Al/2BBJP+xQiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QST/sUIl/99CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9BJP/PQiX/30Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Il/99CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//fWn//31o//9CJP//QiT//0Ik//9aP///iXb//4l2//9CJP//iXb//4l2//+Jdv//iXb//4l2//9aP///TjL//4l2//9aP///QiT//31p//+Jdv//TjH//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//Zk3//04y/////////////31o//9CJP//cVv//1pA/////////////4l2///QyP///////////////////////3Fb//9xW////////4h3//9OMv/////////////c1f//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//04y///z8f//ZU3//3Fb////////iHf//0Ik///z8f//Wj///3Fb//+Id///fWj//04y//9xW////////9zV//9xW///TjH//3Fb////////iHf//0Ik//9CJP//xLv//+fk//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//Zk7///////+UhP//Zk7///////+Id///Zk7///////+UhP//rKD/////////////Wj///0Ik////////z8j//0Ik//9CJP//cVv///////+Id///QiT//0Ik///QyP//5+T//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9OMv///////6CS//9aP////////4h3//99af///////31o//9aQP///////6CS//9OMv//QiT////////PyP//QiT//+jk///////////////////////////////////b1v//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik////////uK3//1o/////////iHf//4l2////////ZU3//4l2///n5P//6OP//0Ik//9CJP///////8/I//9CJP//rZ///8S7////////z8n//9vW////////rJ///1pA//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//+jk///PyP//Wj////////+Id///oJL///////9ZQP//5+T/////////////iXb//0Ik////////z8j//0Ik//9CJP//cVv///////+Id///oJL///////9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9aP////////4h3//9CJP//QiT//0Ik//+Jdv///////1o///9CJP//////////////////z8j//3Fb////////////////////////8/H//8S7///Duv//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//1o/////////iHf//0Ik//9CJP//QiT//1pA///n5P//uK3//0Ik//+4rf//uK3//7it//+UhP//ZU3//8S7////////z8n//6yf//9aQP//fWj//5WD//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//1lA//9OMv//QiT//0Ik//9CJP//QiT//2VN//9xW///QiT//0Ik//9CJP//QiT//0Ik//9CJP//TjL//3Fb//9aQP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiX/30Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Il/99DJP/PQiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiX/30Ek/7FCJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9BJP+xQiX/YEIk//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik/3BAKP8gQiX/30Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP/vQCD/EAAAAABCJf9gQiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Am/14AAAAAAAAAAAAAAABCJP9+QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP9+AAAAAAAAAAAAAAAAAAAAAAAAAABDJv9eQiT/70Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJf/fQiX/YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAIP8QQiT/cEIk/69CJf/fQiX/30Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiT//0Ik//9CJP//QiX/30Mk/89CJP+vQiX/YEAg/yAAAAAAAAAAAAAAAAAAAAAA/AAAP/AAAA/AAAADwAAAA4AAAAGAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAABgAAAAcAAAAPgAAAH8AAAD/wAAD8=',
         };
 
         //社交列表
@@ -5631,7 +5650,8 @@
         /^https?:\/\/swisscows\.com\/*\/(?:web|s)?/i,
         /^https?:\/\/search\.brave\.com\/search\?/i,
         /^https?:\/\/www\.ecosia\.org\/search\?/i,
-        /^https?:\/\/www\.qwant\.com/
+        /^https?:\/\/www\.qwant\.com/,
+        /^https?:\/\/www.xiaohongshu.com/i
     ]
 
     // var hashListTag = hashList.some(function hashUrl(element, index, array){
