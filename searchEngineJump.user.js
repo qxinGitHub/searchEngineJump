@@ -658,7 +658,7 @@
                 ',
                 insertIntoDoc: {
                     keyword: "css;#search-input",
-                    target: "css;.channel-container",
+                    target: "css;#channel-container",
                     where: "afterEnd",
                 },
             },
