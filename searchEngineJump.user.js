@@ -3,9 +3,9 @@
 // @author         NLF&锐经(修改) & iqxin(修改)
 // @contributor    iqxin
 // @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
-// @version        5.26.6
+// @version        5.26.7
 // @created        2011-07-02
-// @lastUpdated    2023-04-22
+// @lastUpdated    2024-12-22
 
 // @namespace      https://greasyfork.org/zh-CN/scripts/27752-searchenginejump
 // @homepage       https://github.com/qxinGitHub/searchEngineJump
@@ -54,13 +54,13 @@
                 style: '\
                     z-index: 100;\
                     margin-top:5px;\
-                    margin-bottom:-5px;\
+                    margin-left:-10px;\
                     ',
                 // 给引擎列表的样式 （“style_ACBaidu” 可选,是为了兼容 “AC Baidu” 脚本）
                 style_ACBaidu: '\
                     text-align: center;\
                     z-index: 100;\
-                    margin-top:5px;\
+                    margin-top:-5px;\
                 ',
                 // 插入文档,相关
                     // target 将引擎跳转工具栏插入到文档的某个元素
@@ -72,14 +72,14 @@
                         // 'beforeEnd' (作为给定元素的最后一个子元素) ;
                         // 'afterEnd'(插入到给定元素的后面);.
                 insertIntoDoc: {
-                    target: 'css;#appbar',
+                    target: 'css;.ufC5Cb',
                     // 若 keyword 使用函数获取
                     // keyword: function () {
                         // var input = document.getElementById('lst-ib');
                         // if (input) return input.value;
                     // },
                     keyword: '//textarea[@name="q"]',
-                    where: 'beforeBegin',
+                    where: 'afterBegin',
                 },
                 // 修改源网页用来适应跳转栏（可选）
                 // stylish: 'body.vasq #hdtbMenus.hdtb-td-o{top:100px !important;} #hdtbMenus{top:92px;margin-top:30px;}'
