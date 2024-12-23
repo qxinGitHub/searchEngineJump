@@ -55,6 +55,7 @@
                     z-index: 100;\
                     margin-top:5px;\
                     margin-bottom:-5px;\
+                    margin-left:170px;\
                     ',
                 // 给引擎列表的样式 （“style_ACBaidu” 可选,是为了兼容 “AC Baidu” 脚本）
                 style_ACBaidu: '\
