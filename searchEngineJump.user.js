@@ -119,12 +119,12 @@
                 fixedTopTarget: "css;#wrapper_wrapper",
                 // fixedTopWhere:"beforeEnd",
                 fixedTopWhere:"beforeBegin",
-                style: '\
+                style:`\
                     margin-top:8px;\
                     margin-bottom: -5px;\
                     z-index: 101;\
-                    margin-left: 144px;\
-                ',
+                    margin-left: ${$('#s_tab_inner').css('padding-left')};\
+                `,
                 style_ACBaidu: '\
                     margin-top: 8px;\
                     margin-bottom: -5px;\
